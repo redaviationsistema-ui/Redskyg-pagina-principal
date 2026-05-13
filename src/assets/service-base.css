@@ -1,0 +1,153 @@
+.service-page {
+  background: linear-gradient(180deg, #071320 0%, #0b1220 100%);
+  color: white;
+}
+
+.hero {
+  position: relative;
+  min-height: 95vh;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(120deg, rgba(5, 15, 30, 0.92), rgba(5, 15, 30, 0.72)),
+    radial-gradient(circle at right center, rgba(123, 183, 255, 0.12), transparent 28%);
+}
+
+.hero-content,
+.split-grid,
+.cta-shell {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-content {
+  padding-top: 8rem;
+  padding-bottom: 4rem;
+}
+
+.eyebrow {
+  display: inline-block;
+  color: #7bb7ff;
+  letter-spacing: 0.24em;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+}
+
+.hero-content h1,
+.split-grid h2,
+.cta-shell h2 {
+  max-width: 860px;
+  font-size: clamp(2.4rem, 4.5vw, 4.4rem);
+  margin: 1rem 0 1.2rem;
+}
+
+.hero-content p,
+.split-grid p,
+.info-card p,
+.cta-shell p {
+  color: rgba(255, 255, 255, 0.76);
+  line-height: 1.8;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.btn-primary,
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
+  padding: 0 1.5rem;
+  border-radius: 999px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.8rem;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #d4af37, #f1d88a);
+  color: #071320;
+  font-weight: 700;
+}
+
+.btn-ghost {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: white;
+}
+
+.btn-ghost.dark {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.split-grid {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.card-grid,
+.process-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.card-grid.compact {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.process-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.info-card,
+.cta-shell {
+  padding: 1.5rem;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.info-card h3 {
+  margin-bottom: 0.8rem;
+}
+
+.cta-shell {
+  text-align: center;
+  background:
+    radial-gradient(circle at top left, rgba(212, 175, 55, 0.14), transparent 24%),
+    linear-gradient(135deg, rgba(9, 21, 37, 0.98), rgba(18, 43, 70, 0.94));
+}
+
+@media (max-width: 992px) {
+  .split-grid,
+  .card-grid.compact,
+  .process-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .btn-primary,
+  .btn-ghost {
+    width: 100%;
+  }
+}

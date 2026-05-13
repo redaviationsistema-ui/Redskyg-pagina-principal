@@ -1,0 +1,25 @@
+{
+  "name": "skylux-vue",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "generate:sitemap": "node scripts/generate-sitemap.mjs",
+    "dev": "vite",
+    "build": "npm run generate:sitemap && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.95.3",
+    "@vuepic/vue-datepicker": "^12.1.0",
+    "axios": "^1.13.5",
+    "lucide-vue-next": "^0.575.0",
+    "v-calendar": "^3.1.2",
+    "vue": "^3.5.25",
+    "vue-router": "^5.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.2",
+    "vite": "^7.3.1"
+  }
+}
