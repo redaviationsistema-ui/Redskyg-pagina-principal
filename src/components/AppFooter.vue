@@ -106,7 +106,7 @@
               <Linkedin class="social-icon" />
             </a>
             <a
-              href="https://www.instagram.com/redaviationcompany/"
+              href="https://www.instagram.com/skygroup_llc/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
@@ -313,15 +313,25 @@ const handlePhone = (number) => {
 .footer-bottom {
   display: grid;
   grid-template-columns: 1.05fr 1fr 0.95fr;
-  gap: 1.4rem;
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .card-shell {
   height: 100%;
-  padding: 1.85rem;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 1.85rem 1.85rem 2rem;
+  background: transparent;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-shell:first-child {
+  padding-left: 0;
+}
+
+.card-shell:last-child {
+  padding-right: 0;
+  border-right: 0;
 }
 
 .footer-logo {
@@ -339,16 +349,22 @@ const handlePhone = (number) => {
 .brand-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.65rem;
+  gap: 0;
   margin: 1.4rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .brand-meta span {
-  padding: 0.55rem 0.85rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.05);
+  padding: 0.75rem 1rem 0.75rem 0;
+  margin-right: 1rem;
   color: rgba(255, 255, 255, 0.82);
   font-size: 0.78rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.brand-meta span:last-child {
+  border-right: 0;
 }
 
 .footer-brand small {
@@ -372,8 +388,19 @@ const handlePhone = (number) => {
 .office-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+  gap: 0;
   margin-top: 1.6rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.detail-group {
+  padding: 1.15rem 1.2rem 1.15rem 0;
+}
+
+.detail-group + .detail-group {
+  padding-left: 1.2rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .detail-group h5 {
@@ -391,6 +418,9 @@ const handlePhone = (number) => {
   display: flex;
   gap: 0.9rem;
   margin: 1.5rem 0 1.8rem;
+  padding: 1rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .footer-social a {
@@ -431,29 +461,38 @@ const handlePhone = (number) => {
 
 .connect-cta {
   display: grid;
-  gap: 0.8rem;
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .connect-cta a {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  min-height: 50px;
-  padding: 0.9rem 1rem;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  justify-content: space-between;
+  min-height: 48px;
+  padding: 0.95rem 0;
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   transition: all 0.25s ease;
 }
 
+.connect-cta a::after {
+  content: "->";
+  color: rgba(143, 202, 255, 0.8);
+  font-size: 0.85rem;
+  letter-spacing: 0;
+}
+
 .connect-cta a:last-child {
-  background: linear-gradient(135deg, #2140f0, #2f5fff);
-  border-color: transparent;
+  border-bottom: 0;
+  color: #8fcaff;
   font-weight: 700;
 }
 
 .connect-cta a:hover {
-  transform: translateY(-3px);
+  color: #8fcaff;
+  transform: translateX(6px);
 }
 
 @media (max-width: 1100px) {
@@ -461,6 +500,28 @@ const handlePhone = (number) => {
   .footer-bottom,
   .office-grid {
     grid-template-columns: 1fr;
+  }
+
+  .card-shell,
+  .card-shell:first-child,
+  .card-shell:last-child {
+    padding: 1.6rem 0;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .card-shell:last-child {
+    border-bottom: 0;
+  }
+
+  .detail-group,
+  .detail-group + .detail-group {
+    padding: 1rem 0;
+    border-left: 0;
+  }
+
+  .detail-group + .detail-group {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .footer-promo-actions {
@@ -473,8 +534,7 @@ const handlePhone = (number) => {
     padding: 3rem 1.2rem 2.4rem;
   }
 
-  .footer-promo,
-  .card-shell {
+  .footer-promo {
     padding: 1.45rem;
   }
 

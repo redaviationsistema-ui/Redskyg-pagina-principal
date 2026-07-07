@@ -567,20 +567,32 @@ const timeline = computed(() =>
 .timeline,
 .metrics-grid {
   display: grid;
-  gap: 1rem;
+  gap: 0;
 }
 
 .hero-metrics article,
 .pillar-card,
 .capability-card,
 .metric-card,
-.timeline-card,
-.cta-shell {
+.timeline-card {
   position: relative;
-  padding: 1.5rem;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.5rem 0;
+  background: transparent;
+  border-radius: 0;
+}
+
+.hero-metrics {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.hero-metrics article {
+  padding: 1.2rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hero-metrics article:last-child {
+  border-bottom: 0;
 }
 
 .icon-badge {
@@ -595,6 +607,10 @@ const timeline = computed(() =>
   background: rgba(255, 255, 255, 0.05);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
   animation: iconFloat 4.2s ease-in-out infinite;
+}
+
+.capability-card .icon-badge {
+  margin-bottom: 0;
 }
 
 .icon-badge svg {
@@ -676,6 +692,21 @@ const timeline = computed(() =>
 
 .pillars-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pillar-card {
+  padding-right: 1.8rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pillar-card + .pillar-card {
+  padding-left: 1.8rem;
+}
+
+.pillar-card:last-child {
+  border-right: 0;
 }
 
 .pillar-card h3,
@@ -690,18 +721,34 @@ const timeline = computed(() =>
 }
 
 .capabilities-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .capability-card {
+  display: grid;
+  grid-template-columns: 76px minmax(160px, 0.7fr) minmax(0, 1fr) auto;
+  gap: 1.2rem;
+  align-items: center;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   text-decoration: none;
   color: white;
-  transition: transform 0.25s ease, border-color 0.25s ease;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.capability-card h3,
+.capability-card p {
+  margin: 0;
+}
+
+.capability-card:last-child {
+  border-bottom: 0;
 }
 
 .capability-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(123, 183, 255, 0.34);
+  transform: translateX(8px);
+  background: rgba(255, 255, 255, 0.025);
 }
 
 .capability-card:hover .icon-badge,
@@ -715,8 +762,8 @@ const timeline = computed(() =>
 
 .capability-card strong {
   display: inline-block;
-  margin-top: 1rem;
   color: #7bb7ff;
+  text-align: right;
 }
 
 .strategy-section {
@@ -730,10 +777,18 @@ const timeline = computed(() =>
 
 .metrics-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .metric-card {
   text-align: center;
+  padding: 1.8rem 1.5rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.metric-card:last-child {
+  border-right: 0;
 }
 
 .journey-section {
@@ -775,6 +830,21 @@ const timeline = computed(() =>
 
 .timeline {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.timeline-card {
+  padding-right: 1.4rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.timeline-card + .timeline-card {
+  padding-left: 1.4rem;
+}
+
+.timeline-card:last-child {
+  border-right: 0;
 }
 
 .journey-lead,
@@ -820,9 +890,10 @@ const timeline = computed(() =>
   grid-template-columns: 1fr auto;
   gap: 2rem;
   align-items: center;
-  background:
-    radial-gradient(circle at top left, rgba(212, 175, 55, 0.14), transparent 24%),
-    linear-gradient(135deg, rgba(9, 21, 37, 0.98), rgba(18, 43, 70, 0.94));
+  padding: 2.5rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
 }
 
 @keyframes iconFloat {
@@ -845,6 +916,36 @@ const timeline = computed(() =>
   .cta-shell {
     grid-template-columns: 1fr;
   }
+
+  .pillar-card,
+  .pillar-card + .pillar-card,
+  .timeline-card,
+  .timeline-card + .timeline-card,
+  .metric-card {
+    padding-left: 0;
+    padding-right: 0;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .pillar-card:last-child,
+  .timeline-card:last-child,
+  .metric-card:last-child {
+    border-bottom: 0;
+  }
+
+  .capability-card {
+    grid-template-columns: 64px minmax(0, 1fr);
+  }
+
+  .capability-card p,
+  .capability-card strong {
+    grid-column: 2;
+  }
+
+  .capability-card strong {
+    text-align: left;
+  }
 }
 
 @media (max-width: 640px) {
@@ -855,6 +956,24 @@ const timeline = computed(() =>
   .btn-primary,
   .btn-ghost {
     width: 100%;
+  }
+
+  .capability-card {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .capability-card p,
+  .capability-card strong {
+    grid-column: auto;
+  }
+
+  .hero-metrics article,
+  .pillar-card,
+  .capability-card,
+  .metric-card,
+  .timeline-card {
+    padding: 1.2rem 0;
   }
 }
 </style>

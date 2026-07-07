@@ -4,7 +4,7 @@
         <img
           class="hero-bg"
           src="/images/Service/TaxiAereo.png"
-          :alt="locale.value === 'en' ? 'Private jet ready for executive charter service' : 'Jet privado listo para servicio de charter ejecutivo'"
+          :alt="locale === 'en' ? 'Private jet ready for executive charter service' : 'Jet privado listo para servicio de charter ejecutivo'"
           fetchpriority="high"
           decoding="async"
         />
@@ -17,10 +17,10 @@
 
           <div class="hero-actions">
             <a class="btn-primary" :href="whatsappHref" target="_blank" rel="noopener noreferrer">
-              {{ locale.value === "en" ? "Request Flight Quote" : "Solicitar cotizacion de vuelo" }}
+              {{ locale === "en" ? "Request Flight Quote" : "Solicitar cotizacion de vuelo" }}
             </a>
             <RouterLink class="btn-ghost" :to="toLocalizedRoute('Contact')">
-              {{ locale.value === "en" ? "Talk to Charter Desk" : "Hablar con charter" }}
+              {{ locale === "en" ? "Talk to Charter Desk" : "Hablar con charter" }}
             </RouterLink>
           </div>
 
@@ -36,9 +36,9 @@
       <section class="section">
         <div class="container">
           <div class="section-head">
-            <span class="eyebrow">{{ locale.value === "en" ? "Why This Service" : "Por que este servicio" }}</span>
-            <h2>{{ locale.value === "en" ? "Built for clients who need private aviation to move fast and perform well." : "Pensado para clientes que necesitan aviacion privada agil y efectiva." }}</h2>
-            <p>{{ locale.value === "en" ? "This page now speaks more directly to users searching for executive charter, private jet rental, urgent private flights, and premium business travel solutions." : "Esta pagina habla de forma mas directa a usuarios que buscan charter ejecutivo, renta de jet privado, vuelos urgentes y soluciones premium de viaje de negocios." }}</p>
+            <span class="eyebrow">{{ locale === "en" ? "Why This Service" : "Por que este servicio" }}</span>
+            <h2>{{ locale === "en" ? "Built for clients who need private aviation to move fast and perform well." : "Pensado para clientes que necesitan aviacion privada agil y efectiva." }}</h2>
+            <p>{{ locale === "en" ? "This page now speaks more directly to users searching for executive charter, private jet rental, urgent private flights, and premium business travel solutions." : "Esta pagina habla de forma mas directa a usuarios que buscan charter ejecutivo, renta de jet privado, vuelos urgentes y soluciones premium de viaje de negocios." }}</p>
           </div>
 
           <div class="feature-grid">
@@ -53,14 +53,14 @@
       <section class="section dark-section">
         <div class="container split-grid">
           <div class="coverage-copy">
-            <span class="eyebrow">{{ locale.value === "en" ? "Charter Coverage" : "Cobertura charter" }}</span>
-            <h2>{{ locale.value === "en" ? "Private flights from key business corridors in Mexico and beyond." : "Vuelos privados desde corredores clave de negocio en Mexico y mas alla." }}</h2>
-            <p>{{ locale.value === "en" ? "We support departures tied to executive activity in Toluca, Mexico City, Monterrey, Guadalajara, Cancun, Queretaro, and other strategic locations depending on mission profile and aircraft availability." : "Apoyamos salidas vinculadas con actividad ejecutiva en Toluca, Ciudad de Mexico, Monterrey, Guadalajara, Cancun, Queretaro y otras ubicaciones estrategicas segun perfil de mision y disponibilidad." }}</p>
+            <span class="eyebrow">{{ locale === "en" ? "Charter Coverage" : "Cobertura charter" }}</span>
+            <h2>{{ locale === "en" ? "Private flights from key business corridors in Mexico and beyond." : "Vuelos privados desde corredores clave de negocio en Mexico y mas alla." }}</h2>
+            <p>{{ locale === "en" ? "We support departures tied to executive activity in Toluca, Mexico City, Monterrey, Guadalajara, Cancun, Queretaro, and other strategic locations depending on mission profile and aircraft availability." : "Apoyamos salidas vinculadas con actividad ejecutiva en Toluca, Ciudad de Mexico, Monterrey, Guadalajara, Cancun, Queretaro y otras ubicaciones estrategicas segun perfil de mision y disponibilidad." }}</p>
 
             <div class="coverage-links">
-              <RouterLink :to="toLocalizedRoute('OperationsManagement')">{{ locale.value === "en" ? "Operations Management" : "Administracion operativa" }}</RouterLink>
-              <RouterLink :to="toLocalizedRoute('AircraftSales')">{{ locale.value === "en" ? "Aircraft Advisory" : "Asesoria de aeronaves" }}</RouterLink>
-              <RouterLink :to="toLocalizedRoute('Contact')">{{ locale.value === "en" ? "Contact Sky Group" : "Contactar a Sky Group" }}</RouterLink>
+              <RouterLink :to="toLocalizedRoute('OperationsManagement')">{{ locale === "en" ? "Operations Management" : "Administracion operativa" }}</RouterLink>
+              <RouterLink :to="toLocalizedRoute('AircraftSales')">{{ locale === "en" ? "Aircraft Advisory" : "Asesoria de aeronaves" }}</RouterLink>
+              <RouterLink :to="toLocalizedRoute('Contact')">{{ locale === "en" ? "Contact Sky Group" : "Contactar a Sky Group" }}</RouterLink>
             </div>
           </div>
 
@@ -76,8 +76,8 @@
       <section class="section">
         <div class="container">
           <div class="section-head">
-            <span class="eyebrow">{{ locale.value === "en" ? "Booking Process" : "Proceso de reserva" }}</span>
-            <h2>{{ locale.value === "en" ? "A clearer path from inquiry to confirmed itinerary." : "Un camino mas claro desde la consulta hasta el itinerario confirmado." }}</h2>
+            <span class="eyebrow">{{ locale === "en" ? "Booking Process" : "Proceso de reserva" }}</span>
+            <h2>{{ locale === "en" ? "A clearer path from inquiry to confirmed itinerary." : "Un camino mas claro desde la consulta hasta el itinerario confirmado." }}</h2>
           </div>
 
           <div class="process-grid">
@@ -93,8 +93,8 @@
       <section class="section faq-section">
         <div class="container">
           <div class="section-head">
-            <span class="eyebrow">{{ locale.value === "en" ? "Charter FAQ" : "Preguntas frecuentes" }}</span>
-            <h2>{{ locale.value === "en" ? "Questions clients ask before requesting a private flight." : "Dudas comunes antes de solicitar un vuelo privado." }}</h2>
+            <span class="eyebrow">{{ locale === "en" ? "Charter FAQ" : "Preguntas frecuentes" }}</span>
+            <h2>{{ locale === "en" ? "Questions clients ask before requesting a private flight." : "Dudas comunes antes de solicitar un vuelo privado." }}</h2>
           </div>
 
           <div class="faq-grid">
@@ -108,15 +108,15 @@
 
       <section class="section final-cta">
         <div class="container cta-shell">
-          <h2>{{ locale.value === "en" ? "Need a fast quote for a private flight?" : "Necesitas una cotizacion rapida para un vuelo privado?" }}</h2>
-          <p>{{ locale.value === "en" ? "Send your route, travel date, passenger count, and schedule window. We will help define the right aircraft, mission profile, and next operational step." : "Comparte tu ruta, fecha de viaje, numero de pasajeros y ventana de horario. Te ayudamos a definir la aeronave correcta y el siguiente paso operativo." }}</p>
+          <h2>{{ locale === "en" ? "Need a fast quote for a private flight?" : "Necesitas una cotizacion rapida para un vuelo privado?" }}</h2>
+          <p>{{ locale === "en" ? "Send your route, travel date, passenger count, and schedule window. We will help define the right aircraft, mission profile, and next operational step." : "Comparte tu ruta, fecha de viaje, numero de pasajeros y ventana de horario. Te ayudamos a definir la aeronave correcta y el siguiente paso operativo." }}</p>
 
           <div class="hero-actions">
             <a class="btn-primary" :href="whatsappHref" target="_blank" rel="noopener noreferrer">
-              {{ locale.value === "en" ? "Quote by WhatsApp" : "Cotizar por WhatsApp" }}
+              {{ locale === "en" ? "Quote by WhatsApp" : "Cotizar por WhatsApp" }}
             </a>
             <RouterLink class="btn-ghost dark" :to="toLocalizedRoute('Pricing')">
-              {{ locale.value === "en" ? "View Pricing Guidance" : "Ver guia de precios" }}
+              {{ locale === "en" ? "View Pricing Guidance" : "Ver guia de precios" }}
             </RouterLink>
           </div>
         </div>
@@ -145,16 +145,25 @@ const content = computed(() =>
       }
 );
 
-const whatsappHref =
+const whatsappHref = computed(() =>
   locale.value === "en"
     ? "https://wa.me/525586186576?text=Hello,%20I%20would%20like%20to%20request%20a%20private%20flight%20quote."
-    : "https://wa.me/525586186576?text=Hola,%20quiero%20solicitar%20una%20cotizacion%20de%20vuelo%20privado.";
+    : "https://wa.me/525586186576?text=Hola,%20quiero%20solicitar%20una%20cotizacion%20de%20vuelo%20privado."
+);
 
-const metrics = [
-  { value: "24/7", label: locale.value === "en" ? "Quote and mission response" : "Respuesta para cotizacion y mision" },
-  { value: "MX + INTL", label: locale.value === "en" ? "Domestic and international support" : "Cobertura nacional e internacional" },
-  { value: locale.value === "en" ? "Direct" : "Directo", label: locale.value === "en" ? "Commercial and operational coordination" : "Coordinacion comercial y operativa" },
-];
+const metrics = computed(() =>
+  locale.value === "en"
+    ? [
+        { value: "24/7", label: "Quote and mission response" },
+        { value: "MX + INTL", label: "Domestic and international support" },
+        { value: "Direct", label: "Commercial and operational coordination" },
+      ]
+    : [
+        { value: "24/7", label: "Respuesta para cotizacion y mision" },
+        { value: "MX + INTL", label: "Cobertura nacional e internacional" },
+        { value: "Directo", label: "Coordinacion comercial y operativa" },
+      ]
+);
 
 const highlights = computed(() =>
   locale.value === "en"

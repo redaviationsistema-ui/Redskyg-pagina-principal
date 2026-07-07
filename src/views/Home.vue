@@ -106,7 +106,7 @@
               <RouterLink
                 v-for="route in featuredRoutes"
                 :key="route.slug"
-                class="route-card"
+                class="route-row"
                 :to="route.to"
               >
                 <div class="route-head">
@@ -130,7 +130,7 @@
               <RouterLink
                 v-for="city in featuredCities"
                 :key="city.slug"
-                class="route-card"
+                class="route-row"
                 :to="city.to"
               >
                 <div class="route-head">
@@ -180,7 +180,7 @@
           <p>{{ pageContent.availabilityLead }}</p>
 
           <div class="availability-status-list">
-            <article v-for="item in pageContent.availabilityStatuses" :key="item.label" class="availability-status-card">
+            <article v-for="item in pageContent.availabilityStatuses" :key="item.label" class="availability-status-row">
               <strong>{{ item.icon }} {{ item.label }}</strong>
               <span>{{ item.text }}</span>
             </article>
@@ -202,8 +202,8 @@
           <p>{{ pageContent.contactLead }}</p>
         </div>
 
-        <div class="contact-grid">
-          <article v-for="channel in pageContent.contactChannels" :key="channel.title" class="contact-card">
+        <div class="contact-directory">
+          <article v-for="channel in pageContent.contactChannels" :key="channel.title" class="contact-row">
             <span>{{ channel.tag }}</span>
             <h3>{{ channel.title }}</h3>
             <p>{{ channel.text }}</p>
@@ -214,6 +214,7 @@
         </div>
 
         <div class="social-strip">
+          <span class="social-strip-label">{{ pageContent.socialLabel }}</span>
           <a
             v-for="social in socialLinks"
             :key="social.label"
@@ -222,6 +223,11 @@
             target="_blank"
             rel="noopener noreferrer"
           >
+            <span class="social-logo" :class="`social-logo-${social.key}`">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path :d="social.icon" />
+              </svg>
+            </span>
             {{ social.label }}
           </a>
         </div>
@@ -262,10 +268,30 @@ const whatsappHref = computed(() =>
 );
 
 const socialLinks = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/company/red-aviation-corp/" },
-  { label: "Instagram", href: "https://www.instagram.com/redaviationcompany/" },
-  { label: "TikTok", href: "https://www.tiktok.com/@redaviationcompany" },
-  { label: "Facebook", href: "https://www.facebook.com/RedAviationJets" },
+  {
+    key: "linkedin",
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/red-aviation-corp/",
+    icon: "M20.45 20.45h-3.56v-5.58c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.44-2.14 2.94v5.68H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.32 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12Zm1.78 13.02H3.53V9H7.1v11.45ZM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0Z",
+  },
+  {
+    key: "instagram",
+    label: "Instagram",
+    href: "https://www.instagram.com/skygroup_llc/",
+    icon: "M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm0 2A3.8 3.8 0 0 0 4 7.8v8.4A3.8 3.8 0 0 0 7.8 20h8.4a3.8 3.8 0 0 0 3.8-3.8V7.8A3.8 3.8 0 0 0 16.2 4H7.8Zm8.95 1.55a1.35 1.35 0 1 1 0 2.7 1.35 1.35 0 0 1 0-2.7ZM12 7.35A4.65 4.65 0 1 1 12 16.65 4.65 4.65 0 0 1 12 7.35Zm0 2A2.65 2.65 0 1 0 12 14.65 2.65 2.65 0 0 0 12 9.35Z",
+  },
+  {
+    key: "tiktok",
+    label: "TikTok",
+    href: "https://www.tiktok.com/@redaviationcompany",
+    icon: "M16.6 2c.36 3.08 2.08 4.92 5.02 5.12v3.38a8.06 8.06 0 0 1-4.95-1.62v6.8c0 3.44-2.34 6.32-6.35 6.32A6.08 6.08 0 0 1 4 15.9c0-3.95 3.12-6.45 7.02-6.1v3.62c-1.8-.28-3.46.52-3.46 2.48a2.52 2.52 0 0 0 2.62 2.56c1.82 0 2.76-1.12 2.76-3.02V2h3.66Z",
+  },
+  {
+    key: "facebook",
+    label: "Facebook",
+    href: "https://www.facebook.com/RedAviationJets",
+    icon: "M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.03 1.8-4.7 4.55-4.7 1.32 0 2.7.24 2.7.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.26h3.34l-.53 3.49H13.9V24C19.61 23.1 24 18.1 24 12.07Z",
+  },
 ];
 
 const featuredRouteConfigs = {
@@ -529,6 +555,7 @@ const content = {
         external: false,
       },
     ],
+    socialLabel: "Redes oficiales",
     externalActions: [
       {
         label: "Genera tu cotizacion",
@@ -643,6 +670,7 @@ const content = {
         external: false,
       },
     ],
+    socialLabel: "Official channels",
     externalActions: [
       {
         label: "Generate your quote",
@@ -755,9 +783,9 @@ const pageContent = computed(() => content[locale.value] ?? content.es);
 .benefits-copy p,
 .benefit-row p,
 .availability-copy p,
-.availability-status-card span,
+.availability-status-row span,
 .contact-copy p,
-.contact-card p,
+.contact-row p,
 .final-shell p {
   color: rgba(248, 243, 234, 0.78);
   line-height: 1.8;
@@ -795,7 +823,7 @@ const pageContent = computed(() => content[locale.value] ?? content.es);
 
 .btn-primary,
 .brief-cta,
-.route-card b {
+.route-row b {
   color: #0a0b0d;
   background: linear-gradient(135deg, #d7b074, #f4d79f);
   box-shadow: 0 18px 40px rgba(164, 120, 51, 0.25);
@@ -810,7 +838,7 @@ const pageContent = computed(() => content[locale.value] ?? content.es);
 .btn-primary:hover,
 .btn-secondary:hover,
 .brief-cta:hover,
-.route-card:hover b,
+.route-row:hover b,
 .social-link:hover {
   transform: translateY(-2px);
 }
@@ -848,12 +876,8 @@ const pageContent = computed(() => content[locale.value] ?? content.es);
 }
 
 .hero-brief,
-.process-step,
 .availability-offer,
-.final-shell,
-.contact-card,
-.availability-status-card,
-.route-card {
+.final-shell {
   border: 1px solid rgba(248, 243, 234, 0.1);
   background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(16px);
@@ -1073,7 +1097,9 @@ const pageContent = computed(() => content[locale.value] ?? content.es);
   position: relative;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1.2rem;
+  gap: 0;
+  border-top: 1px solid rgba(248, 243, 234, 0.12);
+  border-bottom: 1px solid rgba(248, 243, 234, 0.12);
 }
 
 .process-grid::before {
@@ -1089,8 +1115,16 @@ const pageContent = computed(() => content[locale.value] ?? content.es);
 .process-step {
   position: relative;
   min-height: 150px;
-  padding: 1.6rem;
-  border-radius: 24px;
+  padding: 1.6rem 1.6rem 1.6rem 0;
+  border-right: 1px solid rgba(248, 243, 234, 0.1);
+}
+
+.process-step + .process-step {
+  padding-left: 1.6rem;
+}
+
+.process-step:last-child {
+  border-right: 0;
 }
 
 .process-step::before {
@@ -1131,30 +1165,31 @@ const pageContent = computed(() => content[locale.value] ?? content.es);
 
 .routes-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 0;
+  border-top: 1px solid rgba(248, 243, 234, 0.12);
+  border-bottom: 1px solid rgba(248, 243, 234, 0.12);
 }
 
-.route-card {
-  min-height: 235px;
-  padding: 1.35rem;
-  border-radius: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.route-row {
+  min-height: 112px;
+  padding: 1.2rem 0;
+  display: grid;
+  grid-template-columns: minmax(170px, 0.9fr) minmax(180px, 1.1fr) minmax(130px, 0.7fr) minmax(150px, 0.8fr) auto;
+  gap: 1.2rem;
+  align-items: center;
   text-decoration: none;
-  background:
-    radial-gradient(circle at top right, rgba(215, 176, 116, 0.06), transparent 34%),
-    rgba(9, 23, 38, 0.94);
+  border-bottom: 1px solid rgba(248, 243, 234, 0.08);
   overflow: hidden;
-  transition: transform 0.28s ease, border-color 0.28s ease, background 0.28s ease, box-shadow 0.28s ease;
+  transition: transform 0.28s ease, background 0.28s ease;
 }
 
-.route-card:hover,
-.contact-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(215, 176, 116, 0.4);
-  box-shadow: 0 0 0 1px rgba(215, 176, 116, 0.18), 0 22px 56px rgba(4, 10, 18, 0.34), 0 0 28px rgba(215, 176, 116, 0.14);
+.route-row:last-child {
+  border-bottom: 0;
+}
+
+.route-row:hover {
+  transform: translateX(8px);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .route-head {
@@ -1164,12 +1199,12 @@ const pageContent = computed(() => content[locale.value] ?? content.es);
   gap: 0.8rem;
 }
 
-.route-card em,
-.route-card b {
+.route-row em,
+.route-row b {
   font-style: normal;
 }
 
-.route-card em {
+.route-row em {
   color: #d7b074;
   font-size: 0.72rem;
   font-weight: 800;
@@ -1184,7 +1219,7 @@ const pageContent = computed(() => content[locale.value] ?? content.es);
   text-transform: uppercase;
 }
 
-.route-card h3 {
+.route-row h3 {
   margin: 0;
   color: #f8f3ea;
   font-size: 1.5rem;
@@ -1216,7 +1251,7 @@ const pageContent = computed(() => content[locale.value] ?? content.es);
   font-weight: 700;
 }
 
-.route-card b {
+.route-row b {
   min-height: 44px;
   padding: 0.8rem 1rem;
   border-radius: 999px;
@@ -1235,16 +1270,26 @@ const pageContent = computed(() => content[locale.value] ?? content.es);
 
 .availability-status-list {
   display: grid;
-  gap: 1rem;
+  gap: 0;
   margin-top: 1.8rem;
+  border-top: 1px solid rgba(248, 243, 234, 0.12);
+  border-bottom: 1px solid rgba(248, 243, 234, 0.12);
 }
 
-.availability-status-card {
-  padding: 1.2rem 1.3rem;
-  border-radius: 22px;
+.availability-status-row {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.7fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: baseline;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid rgba(248, 243, 234, 0.08);
 }
 
-.availability-status-card strong {
+.availability-status-row:last-child {
+  border-bottom: 0;
+}
+
+.availability-status-row strong {
   display: block;
   color: #f8f3ea;
   font-size: 0.95rem;
@@ -1252,9 +1297,8 @@ const pageContent = computed(() => content[locale.value] ?? content.es);
   text-transform: uppercase;
 }
 
-.availability-status-card span {
+.availability-status-row span {
   display: block;
-  margin-top: 0.6rem;
 }
 
 .availability-offer {
@@ -1277,53 +1321,85 @@ const pageContent = computed(() => content[locale.value] ?? content.es);
 }
 
 .contact-shell {
-  padding: 2.4rem;
-  border-radius: 34px;
-  border: 1px solid rgba(248, 243, 234, 0.08);
+  padding: 2.4rem 0;
+  border-top: 1px solid rgba(248, 243, 234, 0.08);
+  border-bottom: 1px solid rgba(248, 243, 234, 0.08);
   background:
     radial-gradient(circle at top right, rgba(215, 176, 116, 0.05), transparent 28%),
-    rgba(9, 23, 38, 0.94);
+    transparent;
 }
 
-.contact-grid {
+.contact-directory {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 0;
   margin-top: 2rem;
+  border-top: 1px solid rgba(248, 243, 234, 0.12);
+  border-bottom: 1px solid rgba(248, 243, 234, 0.12);
 }
 
-.contact-card {
-  padding: 1.5rem;
-  border-radius: 24px;
-  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+.contact-row {
+  display: grid;
+  grid-template-columns: 130px minmax(180px, 0.7fr) minmax(0, 1fr) minmax(180px, auto);
+  gap: 1.2rem;
+  align-items: baseline;
+  padding: 1.35rem 0;
+  border-bottom: 1px solid rgba(248, 243, 234, 0.08);
+  transition: transform 0.28s ease, background 0.28s ease;
 }
 
-.contact-card span {
+.contact-row:last-child {
+  border-bottom: 0;
+}
+
+.contact-row:hover {
+  transform: translateX(8px);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.contact-row span {
   color: #d7b074;
   font-size: 0.74rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
-.contact-card h3 {
-  margin: 0.85rem 0 0.7rem;
+.contact-row h3 {
+  margin: 0;
   font-size: 1.6rem;
   line-height: 1;
 }
 
-.contact-card a {
-  display: inline-block;
-  margin-top: 1rem;
+.contact-row p {
+  margin: 0;
+}
+
+.contact-row a {
+  justify-self: end;
   color: #f3d39b;
   text-decoration: none;
   font-weight: 700;
+  text-align: right;
+  overflow-wrap: anywhere;
 }
 
 .social-strip {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   gap: 0.9rem;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
+  padding: 1.45rem 0 1.9rem;
+  border-top: 1px solid rgba(248, 243, 234, 0.1);
+  border-bottom: 1px solid rgba(248, 243, 234, 0.1);
+}
+
+.social-strip-label {
+  margin-right: 0.5rem;
+  color: rgba(248, 243, 234, 0.5);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 }
 
 .external-actions {
@@ -1363,25 +1439,68 @@ const pageContent = computed(() => content[locale.value] ?? content.es);
 }
 
 .social-link {
-  min-height: 46px;
-  padding: 0.8rem 1rem;
+  min-height: 54px;
+  padding: 0.62rem 1.25rem 0.62rem 0.7rem;
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #f8f3ea;
+  gap: 0.7rem;
+  color: rgba(248, 243, 234, 0.86);
   text-decoration: none;
-  border: 1px solid rgba(248, 243, 234, 0.12);
-  background: rgba(9, 23, 38, 0.88);
+  border: 1px solid rgba(248, 243, 234, 0.14);
+  background: rgba(255, 255, 255, 0.025);
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  font-size: 0.75rem;
-  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  font-size: 0.76rem;
+  font-weight: 800;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.social-logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  display: inline-grid;
+  place-items: center;
+  color: white;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.social-link svg {
+  width: 19px;
+  height: 19px;
+  flex: 0 0 auto;
+  fill: currentColor;
+}
+
+.social-logo-linkedin {
+  background: linear-gradient(135deg, #0a66c2, #004182);
+}
+
+.social-logo-instagram {
+  background:
+    radial-gradient(circle at 30% 110%, #feda75 0 18%, transparent 38%),
+    radial-gradient(circle at 0% 0%, #405de6 0 22%, transparent 42%),
+    linear-gradient(135deg, #833ab4, #fd1d1d 58%, #fcb045);
+}
+
+.social-logo-tiktok {
+  background:
+    radial-gradient(circle at 35% 65%, rgba(37, 244, 238, 0.55), transparent 28%),
+    radial-gradient(circle at 68% 38%, rgba(254, 44, 85, 0.55), transparent 26%),
+    #050505;
+}
+
+.social-logo-facebook {
+  background: linear-gradient(135deg, #1877f2, #0b5bd3);
 }
 
 .social-link:hover {
-  border-color: rgba(215, 176, 116, 0.48);
-  background: rgba(215, 176, 116, 0.08);
+  color: #f8f3ea;
+  border-color: rgba(215, 176, 116, 0.55);
+  background: rgba(215, 176, 116, 0.09);
 }
 
 .final-cta {
@@ -1419,10 +1538,19 @@ const pageContent = computed(() => content[locale.value] ?? content.es);
     grid-template-columns: 1fr;
   }
 
-  .routes-grid,
-  .contact-grid,
   .process-grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .route-row,
+  .contact-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .route-row b,
+  .contact-row a {
+    justify-self: start;
+    text-align: left;
   }
 
   .hero-copy h1 {
@@ -1433,15 +1561,30 @@ const pageContent = computed(() => content[locale.value] ?? content.es);
 @media (max-width: 900px) {
   .hero-signals,
   .brief-grid,
-  .routes-grid,
-  .contact-grid,
   .process-grid,
   .external-actions {
     grid-template-columns: 1fr;
   }
 
+  .route-row,
+  .contact-row,
+  .availability-status-row {
+    grid-template-columns: 1fr;
+  }
+
   .process-grid::before {
     display: none;
+  }
+
+  .process-step,
+  .process-step + .process-step {
+    padding: 1.4rem 0;
+    border-right: 0;
+    border-bottom: 1px solid rgba(248, 243, 234, 0.1);
+  }
+
+  .process-step:last-child {
+    border-bottom: 0;
   }
 
   .home-hero {
@@ -1498,13 +1641,11 @@ const pageContent = computed(() => content[locale.value] ?? content.es);
   }
 
   .hero-brief,
-  .process-step,
   .contact-shell,
-  .contact-card,
   .availability-offer,
-  .availability-status-card,
   .final-shell,
-  .route-card {
+  .route-row,
+  .contact-row {
     padding: 1.35rem;
   }
 
@@ -1519,8 +1660,8 @@ const pageContent = computed(() => content[locale.value] ?? content.es);
   .btn-primary,
   .btn-secondary,
   .brief-cta,
-  .route-card,
-  .contact-card,
+  .route-row,
+  .contact-row,
   .social-link {
     transition: none;
   }

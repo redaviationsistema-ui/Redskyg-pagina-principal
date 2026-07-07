@@ -175,7 +175,7 @@ const setStructuredData = () => {
       logo: `${baseUrl}/images/logoo.png`,
       sameAs: [
         "https://www.linkedin.com/company/red-aviation-corp/",
-        "https://www.instagram.com/redaviationcompany/",
+        "https://www.instagram.com/skygroup_llc/",
         "https://www.tiktok.com/@redaviationcompany",
         "https://www.facebook.com/RedAviationJets",
       ],
@@ -214,7 +214,7 @@ const setStructuredData = () => {
       areaServed: ["Toluca", "Ciudad de Mexico", "Monterrey", "Guadalajara", "Cancun", "Mexico"],
       sameAs: [
         "https://www.linkedin.com/company/red-aviation-corp/",
-        "https://www.instagram.com/redaviationcompany/",
+        "https://www.instagram.com/skygroup_llc/",
         "https://www.tiktok.com/@redaviationcompany",
         "https://www.facebook.com/RedAviationJets",
       ],
