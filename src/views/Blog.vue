@@ -568,14 +568,16 @@ onMounted(() => {
 .section-banner,
 .strip-card,
 .guide-card {
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(8, 17, 31, 0.62);
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
   backdrop-filter: blur(16px);
-  border-radius: 28px;
+  border-radius: 0;
 }
 
 .hero-copy {
-  padding: 2.4rem;
+  padding: 2.4rem 0;
 }
 
 .eyebrow,
@@ -643,7 +645,8 @@ onMounted(() => {
 }
 
 .hero-panel {
-  padding: 2rem;
+  padding: 2rem 0 2rem 2rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .hero-stats {
@@ -654,9 +657,14 @@ onMounted(() => {
 
 .hero-stat {
   position: relative;
-  padding: 1rem 1.05rem;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.04);
+  padding: 1rem 0;
+  border-radius: 0;
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hero-stat:last-child {
+  border-bottom: 0;
 }
 
 .hero-stat strong {
@@ -724,13 +732,12 @@ onMounted(() => {
 }
 
 .main-pages-shell {
-  padding: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background:
-    radial-gradient(circle at top right, rgba(123, 183, 255, 0.14), transparent 24%),
-    linear-gradient(180deg, rgba(10, 20, 36, 0.92), rgba(8, 17, 31, 0.9));
-  backdrop-filter: blur(18px);
-  border-radius: 32px;
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  backdrop-filter: none;
+  border-radius: 0;
 }
 
 .main-pages-intro {
@@ -754,28 +761,32 @@ onMounted(() => {
 
 .main-pages-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.1rem;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .main-page-card {
   overflow: hidden;
   text-decoration: none;
-  border-radius: 28px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(5, 13, 25, 0.82);
-  transition: transform 0.32s ease, border-color 0.32s ease, box-shadow 0.32s ease;
+  display: grid;
+  grid-template-columns: minmax(220px, 0.38fr) minmax(0, 1fr);
+  align-items: stretch;
+  border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: transparent;
+  transition: transform 0.32s ease, background 0.32s ease;
 }
 
 .main-page-card:hover {
-  transform: translateY(-10px);
-  border-color: rgba(139, 188, 255, 0.4);
-  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.28);
+  transform: translateX(8px);
+  background: rgba(255, 255, 255, 0.025);
 }
 
 .main-page-media {
   position: relative;
-  min-height: 220px;
+  min-height: 210px;
 }
 
 .main-page-media img {
@@ -788,7 +799,7 @@ onMounted(() => {
 }
 
 .main-page-card:hover .main-page-media img {
-  transform: scale(1.06);
+  transform: scale(1.03);
 }
 
 .main-page-index {
@@ -809,7 +820,7 @@ onMounted(() => {
 }
 
 .main-page-body {
-  padding: 1.4rem;
+  padding: 1.4rem 0 1.4rem 1.5rem;
 }
 
 .main-page-body h3 {
@@ -1060,7 +1071,9 @@ onMounted(() => {
 .process-grid-business,
 .confidence-grid {
   display: grid;
-  gap: 1rem;
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .trust-grid,
@@ -1077,12 +1090,20 @@ onMounted(() => {
 .what-we-do-card,
 .process-business-card,
 .confidence-card {
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(8, 17, 31, 0.62);
-  backdrop-filter: blur(16px);
-  border-radius: 28px;
-  padding: 1.5rem;
-  transition: transform 0.32s ease, border-color 0.32s ease, box-shadow 0.32s ease;
+  border: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  backdrop-filter: none;
+  border-radius: 0;
+  padding: 1.5rem 1.4rem;
+  transition: transform 0.32s ease, background 0.32s ease;
+}
+
+.trust-card:last-child,
+.what-we-do-card:last-child,
+.process-business-card:last-child,
+.confidence-card:last-child {
+  border-right: 0;
 }
 
 .trust-card:hover,
@@ -1179,7 +1200,8 @@ onMounted(() => {
 }
 
 .featured-copy {
-  padding: 2rem;
+  padding: 2rem 0 2rem 1.5rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .featured-pills {
@@ -1210,7 +1232,7 @@ onMounted(() => {
   grid-template-columns: 0.8fr 1.2fr;
   gap: 1rem;
   align-items: center;
-  padding: 1.4rem 1.6rem;
+  padding: 1.4rem 0;
   margin-bottom: 1.25rem;
 }
 
@@ -1345,6 +1367,36 @@ onMounted(() => {
 
   .hero-copy h1 {
     max-width: 100%;
+  }
+
+  .hero-panel,
+  .featured-copy {
+    padding: 1.5rem 0;
+    border-left: 0;
+  }
+
+  .main-page-card {
+    grid-template-columns: 1fr;
+  }
+
+  .main-page-body {
+    padding: 1.25rem 0;
+  }
+
+  .trust-card,
+  .what-we-do-card,
+  .process-business-card,
+  .confidence-card {
+    padding: 1.25rem 0;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .trust-card:last-child,
+  .what-we-do-card:last-child,
+  .process-business-card:last-child,
+  .confidence-card:last-child {
+    border-bottom: 0;
   }
 }
 

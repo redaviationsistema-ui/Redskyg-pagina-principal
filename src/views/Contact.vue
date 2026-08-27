@@ -18,7 +18,7 @@
               <article
                 v-for="highlight in highlights"
                 :key="highlight.label"
-                class="highlight-card"
+                class="highlight-stat"
               >
                 <strong>{{ highlight.value }}</strong>
                 <span>{{ highlight.label }}</span>
@@ -31,7 +31,7 @@
             </div>
           </div>
 
-          <div class="hero-aside glass-panel">
+          <div class="hero-aside response-panel">
             <p class="aside-label">{{ content.asideLabel }}</p>
             <div class="aside-grid">
               <article v-for="item in responseFlow" :key="item.title">
@@ -47,17 +47,17 @@
       <section class="contact-content container">
         <div class="content-grid">
           <div class="contact-info">
-            <div class="section-block intro-card">
+            <div class="section-block intro-panel">
               <span class="section-kicker">{{ content.introKicker }}</span>
               <h2>{{ content.introTitle }}</h2>
               <p>{{ content.introText }}</p>
             </div>
 
-            <div class="section-block info-grid">
+            <div class="section-block contact-directory">
               <article
                 v-for="channel in contactChannels"
                 :key="channel.title"
-                class="info-card"
+                class="directory-item"
               >
                 <span>{{ channel.tag }}</span>
                 <h3>{{ channel.title }}</h3>
@@ -66,7 +66,7 @@
               </article>
             </div>
 
-            <div class="section-block benefits-card">
+            <div class="section-block benefits-panel">
               <div class="benefits-header">
                 <span class="section-kicker">{{ content.benefitsKicker }}</span>
                 <h2>{{ content.benefitsTitle }}</h2>
@@ -636,31 +636,23 @@ const submitForm = async () => {
   margin-top: 2rem;
 }
 
-.highlight-card,
-.glass-panel,
-.intro-card,
-.info-card,
-.benefits-card,
-.panel-shell,
-.trust-grid article {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(18px);
-  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.22);
+.highlight-stat {
+  position: relative;
+  padding: 0 1.2rem 0 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.14);
 }
 
-.highlight-card {
-  padding: 1.2rem 1.1rem;
-  border-radius: 18px;
+.highlight-stat:last-child {
+  border-right: 0;
 }
 
-.highlight-card strong {
+.highlight-stat strong {
   display: block;
   font-size: 1.8rem;
   color: white;
 }
 
-.highlight-card span {
+.highlight-stat span {
   display: block;
   margin-top: 0.35rem;
   color: rgba(255, 255, 255, 0.64);
@@ -684,9 +676,9 @@ const submitForm = async () => {
   color: rgba(255, 255, 255, 0.7);
 }
 
-.glass-panel {
-  border-radius: 26px;
-  padding: 1.6rem;
+.response-panel {
+  padding: 0.4rem 0 0.4rem 2rem;
+  border-left: 1px solid rgba(212, 175, 55, 0.34);
 }
 
 .aside-label {
@@ -696,14 +688,30 @@ const submitForm = async () => {
 
 .aside-grid {
   display: grid;
-  gap: 1rem;
+  gap: 0;
 }
 
 .aside-grid article {
-  padding: 1.25rem;
-  border-radius: 18px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  padding: 0 0 1.5rem 2rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.aside-grid article::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 0.1rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: #d4af37;
+  box-shadow: 0 0 0 6px rgba(212, 175, 55, 0.12);
+}
+
+.aside-grid article:last-child {
+  padding-bottom: 0;
+  border-left-color: transparent;
 }
 
 .aside-grid span {
@@ -745,96 +753,96 @@ const submitForm = async () => {
   border-radius: 28px;
 }
 
-.intro-card {
-  padding: 2rem;
+.intro-panel {
+  padding: 0 0 1.8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.intro-card h2,
+.intro-panel h2,
 .benefits-header h2,
 .panel-heading h2 {
   font-size: clamp(1.8rem, 3.4vw, 2.8rem);
   margin: 0.8rem 0 1rem;
 }
 
-.intro-card p,
+.intro-panel p,
 .panel-heading p {
   color: rgba(255, 255, 255, 0.72);
   line-height: 1.8;
 }
 
-.info-grid {
+.contact-directory {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.info-card {
-  padding: 1.5rem;
-  border-radius: 22px;
+.directory-item {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr) minmax(180px, 0.55fr);
+  gap: 1.5rem;
+  align-items: baseline;
+  padding: 1.35rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.info-card span {
+.directory-item:last-child {
+  border-bottom: 0;
+}
+
+.directory-item span {
   color: #7bb7ff;
   font-size: 0.75rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
-.info-card h3 {
-  margin: 0.8rem 0;
+.directory-item h3 {
+  margin: 0;
   font-size: 1.2rem;
 }
 
-.info-card p {
+.directory-item p {
+  margin: 0;
   color: rgba(255, 255, 255, 0.66);
   line-height: 1.7;
 }
 
-.info-card a {
-  display: inline-block;
-  margin-top: 1rem;
+.directory-item a {
+  justify-self: end;
   color: #d4af37;
   text-decoration: none;
+  text-align: right;
+  overflow-wrap: anywhere;
 }
 
-.benefits-card {
-  padding: 2rem;
-  border-radius: 28px;
+.benefits-panel {
+  padding: 2rem 0 0;
 }
 
 .benefits-list {
   display: grid;
-  gap: 1.1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
   margin-top: 1.5rem;
 }
 
 .benefit-item {
-  display: grid;
-  grid-template-columns: 64px 1fr;
-  gap: 1rem;
-  align-items: start;
-  padding: 1.2rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.benefit-item:first-child {
-  border-top: 0;
-  padding-top: 0;
+  display: block;
+  padding-top: 1.1rem;
+  border-top: 2px solid rgba(212, 175, 55, 0.55);
 }
 
 .benefit-index {
-  width: 64px;
-  height: 64px;
-  border-radius: 18px;
-  display: grid;
-  place-items: center;
-  color: #0b1220;
+  color: #d4af37;
   font-weight: 700;
-  background: linear-gradient(135deg, #d4af37, #f3d67a);
+  letter-spacing: 0.18em;
+  font-size: 0.78rem;
 }
 
 .benefit-item h3 {
-  margin-bottom: 0.45rem;
+  margin: 0.8rem 0 0.45rem;
 }
 
 .benefit-item p {
@@ -846,7 +854,11 @@ const submitForm = async () => {
   position: sticky;
   top: 110px;
   padding: 2rem;
-  border-radius: 30px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.22);
 }
 
 .contact-form {
@@ -941,16 +953,18 @@ select option {
 
 .panel-footer {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.9rem;
+  gap: 0;
   margin-top: 1.6rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .panel-foot-item {
-  padding: 1rem;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.panel-foot-item:last-child {
+  border-bottom: 0;
 }
 
 .panel-foot-item strong {
@@ -965,18 +979,28 @@ select option {
 }
 
 .trust-band {
-  padding: 0 0 5rem;
+  padding: 1rem 0 5rem;
 }
 
 .trust-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .trust-grid article {
-  padding: 1.6rem;
-  border-radius: 24px;
+  padding: 1.5rem 1.5rem 1.5rem 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.trust-grid article + article {
+  padding-left: 1.5rem;
+}
+
+.trust-grid article:last-child {
+  border-right: 0;
 }
 
 .trust-grid span {
@@ -1064,19 +1088,45 @@ select option {
 @media (max-width: 1100px) {
   .hero-grid,
   .content-grid,
-  .info-grid,
   .trust-grid {
     grid-template-columns: 1fr;
   }
 
   .hero-highlights,
-  .panel-footer {
+  .benefits-list {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .response-panel {
+    padding: 2rem 0 0;
+    border-left: 0;
+    border-top: 1px solid rgba(212, 175, 55, 0.34);
+  }
+
+  .directory-item {
+    grid-template-columns: 150px minmax(0, 1fr);
+  }
+
+  .directory-item a {
+    grid-column: 2;
+    justify-self: start;
+    text-align: left;
   }
 
   .panel-shell {
     position: relative;
     top: auto;
+  }
+
+  .trust-grid article,
+  .trust-grid article + article {
+    padding: 1.4rem 0;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .trust-grid article:last-child {
+    border-bottom: 0;
   }
 }
 
@@ -1090,23 +1140,44 @@ select option {
   }
 
   .hero-highlights,
-  .panel-footer {
+  .benefits-list {
     grid-template-columns: 1fr;
   }
 
-  .benefit-item {
+  .highlight-stat {
+    padding: 0 0 1rem;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .highlight-stat:last-child {
+    border-bottom: 0;
+  }
+
+  .directory-item {
     grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .directory-item a {
+    grid-column: auto;
   }
 
   .benefit-index {
-    width: 56px;
-    height: 56px;
+    display: block;
   }
 
   .panel-shell,
-  .intro-card,
-  .benefits-card {
+  .intro-panel,
+  .benefits-panel {
     padding: 1.4rem;
+  }
+
+  .intro-panel,
+  .benefits-panel {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.03);
   }
 }
 </style>

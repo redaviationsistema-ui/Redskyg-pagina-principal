@@ -501,6 +501,13 @@ const handlePhone = (number) => {
   font-weight: 600;
 }
 
+.connect-cta a::after {
+  content: "->";
+  color: rgba(143, 202, 255, 0.8);
+  font-size: 0.85rem;
+  letter-spacing: 0;
+}
+
 .connect-cta a:last-child {
   color: #d8b26e;
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);

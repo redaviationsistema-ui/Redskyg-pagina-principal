@@ -944,6 +944,7 @@ const serviceLinkProps = (item) => {
 
 .hero-pills {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   gap: 0.8rem;
   margin-top: 1.5rem;

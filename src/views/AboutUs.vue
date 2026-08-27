@@ -663,6 +663,10 @@ onBeforeUnmount(() => {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
+.capability-card .icon-badge {
+  margin-bottom: 0;
+}
+
 .icon-badge svg {
   width: 24px;
   height: 24px;
@@ -848,6 +852,12 @@ onBeforeUnmount(() => {
 .metric-block {
   padding: 1rem 1.25rem;
   text-align: center;
+  padding: 1.8rem 1.5rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.metric-card:last-child {
+  border-right: 0;
 }
 
 .journey-section {
