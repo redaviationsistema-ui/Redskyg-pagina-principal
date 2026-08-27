@@ -627,7 +627,9 @@ h3 {
 .hero-image-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(7, 19, 33, 0.28), rgba(7, 19, 33, 0.78));
+  background:
+    linear-gradient(90deg, rgba(5, 13, 23, 0.68) 0%, rgba(5, 13, 23, 0.48) 34%, rgba(5, 13, 23, 0.2) 62%, rgba(5, 13, 23, 0.38) 100%),
+    linear-gradient(180deg, rgba(5, 13, 23, 0.08), rgba(5, 13, 23, 0.28));
 }
 
 .hero-panel-copy {
@@ -739,7 +741,7 @@ h3 {
 
 .content-conversion-row small,
 .cta-urgency {
-  color: #8fcaff;
+  color: #d8b26e;
   font-size: 0.78rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -767,8 +769,8 @@ h3 {
   min-height: 36px;
   padding: 0.55rem 0.85rem;
   border-radius: 999px;
-  background: rgba(123, 183, 255, 0.09);
-  border: 1px solid rgba(123, 183, 255, 0.2);
+  background: rgba(216, 178, 110, 0.09);
+  border: 1px solid rgba(216, 178, 110, 0.2);
   color: white;
   font-size: 0.8rem;
   line-height: 1.3;
@@ -782,7 +784,7 @@ h3 {
 
 .content-details summary {
   cursor: pointer;
-  color: #7bb7ff;
+  color: #d8b26e;
   font-weight: 600;
   list-style: none;
 }
@@ -802,7 +804,7 @@ h3 {
 .section-link {
   display: inline-flex;
   margin-top: 1.25rem;
-  color: #7bb7ff;
+  color: #d8b26e;
   text-decoration: none;
   font-weight: 600;
 }
@@ -898,12 +900,12 @@ h3 {
 
 .related-link:hover {
   transform: translateY(-3px);
-  border-color: rgba(123, 183, 255, 0.24);
-  background: rgba(123, 183, 255, 0.08);
+  border-color: rgba(216, 178, 110, 0.24);
+  background: rgba(216, 178, 110, 0.08);
 }
 
 .related-link.is-external {
-  color: #7bb7ff;
+  color: #d8b26e;
 }
 
 .quick-quote-shell {

@@ -3,7 +3,7 @@
       <section class="hero">
         <img
           class="hero-bg"
-          src="/images/Tiempocompartido/tiempoCompartido.jpeg"
+          src="/images/Tiempocompartido/timempocompartido3.jpg"
           :alt="content.heroAlt"
           fetchpriority="high"
           decoding="async"
@@ -32,6 +32,26 @@
           <div class="bullet-grid">
             <article v-for="item in structureItems" :key="item" class="bullet-card">
               {{ item }}
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-heading">
+            <span class="eyebrow">{{ content.visualEyebrow }}</span>
+            <h2>{{ content.visualTitle }}</h2>
+            <p>{{ content.visualText }}</p>
+          </div>
+
+          <div class="visual-grid visual-grid-wide">
+            <article v-for="item in visuals" :key="item.src" class="visual-card">
+              <img :src="item.src" :alt="item.alt" loading="lazy" decoding="async" />
+              <div class="visual-card-body">
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.text }}</p>
+              </div>
             </article>
           </div>
         </div>
@@ -87,36 +107,42 @@ const content = computed(() =>
     ? {
         heroAlt: "Fractional aircraft ownership program",
         heroEyebrow: "Fractional Ownership",
-        heroTitle: "Structured access to executive aviation through shared participation.",
+        heroTitle: "Fractional ownership with structured access.",
         heroText: "Fractional ownership is designed for clients who need frequent access to executive aviation with stronger cost discipline and more predictability than occasional charter.",
         heroPrimaryCta: "Request Ownership Analysis",
         heroSecondaryCta: "Compare With Co-Ownership",
         structureEyebrow: "Program Structure",
-        structureTitle: "What fractional ownership usually includes.",
+        structureTitle: "What the program includes.",
         structureText: "Clients acquire a defined share in a professionally managed aircraft program and receive allocated hours, operational support, and a more structured cost model.",
+        visualEyebrow: "Program Experience",
+        visualTitle: "The unused images fit the access story of fractional ownership.",
+        visualText: "One image reinforces the onboard experience and the other the recurring travel rhythm that gives this model its value.",
         fitEyebrow: "Best Fit",
-        fitTitle: "Who this model is designed for.",
-        finalTitle: "Need help deciding between full ownership, fractional ownership, co-ownership, or charter?",
+        fitTitle: "Who this model fits.",
+        finalTitle: "Compare ownership models with technical guidance.",
         finalText: "We can review your flight volume, budget priorities, and operational goals to recommend the most efficient model.",
         finalPrimaryCta: "Schedule Ownership Review",
-        finalSecondaryCta: "Explore Aircraft Advisory",
+        finalSecondaryCta: "Explore Full Ownership Options",
       }
     : {
         heroAlt: "Programa de propiedad fraccional de aeronaves",
-        heroEyebrow: "Vuelos Privados en Mexico",
-        heroTitle: "Acceso estructurado a aviacion ejecutiva mediante participacion compartida.",
+        heroEyebrow: "Propiedad fraccional",
+        heroTitle: "Propiedad fraccional con acceso estructurado.",
         heroText: "El tiempo compartido esta pensado para clientes que necesitan acceso frecuente a aviacion ejecutiva con mayor disciplina de costos y mas previsibilidad que un charter ocasional.",
         heroPrimaryCta: "Solicitar analisis de propiedad",
         heroSecondaryCta: "Comparar con copropiedad",
         structureEyebrow: "Estructura del programa",
-        structureTitle: "Lo que normalmente incluye la propiedad fraccional.",
+        structureTitle: "Lo que incluye el programa.",
         structureText: "Los clientes adquieren una participacion definida dentro de un programa de aeronave administrado profesionalmente y reciben horas asignadas, soporte operativo y un modelo de costos mas estructurado.",
+        visualEyebrow: "Experiencia del programa",
+        visualTitle: "Las imagenes libres encajan con la historia de acceso del tiempo compartido.",
+        visualText: "Una refuerza la experiencia a bordo y la otra el ritmo de viaje recurrente que le da valor a este modelo.",
         fitEyebrow: "Mejor ajuste",
-        fitTitle: "Para quien esta pensado este modelo.",
-        finalTitle: "Necesitas ayuda para decidir entre propiedad total, propiedad fraccional, copropiedad o charter?",
+        fitTitle: "Para quien encaja este modelo.",
+        finalTitle: "Compare esquemas de propiedad con criterio tecnico.",
         finalText: "Podemos revisar tu volumen de vuelo, prioridades de presupuesto y objetivos operativos para recomendar el modelo mas eficiente.",
         finalPrimaryCta: "Agendar revision de propiedad",
-        finalSecondaryCta: "Explorar asesoria de aeronaves",
+        finalSecondaryCta: "Explorar opciones de propiedad total",
       }
 );
 
@@ -209,6 +235,38 @@ const idealFor = computed(() =>
         },
       ]
 );
+
+const visuals = computed(() =>
+  locale.value === "en"
+    ? [
+        {
+          src: "/images/Tiempocompartido/tiempoCompartido.jpeg",
+          alt: "Private aircraft cabin interior prepared for passengers",
+          title: "Onboard comfort",
+          text: "Supports the promise of a more refined and predictable travel experience for recurring private flyers.",
+        },
+        {
+          src: "/images/Tiempocompartido/tiempocompartido1.jpeg",
+          alt: "Aircraft wing during sunset flight",
+          title: "Recurring access",
+          text: "Connects well with the idea of scheduled, repeatable use instead of occasional charter demand.",
+        },
+      ]
+    : [
+        {
+          src: "/images/Tiempocompartido/tiempoCompartido.jpeg",
+          alt: "Interior de aeronave privada preparado para pasajeros",
+          title: "Confort a bordo",
+          text: "Refuerza la promesa de una experiencia de viaje mas refinada y predecible para usuarios recurrentes de aviacion privada.",
+        },
+        {
+          src: "/images/Tiempocompartido/tiempocompartido1.jpeg",
+          alt: "Ala de aeronave durante un vuelo al atardecer",
+          title: "Acceso recurrente",
+          text: "Conecta bien con la idea de uso programado y repetible, no con demanda ocasional de charter.",
+        },
+      ]
+);
 </script>
 
 <style scoped>
@@ -237,8 +295,8 @@ const idealFor = computed(() =>
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(120deg, rgba(5, 15, 30, 0.94), rgba(5, 15, 30, 0.68)),
-    radial-gradient(circle at right center, rgba(212, 175, 55, 0.12), transparent 28%);
+    linear-gradient(90deg, rgba(5, 13, 23, 0.68) 0%, rgba(5, 13, 23, 0.48) 34%, rgba(5, 13, 23, 0.2) 62%, rgba(5, 13, 23, 0.38) 100%),
+    linear-gradient(180deg, rgba(5, 13, 23, 0.08), rgba(5, 13, 23, 0.28));
 }
 
 .hero-content {
@@ -248,9 +306,14 @@ const idealFor = computed(() =>
   padding-bottom: 4rem;
 }
 
+.section-heading {
+  max-width: 760px;
+  margin-bottom: 2rem;
+}
+
 .eyebrow {
   display: inline-block;
-  color: #7bb7ff;
+  color: #d8b26e;
   letter-spacing: 0.24em;
   font-size: 0.76rem;
   text-transform: uppercase;
@@ -267,7 +330,9 @@ const idealFor = computed(() =>
 .hero-content p,
 .split-grid p,
 .info-card p,
-.cta-shell p {
+.cta-shell p,
+.section-heading p,
+.visual-card p {
   color: rgba(255, 255, 255, 0.76);
   line-height: 1.8;
 }
@@ -322,7 +387,7 @@ const idealFor = computed(() =>
 }
 
 .bullet-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .bullet-card,
@@ -334,8 +399,45 @@ const idealFor = computed(() =>
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.bullet-card {
+  border-radius: 18px 36px 18px 36px;
+  text-align: center;
+}
+
+.visual-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.visual-grid.visual-grid-wide {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.visual-card {
+  display: grid;
+  gap: 0.9rem;
+  overflow: hidden;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1rem;
+}
+
+.visual-card img {
+  aspect-ratio: 16 / 10;
+}
+
+.visual-card-body {
+  padding: 0.2rem 0.3rem 0.5rem;
+}
+
+.visual-card h3 {
+  margin-bottom: 0.65rem;
+}
+
 .card-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .card-grid.compact {
@@ -344,6 +446,19 @@ const idealFor = computed(() =>
 
 .info-card h3 {
   margin-bottom: 0.8rem;
+}
+
+.dark-section .info-card {
+  min-height: 100%;
+  border-radius: 32px;
+  background:
+    linear-gradient(180deg, rgba(8, 19, 34, 0.92), rgba(8, 19, 34, 0.74)),
+    radial-gradient(circle at bottom right, rgba(212, 175, 55, 0.12), transparent 28%);
+}
+
+.split-grid .card-grid.compact .info-card {
+  border-radius: 999px;
+  text-align: center;
 }
 
 .cta-shell {
@@ -357,7 +472,9 @@ const idealFor = computed(() =>
   .split-grid,
   .card-grid,
   .card-grid.compact,
-  .bullet-grid {
+  .bullet-grid,
+  .visual-grid,
+  .visual-grid.visual-grid-wide {
     grid-template-columns: 1fr;
   }
 }

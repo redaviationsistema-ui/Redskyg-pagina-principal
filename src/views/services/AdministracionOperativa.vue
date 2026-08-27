@@ -14,41 +14,36 @@
       </section>
 
       <section class="section">
-        <div class="container split-grid">
+        <div class="container split-grid split-grid-narrow">
           <div>
             <span class="eyebrow">{{ content.sectionEyebrow }}</span>
             <h2>{{ content.sectionTitle }}</h2>
             <p>{{ content.sectionText }}</p>
           </div>
 
-          <div class="card-grid compact">
-            <article v-for="item in services" :key="item.title" class="info-card">
-              <h3>{{ item.title }}</h3>
-              <p>{{ item.text }}</p>
+          <div class="timeline-list">
+            <article v-for="(item, index) in services" :key="item.title" class="timeline-item">
+              <span class="timeline-item__index">{{ String(index + 1).padStart(2, "0") }}</span>
+              <div>
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.text }}</p>
+              </div>
             </article>
           </div>
         </div>
       </section>
 
       <section class="section dark-section">
-        <div class="container process-grid">
-          <article v-for="item in outcomes" :key="item.title" class="info-card">
-            <h3>{{ item.title }}</h3>
-            <p>{{ item.text }}</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section final-cta">
-        <div class="container cta-shell">
-          <h2>{{ content.finalTitle }}</h2>
-          <p>{{ content.finalText }}</p>
-          <div class="hero-actions">
-            <RouterLink class="btn-primary" :to="toLocalizedRoute('Contact')">{{ content.finalPrimaryCta }}</RouterLink>
-            <RouterLink class="btn-ghost dark" :to="toLocalizedRoute('Pricing')">{{ content.finalSecondaryCta }}</RouterLink>
+        <div class="container">
+          <div class="stat-band">
+            <article v-for="item in outcomes" :key="item.title" class="stat-band__item">
+              <span class="stat-band__label">{{ item.title }}</span>
+              <p class="stat-band__value">{{ item.text }}</p>
+            </article>
           </div>
         </div>
       </section>
+
     </section>
 </template>
 
@@ -60,71 +55,98 @@ import { useLocale } from "../../i18n";
 const { locale, toLocalizedRoute } = useLocale();
 
 const heroStyle = {
-  backgroundImage:
-    'linear-gradient(120deg, rgba(5, 15, 30, 0.92), rgba(5, 15, 30, 0.72)), url("/images/Service/AdministracionOperativa.png")',
+  backgroundImage: 'url("/images/Service/AdministracionOperativa.png")',
+  backgroundPosition: "center 34%",
 };
 
 const content = computed(() =>
   locale.value === "en"
     ? {
         heroEyebrow: "Aircraft Management",
-        heroTitle: "Aircraft operations management with stronger control, compliance, and cost visibility.",
-        heroText: "Sky Group supports owners and operators who need a more structured management model for executive aviation and private flight operations.",
+        heroTitle: "Aircraft management with operational control.",
+        heroText: "If you want a more organized way to run your aircraft, we help you keep operations, maintenance, and compliance under control.",
         heroPrimaryCta: "Request Consultation",
         heroSecondaryCta: "Explore Charter",
         sectionEyebrow: "Management Scope",
-        sectionTitle: "Built for aircraft owners who need less friction and more oversight.",
-        sectionText: "This service is designed to connect operations, regulatory control, maintenance planning, and reporting into one management structure so owners can focus on business priorities instead of day-to-day aircraft complexity.",
-        finalTitle: "Need structured oversight for an aircraft you already own?",
-        finalText: "We can review the operating profile, compliance scope, and technical needs to define the right management model.",
-        finalPrimaryCta: "Talk to Operations",
-        finalSecondaryCta: "View Pricing Guidance",
+        sectionTitle: "Operational oversight with clearer visibility.",
+        sectionText: "We connect operations, regulatory control, maintenance planning, and reporting in one structure so you can focus on your priorities instead of the daily complexity of the aircraft.",
       }
     : {
-        heroEyebrow: "Vuelos Privados en Mexico",
-        heroTitle: "Administracion operativa de aeronaves con mayor control, cumplimiento y visibilidad de costos.",
-        heroText: "Sky Group apoya a propietarios y operadores que necesitan una gestion mas estructurada para respaldar operaciones de aviacion ejecutiva y vuelos privados en Mexico.",
+        heroEyebrow: "Servicios aeronauticos",
+        heroTitle: "Administracion de aeronaves con control operativo.",
+        heroText: "Si buscas una operacion mas ordenada, te ayudamos a mantener bajo control cumplimiento, mantenimiento y coordinacion diaria.",
         heroPrimaryCta: "Solicitar asesoria",
         heroSecondaryCta: "Explorar charter",
         sectionEyebrow: "Alcance de gestion",
-        sectionTitle: "Pensado para propietarios que necesitan menos friccion y mayor supervision.",
-        sectionText: "Este servicio conecta operaciones, control regulatorio, planeacion de mantenimiento y reporteo dentro de una sola estructura de gestion para que el propietario pueda enfocarse en prioridades de negocio y no en la complejidad diaria de la aeronave.",
-        finalTitle: "Necesitas supervision estructurada para una aeronave que ya posees?",
-        finalText: "Podemos revisar el perfil operativo, el alcance de cumplimiento y las necesidades tecnicas para definir el modelo de gestion correcto.",
-        finalPrimaryCta: "Hablar con operaciones",
-        finalSecondaryCta: "Ver guia de precios",
+        sectionTitle: "Supervision operativa con visibilidad real.",
+        sectionText: "Conectamos operaciones, control regulatorio, planeacion de mantenimiento y reporteo en una sola estructura para que puedas enfocarte en tu negocio y no en la complejidad diaria de la aeronave.",
       }
 );
 
 const services = computed(() =>
   locale.value === "en"
     ? [
-        { title: "Regulatory compliance", text: "Oversight of certifications, documentation, and operating requirements." },
-        { title: "Crew and scheduling", text: "Support for pilot coordination, readiness, and recurring flight planning." },
-        { title: "Maintenance planning", text: "Structured technical oversight to reduce risk and improve aircraft availability." },
-        { title: "Budget and reporting", text: "Clearer visibility into operating expenses, management priorities, and control." },
+        { title: "Regulatory compliance", text: "Keep certifications, documentation, and operating requirements in order." },
+        { title: "Crew and scheduling", text: "Coordinate pilots, readiness, and recurring flight planning with fewer loose ends." },
+        { title: "Maintenance planning", text: "Reduce risk and improve aircraft availability with structured technical follow-up." },
+        { title: "Budget and reporting", text: "See operating expenses and management priorities more clearly." },
       ]
     : [
-        { title: "Cumplimiento regulatorio", text: "Supervision de certificaciones, documentacion y requerimientos operativos." },
-        { title: "Tripulacion y programacion", text: "Apoyo para coordinacion de pilotos, disponibilidad y planeacion recurrente de vuelos." },
-        { title: "Planeacion de mantenimiento", text: "Supervision tecnica estructurada para reducir riesgo y mejorar disponibilidad de la aeronave." },
-        { title: "Presupuesto y reporteo", text: "Mayor visibilidad sobre gastos operativos, prioridades de gestion y control." },
+        { title: "Cumplimiento regulatorio", text: "Mantienes en orden certificaciones, documentacion y requerimientos operativos." },
+        { title: "Tripulacion y programacion", text: "Coordinas pilotos, disponibilidad y planeacion recurrente con menos frentes sueltos." },
+        { title: "Planeacion de mantenimiento", text: "Reducimos riesgo y mejoramos disponibilidad con seguimiento tecnico estructurado." },
+        { title: "Presupuesto y reporteo", text: "Ves con mas claridad los gastos operativos y las prioridades de gestion." },
       ]
 );
 
 const outcomes = computed(() =>
   locale.value === "en"
     ? [
-        { title: "Less operational complexity", text: "Owners gain a clearer decision framework instead of managing scattered issues reactively." },
-        { title: "Better cost awareness", text: "Planning and reporting help reduce surprises and improve control over operating spend." },
-        { title: "Stronger execution quality", text: "Commercial, operational, and technical priorities are handled in a more coordinated way." },
+        { title: "Less operational complexity", text: "You make decisions with more clarity instead of reacting to scattered issues." },
+        { title: "Better cost awareness", text: "Planning and reporting help you reduce surprises and keep spending under control." },
+        { title: "Stronger execution quality", text: "Commercial, operational, and technical priorities move in a more coordinated way." },
       ]
     : [
-        { title: "Menos complejidad operativa", text: "Los propietarios ganan un marco de decision mas claro en lugar de administrar problemas dispersos de forma reactiva." },
-        { title: "Mejor conciencia de costos", text: "La planeacion y el reporteo ayudan a reducir sorpresas y mejorar el control del gasto operativo." },
-        { title: "Mayor calidad de ejecucion", text: "Las prioridades comerciales, operativas y tecnicas se atienden de una forma mas coordinada." },
+        { title: "Menos complejidad operativa", text: "Tomas decisiones con mas claridad en lugar de reaccionar a problemas dispersos." },
+        { title: "Mejor control de costos", text: "La planeacion y el reporteo te ayudan a reducir sorpresas y controlar mejor el gasto operativo." },
+        { title: "Mayor calidad de ejecucion", text: "Las prioridades comerciales, operativas y tecnicas avanzan de forma mas coordinada." },
       ]
 );
 </script>
 
 <style scoped src="../../assets/service-base.css"></style>
+<style scoped>
+.timeline-list {
+  gap: 1.2rem;
+}
+
+.timeline-item {
+  grid-template-columns: 72px minmax(0, 1fr);
+  padding: 1.4rem;
+  border-radius: 28px;
+  background:
+    linear-gradient(135deg, rgba(10, 24, 42, 0.96), rgba(10, 24, 42, 0.72)),
+    radial-gradient(circle at top right, rgba(212, 175, 55, 0.14), transparent 32%);
+  border-color: rgba(212, 175, 55, 0.12);
+}
+
+.timeline-item__index {
+  min-width: 3.4rem;
+  min-height: 3.4rem;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.stat-band {
+  gap: 1.25rem;
+}
+
+.stat-band__item {
+  padding: 1.7rem;
+  border-radius: 28px;
+}
+
+.stat-band__value {
+  font-size: 1.2rem;
+  line-height: 1.7;
+}
+</style>

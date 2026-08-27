@@ -28,16 +28,16 @@ const { locale } = useLocale();
 const content = computed(() =>
   locale.value === "en"
     ? {
-        eyebrow: "Private Jet Charter in Mexico",
+        eyebrow: "Aviation FAQ",
         title:
-          "Key answers about private jet charter in Mexico and aviation services.",
+          "Key answers on private charter and aviation services.",
         text:
           "This page helps resolve common questions before requesting a quote, hiring a charter, or moving forward with an aviation service.",
       }
     : {
-        eyebrow: "Vuelos Privados en Mexico",
+        eyebrow: "Preguntas frecuentes",
         title:
-          "Respuestas clave sobre vuelos privados en Mexico, private jet charter in Mexico y servicios aeronauticos.",
+          "Respuestas clave sobre charter privado y servicios aeronauticos.",
         text:
           "Esta pagina ayuda a resolver dudas frecuentes antes de solicitar una cotizacion, contratar un charter o avanzar con un servicio aeronautico.",
       }
@@ -125,7 +125,7 @@ const faqs = computed(() =>
 }
 
 .eyebrow {
-  color: #7bb7ff;
+  color: #d8b26e;
   letter-spacing: 0.24em;
   font-size: 0.76rem;
   text-transform: uppercase;

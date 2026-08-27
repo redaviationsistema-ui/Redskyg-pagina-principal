@@ -1,21 +1,15 @@
 <template>
   <div id="app">
     <MainLayout>
-      <Suspense>
-        <template #default>
-          <RouterView v-slot="{ Component }">
-            <transition name="fade" mode="out-in">
-              <div v-if="Component" :key="route.fullPath">
-                <component :is="Component" />
-              </div>
-            </transition>
-          </RouterView>
-        </template>
-
-        <template #fallback>
-          <div class="loading">Loading...</div>
-        </template>
-      </Suspense>
+      <RouterView v-slot="{ Component, route: currentRoute }">
+        <transition name="fade" mode="out-in">
+          <component
+            :is="Component"
+            v-if="Component"
+            :key="currentRoute.fullPath"
+          />
+        </transition>
+      </RouterView>
     </MainLayout>
   </div>
 </template>
@@ -175,7 +169,7 @@ const setStructuredData = () => {
       logo: `${baseUrl}/images/logoo.png`,
       sameAs: [
         "https://www.linkedin.com/company/red-aviation-corp/",
-        "https://www.instagram.com/redaviationcompany/",
+        "https://www.instagram.com/skygroup_llc/",
         "https://www.tiktok.com/@redaviationcompany",
         "https://www.facebook.com/RedAviationJets",
       ],
@@ -214,7 +208,7 @@ const setStructuredData = () => {
       areaServed: ["Toluca", "Ciudad de Mexico", "Monterrey", "Guadalajara", "Cancun", "Mexico"],
       sameAs: [
         "https://www.linkedin.com/company/red-aviation-corp/",
-        "https://www.instagram.com/redaviationcompany/",
+        "https://www.instagram.com/skygroup_llc/",
         "https://www.tiktok.com/@redaviationcompany",
         "https://www.facebook.com/RedAviationJets",
       ],

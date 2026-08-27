@@ -14,15 +14,15 @@
       </section>
 
       <section class="section">
-        <div class="container split-grid">
+        <div class="container engine-overview">
           <div>
             <span class="eyebrow">{{ content.sectionEyebrow }}</span>
             <h2>{{ content.sectionTitle }}</h2>
             <p>{{ content.sectionText }}</p>
           </div>
 
-          <div class="card-grid compact">
-            <article v-for="item in services" :key="item.title" class="info-card">
+          <div class="engine-checks">
+            <article v-for="item in services" :key="item.title" class="engine-check">
               <h3>{{ item.title }}</h3>
               <p>{{ item.text }}</p>
             </article>
@@ -30,9 +30,29 @@
         </div>
       </section>
 
+      <section class="section">
+        <div class="container">
+          <div class="section-heading">
+            <span class="eyebrow">{{ content.visualEyebrow }}</span>
+            <h2>{{ content.visualTitle }}</h2>
+            <p>{{ content.visualText }}</p>
+          </div>
+
+          <div class="engine-visuals">
+            <article v-for="item in visuals" :key="item.src" class="engine-visual">
+              <img :src="item.src" :alt="item.alt" loading="lazy" decoding="async" />
+              <div class="engine-visual__body">
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.text }}</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section class="section dark-section">
-        <div class="container process-grid">
-          <article v-for="item in outcomes" :key="item.title" class="info-card">
+        <div class="container engine-outcomes">
+          <article v-for="item in outcomes" :key="item.title" class="engine-outcome">
             <h3>{{ item.title }}</h3>
             <p>{{ item.text }}</p>
           </article>
@@ -45,7 +65,7 @@
           <p>{{ content.finalText }}</p>
           <div class="hero-actions">
             <RouterLink class="btn-primary" :to="toLocalizedRoute('Contact')">{{ content.finalPrimaryCta }}</RouterLink>
-            <RouterLink class="btn-ghost dark" :to="toLocalizedRoute('Pricing')">{{ content.finalSecondaryCta }}</RouterLink>
+            <RouterLink class="btn-ghost dark" :to="toLocalizedRoute('Avionics')">{{ content.finalSecondaryCta }}</RouterLink>
           </div>
         </div>
       </section>
@@ -60,39 +80,45 @@ import { useLocale } from "../../i18n";
 const { locale, toLocalizedRoute } = useLocale();
 
 const heroStyle = {
-  backgroundImage:
-    'linear-gradient(120deg, rgba(5, 15, 30, 0.92), rgba(5, 15, 30, 0.72)), url("/images/Service/TallerMotores2.png")',
+  backgroundImage: 'url("/images/Service/TallerMotores.png")',
+  backgroundPosition: "center 42%",
 };
 
 const content = computed(() =>
   locale.value === "en"
     ? {
         heroEyebrow: "Engine Shop Support",
-        heroTitle: "Technical and logistics support for high-value aircraft engine programs.",
+        heroTitle: "Engine logistics and technical support.",
         heroText: "Sky Group structures engine support around logistics, documentation, timing, and protection of critical aviation assets.",
         heroPrimaryCta: "Request Engine Consultation",
         heroSecondaryCta: "Explore Import and Export",
         sectionEyebrow: "Engine Coordination",
-        sectionTitle: "Built for engine movements and technical support that require tighter execution.",
+        sectionTitle: "Engine coordination with tighter execution.",
         sectionText: "This service supports clients dealing with engine logistics, documentation, technical handling, and coordination across multiple stakeholders and jurisdictions.",
-        finalTitle: "Need support for engine logistics or technical coordination?",
+        visualEyebrow: "Engine Workflow",
+        visualTitle: "Visual support across the engine program.",
+        visualText: "These visuals reinforce the main workstreams behind engine support: technical intervention, movement control, and aircraft asset protection.",
+        finalTitle: "Need support for an engine program?",
         finalText: "We can help define the documentation, process flow, and next operational steps for high-value engine work.",
         finalPrimaryCta: "Talk to Technical Team",
-        finalSecondaryCta: "View Pricing Guidance",
+        finalSecondaryCta: "Explore Avionics Support",
       }
     : {
-        heroEyebrow: "Vuelos Privados en Mexico",
-        heroTitle: "Soporte tecnico y logistico para programas de motores aeronauticos de alto valor.",
+        heroEyebrow: "Soporte de motores",
+        heroTitle: "Logistica y soporte tecnico para motores.",
         heroText: "Sky Group estructura el soporte de motores alrededor de logistica, documentacion, tiempos y proteccion de activos aeronauticos criticos.",
         heroPrimaryCta: "Solicitar asesoria de motores",
         heroSecondaryCta: "Explorar importacion y exportacion",
         sectionEyebrow: "Coordinacion de motores",
-        sectionTitle: "Pensado para movimientos de motores y soporte tecnico que requieren una ejecucion mas precisa.",
+        sectionTitle: "Coordinacion de motores con mayor precision.",
         sectionText: "Este servicio apoya a clientes que trabajan con logistica de motores, documentacion, manejo tecnico y coordinacion entre multiples participantes y jurisdicciones.",
-        finalTitle: "Necesitas soporte para logistica de motores o coordinacion tecnica?",
+        visualEyebrow: "Flujo del programa",
+        visualTitle: "Apoyo visual para cada etapa del servicio.",
+        visualText: "Estas imagenes refuerzan los frentes principales del soporte de motores: intervencion tecnica, control logistico y proteccion del activo aeronautico.",
+        finalTitle: "Necesita soporte para un programa de motores?",
         finalText: "Podemos ayudarte a definir documentacion, flujo de proceso y siguientes pasos operativos para trabajos de motores de alto valor.",
         finalPrimaryCta: "Hablar con equipo tecnico",
-        finalSecondaryCta: "Ver guia de precios",
+        finalSecondaryCta: "Explorar soporte de avionica",
       }
 );
 
@@ -125,6 +151,97 @@ const outcomes = computed(() =>
         { title: "Mas confianza en la ejecucion", text: "Los movimientos de motores de alto valor requieren control, no improvisacion." },
       ]
 );
+
+const visuals = computed(() =>
+  locale.value === "en"
+    ? [
+        {
+          src: "/images/Service/TallerMotores1.png",
+          alt: "Engine logistics visual with global routing",
+          title: "Logistics and traceability",
+          text: "Ideal for the import, routing, and documentation side of engine support where timing and visibility matter.",
+        },
+        {
+          src: "/images/Service/TallerMotores2.png",
+          alt: "Aircraft protected inside hangar during technical supervision",
+          title: "Operational protection",
+          text: "Useful for communicating supervision, custody, and secure execution around high-value aviation assets.",
+        },
+      ]
+    : [
+        {
+          src: "/images/Service/TallerMotores1.png",
+          alt: "Visual de logistica de motores con trazabilidad global",
+          title: "Logistica y trazabilidad",
+          text: "Funciona para reforzar la parte de importacion, traslado y documentacion del soporte de motores, donde el control del proceso es clave.",
+        },
+        {
+          src: "/images/Service/TallerMotores2.png",
+          alt: "Aeronave protegida en hangar durante supervision tecnica",
+          title: "Proteccion operativa",
+          text: "Aporta contexto visual para supervision, custodia y ejecucion segura alrededor de activos aeronauticos de alto valor.",
+        },
+      ]
+);
 </script>
 
 <style scoped src="../../assets/service-base.css"></style>
+<style scoped>
+.engine-overview {
+  display: grid;
+  grid-template-columns: 0.86fr 1.14fr;
+  gap: 2rem;
+}
+
+.engine-checks {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.engine-check {
+  padding: 1.35rem 1.45rem;
+  border-left: 3px solid rgba(212, 175, 55, 0.7);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.engine-visuals {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.engine-visual img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 28px;
+  display: block;
+}
+
+.engine-visual__body {
+  padding-top: 0.9rem;
+}
+
+.engine-outcomes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.engine-outcome {
+  padding: 1.8rem;
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(8, 19, 34, 0.94), rgba(8, 19, 34, 0.72)),
+    radial-gradient(circle at top left, rgba(212, 175, 55, 0.12), transparent 28%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 992px) {
+  .engine-overview,
+  .engine-visuals,
+  .engine-outcomes {
+    grid-template-columns: 1fr;
+  }
+}
+</style>

@@ -542,7 +542,7 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(0.9) brightness(0.45);
+  filter: none;
   transform: scale(1.06);
 }
 
@@ -551,8 +551,8 @@ onMounted(() => {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(120deg, rgba(6, 17, 32, 0.96), rgba(6, 17, 32, 0.75)),
-    radial-gradient(circle at top right, rgba(123, 183, 255, 0.16), transparent 24%);
+    linear-gradient(90deg, rgba(5, 13, 23, 0.68) 0%, rgba(5, 13, 23, 0.48) 34%, rgba(5, 13, 23, 0.2) 62%, rgba(5, 13, 23, 0.38) 100%),
+    linear-gradient(180deg, rgba(5, 13, 23, 0.08), rgba(5, 13, 23, 0.28));
 }
 
 .hero-shell {
@@ -582,7 +582,7 @@ onMounted(() => {
 .card-tag,
 .panel-label {
   display: inline-block;
-  color: #8bbcff;
+  color: #d8b26e;
   text-transform: uppercase;
   letter-spacing: 0.26em;
   font-size: 0.72rem;
@@ -857,8 +857,8 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  background: rgba(123, 183, 255, 0.12);
-  color: #8bbcff;
+  background: rgba(216, 178, 110, 0.12);
+  color: #d8b26e;
   font-weight: 700;
   margin-bottom: 1rem;
 }
@@ -926,7 +926,7 @@ onMounted(() => {
 }
 
 .quick-link.is-external {
-  color: #8bbcff;
+  color: #d8b26e;
 }
 
 .quick-link-icon {
@@ -1090,7 +1090,7 @@ onMounted(() => {
 .process-business-card:hover,
 .confidence-card:hover {
   transform: translateY(-10px);
-  border-color: rgba(139, 188, 255, 0.34);
+  border-color: rgba(216, 178, 110, 0.34);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
 }
 
@@ -1104,7 +1104,7 @@ onMounted(() => {
 .card-action {
   display: inline-flex;
   margin-top: 1rem;
-  color: #8bbcff;
+  color: #d8b26e;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -1132,7 +1132,7 @@ onMounted(() => {
   padding: 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background:
-    radial-gradient(circle at top right, rgba(123, 183, 255, 0.12), transparent 24%),
+    radial-gradient(circle at top right, rgba(216, 178, 110, 0.12), transparent 24%),
     linear-gradient(180deg, rgba(10, 20, 36, 0.92), rgba(8, 17, 31, 0.9));
   backdrop-filter: blur(18px);
   border-radius: 32px;
@@ -1163,11 +1163,11 @@ onMounted(() => {
   position: absolute;
   inset: auto 0 0 0;
   padding: 1.6rem;
-  background: linear-gradient(180deg, transparent, rgba(8, 17, 31, 0.95));
+  background: linear-gradient(180deg, transparent, rgba(5, 13, 23, 0.52));
 }
 
 .featured-overlay span {
-  color: #8bbcff;
+  color: #d8b26e;
   text-transform: uppercase;
   letter-spacing: 0.18em;
   font-size: 0.72rem;
@@ -1195,7 +1195,7 @@ onMounted(() => {
   align-items: center;
   padding: 0.55rem 0.85rem;
   border-radius: 999px;
-  background: rgba(123, 183, 255, 0.08);
+  background: rgba(216, 178, 110, 0.08);
   color: white;
   font-size: 0.8rem;
 }
@@ -1229,7 +1229,7 @@ onMounted(() => {
 
 .guide-card:hover {
   transform: translateY(-10px);
-  border-color: rgba(139, 188, 255, 0.34);
+  border-color: rgba(216, 178, 110, 0.34);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
 }
 
@@ -1286,7 +1286,7 @@ onMounted(() => {
 }
 
 .card-footer strong {
-  color: #8bbcff;
+  color: #d8b26e;
 }
 
 .card-index {

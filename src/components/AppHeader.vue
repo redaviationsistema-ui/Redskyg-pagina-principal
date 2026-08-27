@@ -10,19 +10,42 @@
       <!-- LEFT NAV -->
       <nav class="nav nav-left">
         <RouterLink :to="toLocalizedRoute('Home')" class="nav-link">
+          <span class="nav-link-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path :d="navIcons.home" />
+            </svg>
+          </span>
           {{ headerContent.home }}
         </RouterLink>
 
         <RouterLink :to="toLocalizedRoute('AboutUs')" class="nav-link">
+          <span class="nav-link-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path :d="navIcons.about" />
+            </svg>
+          </span>
           {{ headerContent.about }}
         </RouterLink>
 
         <div
+          ref="dropdownRef"
           class="dropdown"
           @mouseenter="openDropdown"
           @mouseleave="closeDropdown"
         >
-          <span class="nav-link">{{ headerContent.services }}</span>
+          <button
+            type="button"
+            class="nav-link nav-link-button"
+            :aria-expanded="dropdownOpen ? 'true' : 'false'"
+            @click="toggleDropdown"
+          >
+            <span class="nav-link-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path :d="navIcons.services" />
+              </svg>
+            </span>
+            {{ headerContent.services }}
+          </button>
 
           <div class="elegant-menu" v-show="dropdownOpen">
             <div class="menu-header">
@@ -30,7 +53,7 @@
             </div>
 
             <div class="menu-grid">
-              <RouterLink :to="toLocalizedRoute('AircraftSales')" class="menu-item">
+              <RouterLink :to="toLocalizedRoute('AircraftSales')" class="menu-item" @click="closeDropdownImmediate">
                 <div class="menu-icon-badge">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path :d="serviceIcons.aircraftSales" />
@@ -40,7 +63,7 @@
                 <small>{{ headerContent.aircraftSalesDesc }}</small>
               </RouterLink>
 
-              <RouterLink :to="toLocalizedRoute('AirTaxi')" class="menu-item">
+              <RouterLink :to="toLocalizedRoute('AirTaxi')" class="menu-item" @click="closeDropdownImmediate">
                 <div class="menu-icon-badge">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path :d="serviceIcons.airTaxi" />
@@ -53,6 +76,7 @@
               <RouterLink
                 :to="toLocalizedRoute('OperationsManagement')"
                 class="menu-item"
+                @click="closeDropdownImmediate"
               >
                 <div class="menu-icon-badge">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -66,6 +90,7 @@
               <RouterLink
                 :to="toLocalizedRoute('PrePurchaseInspection')"
                 class="menu-item"
+                @click="closeDropdownImmediate"
               >
                 <div class="menu-icon-badge">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -76,7 +101,7 @@
                 <small>{{ headerContent.prePurchaseDesc }}</small>
               </RouterLink>
 
-              <RouterLink :to="toLocalizedRoute('ImportExport')" class="menu-item">
+              <RouterLink :to="toLocalizedRoute('ImportExport')" class="menu-item" @click="closeDropdownImmediate">
                 <div class="menu-icon-badge">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path :d="serviceIcons.importExport" />
@@ -86,7 +111,7 @@
                 <small>{{ headerContent.importExportDesc }}</small>
               </RouterLink>
 
-              <RouterLink :to="toLocalizedRoute('EngineShop')" class="menu-item">
+              <RouterLink :to="toLocalizedRoute('EngineShop')" class="menu-item" @click="closeDropdownImmediate">
                 <div class="menu-icon-badge">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path :d="serviceIcons.engineServices" />
@@ -96,7 +121,7 @@
                 <small>{{ headerContent.engineServicesDesc }}</small>
               </RouterLink>
 
-              <RouterLink :to="toLocalizedRoute('Avionics')" class="menu-item">
+              <RouterLink :to="toLocalizedRoute('Avionics')" class="menu-item" @click="closeDropdownImmediate">
                 <div class="menu-icon-badge">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path :d="serviceIcons.avionics" />
@@ -108,6 +133,7 @@
               <RouterLink
                 :to="toLocalizedRoute('FractionalOwnership')"
                 class="menu-item"
+                @click="closeDropdownImmediate"
               >
                 <div class="menu-icon-badge">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -117,7 +143,7 @@
                 <strong>{{ headerContent.fractionalOwnership }}</strong>
                 <small>{{ headerContent.fractionalOwnershipDesc }}</small>
               </RouterLink>
-              <RouterLink :to="toLocalizedRoute('CoOwnership')" class="menu-item">
+              <RouterLink :to="toLocalizedRoute('CoOwnership')" class="menu-item" @click="closeDropdownImmediate">
                 <div class="menu-icon-badge">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path :d="serviceIcons.coOwnership" />
@@ -131,10 +157,20 @@
         </div>
 
         <RouterLink :to="toLocalizedRoute('Blog')" class="nav-link">
+          <span class="nav-link-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path :d="navIcons.blog" />
+            </svg>
+          </span>
           {{ headerContent.blog }}
         </RouterLink>
 
         <RouterLink :to="toLocalizedRoute('Contact')" class="nav-link">
+          <span class="nav-link-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path :d="navIcons.contact" />
+            </svg>
+          </span>
           {{ headerContent.contact }}
         </RouterLink>
       </nav>
@@ -292,10 +328,18 @@ const serviceIcons = {
   fractionalOwnership: "M3 17l9-11 9 11M6 17h12M9 17v-3h6v3",
   coOwnership: "M7 11a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm10 0a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5ZM3.5 19a3.5 3.5 0 0 1 7 0m3 0a3.5 3.5 0 0 1 7 0",
 };
+const navIcons = {
+  home: "M4 11.5 12 5l8 6.5M6.5 10.5V19h11v-8.5M10 19v-4.5h4V19",
+  about: "M12 12a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5ZM5 19a7 7 0 0 1 14 0",
+  services: "M4 7h16M4 12h10M4 17h13",
+  blog: "M6 5.5h9.5A2.5 2.5 0 0 1 18 8v10.5H8.5A2.5 2.5 0 0 0 6 21V5.5Zm0 0A2.5 2.5 0 0 1 8.5 3H18v15.5M9 8h6M9 11h6M9 14h4",
+  contact: "M4 7.5 12 13l8-5.5M5.5 6h13A1.5 1.5 0 0 1 20 7.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 16.5v-9A1.5 1.5 0 0 1 5.5 6Z",
+};
 
 const scrolled = ref(false);
 const mobileOpen = ref(false);
 const dropdownOpen = ref(false);
+const dropdownRef = ref(null);
 let closeTimeout = null;
 const languageOptions = [
   { locale: "es", label: "ES", longLabel: "Español" },
@@ -312,6 +356,31 @@ const closeDropdown = () => {
     dropdownOpen.value = false;
   }, 300); // 🔥 aquí controlas la velocidad
 };
+
+const closeDropdownImmediate = () => {
+  clearTimeout(closeTimeout);
+  dropdownOpen.value = false;
+};
+
+const toggleDropdown = () => {
+  clearTimeout(closeTimeout);
+  dropdownOpen.value = !dropdownOpen.value;
+};
+
+const handlePointerDown = (event) => {
+  if (!dropdownRef.value) return;
+  if (!dropdownRef.value.contains(event.target)) {
+    closeDropdownImmediate();
+  }
+};
+
+const handleKeydown = (event) => {
+  if (event.key === "Escape") {
+    closeDropdownImmediate();
+    closeMenu();
+  }
+};
+
 const isHome = computed(() => route.name === "Home");
 const headerContent = computed(() =>
   locale.value === "en"
@@ -320,16 +389,16 @@ const headerContent = computed(() =>
         about: "ABOUT US",
         services: "SERVICES",
         menuTitle: "Our Aviation Services",
-        aircraftSales: "Aircraft Sales Advisory",
-        aircraftSalesDesc: "Acquisition, Valuation, and Brokerage",
+        aircraftSales: "Aircraft Sales & Acquisitions",
+        aircraftSalesDesc: "Sourcing, Valuation, and Transactions",
         airTaxi: "Executive Air Charter",
         airTaxiDesc: "Private Flights and Mission Support",
-        operationsManagement: "Operational Management",
+        operationsManagement: "Aircraft Management",
         operationsManagementDesc: "Compliance, Crew, and Oversight",
         prePurchase: "Pre-Purchase Advisory",
         prePurchaseDesc: "Due Diligence and Risk Review",
         importExport: "Import & Export",
-        importExportDesc: "Cross-Border Aircraft Coordination",
+        importExportDesc: "Cross-Border Asset Coordination",
         engineServices: "Engine Services",
         engineServicesDesc: "Programs, Logistics, and Technical Support",
         avionics: "Avionics",
@@ -350,19 +419,19 @@ const headerContent = computed(() =>
         aircraftAdvisory: "Aircraft Advisory",
         operationsTechnical: "Operations & Technical",
         avionicsMobile: "Avionics & Systems",
-        contactSkyGroup: "Contact Sky Group",
+        contactSkyGroup: "Speak with an Advisor",
         whatsappQuote: "WhatsApp Quote",
       }
     : {
         home: "INICIO",
         about: "NOSOTROS",
         services: "SERVICIOS",
-        menuTitle: "Nuestros servicios de aviacion",
-        aircraftSales: "Compra y venta de aeronaves",
-        aircraftSalesDesc: "Adquisicion, valuacion e intermediacion",
-        airTaxi: "Taxi aereo ejecutivo",
+        menuTitle: "Nuestros servicios aeronauticos",
+        aircraftSales: "Venta y adquisicion de aeronaves",
+        aircraftSalesDesc: "Busqueda, valuacion y transaccion",
+        airTaxi: "Vuelos privados",
         airTaxiDesc: "Vuelos privados y coordinacion de misiones",
-        operationsManagement: "Administracion operativa",
+        operationsManagement: "Servicios aeronauticos",
         operationsManagementDesc: "Cumplimiento, tripulacion y supervision",
         prePurchase: "Asesoria precompra",
         prePurchaseDesc: "Debida diligencia y revision de riesgos",
@@ -385,10 +454,10 @@ const headerContent = computed(() =>
         homeTitle: "Inicio",
         aboutTitle: "Nosotros",
         blogTitle: "Guia de vuelos privados",
-        aircraftAdvisory: "Asesoria aeronáutica",
-        operationsTechnical: "Operaciones y tecnico",
+        aircraftAdvisory: "Asesoria de aeronaves",
+        operationsTechnical: "Operaciones y soporte tecnico",
         avionicsMobile: "Avionica y sistemas",
-        contactSkyGroup: "Contactar a Sky Group",
+        contactSkyGroup: "Hablar con un asesor",
         whatsappQuote: "Cotizar por WhatsApp",
       }
 );
@@ -419,13 +488,25 @@ watch(mobileOpen, (val) => {
   document.body.style.overflow = val ? "hidden" : "auto";
 });
 
+watch(
+  () => route.fullPath,
+  () => {
+    closeDropdownImmediate();
+    closeMenu();
+  }
+);
+
 onMounted(() => {
   handleScroll();
   window.addEventListener("scroll", handleScroll);
+  document.addEventListener("pointerdown", handlePointerDown);
+  document.addEventListener("keydown", handleKeydown);
 });
 
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
+  document.removeEventListener("pointerdown", handlePointerDown);
+  document.removeEventListener("keydown", handleKeydown);
 });
 </script>
 <style>
@@ -435,7 +516,7 @@ onUnmounted(() => {
   position: fixed;
   top: 0;
   width: 100%;
-  height: 140px;
+  height: 90px;
   display: flex;
   align-items: center;
   z-index: 10000;
@@ -473,8 +554,8 @@ onUnmounted(() => {
   gap: 0.6rem;
   padding: 0.35rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   backdrop-filter: blur(12px);
 }
 
@@ -494,7 +575,7 @@ onUnmounted(() => {
   border-radius: 50%;
   background: transparent;
   color: rgba(255, 255, 255, 0.72);
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   font-weight: 600;
 }
 
@@ -504,35 +585,76 @@ onUnmounted(() => {
 }
 
 .locale-switcher__button.active {
-  color: #d4af37;
-  border: 1px solid rgba(212, 175, 55, 0.65);
-  background: rgba(212, 175, 55, 0.1);
-  box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.08);
+  color: #d8b26e;
+  border: 1px solid rgba(216, 178, 110, 0.65);
+  background: rgba(216, 178, 110, 0.12);
+  box-shadow: 0 0 0 1px rgba(216, 178, 110, 0.08);
 }
 
 .nav {
   flex: 1;
   display: flex;
   gap: 2.5rem;
-  font-family: "Segoe UI", Arial, sans-serif;
-  font-size: 12px;
+  font-family: var(--font-body);
+  font-size: 14px;
   letter-spacing: 2px;
 }
 
 .nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
   color: white;
   text-decoration: none;
   position: relative;
   transition: 0.3s;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.nav-link-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #d8b26e;
+  opacity: 0.92;
+}
+
+.nav-link-icon svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.nav-link-button {
+  padding: 0;
+  border: none;
+  background: transparent;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
 }
 
 .nav-link:hover {
-  color: #d4af37;
+  color: #d8b26e;
+}
+
+.nav-link:hover .nav-link-icon,
+.nav-link.router-link-active .nav-link-icon,
+.nav-link.router-link-exact-active .nav-link-icon {
+  opacity: 1;
 }
 
 .nav-link.router-link-active,
 .nav-link.router-link-exact-active {
-  color: #d4af37;
+  color: #d8b26e;
 }
 
 .nav-link.router-link-active::after,
@@ -543,7 +665,7 @@ onUnmounted(() => {
   bottom: -10px;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, #d4af37, rgba(212, 175, 55, 0.3));
+  background: linear-gradient(90deg, #d8b26e, rgba(216, 178, 110, 0.3));
 }
 
 .cta {
@@ -561,20 +683,12 @@ onUnmounted(() => {
 }
 
 .logo img {
-  height: 96px;
+  height: 74px;
   width: auto;
   object-fit: contain;
   transition: all 0.3s ease;
   filter: brightness(0) invert(1); /* convierte logo oscuro en blanco */
 }
-.header.scrolled .logo img {
-  height: 42px;
-}
-
-.header.scrolled .logo img {
-  height: 55px;
-}
-
 .header.scrolled .logo img {
   height: 60px;
 }
@@ -668,7 +782,7 @@ onUnmounted(() => {
   background: rgba(255, 255, 255, 0.045);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  color: #8bbcff;
+  color: #d8b26e;
   transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
   animation: menuIconFloat 4.2s ease-in-out infinite;
 }
@@ -702,18 +816,18 @@ onUnmounted(() => {
 
 .menu-grid a:hover {
   transform: translateY(-4px);
-  border-color: rgba(77, 163, 255, 0.12);
+  border-color: rgba(216, 178, 110, 0.18);
   background: rgba(255, 255, 255, 0.045);
 }
 
 .menu-grid a:hover .menu-icon-badge {
   transform: translateY(-4px) scale(1.06);
-  border-color: rgba(77, 163, 255, 0.25);
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+  border-color: rgba(216, 178, 110, 0.3);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18), 0 0 22px rgba(216, 178, 110, 0.14);
 }
 
 .menu-grid a:hover strong {
-  color: #4da3ff;
+  color: #d8b26e;
 }
 
 .menu-grid a:hover small {

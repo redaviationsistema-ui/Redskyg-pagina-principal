@@ -1,172 +1,204 @@
 <template>
-    <section class="about-page">
-      <section class="about-hero">
-        <div class="hero-overlay"></div>
+  <section class="about-page">
+    <section class="about-hero">
+      <div class="hero-overlay"></div>
 
-        <div class="container hero-shell">
-          <div class="hero-copy">
-            <span class="eyebrow">{{ content.heroEyebrow }}</span>
-            <h1>{{ content.heroTitle }}</h1>
-            <p>{{ content.heroText }}</p>
+      <div class="container hero-shell">
+        <div class="hero-copy reveal">
+          <span class="eyebrow">{{ content.heroEyebrow }}</span>
+          <h1>{{ content.heroTitle }}</h1>
+          <p>{{ content.heroText }}</p>
 
-            <div class="hero-actions">
-              <RouterLink class="btn-primary" :to="toLocalizedRoute('Contact')">{{ content.heroPrimaryCta }}</RouterLink>
-              <RouterLink class="btn-ghost" :to="toLocalizedRoute('AirTaxi')">{{ content.heroSecondaryCta }}</RouterLink>
-            </div>
+          <div class="hero-actions">
+            <RouterLink class="btn-primary" :to="toLocalizedRoute('Contact')">{{ content.heroPrimaryCta }}</RouterLink>
+            <RouterLink class="btn-ghost" :to="toLocalizedRoute('AirTaxi')">{{ content.heroSecondaryCta }}</RouterLink>
           </div>
+        </div>
 
-          <div class="hero-metrics">
-            <article v-for="(item, index) in metrics" :key="item.label">
+        <div class="hero-side reveal reveal-delay">
+          <div class="hero-side-panel">
+            <article v-for="(item, index) in metrics" :key="item.label" class="hero-metric">
               <div class="icon-badge is-metric">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path :d="metricIcons[index % metricIcons.length]" />
                 </svg>
               </div>
-              <strong>{{ item.value }}</strong>
-              <span>{{ item.label }}</span>
+              <div>
+                <strong>{{ item.value }}</strong>
+                <span>{{ item.label }}</span>
+              </div>
             </article>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="section">
-        <div class="container intro-grid">
-          <div>
-            <span class="eyebrow">{{ content.introEyebrow }}</span>
-            <h2>{{ content.introTitle }}</h2>
-          </div>
-
-          <div class="intro-copy">
-            <p>{{ content.introParagraphs[0] }}</p>
-            <p>{{ content.introParagraphs[1] }}</p>
-          </div>
+    <section class="section intro-section">
+      <div class="container intro-grid">
+        <div class="intro-copy reveal">
+          <span class="eyebrow">{{ content.introEyebrow }}</span>
+          <h2>{{ content.introTitle }}</h2>
         </div>
-      </section>
 
-      <section class="section experience-section">
-        <img
-          src="/images/About/About10.png"
-          :alt="content.experienceAlt"
-          class="experience-bg"
-          loading="lazy"
-          decoding="async"
-        />
-        <div class="experience-overlay"></div>
+        <div class="intro-text reveal reveal-delay">
+          <p>{{ content.introParagraphs[0] }}</p>
+          <p>{{ content.introParagraphs[1] }}</p>
+        </div>
+      </div>
+    </section>
 
-        <div class="container experience-shell">
+    <section class="section experience-section">
+      <img
+        src="/images/About/About10.png"
+        :alt="content.experienceAlt"
+        class="experience-bg"
+        loading="lazy"
+        decoding="async"
+      />
+      <div class="experience-overlay"></div>
+
+      <div class="container experience-shell">
+        <div class="experience-copy reveal">
           <span class="eyebrow">{{ content.experienceEyebrow }}</span>
           <h2>{{ content.experienceTitle }}</h2>
           <p>{{ content.experienceText }}</p>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="section dark-section">
-        <div class="container pillars-grid">
-          <article v-for="(pillar, index) in pillars" :key="pillar.title" class="pillar-card">
-            <div class="icon-badge is-pillar">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path :d="pillarIcons[index % pillarIcons.length]" />
-              </svg>
-            </div>
-            <h3>{{ pillar.title }}</h3>
-            <p>{{ pillar.text }}</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="section-head">
-            <span class="eyebrow">{{ content.capabilitiesEyebrow }}</span>
-            <h2>{{ content.capabilitiesTitle }}</h2>
-          </div>
-
-          <div class="capabilities-grid">
-            <RouterLink
-              v-for="(service, index) in services"
-              :key="service.route"
-              :to="toLocalizedRoute(service.route)"
-              class="capability-card"
-            >
-              <div class="icon-badge is-capability">
+    <section class="section pillars-section">
+      <div class="container">
+        <div class="pillar-lines">
+          <article
+            v-for="(pillar, index) in pillars"
+            :key="pillar.title"
+            class="pillar-line reveal"
+            :style="{ transitionDelay: `${index * 120}ms` }"
+          >
+            <div class="pillar-mark">
+              <div class="icon-badge is-pillar">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path :d="capabilityIcons[index % capabilityIcons.length]" />
+                  <path :d="pillarIcons[index % pillarIcons.length]" />
                 </svg>
               </div>
-              <h3>{{ service.title }}</h3>
-              <p>{{ service.text }}</p>
-              <strong>{{ content.capabilitiesCta }}</strong>
-            </RouterLink>
-          </div>
-        </div>
-      </section>
-
-      <section class="section strategy-section">
-        <div class="container strategy-shell">
-          <span class="eyebrow">{{ content.strategyEyebrow }}</span>
-          <h2>{{ content.strategyTitle }}</h2>
-          <p>{{ content.strategyText }}</p>
-        </div>
-      </section>
-
-      <section class="section metrics-section">
-        <div class="container metrics-grid">
-          <article v-for="item in metrics" :key="item.label" class="metric-card">
-            <strong>{{ item.value }}</strong>
-            <span>{{ item.label }}</span>
+            </div>
+            <div class="pillar-content">
+              <h3>{{ pillar.title }}</h3>
+              <p>{{ pillar.text }}</p>
+            </div>
           </article>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="section journey-section">
-        <div class="container">
-          <div class="section-head center">
-            <span class="eyebrow">{{ content.journeyEyebrow }}</span>
-            <h2>{{ content.journeyTitle }}</h2>
-            <p class="journey-lead">{{ content.journeyText }}</p>
+    <section class="section capabilities-section">
+      <div class="container section-head reveal">
+        <span class="eyebrow">{{ content.capabilitiesEyebrow }}</span>
+        <h2>{{ content.capabilitiesTitle }}</h2>
+      </div>
+
+      <div class="container capabilities-stream">
+        <RouterLink
+          v-for="(service, index) in services"
+          :key="service.route"
+          :to="toLocalizedRoute(service.route)"
+          class="capability-row reveal"
+          :class="{ reverse: index % 2 === 1 }"
+          :style="{ transitionDelay: `${index * 90}ms` }"
+        >
+          <div class="capability-copy">
+            <span class="capability-number">{{ String(index + 1).padStart(2, '0') }}</span>
+            <h3>{{ service.title }}</h3>
+            <p>{{ service.text }}</p>
+            <strong>{{ content.capabilitiesCta }}</strong>
           </div>
 
-          <div class="journey-actions">
-            <RouterLink class="btn-primary" :to="toLocalizedRoute('Contact')">{{ content.journeyPrimaryCta }}</RouterLink>
-            <a class="btn-ghost" :href="journeyWhatsappHref" target="_blank" rel="noopener noreferrer">{{ content.journeySecondaryCta }}</a>
+          <div class="capability-icon">
+            <div class="icon-badge is-capability">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path :d="capabilityIcons[index % capabilityIcons.length]" />
+              </svg>
+            </div>
           </div>
+        </RouterLink>
+      </div>
+    </section>
 
-          <div class="timeline">
-            <article v-for="(item, index) in timeline" :key="item.title" class="timeline-card">
+    <section class="section strategy-section">
+      <div class="container strategy-shell reveal">
+        <span class="eyebrow">{{ content.strategyEyebrow }}</span>
+        <h2>{{ content.strategyTitle }}</h2>
+        <p>{{ content.strategyText }}</p>
+      </div>
+    </section>
+
+    <section class="section metrics-section">
+      <div class="container metrics-ribbon reveal">
+        <article v-for="item in metrics" :key="item.label" class="metric-block">
+          <strong>{{ item.value }}</strong>
+          <span>{{ item.label }}</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section journey-section">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">{{ content.journeyEyebrow }}</span>
+          <h2>{{ content.journeyTitle }}</h2>
+          <p class="journey-lead">{{ content.journeyText }}</p>
+        </div>
+
+        <div class="journey-actions reveal reveal-delay">
+          <RouterLink class="btn-primary" :to="toLocalizedRoute('Contact')">{{ content.journeyPrimaryCta }}</RouterLink>
+          <a class="btn-ghost" :href="journeyWhatsappHref" target="_blank" rel="noopener noreferrer">{{ content.journeySecondaryCta }}</a>
+        </div>
+
+        <div class="timeline">
+          <article
+            v-for="(item, index) in timeline"
+            :key="item.title"
+            class="timeline-row reveal"
+            :style="{ transitionDelay: `${index * 110}ms` }"
+          >
+            <div class="timeline-stage">
               <div class="icon-badge is-timeline">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path :d="timelineIcons[index % timelineIcons.length]" />
                 </svg>
               </div>
               <span>{{ item.stage }}</span>
+            </div>
+            <div class="timeline-copy">
               <h3>{{ item.title }}</h3>
               <p>{{ item.text }}</p>
-            </article>
-          </div>
-
-          <p class="journey-footnote">{{ content.journeyFootnote }}</p>
+            </div>
+          </article>
         </div>
-      </section>
 
-      <section class="section final-cta">
-        <div class="container cta-shell">
-          <div>
-            <span class="eyebrow">{{ content.finalEyebrow }}</span>
-            <h2>{{ content.finalTitle }}</h2>
-            <p>{{ content.finalText }}</p>
-          </div>
-
-          <div class="hero-actions">
-            <RouterLink class="btn-primary" :to="toLocalizedRoute('Contact')">{{ content.finalPrimaryCta }}</RouterLink>
-            <RouterLink class="btn-ghost dark" :to="toLocalizedRoute('Pricing')">{{ content.finalSecondaryCta }}</RouterLink>
-          </div>
-        </div>
-      </section>
+        <p class="journey-footnote reveal">{{ content.journeyFootnote }}</p>
+      </div>
     </section>
+
+    <section class="section final-cta">
+      <div class="container cta-shell reveal">
+        <div>
+          <span class="eyebrow">{{ content.finalEyebrow }}</span>
+          <h2>{{ content.finalTitle }}</h2>
+          <p>{{ content.finalText }}</p>
+        </div>
+
+        <div class="hero-actions">
+          <RouterLink class="btn-primary" :to="toLocalizedRoute('Contact')">{{ content.finalPrimaryCta }}</RouterLink>
+          <RouterLink class="btn-ghost dark" :to="toLocalizedRoute('Pricing')">{{ content.finalSecondaryCta }}</RouterLink>
+        </div>
+      </div>
+    </section>
+  </section>
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, onBeforeUnmount, onMounted } from "vue";
 import { RouterLink } from "vue-router";
 import { useLocale } from "../i18n";
 
@@ -205,35 +237,35 @@ const journeyWhatsappHref = computed(() =>
 const content = computed(() =>
   locale.value === "en"
     ? {
-        heroEyebrow: "Private Jet Charter in Mexico",
+        heroEyebrow: "Sky Group",
         heroTitle:
-          "Sky Group brings together private jet charter in Mexico with premium operational and aviation support.",
+          "Strategic support for private aviation.",
         heroText:
           "Sky Group is an aviation group focused on executive charter, operations, aircraft transactions, and technical coordination for clients who need clearer and more specialized support.",
         heroPrimaryCta: "Talk to Sky Group",
-        heroSecondaryCta: "Explore private jet charter",
+        heroSecondaryCta: "Explore Private Charter",
         introEyebrow: "Who We Are",
         introTitle:
-          "An aviation platform built to connect commercial, operational, and technical execution.",
+          "Commercial, operational, technical execution.",
         introParagraphs: [
           "Sky Group operates with a structure designed to reduce friction for clients who need more than one isolated aviation service. Instead of treating charter, aircraft advisory, technical support, and operations as separate silos, we align them under one coordinated approach.",
           "That makes the experience clearer for owners, executives, operators, and buyers who need responsive guidance, stronger oversight, and a team that understands both the strategic and operational side of aviation.",
         ],
         experienceAlt: "Executive aviation environment",
         experienceEyebrow: "How We Work",
-        experienceTitle: "Experience matters, but so does structure.",
+        experienceTitle: "Experience with operational structure.",
         experienceText:
           "We approach aviation with a combination of commercial awareness, operational discipline, regulatory attention, and premium client handling. The goal is not only to move aircraft or coordinate flights, but to protect time, reduce complexity, and support better decisions.",
         capabilitiesEyebrow: "Core Capabilities",
-        capabilitiesTitle: "Services that support the full aviation lifecycle.",
+        capabilitiesTitle: "Capabilities across the aviation cycle.",
         capabilitiesCta: "Explore service",
         strategyEyebrow: "Strategic View",
         strategyTitle:
-          "Aviation is not just transportation. It is a business tool, an asset, and an operational system.",
+          "Aviation is a business asset and an operational system.",
         strategyText:
           "Every charter request, ownership structure, transaction, maintenance decision, or technical review affects cost, timing, risk, and long-term value. Sky Group is built around that broader reality, which is why our role goes beyond execution into informed guidance.",
         journeyEyebrow: "Why Trust Sky Group",
-        journeyTitle: "Strategic private aviation across Mexico, LATAM & international routes.",
+        journeyTitle: "Strategic coverage for private aviation.",
         journeyText:
           "Need immediate availability? We focus on operational coverage, faster response, concierge coordination, and clearer execution for high-value private aviation clients.",
         journeyPrimaryCta: "Get Instant Quote",
@@ -241,50 +273,50 @@ const content = computed(() =>
         journeyFootnote: "Response in under 15 minutes",
         finalEyebrow: "Next Step",
         finalTitle:
-          "Work with a team that can connect charter, aircraft advisory, and operational execution.",
+          "Charter, aircraft, operations connected.",
         finalText:
           "If you are planning a flight, evaluating an aircraft, structuring ownership, or looking for technical and operational support, we can help define the right next move.",
         finalPrimaryCta: "Contact Sky Group",
         finalSecondaryCta: "View Pricing Guidance",
       }
     : {
-        heroEyebrow: "Vuelos Privados en Mexico",
+        heroEyebrow: "Sky Group",
         heroTitle:
-          "Sky Group integra vuelos privados en Mexico, private jet charter in Mexico y soporte aeronautico premium.",
+          "Soporte estrategico para aviacion privada.",
         heroText:
           "Sky Group es un grupo aeronautico enfocado en charter ejecutivo, operaciones, transacciones de aeronaves y coordinacion tecnica para clientes que buscan una atencion mas clara y especializada.",
         heroPrimaryCta: "Hablar con Sky Group",
-        heroSecondaryCta: "Explorar private jet charter",
+        heroSecondaryCta: "Explorar charter privado",
         introEyebrow: "Quienes somos",
         introTitle:
-          "Una plataforma aeronautica creada para conectar ejecucion comercial, operativa y tecnica.",
+          "Ejecucion comercial, operativa y tecnica conectada.",
         introParagraphs: [
           "Sky Group opera con una estructura pensada para reducir friccion a clientes que necesitan mas de un servicio aeronautico. En lugar de tratar charter, asesoria de aeronaves, soporte tecnico y operaciones como silos separados, los alineamos bajo un mismo enfoque coordinado.",
           "Eso vuelve la experiencia mas clara para propietarios, ejecutivos, operadores y compradores que necesitan respuesta, supervision y un equipo que entienda tanto la parte estrategica como la operativa de la aviacion.",
         ],
         experienceAlt: "Entorno de aviacion ejecutiva",
         experienceEyebrow: "Como trabajamos",
-        experienceTitle: "La experiencia importa, pero la estructura tambien.",
+        experienceTitle: "Experiencia con estructura operativa.",
         experienceText:
           "Abordamos la aviacion con una mezcla de criterio comercial, disciplina operativa, atencion regulatoria y trato premium al cliente. El objetivo no es solo mover aeronaves o coordinar vuelos, sino proteger tiempo, reducir complejidad y apoyar mejores decisiones.",
         capabilitiesEyebrow: "Capacidades clave",
-        capabilitiesTitle: "Servicios que respaldan todo el ciclo de la aviacion.",
+        capabilitiesTitle: "Capacidades para todo el ciclo de aviacion.",
         capabilitiesCta: "Explorar servicio",
         strategyEyebrow: "Vision estrategica",
         strategyTitle:
-          "La aviacion no es solo transporte. Es una herramienta de negocio, un activo y un sistema operativo.",
+          "La aviacion es un activo y un sistema operativo.",
         strategyText:
           "Cada solicitud de charter, estructura de propiedad, transaccion, decision de mantenimiento o revision tecnica afecta costo, tiempo, riesgo y valor de largo plazo. Sky Group esta construido alrededor de esa realidad, por eso nuestro rol va mas alla de ejecutar y se convierte en una guia informada.",
         journeyEyebrow: "Por que confiar en Sky Group",
-        journeyTitle: "Aviacion privada estrategica a traves de Mexico, LATAM y rutas internacionales.",
+        journeyTitle: "Cobertura estrategica para aviacion privada.",
         journeyText:
-          "Necesitas disponibilidad inmediata? Nuestro enfoque esta en cobertura operativa, respuesta mas rapida, concierge service y ejecucion mas clara para clientes de aviacion ejecutiva.",
+          "Necesitas disponibilidad inmediata? Nuestro enfoque esta en cobertura operativa, respuesta mas rapida, coordinacion premium y ejecucion mas clara para clientes de aviacion ejecutiva.",
         journeyPrimaryCta: "Cotizar vuelo ahora",
         journeySecondaryCta: "Hablar con asesor",
-        journeyFootnote: "Response in under 15 minutes",
+        journeyFootnote: "Respuesta en menos de 15 minutos",
         finalEyebrow: "Siguiente paso",
         finalTitle:
-          "Trabaja con un equipo que conecta charter, asesoria de aeronaves y ejecucion operativa.",
+          "Charter, aeronaves y operaciones conectadas.",
         finalText:
           "Si estas planeando un vuelo, evaluando una aeronave, estructurando propiedad o buscando soporte tecnico y operativo, podemos ayudarte a definir el siguiente movimiento correcto.",
         finalPrimaryCta: "Contactar a Sky Group",
@@ -343,7 +375,7 @@ const services = computed(() =>
     ? [
         {
           route: "AirTaxi",
-          title: "Executive air charter",
+          title: "Private Charter",
           text: "Private flights designed for business mobility, urgent missions, and premium travel coordination.",
         },
         {
@@ -353,7 +385,7 @@ const services = computed(() =>
         },
         {
           route: "OperationsManagement",
-          title: "Operational management",
+          title: "Aircraft Management",
           text: "Structured oversight for compliance, crew coordination, maintenance planning, and control.",
         },
         {
@@ -363,29 +395,29 @@ const services = computed(() =>
         },
         {
           route: "ImportExport",
-          title: "Import and export support",
+          title: "Import & Export",
           text: "Cross-border coordination for aircraft, components, documentation, and regulatory flow.",
         },
         {
           route: "Avionics",
-          title: "Avionics and technical support",
+          title: "Avionics & Systems",
           text: "Support for aircraft systems, modernization, and operational readiness.",
         },
       ]
     : [
         {
           route: "AirTaxi",
-          title: "Charter aereo ejecutivo",
+          title: "Vuelos privados",
           text: "Vuelos privados pensados para movilidad de negocios, misiones urgentes y coordinacion premium de viaje.",
         },
         {
           route: "AircraftSales",
-          title: "Compra y venta de aeronaves",
-          text: "Soporte de asesoria para sourcing, valuacion, negociacion y supervision transaccional.",
+          title: "Venta y adquisicion de aeronaves",
+          text: "Soporte de asesoria para busqueda, valuacion, negociacion y supervision transaccional.",
         },
         {
           route: "OperationsManagement",
-          title: "Gestion operativa",
+          title: "Administracion operativa",
           text: "Supervision estructurada para cumplimiento, coordinacion de tripulacion, planeacion de mantenimiento y control.",
         },
         {
@@ -395,12 +427,12 @@ const services = computed(() =>
         },
         {
           route: "ImportExport",
-          title: "Soporte de importacion y exportacion",
+          title: "Importacion y exportacion",
           text: "Coordinacion transfronteriza para aeronaves, componentes, documentacion y flujo regulatorio.",
         },
         {
           route: "Avionics",
-          title: "Avionica y soporte tecnico",
+          title: "Avionica y sistemas",
           text: "Soporte para sistemas de aeronaves, modernizacion y alistamiento operativo.",
         },
       ]
@@ -411,22 +443,22 @@ const timeline = computed(() =>
     ? [
         {
           stage: "Availability",
-          title: "Aircraft availability",
+          title: "Disponibilidad de aeronave",
           text: "Real charter review built around route, timing, aircraft category, and mission urgency.",
         },
         {
           stage: "Coverage",
-          title: "Operational coverage",
+          title: "Cobertura operativa",
           text: "Support across Mexico, LATAM, and international routes with stronger execution visibility.",
         },
         {
           stage: "Response",
-          title: "Response time",
+          title: "Tiempo de respuesta",
           text: "Commercial follow-up designed to move quickly when the client needs a serious answer fast.",
         },
         {
           stage: "Concierge",
-          title: "Concierge service",
+          title: "Coordinacion premium",
           text: "A clearer premium path for charter, advisory, and high-touch operational coordination.",
         },
       ]
@@ -453,11 +485,36 @@ const timeline = computed(() =>
         },
       ]
 );
+
+let revealObserver;
+
+onMounted(() => {
+  const reveals = Array.from(document.querySelectorAll(".reveal"));
+
+  revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        revealObserver?.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.18, rootMargin: "0px 0px -8% 0px" }
+  );
+
+  reveals.forEach((element) => revealObserver?.observe(element));
+});
+
+onBeforeUnmount(() => {
+  revealObserver?.disconnect();
+});
 </script>
 
 <style scoped>
 .about-page {
-  background: linear-gradient(180deg, #071320 0%, #0b1220 100%);
+  background:
+    radial-gradient(circle at top right, rgba(215, 176, 116, 0.08), transparent 24%),
+    linear-gradient(180deg, #071320 0%, #0b1220 100%);
   color: white;
 }
 
@@ -474,8 +531,8 @@ const timeline = computed(() =>
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(120deg, rgba(5, 10, 20, 0.9), rgba(5, 10, 20, 0.66)),
-    radial-gradient(circle at right center, rgba(123, 183, 255, 0.14), transparent 28%);
+    linear-gradient(90deg, rgba(5, 13, 23, 0.68) 0%, rgba(5, 13, 23, 0.48) 34%, rgba(5, 13, 23, 0.2) 62%, rgba(5, 13, 23, 0.38) 100%),
+    linear-gradient(180deg, rgba(5, 13, 23, 0.08), rgba(5, 13, 23, 0.28));
 }
 
 .hero-shell,
@@ -489,8 +546,8 @@ const timeline = computed(() =>
 
 .hero-shell {
   display: grid;
-  grid-template-columns: 1fr 360px;
-  gap: 2rem;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 2.5rem;
   align-items: end;
   padding-top: 8rem;
   padding-bottom: 4rem;
@@ -498,7 +555,7 @@ const timeline = computed(() =>
 
 .eyebrow {
   display: inline-block;
-  color: #7bb7ff;
+  color: #d8b26e;
   letter-spacing: 0.24em;
   font-size: 0.76rem;
   text-transform: uppercase;
@@ -508,27 +565,32 @@ const timeline = computed(() =>
 .intro-grid h2,
 .section-head h2,
 .strategy-shell h2,
-.cta-shell h2 {
+.cta-shell h2,
+.experience-copy h2 {
   font-size: clamp(2.4rem, 4.5vw, 4.5rem);
   margin: 1rem 0 1.2rem;
 }
 
 .hero-copy p,
-.intro-copy p,
-.experience-shell p,
-.pillar-card p,
-.capability-card p,
+.intro-text p,
+.experience-copy p,
+.pillar-content p,
+.capability-copy p,
 .strategy-shell p,
-.timeline-card p,
+.timeline-copy p,
 .cta-shell p {
   color: rgba(255, 255, 255, 0.76);
   line-height: 1.8;
 }
 
-.hero-actions {
+.hero-actions,
+.journey-actions {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+}
+
+.hero-actions {
   margin-top: 2rem;
 }
 
@@ -544,6 +606,13 @@ const timeline = computed(() =>
   text-transform: uppercase;
   letter-spacing: 0.14em;
   font-size: 0.8rem;
+  transition: transform 0.28s ease, border-color 0.28s ease, background 0.28s ease, box-shadow 0.28s ease;
+}
+
+.btn-primary:hover,
+.btn-ghost:hover,
+.capability-row:hover {
+  transform: translateY(-4px);
 }
 
 .btn-primary {
@@ -555,32 +624,31 @@ const timeline = computed(() =>
 .btn-ghost {
   border: 1px solid rgba(255, 255, 255, 0.16);
   color: white;
+  background: rgba(9, 20, 33, 0.28);
 }
 
 .btn-ghost.dark {
   border-color: rgba(255, 255, 255, 0.12);
 }
 
-.hero-metrics,
-.pillars-grid,
-.capabilities-grid,
-.timeline,
-.metrics-grid {
+.hero-side-panel {
   display: grid;
   gap: 1rem;
+  padding: 1.35rem;
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(8, 18, 31, 0.86), rgba(8, 18, 31, 0.68)),
+    radial-gradient(circle at top right, rgba(215, 176, 116, 0.16), transparent 34%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
 }
 
-.hero-metrics article,
-.pillar-card,
-.capability-card,
-.metric-card,
-.timeline-card,
-.cta-shell {
-  position: relative;
-  padding: 1.5rem;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+.hero-metric {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.5rem 0;
 }
 
 .icon-badge {
@@ -590,11 +658,9 @@ const timeline = computed(() =>
   align-items: center;
   justify-content: center;
   border-radius: 16px;
-  margin-bottom: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(255, 255, 255, 0.05);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  animation: iconFloat 4.2s ease-in-out infinite;
 }
 
 .icon-badge svg {
@@ -607,30 +673,21 @@ const timeline = computed(() =>
   stroke-linejoin: round;
 }
 
-.is-metric {
-  color: #d4af37;
-}
-
-.is-pillar {
-  color: #8bbcff;
-}
-
-.is-capability {
-  color: #7be0d6;
-}
-
+.is-metric,
+.is-pillar,
+.is-capability,
 .is-timeline {
-  color: #f1d88a;
+  color: #d8b26e;
 }
 
-.hero-metrics strong,
-.metric-card strong {
+.hero-metric strong,
+.metric-block strong {
   display: block;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
-.hero-metrics span,
-.metric-card span {
+.hero-metric span,
+.metric-block span {
   color: rgba(255, 255, 255, 0.72);
 }
 
@@ -641,7 +698,7 @@ const timeline = computed(() =>
   align-items: start;
 }
 
-.intro-copy {
+.intro-text {
   display: grid;
   gap: 1rem;
 }
@@ -662,26 +719,50 @@ const timeline = computed(() =>
 .experience-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, rgba(8, 15, 28, 0.9), rgba(15, 23, 42, 0.82));
+  background:
+    linear-gradient(90deg, rgba(5, 13, 23, 0.68) 0%, rgba(5, 13, 23, 0.48) 34%, rgba(5, 13, 23, 0.2) 62%, rgba(5, 13, 23, 0.38) 100%),
+    linear-gradient(180deg, rgba(5, 13, 23, 0.08), rgba(5, 13, 23, 0.28));
 }
 
 .experience-shell {
+  min-height: 440px;
+  display: flex;
+  align-items: center;
+}
+
+.experience-copy {
   max-width: 900px;
 }
 
-.experience-shell h2 {
-  font-size: clamp(2.2rem, 4vw, 3.5rem);
-  margin: 1rem 0;
+.pillars-section {
+  padding-top: 5rem;
 }
 
-.pillars-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.pillar-lines {
+  display: grid;
+  border-top: 1px solid rgba(215, 176, 116, 0.18);
 }
 
-.pillar-card h3,
-.capability-card h3,
-.timeline-card h3 {
-  margin-bottom: 0.8rem;
+.pillar-line {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pillar-content {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1fr);
+  gap: 2rem;
+}
+
+.pillar-content h3,
+.capability-copy h3,
+.timeline-copy h3 {
+  font-size: clamp(1.35rem, 2.1vw, 2rem);
+  line-height: 1.05;
 }
 
 .section-head {
@@ -689,34 +770,61 @@ const timeline = computed(() =>
   margin-bottom: 2rem;
 }
 
-.capabilities-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.capabilities-stream {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid rgba(215, 176, 116, 0.18);
 }
 
-.capability-card {
-  text-decoration: none;
+.capability-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 120px;
+  gap: 2rem;
+  align-items: center;
+  padding: 2rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   color: white;
-  transition: transform 0.25s ease, border-color 0.25s ease;
+  text-decoration: none;
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
 }
 
-.capability-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(123, 183, 255, 0.34);
+.capability-row.reverse {
+  grid-template-columns: 120px minmax(0, 1fr);
 }
 
-.capability-card:hover .icon-badge,
-.pillar-card:hover .icon-badge,
-.timeline-card:hover .icon-badge,
-.hero-metrics article:hover .icon-badge {
-  transform: translateY(-4px) scale(1.04);
-  border-color: rgba(255, 255, 255, 0.22);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+.capability-row.reverse .capability-copy {
+  order: 2;
 }
 
-.capability-card strong {
-  display: inline-block;
-  margin-top: 1rem;
-  color: #7bb7ff;
+.capability-row.reverse .capability-icon {
+  order: 1;
+}
+
+.capability-row:hover {
+  border-color: rgba(216, 178, 110, 0.34);
+  background: linear-gradient(90deg, rgba(216, 178, 110, 0.05), transparent 70%);
+}
+
+.capability-copy {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.capability-number,
+.timeline-stage span {
+  color: #d8b26e;
+  font-size: 0.76rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.capability-copy strong {
+  color: #d8b26e;
+}
+
+.capability-icon {
+  display: flex;
+  justify-content: center;
 }
 
 .strategy-section {
@@ -728,11 +836,17 @@ const timeline = computed(() =>
   margin: 0 auto;
 }
 
-.metrics-grid {
+.metrics-ribbon {
+  display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 1.2rem 0;
+  border-top: 1px solid rgba(215, 176, 116, 0.18);
+  border-bottom: 1px solid rgba(215, 176, 116, 0.18);
 }
 
-.metric-card {
+.metric-block {
+  padding: 1rem 1.25rem;
   text-align: center;
 }
 
@@ -751,15 +865,15 @@ const timeline = computed(() =>
 
 .journey-section::before {
   background: url("/images/About/About2.png") center/cover no-repeat;
-  filter: brightness(0.52) saturate(0.82) contrast(1.05);
+  filter: brightness(0.66) saturate(0.92) contrast(1.06);
   transform: scale(1.03);
 }
 
 .journey-section::after {
   background:
-    linear-gradient(180deg, rgba(4, 9, 18, 0.82), rgba(7, 13, 24, 0.92)),
-    radial-gradient(circle at 50% 32%, rgba(18, 30, 52, 0.16), transparent 34%),
-    linear-gradient(90deg, rgba(3, 7, 15, 0.52), rgba(3, 7, 15, 0.18) 45%, rgba(3, 7, 15, 0.56));
+    linear-gradient(180deg, rgba(4, 9, 18, 0.68), rgba(7, 13, 24, 0.82)),
+    radial-gradient(circle at 50% 32%, rgba(18, 30, 52, 0.18), transparent 38%),
+    linear-gradient(90deg, rgba(3, 7, 15, 0.4), rgba(3, 7, 15, 0.12) 45%, rgba(3, 7, 15, 0.42));
 }
 
 .journey-section .container {
@@ -771,10 +885,6 @@ const timeline = computed(() =>
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-}
-
-.timeline {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .journey-lead,
@@ -791,25 +901,36 @@ const timeline = computed(() =>
 }
 
 .journey-actions {
-  display: flex;
   justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin: 2rem 0;
+  margin: 2rem 0 2.5rem;
 }
 
-.timeline-card span {
-  display: inline-block;
-  margin-bottom: 0.8rem;
-  color: #d4af37;
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+.timeline {
+  display: grid;
+  gap: 1rem;
+}
+
+.timeline-row {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+  padding: 1.8rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.timeline-stage {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.timeline-copy {
+  max-width: 820px;
 }
 
 .journey-footnote {
   margin-top: 1.5rem;
-  color: #8fcaff;
+  color: #d8b26e;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   font-size: 0.78rem;
@@ -820,41 +941,69 @@ const timeline = computed(() =>
   grid-template-columns: 1fr auto;
   gap: 2rem;
   align-items: center;
+  padding: 2rem;
+  border-radius: 28px;
   background:
     radial-gradient(circle at top left, rgba(212, 175, 55, 0.14), transparent 24%),
     linear-gradient(135deg, rgba(9, 21, 37, 0.98), rgba(18, 43, 70, 0.94));
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-@keyframes iconFloat {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
+.reveal {
+  opacity: 0;
+  transform: translateY(48px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+
+.reveal-delay {
+  transition-delay: 160ms;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @media (max-width: 1100px) {
   .hero-shell,
   .intro-grid,
-  .pillars-grid,
-  .capabilities-grid,
-  .metrics-grid,
-  .timeline,
+  .pillar-content,
+  .metrics-ribbon,
+  .timeline-row,
   .cta-shell {
     grid-template-columns: 1fr;
+  }
+
+  .capability-row,
+  .capability-row.reverse {
+    grid-template-columns: 1fr;
+  }
+
+  .capability-row.reverse .capability-copy,
+  .capability-row.reverse .capability-icon {
+    order: initial;
   }
 }
 
 @media (max-width: 640px) {
-  .hero-actions {
+  .hero-actions,
+  .journey-actions {
     flex-direction: column;
   }
 
   .btn-primary,
   .btn-ghost {
     width: 100%;
+  }
+
+  .hero-shell {
+    padding-top: 7.5rem;
+  }
+
+  .pillar-line,
+  .timeline-row,
+  .hero-metric {
+    grid-template-columns: 1fr;
   }
 }
 </style>

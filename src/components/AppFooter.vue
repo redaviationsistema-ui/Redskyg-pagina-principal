@@ -24,10 +24,9 @@
       </section>
 
       <div class="footer-bottom">
-        <section class="footer-brand card-shell">
+        <section class="footer-brand footer-column">
           <div class="footer-logo">
-            <span class="footer-logo-icon">S</span>
-            <span>Sky Group</span>
+            <img src="/images/logoo.png" alt="Sky Group logo" class="footer-logo-mark" />
           </div>
 
           <p class="brand-text">
@@ -40,13 +39,13 @@
             <span>{{ locale.value === "en" ? "Technical Services" : "Servicios tecnicos" }}</span>
           </div>
 
-          <small>
-            © 2026 REDSKYG. All rights reserved.
+          <small class="footer-legal">
+            {{ footerMeta.copyright }}
             <RouterLink :to="toLocalizedRoute('Privacy')" class="footer-link">{{ footerMeta.privacy }}</RouterLink>
           </small>
         </section>
 
-        <section class="footer-office card-shell">
+        <section class="footer-office footer-column">
           <div class="section-heading">
             <span>{{ locale.value === "en" ? "Head Office" : "Oficina principal" }}</span>
             <h4>{{ locale.value === "en" ? "Toluca, State of Mexico" : "Toluca, Estado de Mexico" }}</h4>
@@ -86,7 +85,7 @@
           </div>
         </section>
 
-        <section class="footer-connect card-shell">
+        <section class="footer-connect footer-column">
           <div class="section-heading">
             <span>{{ locale.value === "en" ? "Connect With Us" : "Conecta con nosotros" }}</span>
             <h4>{{ locale.value === "en" ? "Stay close to Sky Group" : "Mantente cerca de Sky Group" }}</h4>
@@ -98,37 +97,40 @@
 
           <div class="footer-social">
             <a
-              href="https://www.linkedin.com/company/red-aviation-corp/"
+              href="https://www.facebook.com/RedAviationJets"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="LinkedIn"
+              aria-label="Facebook"
+              class="social-badge social-badge-facebook"
             >
-              <Linkedin class="social-icon" />
+              <img src="/images/social/facebook.svg" alt="" class="social-logo" />
             </a>
             <a
-              href="https://www.instagram.com/redaviationcompany/"
+              href="https://www.instagram.com/skygroup_llc/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
+              class="social-badge social-badge-instagram"
             >
-              <Instagram class="social-icon" />
+              <img src="/images/social/instagram.svg" alt="" class="social-logo" />
+            </a>
+            <a
+              href="https://wa.me/525586186576"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              class="social-badge social-badge-whatsapp"
+            >
+              <img src="/images/social/whatsapp.svg" alt="" class="social-logo" />
             </a>
             <a
               href="https://www.tiktok.com/@redaviationcompany"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="TikTok"
-              class="social-text-link"
+              class="social-badge social-badge-tiktok"
             >
-              <span>TikTok</span>
-            </a>
-            <a
-              href="https://www.facebook.com/RedAviationJets"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-            >
-              <Facebook class="social-icon" />
+              <img src="/images/social/tiktok.svg" alt="" class="social-logo" />
             </a>
           </div>
 
@@ -138,22 +140,30 @@
               target="_blank"
               rel="noopener noreferrer"
             >
-              {{ locale.value === "en" ? "Main Website" : "Nuestra Web" }}
+              <span>{{ locale.value === "en" ? "Main Website" : "Nuestra Web" }}</span>
+              <strong aria-hidden="true">-></strong>
             </a>
             <a
               href="https://redskyg.com/landing"
               target="_blank"
               rel="noopener noreferrer"
             >
-              {{ locale.value === "en" ? "Quotes" : "Cotizaciones" }}
+              <span>{{ locale.value === "en" ? "Quotes" : "Cotizaciones" }}</span>
+              <strong aria-hidden="true">-></strong>
             </a>
-            <a href="mailto:sales@redskyg.com">sales@redskyg.com</a>
+            <a
+              href="mailto:sales@redskyg.com"
+            >
+              <span>sales@redskyg.com</span>
+              <strong aria-hidden="true">-></strong>
+            </a>
             <a
               href="https://wa.me/525586186576"
               target="_blank"
               rel="noopener noreferrer"
             >
-              {{ locale.value === "en" ? "Get a Quote" : "Cotizar ahora" }}
+              <span>{{ locale.value === "en" ? "Get a Quote" : "Cotizar ahora" }}</span>
+              <strong aria-hidden="true">-></strong>
             </a>
           </div>
         </section>
@@ -164,7 +174,6 @@
 
 <script setup>
 import { computed } from "vue";
-import { Linkedin, Instagram, Facebook } from "lucide-vue-next";
 import { useLocale } from "../i18n";
 
 const { locale, toLocalizedRoute } = useLocale();
@@ -174,7 +183,7 @@ const promoContent = computed(() =>
     ? {
         kicker: "Executive Aviation Group",
         title:
-          "Private aviation with strategic execution, technical oversight, and specialized support.",
+          "Private aviation with technical and operational support.",
         text:
           "Aircraft sales, charter, operations management, and technical services in one professional team.",
         primaryCta: "Request Consultation",
@@ -183,7 +192,7 @@ const promoContent = computed(() =>
     : {
         kicker: "Grupo de aviacion privada",
         title:
-          "Aviacion privada con ejecucion estrategica, supervision tecnica y atencion especializada.",
+          "Aviacion privada con soporte tecnico y operacional.",
         text:
           "Compra y venta de aeronaves, charter, gestion operativa y servicios tecnicos en un solo equipo.",
         primaryCta: "Solicitar asesoria",
@@ -194,11 +203,11 @@ const promoContent = computed(() =>
 const footerMeta = computed(() =>
   locale.value === "en"
     ? {
-        copyright: "© 2026 REDSKYG. All rights reserved.",
+        copyright: "© 2026 RED SKY GROUP. All rights reserved.",
         privacy: "Privacy Policy",
       }
     : {
-        copyright: "© 2026 REDSKYG. Todos los derechos reservados.",
+        copyright: "© 2026 RED SKY GROUP. Todos los derechos reservados.",
         privacy: "Aviso de privacidad",
       }
 );
@@ -223,23 +232,23 @@ const handlePhone = (number) => {
     radial-gradient(circle at top left, rgba(63, 169, 245, 0.08), transparent 28%),
     linear-gradient(180deg, #071524 0%, #06111d 100%);
   color: #fff;
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family: var(--font-body);
 }
 
 .footer-overlay {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 4rem 3rem 3rem;
+  padding: 2.75rem 2.4rem 1.4rem;
 }
 
 .footer-promo {
   display: grid;
   grid-template-columns: 1.3fr auto;
-  gap: 2rem;
+  gap: 1.4rem;
   align-items: center;
-  margin-bottom: 2.25rem;
-  padding: 2rem 2.2rem;
-  border-radius: 28px;
+  margin-bottom: 1.45rem;
+  padding: 1.45rem 1.7rem;
+  border-radius: 24px;
   background: linear-gradient(135deg, rgba(11, 29, 49, 0.96), rgba(16, 43, 71, 0.92));
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
@@ -256,13 +265,13 @@ const handlePhone = (number) => {
 
 .footer-kicker,
 .section-heading span {
-  color: #8fcaff;
+  color: #d8b26e;
 }
 
 .footer-promo-copy h3 {
   max-width: 760px;
-  margin: 0.9rem 0 0.8rem;
-  font-size: 2rem;
+  margin: 0.65rem 0 0.55rem;
+  font-size: 1.7rem;
   line-height: 1.2;
 }
 
@@ -272,7 +281,7 @@ const handlePhone = (number) => {
 .connect-text,
 .detail-group p {
   color: #cfd6df;
-  line-height: 1.75;
+  line-height: 1.55;
 }
 
 .footer-promo-actions {
@@ -286,8 +295,8 @@ const handlePhone = (number) => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 50px;
-  padding: 0.9rem 1.35rem;
+  min-height: 46px;
+  padding: 0.78rem 1.15rem;
   border-radius: 999px;
   text-decoration: none;
   transition: all 0.25s ease;
@@ -313,72 +322,89 @@ const handlePhone = (number) => {
 .footer-bottom {
   display: grid;
   grid-template-columns: 1.05fr 1fr 0.95fr;
-  gap: 1.4rem;
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-.card-shell {
+.footer-column {
   height: 100%;
-  padding: 1.85rem;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  min-height: 420px;
+  padding: 1.55rem 1.4rem 1.35rem;
+}
+
+.footer-column + .footer-column {
+  border-left: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .footer-logo {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
-  font-size: 1.8rem;
-  font-weight: 600;
 }
 
-.footer-logo-icon {
-  color: #3fa9f5;
+.footer-logo-mark {
+  width: 126px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
 }
 
 .brand-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.65rem;
-  margin: 1.4rem 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 1rem 0 0.8rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .brand-meta span {
-  padding: 0.55rem 0.85rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.05);
+  padding: 0.75rem 0;
   color: rgba(255, 255, 255, 0.82);
   font-size: 0.78rem;
+  text-align: center;
 }
 
-.footer-brand small {
+.brand-meta span + span {
+  border-left: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.footer-legal {
   display: block;
-  margin-top: 1.2rem;
+  margin-top: 0.85rem;
   font-size: 0.78rem;
   color: #94a3b8;
 }
 
 .footer-link {
   margin-left: 0.35rem;
-  color: #8fcaff;
+  color: #d8b26e;
   text-decoration: none;
 }
 
 .section-heading h4 {
-  margin-top: 0.8rem;
-  font-size: 1.45rem;
+  margin-top: 0.55rem;
+  font-size: 1.1rem;
 }
 
 .office-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-top: 1.6rem;
+  gap: 1rem;
+  margin-top: 1.1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .detail-group h5 {
-  margin-bottom: 0.9rem;
+  margin-bottom: 0.6rem;
   color: rgba(255, 255, 255, 0.82);
+}
+
+.detail-group p {
+  margin: 0.45rem 0;
 }
 
 .detail-group a,
@@ -387,73 +413,108 @@ const handlePhone = (number) => {
   text-decoration: none;
 }
 
-.footer-social {
-  display: flex;
-  gap: 0.9rem;
-  margin: 1.5rem 0 1.8rem;
+.detail-group:last-child {
+  padding-left: 1rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-.footer-social a {
-  width: 46px;
-  height: 46px;
+.footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin: 1rem 0 0.9rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.social-badge {
+  width: 68px;
+  height: 68px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(255, 255, 255, 0.03);
-  transition: all 0.25s ease;
+  border-radius: 18px;
+  border: none;
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.18),
+    0 22px 30px rgba(5, 10, 18, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
 }
 
-.social-text-link {
-  width: auto;
-  padding: 0 1rem;
-  border-radius: 999px;
-  color: white;
-  text-decoration: none;
-  font-size: 0.82rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.social-badge-instagram {
+  background:
+    radial-gradient(circle at 82% 18%, rgba(255, 243, 170, 0.95) 0%, rgba(255, 243, 170, 0.1) 17%, transparent 18%),
+    radial-gradient(circle at 18% 100%, #ffd86d 0%, #ffd86d 20%, transparent 21%),
+    linear-gradient(135deg, #4d6cff 0%, #a332d5 38%, #f93b76 68%, #ff8c39 84%, #ffd34f 100%);
+}
+
+.social-badge-facebook {
+  background: linear-gradient(180deg, #44b1ff 0%, #1d8cff 40%, #1e63ff 100%);
+}
+
+.social-badge-whatsapp {
+  background: linear-gradient(180deg, #42f35f 0%, #23de46 48%, #1dc63d 100%);
+}
+
+.social-badge-tiktok {
+  background: linear-gradient(180deg, #050607 0%, #090a0d 100%);
 }
 
 .footer-social a:hover {
   transform: translateY(-3px);
-  border-color: rgba(212, 175, 55, 0.4);
-  background: rgba(212, 175, 55, 0.12);
+  box-shadow:
+    0 18px 34px rgba(0, 0, 0, 0.22),
+    0 24px 34px rgba(5, 10, 18, 0.14);
+  filter: saturate(1.04) brightness(1.03);
 }
 
 .social-icon {
-  width: 18px;
-  height: 18px;
+  width: 40px;
+  height: 40px;
   color: white;
   stroke: white;
+  stroke-width: 2;
+}
+
+.social-logo {
+  width: 68px;
+  height: 68px;
+  display: block;
+  object-fit: contain;
 }
 
 .connect-cta {
   display: grid;
-  gap: 0.8rem;
+  gap: 0;
 }
 
 .connect-cta a {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  min-height: 50px;
-  padding: 0.9rem 1rem;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  transition: all 0.25s ease;
+  justify-content: space-between;
+  min-height: 46px;
+  padding: 0.72rem 0;
+  border-radius: 0;
+  background: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  transition: color 0.25s ease, transform 0.25s ease;
+  font-weight: 600;
 }
 
 .connect-cta a:last-child {
-  background: linear-gradient(135deg, #2140f0, #2f5fff);
-  border-color: transparent;
-  font-weight: 700;
+  color: #d8b26e;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .connect-cta a:hover {
-  transform: translateY(-3px);
+  color: #d8b26e;
+  transform: translateX(3px);
+}
+
+.connect-cta a strong {
+  color: #d8b26e;
+  font-size: 0.95rem;
+  font-weight: 700;
 }
 
 @media (max-width: 1100px) {
@@ -463,6 +524,15 @@ const handlePhone = (number) => {
     grid-template-columns: 1fr;
   }
 
+  .footer-column {
+    min-height: auto;
+  }
+
+  .footer-column + .footer-column {
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
   .footer-promo-actions {
     justify-content: flex-start;
   }
@@ -470,20 +540,39 @@ const handlePhone = (number) => {
 
 @media (max-width: 768px) {
   .footer-overlay {
-    padding: 3rem 1.2rem 2.4rem;
+    padding: 2.25rem 1rem 1.3rem;
   }
 
   .footer-promo,
-  .card-shell {
-    padding: 1.45rem;
+  .footer-column {
+    padding: 1.2rem;
   }
 
   .footer-promo-copy h3 {
-    font-size: 1.55rem;
+    font-size: 1.4rem;
   }
 
   .footer-logo {
     font-size: 1.55rem;
+  }
+
+  .brand-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-meta span + span,
+  .detail-group:last-child {
+    border-left: none;
+  }
+
+  .brand-meta span + span,
+  .detail-group:last-child {
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .detail-group:last-child {
+    padding-left: 0;
+    padding-top: 1rem;
   }
 }
 </style>

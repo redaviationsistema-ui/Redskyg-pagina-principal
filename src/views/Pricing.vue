@@ -3,11 +3,9 @@
       <section class="pricing-hero">
         <div class="hero-overlay"></div>
         <div class="container hero-content">
-          <span class="eyebrow">Vuelos Privados en Mexico</span>
-          <h1>Precios para vuelos privados en Mexico y private jet charter in Mexico segun ruta, aeronave y operacion.</h1>
-          <p>
-            Sky Group no maneja tarifas planas porque la categoria de aeronave, la ruta, los aeropuertos, el posicionamiento de tripulacion y los requerimientos tecnicos cambian el costo final de cada operacion.
-          </p>
+          <span class="eyebrow">{{ heroContent.eyebrow }}</span>
+          <h1>{{ heroContent.title }}</h1>
+          <p>{{ heroContent.text }}</p>
           <div class="hero-actions">
             <a class="btn-primary" :href="whatsappHref" target="_blank" rel="noopener noreferrer">{{ locale.value === "en" ? "Request a Quote" : "Solicitar cotizacion" }}</a>
             <RouterLink class="btn-ghost" :to="toLocalizedRoute('Contact')">{{ locale.value === "en" ? "Speak With Operations" : "Hablar con operaciones" }}</RouterLink>
@@ -19,7 +17,7 @@
         <div class="container intro-grid">
           <div>
             <span class="eyebrow">{{ locale.value === "en" ? "How Pricing Works" : "Como funciona el precio" }}</span>
-            <h2>{{ locale.value === "en" ? "What impacts the final proposal." : "Que impacta la propuesta final." }}</h2>
+            <h2>{{ locale.value === "en" ? "Pricing variables." : "Variables de cotizacion." }}</h2>
           </div>
 
           <div class="factors-grid">
@@ -45,7 +43,7 @@
         <div class="container quote-shell">
           <div>
             <span class="eyebrow">{{ locale.value === "en" ? "Faster Quotes" : "Cotizaciones mas rapidas" }}</span>
-            <h2>{{ locale.value === "en" ? "Send the right details and we can respond faster." : "Comparte los datos correctos y respondemos mas rapido." }}</h2>
+            <h2>{{ locale.value === "en" ? "Send the right mission details." : "Comparta los datos de la operacion." }}</h2>
             <p>{{ locale.value === "en" ? "For charter requests, share route, dates, passenger count, and any schedule flexibility. For aircraft transactions or management support, include the aircraft model, current location, and your objective." : "Para solicitudes de charter, comparte ruta, fechas, numero de pasajeros y cualquier flexibilidad de horario. Para transacciones o administracion de aeronaves, incluye modelo, ubicacion actual y objetivo." }}</p>
           </div>
 
@@ -59,7 +57,7 @@
 
       <section class="section final-cta">
         <div class="container cta-shell">
-          <h2>{{ locale.value === "en" ? "Need a charter, aircraft advisory, or technical scope priced correctly?" : "Necesitas cotizar bien un charter, una asesoria aeronautica o un alcance tecnico?" }}</h2>
+          <h2>{{ locale.value === "en" ? "Need pricing support for an aviation requirement?" : "Necesita apoyo de cotizacion para un requerimiento aeronautico?" }}</h2>
           <p>{{ locale.value === "en" ? "We can review the mission and route it to the right team so the quote reflects the real operational requirements from the start." : "Podemos revisar la operacion y dirigirla al equipo correcto para que la propuesta refleje los requerimientos reales desde el inicio." }}</p>
           <div class="hero-actions">
             <a class="btn-primary" :href="whatsappHref" target="_blank" rel="noopener noreferrer">{{ locale.value === "en" ? "Get Pricing Support" : "Recibir apoyo de precios" }}</a>
@@ -71,6 +69,7 @@
 </template>
 
 <script setup>
+import { computed } from "vue";
 import { RouterLink } from "vue-router";
 import { useLocale } from "../i18n";
 
@@ -80,6 +79,22 @@ const whatsappHref =
   locale.value === "en"
     ? "https://wa.me/525586186576?text=Hello,%20I%20would%20like%20pricing%20information%20for%20a%20private%20flight%20or%20aviation%20service."
     : "https://wa.me/525586186576?text=Hola,%20quiero%20informacion%20de%20precios%20para%20un%20vuelo%20privado%20o%20servicio%20aeronautico.";
+
+const heroContent = computed(() =>
+  locale.value === "en"
+    ? {
+        eyebrow: "Charter Pricing",
+        title: "Private flight pricing by route, aircraft, and operational scope.",
+        text:
+          "Sky Group does not work with flat rates because aircraft category, routing, airports, crew positioning, and technical requirements change the final cost of each operation.",
+      }
+    : {
+        eyebrow: "Precios de charter",
+        title: "Precios de vuelo privado segun ruta, aeronave y operacion.",
+        text:
+          "Sky Group no maneja tarifas planas porque la categoria de aeronave, la ruta, los aeropuertos, el posicionamiento de tripulacion y los requerimientos tecnicos cambian el costo final de cada operacion.",
+      }
+);
 
 const factors = [
   {
@@ -141,15 +156,15 @@ const quoteChecklist = [
 .pricing-hero {
   position: relative;
   padding: 11rem 0 5rem;
-  background:
-    linear-gradient(120deg, rgba(5, 15, 30, 0.94), rgba(5, 15, 30, 0.72)),
-    url("/images/Home/home2.jpg") center/cover no-repeat;
+  background: url("/images/Home/home2.jpg") center/cover no-repeat;
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at right center, rgba(123, 183, 255, 0.14), transparent 28%);
+  background:
+    linear-gradient(90deg, rgba(5, 13, 23, 0.68) 0%, rgba(5, 13, 23, 0.48) 34%, rgba(5, 13, 23, 0.2) 62%, rgba(5, 13, 23, 0.38) 100%),
+    linear-gradient(180deg, rgba(5, 13, 23, 0.08), rgba(5, 13, 23, 0.28));
 }
 
 .hero-content,
@@ -162,7 +177,7 @@ const quoteChecklist = [
 
 .eyebrow {
   display: inline-block;
-  color: #7bb7ff;
+  color: #d8b26e;
   letter-spacing: 0.24em;
   font-size: 0.76rem;
   text-transform: uppercase;

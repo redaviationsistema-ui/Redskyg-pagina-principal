@@ -4,16 +4,14 @@
         <div class="hero-backdrop"></div>
         <div class="hero-grid container">
           <div class="hero-copy">
-            <span class="eyebrow">Vuelos Privados en Mexico</span>
+            <span class="eyebrow">{{ content.heroEyebrow }}</span>
             <h1>
-              Cotiza tu siguiente
-              <span>private jet charter</span>
-              con un equipo experto.
+              {{ content.heroTitlePrefix }}
+              <span>{{ content.heroTitleAccent }}</span>
+              {{ content.heroTitleSuffix }}
             </h1>
             <p class="hero-text">
-              Vuelos privados en Mexico, private jet charter in Mexico,
-              coordinacion tecnica y soporte operativo bajo un mismo equipo
-              premium para decisiones rapidas y de alto valor.
+              {{ content.heroText }}
             </p>
 
             <div class="hero-highlights">
@@ -29,10 +27,7 @@
 
             <div class="hero-strip">
               <div class="strip-line"></div>
-              <p>
-                Soporte inmediato para propietarios, operadores y clientes de
-                aviacion ejecutiva.
-              </p>
+              <p>{{ content.heroStripText }}</p>
             </div>
           </div>
 
@@ -204,15 +199,23 @@ const { locale } = useLocale();
 const content = computed(() =>
   locale.value === "en"
     ? {
+        heroEyebrow: "Contact Sky Group",
+        heroTitlePrefix: "Quote your next",
+        heroTitleAccent: "private charter flight",
+        heroTitleSuffix: "with an expert team.",
+        heroText:
+          "Private jet charter in Mexico, technical coordination and operational support under one premium team for fast, high-value decisions.",
+        heroStripText:
+          "Immediate support for owners, operators and executive aviation clients.",
         asideLabel: "Flight Operations Window",
         introKicker: "Why clients reach us",
-        introTitle: "A premium contact page with more confidence and momentum.",
+        introTitle: "Executive contact for aviation needs.",
         introText:
-          "We redesigned this experience to feel more aligned with modern private aviation brands: darker cockpit tones, stronger contrast, sharper spacing, and clearer trust signals.",
+          "Use this contact channel to route charter requests, aircraft advisory, technical support, and operational requirements to the right team with faster response.",
         benefitsKicker: "Operational advantages",
-        benefitsTitle: "Built to look premium and convert better.",
+        benefitsTitle: "Built for faster aviation coordination.",
         formKicker: "Request consultation",
-        formTitle: "Schedule your aviation brief",
+        formTitle: "Submit your aviation brief",
         formText:
           "Share your operation, aircraft, or mission needs and our team will follow up with the right specialist.",
         nameLabel: "Full Name",
@@ -233,15 +236,23 @@ const content = computed(() =>
         genericError: "Error sending request. Please try again.",
       }
     : {
+        heroEyebrow: "Contactar a Sky Group",
+        heroTitlePrefix: "Cotiza tu siguiente",
+        heroTitleAccent: "charter ejecutivo",
+        heroTitleSuffix: "con un equipo experto.",
+        heroText:
+          "Vuelos privados en Mexico, coordinacion tecnica y soporte operativo bajo un mismo equipo premium para decisiones rapidas y de alto valor.",
+        heroStripText:
+          "Soporte inmediato para propietarios, operadores y clientes de aviacion ejecutiva.",
         asideLabel: "Ventana de operaciones de vuelo",
         introKicker: "Por que nos contactan",
-        introTitle: "Una pagina de contacto premium con mas confianza y avance.",
+        introTitle: "Contacto ejecutivo para necesidades aeronauticas.",
         introText:
-          "Redisenamos esta experiencia para alinearla mejor con marcas modernas de aviacion privada: tonos mas sobrios, mayor contraste, mejor jerarquia y senales de confianza mas claras.",
+          "Utiliza este canal para dirigir solicitudes de charter, asesoria de aeronaves, soporte tecnico y requerimientos operativos al equipo correcto con una respuesta mas agil.",
         benefitsKicker: "Ventajas operativas",
-        benefitsTitle: "Disenada para verse premium y convertir mejor.",
+        benefitsTitle: "Disenada para coordinacion aeronautica mas agil.",
         formKicker: "Solicitar asesoria",
-        formTitle: "Agenda tu brief aeronautico",
+        formTitle: "Comparta su brief aeronautico",
         formText:
           "Comparte tu operacion, aeronave o necesidad de mision y nuestro equipo te dara seguimiento con el especialista correcto.",
         nameLabel: "Nombre completo",
@@ -479,7 +490,7 @@ const trustItems = computed(() =>
         {
           metric: "UX moderna",
           title: "Flujo de interaccion mas limpio",
-          text: "La legibilidad del formulario y el ritmo de la informacion son ahora mas fuertes en desktop y mobile.",
+          text: "La legibilidad del formulario y el ritmo de la informacion son ahora mas claros en escritorio y movil.",
         },
         {
           metric: "Presencia de marca",
@@ -559,9 +570,10 @@ const submitForm = async () => {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(135deg, rgba(4, 13, 25, 0.94), rgba(4, 13, 25, 0.7)),
+    linear-gradient(90deg, rgba(5, 13, 23, 0.68) 0%, rgba(5, 13, 23, 0.48) 34%, rgba(5, 13, 23, 0.2) 62%, rgba(5, 13, 23, 0.38) 100%),
+    linear-gradient(180deg, rgba(5, 13, 23, 0.08), rgba(5, 13, 23, 0.28)),
     url("/images/Home/home2.jpg") center/cover no-repeat;
-  opacity: 0.62;
+  opacity: 1;
   transform: scale(1.05);
 }
 
@@ -570,7 +582,7 @@ const submitForm = async () => {
   position: absolute;
   inset: auto 0 0 0;
   height: 220px;
-  background: linear-gradient(180deg, transparent, rgba(6, 16, 29, 0.9));
+  background: linear-gradient(180deg, transparent, rgba(5, 13, 23, 0.22));
 }
 
 .hero-grid {
@@ -606,7 +618,7 @@ const submitForm = async () => {
 
 .eyebrow,
 .section-kicker {
-  color: #7bb7ff;
+  color: #d8b26e;
 }
 
 .hero-text {
@@ -877,9 +889,9 @@ input:focus,
 select:focus,
 textarea:focus {
   outline: none;
-  border-color: rgba(123, 183, 255, 0.9);
+  border-color: rgba(216, 178, 110, 0.9);
   transform: translateY(-1px);
-  box-shadow: 0 0 0 4px rgba(77, 163, 255, 0.12);
+  box-shadow: 0 0 0 4px rgba(216, 178, 110, 0.12);
 }
 
 select option {
@@ -898,7 +910,7 @@ select option {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  background: linear-gradient(135deg, #d4af37, #f4d97f 55%, #7bb7ff 100%);
+  background: linear-gradient(135deg, #d4af37, #f4d97f 55%, #d8b26e 100%);
   transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
 }
 

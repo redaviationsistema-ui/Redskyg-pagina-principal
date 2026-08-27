@@ -67,16 +67,16 @@ const pageRoutes = [
     meta: {
       seo: {
         es: {
-          title: "Private Aviation Mexico | Sky Group Aviation",
+          title: "Jet Privado en Mexico | Charter Ejecutivo Premium | RedSkyG",
           description:
-            "Private jet charter en Mexico con disponibilidad real, respuesta rapida y coordinacion operativa premium para vuelos ejecutivos.",
+            "Jet privado en Mexico con disponibilidad real, charter ejecutivo premium y soluciones de aviacion privada sin intermediarios innecesarios.",
           keywords:
             "private jet charter mexico, vuelos privados mexico, charter ejecutivo mexico, jet privado mexico, aviacion privada mexico",
         },
         en: {
-          title: "Private Aviation Mexico | Sky Group Aviation",
+          title: "Private Jet in Mexico | Premium Executive Charter | RedSkyG",
           description:
-            "Private jet charter in Mexico with real availability, fast response, and premium operational coordination for executive flights.",
+            "Private jet in Mexico with real availability, premium executive charter, and private aviation solutions without unnecessary intermediaries.",
           keywords:
             "private jet charter mexico, private flights mexico, executive charter mexico, private jet mexico, sky group aviation",
         },

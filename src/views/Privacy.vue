@@ -69,7 +69,7 @@ const content = computed(() =>
         heroTag: "Legal Documentation",
         heroTitle: "Privacy Notice for Passengers",
         updated: "Last updated: March 2026",
-        copyright: "© 2026 REDSKYG. All rights reserved.",
+        copyright: "© 2026 RED SKY GROUP. All rights reserved.",
         sections: {
           controller: {
             title: "Identity of the Data Controller",
@@ -152,7 +152,7 @@ const content = computed(() =>
         heroTag: "Documentacion legal",
         heroTitle: "Aviso de Privacidad para Pasajeros",
         updated: "Ultima actualizacion: marzo 2026",
-        copyright: "© 2026 REDSKYG. Todos los derechos reservados.",
+        copyright: "© 2026 RED SKY GROUP. Todos los derechos reservados.",
         sections: {
           controller: {
             title: "Identidad del Responsable",
@@ -257,11 +257,9 @@ const content = computed(() =>
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(5, 10, 20, 0.85),
-    rgba(5, 10, 20, 0.95)
-  );
+  background:
+    linear-gradient(90deg, rgba(5, 13, 23, 0.68) 0%, rgba(5, 13, 23, 0.48) 34%, rgba(5, 13, 23, 0.2) 62%, rgba(5, 13, 23, 0.38) 100%),
+    linear-gradient(180deg, rgba(5, 13, 23, 0.08), rgba(5, 13, 23, 0.28));
   z-index: 0;
 }
 

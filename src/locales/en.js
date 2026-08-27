@@ -1,9 +1,9 @@
 export default {
   seo: {
     default: {
-      title: "Private Aviation Mexico | Sky Group Aviation",
+      title: "Private Jet in Mexico | Premium Executive Charter | Red Sky Group",
       description:
-        "Premium private aviation services in Mexico. Charter flights and aircraft sales with global reach and qualified buyers.",
+        "Private jet in Mexico with real availability, premium executive charter, and private aviation solutions built to convert.",
       keywords:
         "sky group aviation, private aviation mexico, aircraft services mexico, private charter mexico, aircraft management mexico",
     },
@@ -41,7 +41,7 @@ export default {
     ],
     introKicker: "PRIVATE AVIATION SERVICES",
     introTitle: "One platform. Four strategic layers.",
-    introLead: "Built to scan fast and move the client directly into execution.",
+    introLead: "Built so you can understand it fast and move straight into action.",
     introPoints: [
       "Commercial execution",
       "Operational coordination",
@@ -51,7 +51,7 @@ export default {
     servicesKicker: "OUR SOLUTIONS",
     servicesTitle: "Focused pages built around commercial intent, not generic browsing.",
     servicesText:
-      "Move directly into the charter, aircraft, or operational path you need with stronger messaging and a clearer next step.",
+      "Move directly into the charter, aircraft, or operational path you need, with clearer messaging and an easier next step.",
     serviceAction: "View service",
     localKicker: "BUSINESS ADVANTAGE",
     localTitle: "Aviation is not a service. It's a business asset.",
@@ -78,7 +78,7 @@ export default {
     finalTitle:
       "Plan your next flight with full operational control.",
     finalText:
-      "Ideal for clients who need real availability, operational control, and premium coordination instead of generic aviation sales language.",
+      "Ideal if you need real availability, operational control, and premium coordination instead of generic aviation sales language.",
     finalPrimaryCta: "Request Flight Now",
     finalSecondaryCta: "View Aircraft",
     finalFootnote: "Limited aircraft availability depending on route and time",
@@ -154,7 +154,7 @@ export default {
       },
       {
         title: "Transparent pricing",
-        text: "We frame pricing around route, category, and schedule so the client understands what drives the quote.",
+        text: "We frame pricing around route, category, and schedule so you can understand what drives the quote.",
       },
     ],
     processSteps: [
@@ -193,7 +193,7 @@ export default {
       {
         question: "Do you serve clients outside Toluca or Mexico City?",
         answer:
-          "Yes. We handle national and international requests for private clients, corporations, and operators.",
+          "Yes. We handle national and international requests for private travelers, companies, and operators.",
       },
     ],
   },
@@ -202,7 +202,7 @@ export default {
     contactCta: "Talk to an advisor",
     profileLabel: "Page profile",
     faqKicker: "Frequently asked questions",
-    faqTitle: "Additional content to strengthen visibility and conversions",
+    faqTitle: "Clear answers to help you move forward with confidence",
     nextStep: "Next step",
     whatsappCta: "Go to WhatsApp",
     blogCta: "View more content",

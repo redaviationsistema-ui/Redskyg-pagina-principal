@@ -24,8 +24,8 @@ const getPrimaryKeyword = (keywords = "", title = "") =>
 const getAudienceLabel = (audience = [], locale = "es") => {
   if (!audience.length) {
     return locale === "en"
-      ? "companies, premium travelers, and clients with urgent travel needs"
-      : "empresas, viajeros premium y clientes con necesidades urgentes";
+      ? "companies, premium travelers, and urgent trips"
+      : "empresas, viajeros premium y viajes urgentes";
   }
 
   if (locale === "en") return audience.join(", ").toLowerCase();
@@ -48,7 +48,7 @@ const buildFaqs = (title, variant, locale = "es") =>
         {
           question: `What does ${title.toLowerCase()} include?`,
           answer:
-            "It usually includes commercial follow-up, operational coordination, passenger support, and a quote aligned with the mission, timing, and service expectations of the client.",
+            "It usually includes commercial follow-up, operational coordination, passenger support, and a quote aligned with your route, timing, and travel needs.",
         },
         {
           question: `Can I request an immediate quote for ${title.toLowerCase()}?`,
@@ -70,7 +70,7 @@ const buildFaqs = (title, variant, locale = "es") =>
         {
           question: `Que incluye ${title.toLowerCase()}?`,
           answer:
-            "Incluye coordinacion comercial, seguimiento operativo, atencion personalizada y una propuesta alineada a la mision, los tiempos y el nivel de servicio esperado por el cliente.",
+            "Incluye coordinacion comercial, seguimiento operativo, atencion personalizada y una propuesta alineada a tu ruta, tus tiempos y el tipo de viaje que necesitas.",
         },
         {
           question: `Puedo solicitar cotizacion inmediata para ${title.toLowerCase()}?`,
@@ -104,11 +104,11 @@ const buildLongformSections = ({
         kicker: "Search Intent",
         image: sectionImages[imageOffset % sectionImages.length],
         summary:
-          `This page is built around ${primaryKeyword} with a commercial angle focused on readers who are already comparing private aviation options.`,
+          `If you are already comparing private aviation options, ${primaryKeyword} usually means you are much closer to requesting a quote than just browsing.`,
         highlights: ["High-intent traffic", "Private aviation demand", "Clear commercial focus"],
         paragraphs: [
-          `${title} is not only a descriptive topic. It is a search with visible commercial value because users arriving through this term are usually much closer to action than readers in an early research stage. ${intro} Instead of treating the keyword as a thin placeholder, this page turns it into a useful guide that explains what the service means, who it is built for, and why a private aviation proposal should be evaluated according to mission profile, timing, and service expectations.`,
-          `${description} That matters especially for ${audienceLabel}, because the decision is rarely based on one generic factor. Readers want to know whether the route is viable, how the operation adapts to their timing, and whether the service level really matches the urgency or premium nature of the trip. A page with stronger depth helps qualify demand, improve topical relevance, and move the visitor from broad interest toward a concrete quote conversation.`,
+          `${title} is not just a descriptive topic. If you arrive through this search, you are usually much closer to taking action than someone who is only starting to research. ${intro} The goal here is simple: help you understand what the service means, whether it fits your trip, and why a private aviation quote should be reviewed according to route, timing, and service expectations.`,
+          `${description} That matters especially for ${audienceLabel}, because the decision is rarely based on one generic factor. You usually want to know if the route works, how the operation adapts to your timing, and whether the service level really matches the urgency or premium nature of the trip. Clearer content helps you move faster from broad interest to a real quote conversation.`,
         ],
       },
       {
@@ -119,8 +119,8 @@ const buildLongformSections = ({
           "Private aviation decisions usually depend on route logic, airport access, schedule flexibility, passenger profile, and the level of coordination required.",
         highlights: ["Route planning", "Schedule flexibility", "Passenger profile"],
         paragraphs: [
-          `${operationText} In practice, the value of ${title.toLowerCase()} grows when the traveler needs more control over departure windows, less friction at the airport, stronger privacy, or a more efficient way to protect a business or premium agenda. That is why the operational side of the page matters. It gives context to the keyword and explains that private aviation is not one uniform product, but a service that adapts according to airport pair, aircraft category, travel distance, baggage needs, and the commercial or personal importance of the mission.`,
-          `A better explanation also helps improve lead quality. Many users search broad terms without fully knowing whether they need a light jet, a larger cabin, a domestic route solution, or a charter structure that can support same-day turns or tighter planning windows. By clarifying how the operation is normally structured, the page becomes more useful for both SEO and conversion. It answers practical questions, filters weaker clicks, and gives higher-intent visitors a clearer path toward requesting support with better information.`,
+          `${operationText} In practice, the value of ${title.toLowerCase()} grows when you need more control over departure windows, less friction at the airport, stronger privacy, or a better way to protect a business or premium agenda. That is why the operational side matters. It gives you context and shows that private aviation is not one fixed product, but a service that adapts to airport pair, aircraft category, travel distance, baggage needs, and the importance of your trip.`,
+          `This also makes the next step clearer. Many searches start broad, but once you understand whether you need a light jet, a larger cabin, a domestic route solution, or a charter setup for tighter planning windows, it becomes much easier to request the right kind of support.`,
         ],
       },
       {
@@ -128,11 +128,11 @@ const buildLongformSections = ({
         kicker: "Audience",
         image: sectionImages[(imageOffset + 2) % sectionImages.length],
         summary:
-          "This type of search usually comes from clients who already value time, privacy, flexibility, and a smoother travel experience than commercial aviation can offer.",
+          "This kind of search usually comes from people who already value time, privacy, flexibility, and a smoother travel experience than commercial aviation can offer.",
         highlights: ["Companies", "Premium travelers", "Urgent departures"],
         paragraphs: [
-          `The audience behind ${primaryKeyword} is usually more defined than it looks. Some searches come from companies protecting a schedule, some from premium leisure travelers trying to simplify a more complex itinerary, and others from families or decision-makers who need direct support without losing time in a fragmented booking process. The stronger the page is, the easier it becomes to connect that intent with the right language. Instead of relying on luxury clichés, the content can explain why control, continuity, privacy, and timing are the real drivers behind many private flight requests.`,
-          `${benefitText} That benefit becomes even more relevant when the user is comparing several providers or several route options at the same time. A richer page gives the brand more authority because it sounds informed and operationally grounded rather than generic. It also supports semantic SEO by reinforcing related terms connected to charter service, private flights, executive travel, airport flexibility, and personalized quoting in Mexico.`,
+          `The intent behind ${primaryKeyword} is usually more defined than it looks. Maybe you need to protect a business schedule, simplify a premium itinerary, move a group with more privacy, or solve a trip without losing time in a fragmented booking process. Stronger copy helps connect that need with the right message. Instead of relying on luxury clichés, it should help you see why control, continuity, privacy, and timing matter.`,
+          `${benefitText} That becomes even more relevant when you are comparing several providers or route options at the same time. Clearer language builds more trust because it feels informed and operationally grounded instead of generic.`,
         ],
       },
       {
@@ -143,8 +143,8 @@ const buildLongformSections = ({
           "A focused landing page helps connect the keyword with real route demand, airport patterns, and the reasons why travelers move to private aviation.",
         highlights: ["Domestic and international routes", "Airport strategy", "Mission fit"],
         paragraphs: [
-          `One of the main strengths of a page focused on ${title.toLowerCase()} is that it helps translate a broad search into practical route thinking. In Mexico, private aviation demand is shaped by corporate corridors, tourism hubs, executive airports, and time-sensitive travel patterns. That means the page should not stop at a headline and a short description. It should help readers understand that route design, airport access, turnaround timing, and service continuity all influence what kind of proposal makes sense.`,
-          `This also creates stronger internal SEO value. When the page explains route context well, it becomes easier to connect it with city pages, route pages, quote pages, and informational content without looking repetitive. Search engines get a clearer signal about topical depth, and users get a stronger sense that the brand understands the market instead of repeating the same short copy across different URLs. That combination is valuable because it supports ranking potential and conversion quality at the same time.`,
+          `One of the biggest advantages of focusing on ${title.toLowerCase()} is that it turns a broad search into a more practical route conversation. In Mexico, private aviation demand is shaped by corporate corridors, tourism hubs, executive airports, and time-sensitive travel patterns. That means you need more than a headline and a short description. You need to understand how route design, airport access, turnaround timing, and service continuity change the proposal.`,
+          `That clarity also helps the rest of the site connect better around routes, cities, quote pages, and supporting content without sounding repetitive. More importantly, it gives you a stronger sense that the brand understands the market and your trip.`,
         ],
       },
       {
@@ -155,8 +155,8 @@ const buildLongformSections = ({
           "The best next step is to move from a generic search into a quote request with route, date, passengers, and timing clearly defined.",
         highlights: ["Share route details", "Define timing", "Request a tailored proposal"],
         paragraphs: [
-          `A page about ${title.toLowerCase()} should always make the next action easy. Once the visitor understands the service and sees that the keyword fits a real travel need, the next step is to send route details, date, passenger count, and timing preferences. ${ctaText} That handoff matters because private aviation works best when the quote starts from a realistic mission rather than from a vague request with no operational context.`,
-          `From a conversion perspective, this section is where traffic turns into opportunity. Instead of letting the reader leave with only a general impression, the page should reinforce that a personalized proposal provides more value than a public flat number. A clearer quote process improves trust, raises lead quality, and helps the commercial team respond with options that actually fit the trip. That is why long-form keyword pages can be useful not only for ranking, but also for creating better sales conversations from the same volume of traffic.`,
+          `If ${title.toLowerCase()} matches what you need, the next step should feel easy. Share your route, date, passenger count, and preferred timing. ${ctaText} That handoff matters because private aviation works much better when the quote starts from a real trip instead of a vague request.`,
+          `A clearer quote process also builds more trust. Instead of leaving with only a general idea, you get a more useful path toward a personalized proposal that actually fits the trip.`,
         ],
       },
     ];
@@ -168,11 +168,11 @@ const buildLongformSections = ({
       kicker: "Intencion de busqueda",
       image: sectionImages[imageOffset % sectionImages.length],
       summary:
-        `Esta pagina trabaja la keyword ${primaryKeyword} con un enfoque comercial pensado para usuarios que ya estan comparando opciones reales de aviacion privada.`,
+        `Si ya estas comparando opciones reales de aviacion privada, ${primaryKeyword} suele indicar que estas mucho mas cerca de cotizar que de solo explorar.`,
       highlights: ["Trafico con intencion", "Aviacion privada", "Enfoque comercial"],
       paragraphs: [
-        `${title} no es solo un tema descriptivo. Es una busqueda con valor comercial porque quien llega por este termino normalmente esta mucho mas cerca de pedir una propuesta que un lector que apenas esta investigando. ${intro} En lugar de tratar la keyword como una url delgada, esta pagina la convierte en una guia util que ayuda a entender que significa el servicio, para quien funciona y por que la propuesta debe evaluarse segun la mision, el horario y el nivel de atencion que espera el cliente.`,
-        `${description} Eso importa especialmente para ${audienceLabel}, porque la decision rara vez depende de un solo factor generico. El usuario quiere saber si la ruta hace sentido, como cambia la operacion segun el horario y si el nivel de servicio realmente esta alineado con la urgencia o el perfil premium del viaje. Una pagina con mas profundidad ayuda a calificar mejor la demanda, refuerza relevancia topical y acerca al visitante a una conversacion de cotizacion mucho mas clara.`,
+        `${title} no es solo un tema descriptivo. Si llegas por esta busqueda, normalmente estas mucho mas cerca de pedir una propuesta que de apenas investigar. ${intro} La idea aqui es ayudarte a entender que significa el servicio, si encaja con tu viaje y por que una propuesta de aviacion privada debe revisarse segun la ruta, el horario y el nivel de atencion que esperas.`,
+        `${description} Eso importa especialmente para ${audienceLabel}, porque esta decision rara vez depende de un solo factor generico. Normalmente quieres saber si la ruta hace sentido, como cambia la operacion segun tus tiempos y si el servicio realmente encaja con la urgencia o el perfil premium del viaje. Un contenido mas claro te ayuda a pasar mas rapido de la duda a una cotizacion real.`,
       ],
     },
     {
@@ -183,8 +183,8 @@ const buildLongformSections = ({
         "Las decisiones de aviacion privada suelen depender de la logica de ruta, el acceso a aeropuerto, la flexibilidad de horario y el perfil real del pasajero.",
       highlights: ["Planeacion de ruta", "Flexibilidad", "Perfil de pasajeros"],
       paragraphs: [
-        `${operationText} En la practica, el valor de ${title.toLowerCase()} crece cuando el usuario necesita mas control sobre el horario de salida, menos friccion en aeropuerto, mejor privacidad o una forma mas eficiente de proteger una agenda ejecutiva o premium. Por eso el lado operativo de la pagina es importante. Le da contexto a la keyword y explica que la aviacion privada no es un producto unico, sino un servicio que cambia segun el par de aeropuertos, la categoria de aeronave, la distancia, el equipaje y la importancia comercial o personal de la mision.`,
-        `Una mejor explicacion tambien eleva la calidad del lead. Muchos usuarios buscan terminos amplios sin tener claro si necesitan un jet ligero, una cabina mas amplia, una solucion nacional o una estructura charter que soporte vueltas el mismo dia o ventanas de planeacion mas cerradas. Al aclarar como suele organizarse la operacion, la pagina se vuelve mas util para SEO y para conversion. Responde dudas practicas, filtra clics debiles y da a los usuarios con mayor intencion un camino mas claro para pedir apoyo con mejor informacion.`,
+        `${operationText} En la practica, el valor de ${title.toLowerCase()} crece cuando necesitas mas control sobre el horario de salida, menos friccion en aeropuerto, mejor privacidad o una forma mas eficiente de proteger una agenda ejecutiva o premium. Por eso el lado operativo importa. Te da contexto y te deja ver que la aviacion privada no es un producto fijo, sino un servicio que cambia segun el par de aeropuertos, la categoria de aeronave, la distancia, el equipaje y la importancia del viaje.`,
+        `Eso tambien hace mas claro el siguiente paso. Muchas busquedas empiezan amplias, pero cuando entiendes si te conviene un jet ligero, una cabina mas amplia, una solucion nacional o una estructura charter para tiempos mas cerrados, pedir apoyo se vuelve mucho mas facil.`,
       ],
     },
     {
@@ -192,11 +192,11 @@ const buildLongformSections = ({
       kicker: "Perfil del cliente",
       image: sectionImages[(imageOffset + 2) % sectionImages.length],
       summary:
-        "Este tipo de busqueda suele venir de clientes que ya valoran tiempo, privacidad, flexibilidad y una experiencia mas fluida que la aviacion comercial.",
+        "Este tipo de busqueda suele venir de personas que ya valoran tiempo, privacidad, flexibilidad y una experiencia mas fluida que la aviacion comercial.",
       highlights: ["Empresas", "Viajeros premium", "Salidas urgentes"],
       paragraphs: [
-        `La audiencia detras de ${primaryKeyword} suele estar mas definida de lo que parece. Algunas busquedas vienen de empresas que quieren proteger agenda, otras de viajeros premium que quieren simplificar un itinerario mas complejo y otras de familias o tomadores de decision que necesitan atencion directa sin perder tiempo en procesos fragmentados. Mientras mas fuerte sea la pagina, mas facil sera conectar esa intencion con el lenguaje correcto. En vez de depender solo de frases aspiracionales, el contenido puede explicar por que control, continuidad, privacidad y tiempos son los verdaderos motores detras de muchas solicitudes de vuelo privado.`,
-        `${benefitText} Ese beneficio se vuelve todavia mas relevante cuando el usuario compara varios proveedores o varias opciones de ruta al mismo tiempo. Una pagina mas robusta transmite mayor autoridad porque suena informada y operativamente aterrizada, no generica. Tambien ayuda al SEO semantico porque refuerza conceptos relacionados con charter privado, vuelos ejecutivos, flexibilidad aeroportuaria y cotizacion personalizada en Mexico.`,
+        `La intencion detras de ${primaryKeyword} suele estar mas definida de lo que parece. Tal vez quieres proteger una agenda de negocio, simplificar un itinerario premium, mover a tu grupo con mas privacidad o resolver un viaje sin perder tiempo en procesos fragmentados. Un mensaje mas claro conecta mejor con eso. En vez de depender de frases aspiracionales, conviene mostrarte por que control, continuidad, privacidad y tiempos si hacen diferencia.`,
+        `${benefitText} Eso pesa aun mas cuando comparas varios proveedores o varias rutas al mismo tiempo. Un lenguaje mas claro genera mas confianza porque se siente mejor aterrizado y menos generico.`,
       ],
     },
     {
@@ -207,8 +207,8 @@ const buildLongformSections = ({
         "Una landing enfocada permite conectar la keyword con demanda real de rutas, patrones de aeropuerto y razones por las que el usuario cambia a aviacion privada.",
       highlights: ["Rutas MX + INTL", "Estrategia de aeropuerto", "Mision adecuada"],
       paragraphs: [
-        `Una de las fortalezas mas claras de una pagina enfocada en ${title.toLowerCase()} es que ayuda a traducir una busqueda amplia en una logica de ruta mucho mas practica. En Mexico la demanda de aviacion privada esta marcada por corredores corporativos, destinos premium, aeropuertos ejecutivos y traslados sensibles al tiempo. Eso significa que la pagina no debe quedarse en un titulo y una descripcion corta. Debe ayudar al lector a entender que el diseo de ruta, el acceso al aeropuerto, los tiempos de respuesta y la continuidad del servicio cambian completamente el tipo de propuesta que hace sentido.`,
-        `Esto tambien crea mas valor para el ecosistema SEO. Cuando la pagina explica bien el contexto de ruta, se vuelve mas facil conectarla con paginas por ciudad, paginas de ruta, paginas de cotizacion y contenidos informativos sin que todo se vea repetido. Google recibe una senal mas clara de profundidad topical y el usuario percibe que la marca entiende el mercado en lugar de repetir el mismo texto en distintas urls. Esa combinacion es valiosa porque ayuda al ranking y a la conversion al mismo tiempo.`,
+        `Una de las ventajas mas claras de enfocarte en ${title.toLowerCase()} es que convierte una busqueda amplia en una conversacion de ruta mucho mas practica. En Mexico, la demanda de aviacion privada se mueve por corredores corporativos, destinos premium, aeropuertos ejecutivos y traslados sensibles al tiempo. Por eso no basta con un titulo y una descripcion corta. Necesitas entender como el diseno de ruta, el acceso al aeropuerto, los tiempos de respuesta y la continuidad del servicio cambian la propuesta.`,
+        `Esa claridad tambien ayuda a conectar mejor rutas, ciudades, paginas de cotizacion y contenido de apoyo sin que todo suene repetido. Y, sobre todo, te deja ver que la marca entiende el mercado y tu viaje.`,
       ],
     },
     {
@@ -219,8 +219,8 @@ const buildLongformSections = ({
         "El mejor siguiente paso es pasar de una busqueda generica a una solicitud con ruta, fecha, pasajeros y horario bien definidos.",
       highlights: ["Comparte ruta", "Define horario", "Recibe propuesta"],
       paragraphs: [
-        `Una pagina sobre ${title.toLowerCase()} siempre debe hacer facil la accion siguiente. Cuando el visitante ya entiende el servicio y confirma que la keyword si corresponde a su necesidad, lo correcto es enviar ruta, fecha, numero de pasajeros y preferencia de horario. ${ctaText} Ese traspaso importa porque la aviacion privada funciona mejor cuando la cotizacion arranca desde una mision real y no desde una solicitud vaga sin contexto operativo.`,
-        `Desde la perspectiva de conversion, aqui es donde el trafico se convierte en oportunidad. En vez de dejar al lector con una impresion general, la pagina debe reforzar que una propuesta personalizada aporta mucho mas valor que un numero fijo publicado sin contexto. Un proceso de cotizacion mas claro mejora confianza, sube la calidad del lead y ayuda al equipo comercial a responder con opciones que realmente encajen con el viaje. Por eso las paginas largas orientadas a keyword no solo ayudan a posicionar, tambien ayudan a generar mejores conversaciones de venta con el mismo trafico.`,
+        `Si ${title.toLowerCase()} si encaja con lo que buscas, el siguiente paso debe sentirse facil. Comparte tu ruta, fecha, numero de pasajeros y horario ideal. ${ctaText} Ese momento importa porque la aviacion privada funciona mucho mejor cuando la cotizacion arranca desde un viaje real y no desde una solicitud vaga.`,
+        `Un proceso de cotizacion mas claro tambien genera mas confianza. En lugar de quedarte con una idea general, avanzas hacia una propuesta personalizada que si tiene sentido para tu viaje.`,
       ],
     },
   ];
@@ -250,14 +250,14 @@ const createPage = ({
         article: "a",
         whyTitle: "Why this page matters",
         whyText:
-          "It answers high-intent questions with clearer language, a stronger sales path, and more relevance for premium travelers looking for private aviation in Mexico.",
+          "It answers the questions you are already asking and gives you a clearer path to quote private aviation in Mexico.",
       }
     : {
         kicker: category,
         article: "un",
         whyTitle: "Por que esta pagina ayuda a convertir",
         whyText:
-          "Responde dudas frecuentes, trabaja palabras clave con alta intencion comercial y acerca al usuario a una cotizacion real en lugar de dejarlo solo navegando.",
+          "Responde las dudas que ya tienes y te acerca a una cotizacion real en lugar de dejarte solo explorando.",
       };
 
   return {
@@ -274,7 +274,7 @@ const createPage = ({
     heroIntro: intro,
     heroIntroByLocale: {
       es: intro,
-      en: `This page is focused on ${title.toLowerCase()} and is designed to answer commercial questions, clarify how the service is evaluated, and move the visitor toward a better private aviation quote process in Mexico.`,
+      en: `If you are looking for ${title.toLowerCase()}, here you can understand how it works, what really matters, and how to move toward a clearer private aviation quote in Mexico.`,
     },
     audience,
     whatsappHref,
@@ -330,9 +330,9 @@ const createPage = ({
         text: ctaText,
       },
       en: {
-        title: `Request information about ${title}`,
+        title: `Get more information about ${title}`,
         text:
-          "Share your route, passengers, and preferred timing to receive a quote aligned with your mission and travel expectations.",
+          "Share your route, passengers, and preferred timing so you can receive a quote that fits your trip.",
       },
     },
     faqs: buildFaqs(title, variant, "es"),
@@ -350,13 +350,13 @@ export const seoPages = [
     title: "Vuelos privados en Mexico",
     category: "Paginas Principales",
     description:
-      "Cotiza vuelos privados en Mexico con atencion personalizada, cobertura nacional y rutas ejecutivas para clientes corporativos y particulares.",
+      "Cotiza vuelos privados en Mexico con atencion personalizada, cobertura nacional y rutas ejecutivas para tu agenda personal o de negocio.",
     keywords:
       "vuelos privados mexico, vuelo privado mexico, contratar vuelo privado, cotizar vuelo privado mexico",
     heroKicker: "Paginas Principales",
     heroTitle: "Vuelos privados en Mexico",
     heroIntro:
-      "Esta pagina esta pensada para usuarios que buscan una solucion premium para viajar dentro y fuera del pais con flexibilidad, rapidez y atencion ejecutiva. Reune informacion clave para entender como funciona una operacion privada, que variables influyen en la propuesta, que aeropuertos concentran mayor actividad ejecutiva y que rutas suelen tener mas demanda comercial en Mexico.",
+      "Si buscas una forma premium de viajar dentro o fuera del pais, aqui puedes entender como funciona una operacion privada, que variables cambian la propuesta, que aeropuertos concentran mayor actividad ejecutiva y que rutas suelen tener mas demanda en Mexico.",
     heroImage: "/images/Home/home2.jpg",
     heroStats: [
       { value: "MX + INTL", label: "Cobertura para rutas nacionales e internacionales" },
@@ -375,7 +375,7 @@ export const seoPages = [
         highlights: ["Ruta y horario", "Tipo de aeronave", "Perfil de pasajeros"],
         paragraphs: [
           "El costo de un vuelo privado en Mexico no se define con una tarifa unica ni con una tabla general, porque cada operacion cambia segun la ruta, el tipo de aeronave, el tiempo total de vuelo, la disponibilidad del equipo y los servicios que el pasajero necesita. Una salida ejecutiva entre ciudades cercanas no se estructura igual que una operacion hacia playa, una ruta fronteriza o un itinerario internacional con escalas, permisos y tiempos de espera. Por eso una pagina de vuelos privados en Mexico debe explicar el criterio detras de la cotizacion sin caer en promesas de precio poco confiables.",
-          "Tambien influyen factores operativos como posicionamiento de aeronave, horarios de salida, uso de terminal ejecutiva, perfil de pasajeros, equipaje, pernocta de tripulacion y requerimientos adicionales de coordinacion. En viajes corporativos, por ejemplo, importa mucho la puntualidad, la posibilidad de ajustar la agenda y la eficiencia puerta a puerta. En viajes familiares o premium, el foco puede estar en privacidad, flexibilidad y experiencia. La mejor forma de orientar al usuario no es publicar cifras genericas, sino explicar que una cotizacion profesional se arma con base en la mision real para que la propuesta tenga sentido comercial y operativo desde el inicio.",
+          "Tambien influyen factores operativos como posicionamiento de aeronave, horarios de salida, uso de terminal ejecutiva, perfil de pasajeros, equipaje, pernocta de tripulacion y requerimientos adicionales de coordinacion. En viajes corporativos, por ejemplo, importa mucho la puntualidad, la posibilidad de ajustar la agenda y la eficiencia puerta a puerta. En viajes familiares o premium, el foco puede estar en privacidad, flexibilidad y experiencia. La mejor forma de orientarte no es publicar cifras genericas, sino explicarte que una cotizacion profesional se arma con base en la mision real para que la propuesta tenga sentido desde el inicio.",
         ],
       },
       {
@@ -387,7 +387,7 @@ export const seoPages = [
         highlights: ["Terminal ejecutiva", "Menor friccion", "Hubs estrategicos"],
         paragraphs: [
           "Cuando los usuarios buscan aeropuertos privados en Mexico, en realidad suelen referirse a los aeropuertos y terminales que operan aviacion ejecutiva, vuelos charter y servicios de atencion privada. En el pais, la actividad privada se concentra en zonas con fuerte movimiento corporativo, turistico y patrimonial, como Toluca, Ciudad de Mexico, Monterrey, Guadalajara, Queretaro, Cancun y Los Cabos. No todos funcionan de la misma manera, pero si comparten un objetivo: ofrecer una experiencia con menor friccion que la aviacion comercial, con acceso mas agil, coordinacion dedicada y mejores condiciones para agendas exigentes.",
-          "Segun la ruta y el perfil del pasajero, la operacion puede apoyarse en terminales ejecutivas, FBOs, slots disponibles, manejo especial de pasajeros y procesos de embarque mas directos. Esto es especialmente relevante para empresas, directivos, familias y viajeros que valoran continuidad de agenda, privacidad y tiempos optimizados. Desde el punto de vista SEO, esta seccion ayuda porque conecta la busqueda amplia de vuelos privados en Mexico con preguntas reales del usuario: desde donde se puede salir, que hubs ejecutivos son mas convenientes y como cambia la experiencia al operar por infraestructura orientada a aviacion privada en lugar de depender del proceso comercial tradicional.",
+          "Segun la ruta y el perfil del pasajero, la operacion puede apoyarse en terminales ejecutivas, FBOs, slots disponibles, manejo especial de pasajeros y procesos de embarque mas directos. Esto es especialmente relevante si valoras continuidad de agenda, privacidad y tiempos optimizados. Tambien te ayuda a entender desde donde puedes salir, que hubs ejecutivos te convienen mas y como cambia la experiencia cuando vuelas por infraestructura orientada a aviacion privada.",
         ],
       },
       {
@@ -398,7 +398,7 @@ export const seoPages = [
           "No todos los vuelos requieren la misma categoria de aeronave: el viaje cambia segun alcance, pasajeros, equipaje y experiencia buscada.",
         highlights: ["Jets ligeros", "Midsize y heavy", "Opciones segun mision"],
         paragraphs: [
-          "No todos los vuelos privados en Mexico se operan con la misma categoria de aeronave. Existen jets ligeros, midsize, super midsize, heavy jets, turbohelices y helicopteros, y cada opcion responde a una necesidad distinta de alcance, tiempo, numero de pasajeros, equipaje y perfil de viaje. Un cliente que busca resolver una agenda ejecutiva dentro del pais puede necesitar una aeronave agil para tramos cortos o medianos, mientras que una familia o grupo premium puede requerir mayor cabina, autonomia y comodidad para una ruta mas larga. Entender estas diferencias mejora la calidad del trafico porque ayuda al usuario a sentirse orientado antes de pedir una propuesta.",
+          "No todos los vuelos privados en Mexico se operan con la misma categoria de aeronave. Existen jets ligeros, midsize, super midsize, heavy jets, turbohelices y helicopteros, y cada opcion responde a una necesidad distinta de alcance, tiempo, numero de pasajeros, equipaje y perfil de viaje. Si quieres resolver una agenda ejecutiva dentro del pais, puede convenirte una aeronave agil para tramos cortos o medianos. Si viajas en familia o en un grupo premium, puede hacer mas sentido una cabina mas amplia, con mayor autonomia y comodidad. Entender estas diferencias te ayuda a pedir una propuesta mejor orientada.",
           "Desde la perspectiva comercial, hablar de tipos de jets privados permite alinear expectativa y operacion. Hay usuarios que llegan buscando un termino general como vuelo privado en Mexico, pero en realidad tienen una necesidad concreta: rentar un jet para una reunion, una salida urgente, un viaje de lujo o una ruta frecuente. Esta seccion sirve para traducir esa necesidad a una categoria operativa sin abrumar al visitante con tecnicismos. Ademas, fortalece el SEO semantico al relacionar la pagina con conceptos como charter ejecutivo, avion privado, jet ligero, jet mediano y aeronaves para rutas nacionales e internacionales, ampliando el espectro de palabras clave que la URL puede capturar.",
         ],
       },
@@ -422,8 +422,8 @@ export const seoPages = [
           "La mejor cotizacion empieza con una ruta clara, fecha, pasajeros y necesidades operativas bien definidas para recibir una propuesta util.",
         highlights: ["Comparte tu ruta", "Define pasajeros", "Avanza a propuesta"],
         paragraphs: [
-          "Cotizar un vuelo privado de forma correcta empieza por compartir informacion clara sobre la ruta, la fecha, el numero de pasajeros, el tipo de viaje y cualquier restriccion operativa o de agenda. Mientras mejor se define el escenario, mas facil es recibir una propuesta alineada a la necesidad real. Para un usuario que llega por la keyword vuelos privados en Mexico, esta suele ser la siguiente pregunta natural, asi que convertirla en una seccion fuerte mejora tanto la experiencia del visitante como la capacidad de conversion organica de la pagina.",
-          "Para trabajar esa intencion de compra con una URL dedicada, el siguiente paso debe apuntar a https://redskyg.com/landing/ enfocada en el proceso de cotizacion. Desde aqui conviene dirigir al usuario a esa pagina para profundizar en que datos compartir, como se estructura una respuesta comercial y por que una propuesta personalizada ofrece mas valor que una cifra generica publicada sin contexto. Este enlace ayuda a repartir mejor la intencion entre la URL principal y una pagina mas transaccional, sin debilitar la autoridad de la landing principal.",
+          "Cotizar un vuelo privado de forma correcta empieza por compartir informacion clara sobre la ruta, la fecha, el numero de pasajeros, el tipo de viaje y cualquier restriccion operativa o de agenda. Mientras mejor se define el escenario, mas facil es recibir una propuesta alineada a lo que realmente necesitas.",
+          "Si quieres profundizar en el proceso, el siguiente paso puede llevarte a https://redskyg.com/landing/ para revisar que datos conviene compartir, como se estructura una respuesta comercial y por que una propuesta personalizada vale mas que una cifra generica sin contexto.",
         ],
         href: "https://redskyg.com/landing/",
         linkLabel: "Ir a la pagina para cotizar un vuelo privado",
@@ -462,10 +462,10 @@ export const seoPages = [
     heroKicker: "Paginas de Intencion de Compra",
     heroTitle: "Como Cotizar un Vuelo Privado",
     heroIntro:
-      "Esta pagina esta enfocada en usuarios que ya dieron el paso de evaluar una salida privada y quieren entender que informacion compartir para recibir una propuesta util, clara y comercialmente bien orientada. Su objetivo es convertir una necesidad general en una solicitud de cotizacion mejor definida para que la respuesta comercial tenga mas contexto y mas valor desde el primer contacto.",
+      "Si ya estas evaluando una salida privada, aqui puedes ver que informacion conviene compartir para recibir una propuesta clara, util y mejor orientada desde el primer contacto.",
     heroIntroByLocale: {
-      es: "Esta pagina esta enfocada en usuarios que ya dieron el paso de evaluar una salida privada y quieren entender que informacion compartir para recibir una propuesta util, clara y comercialmente bien orientada. Su objetivo es convertir una necesidad general en una solicitud de cotizacion mejor definida para que la respuesta comercial tenga mas contexto y mas valor desde el primer contacto.",
-      en: "This page is built for users who are already considering a private flight and want to understand which details matter before requesting a useful quote. The goal is to turn general interest into a more defined request so the commercial response can start from stronger operational context.",
+      es: "Si ya estas evaluando una salida privada, aqui puedes ver que informacion conviene compartir para recibir una propuesta clara, util y mejor orientada desde el primer contacto.",
+      en: "If you are already considering a private flight, here you can see which details matter before asking for a clearer, more useful quote.",
     },
     audience: ["Usuarios listos para cotizar", "Leads calientes", "Cotizacion"],
     whatsappHref,
@@ -477,7 +477,7 @@ export const seoPages = [
         summary:
           "Una mejor cotizacion empieza con una ruta clara, fecha, pasajeros y contexto suficiente para entender la mision real del viaje.",
         paragraphs: [
-          "Lo mas importante al cotizar un vuelo privado es indicar ruta, fecha, numero de pasajeros, si el viaje es sencillo o redondo y cualquier limitacion de horario. Con esa base el equipo puede aterrizar mejor la necesidad, revisar viabilidad operativa y construir una propuesta mucho mas util que una respuesta general. Cuando el usuario comparte informacion clara desde el inicio, la cotizacion deja de ser una aproximacion vaga y se convierte en una herramienta real para tomar decisiones.",
+          "Lo mas importante al cotizar un vuelo privado es indicar ruta, fecha, numero de pasajeros, si el viaje es sencillo o redondo y cualquier limitacion de horario. Con esa base el equipo puede aterrizar mejor la necesidad, revisar viabilidad operativa y construir una propuesta mucho mas util que una respuesta general. Cuando compartes informacion clara desde el inicio, la cotizacion deja de ser una aproximacion vaga y se convierte en una herramienta real para decidir.",
           "Si ya conoces aeropuerto de salida, destino, horario deseado, perfil de equipaje o tipo de viaje, incluirlo acelera el proceso y evita propuestas demasiado abiertas. Esto es especialmente importante en aviacion privada, donde la mision cambia segun tiempos, aeropuerto, disponibilidad y experiencia esperada. Una buena pagina de cotizacion no solo pide datos: explica por que esos datos ayudan a recibir una respuesta mejor alineada con la operacion.",
         ],
       },
@@ -489,7 +489,7 @@ export const seoPages = [
           "Una propuesta personalizada vale mas que una cifra generica porque toma en cuenta la ruta, la aeronave, la disponibilidad y el tipo de servicio esperado.",
         paragraphs: [
           "Una operacion privada depende de disponibilidad, tipo de aeronave, posicionamiento, tiempos de tripulacion y condiciones del itinerario. Por eso una propuesta a la medida suele aportar mas valor que un precio generico. En este mercado, publicar un numero fijo sin contexto puede generar expectativas poco realistas, mientras que una cotizacion personalizada ayuda a entender por que ciertas opciones operan mejor para una ruta especifica, un perfil de pasajeros concreto o una agenda con poca flexibilidad.",
-          "Ademas, una cotizacion bien trabajada permite comparar opciones de forma mas clara y tomar decisiones con mejor contexto operativo. El usuario no solo recibe una respuesta comercial; recibe una orientacion mas cercana a su caso. Eso mejora conversion, confianza y calidad del lead, porque el contacto llega mejor informado y el equipo comercial puede responder con una propuesta mas seria desde el inicio.",
+          "Ademas, una cotizacion bien trabajada te permite comparar opciones con mas claridad y decidir con mejor contexto operativo. No solo recibes una respuesta comercial; recibes una orientacion mas cercana a tu caso.",
         ],
       },
       {
@@ -500,7 +500,7 @@ export const seoPages = [
           "Una solicitud de calidad traduce una necesidad de viaje en un escenario comercial y operativo que si se puede evaluar con rapidez.",
         paragraphs: [
           "Una solicitud util no necesita ser compleja, pero si debe aterrizar la necesidad. Compartir la mision, el motivo general del viaje, la cantidad de pasajeros, el nivel de flexibilidad y cualquier dato clave sobre horarios ayuda a transformar una idea general en una operacion evaluable. Eso permite al equipo comercial revisar disponibilidad, estimar escenarios razonables y responder con una propuesta que no se sienta improvisada o demasiado abierta.",
-          "Desde el punto de vista del usuario, este paso reduce friccion. En vez de sentir que tiene que entender toda la aviacion privada antes de preguntar, solo necesita compartir informacion suficiente para que el equipo haga el resto. Una landing fuerte de cotizacion debe transmitir justo eso: claridad, rapidez y un proceso facil para pasar de interes a propuesta.",
+          "Este paso reduce friccion. En vez de sentir que tienes que entender toda la aviacion privada antes de preguntar, solo necesitas compartir informacion suficiente para que el equipo haga el resto. La idea es darte claridad, rapidez y un proceso facil para pasar de interes a propuesta.",
         ],
       },
       {
@@ -510,8 +510,8 @@ export const seoPages = [
         summary:
           "El error mas comun es pedir una cotizacion sin contexto, porque eso obliga a trabajar con supuestos y debilita la calidad de la respuesta.",
         paragraphs: [
-          "Uno de los errores mas comunes es pedir una cotizacion sin ruta definida, sin fecha tentativa o sin numero de pasajeros. En esos casos la respuesta inevitablemente se vuelve mas amplia, porque faltan datos para estimar una solucion aterrizada. Tambien pasa cuando el usuario no aclara si necesita una salida urgente, un viaje sencillo, una operacion redonda o una experiencia premium con requerimientos especiales. Mientras menos contexto exista, mas probable es que la propuesta se sienta distante de la necesidad real.",
-          "Otro error frecuente es asumir que todas las misiones privadas se parecen. No es lo mismo una salida corporativa con agenda critica que un viaje de placer a un destino premium o una ruta que necesita operar en horarios poco comunes. Explicar estos puntos dentro de la pagina ayuda a elevar la calidad de las solicitudes y mejora la experiencia del usuario, porque lo prepara para recibir una propuesta mas inteligente y mas util.",
+          "Uno de los errores mas comunes es pedir una cotizacion sin ruta definida, sin fecha tentativa o sin numero de pasajeros. En esos casos la respuesta inevitablemente se vuelve mas amplia, porque faltan datos para estimar una solucion aterrizada. Tambien pasa cuando no aclaras si necesitas una salida urgente, un viaje sencillo, una operacion redonda o una experiencia premium con requerimientos especiales. Mientras menos contexto exista, mas probable es que la propuesta se sienta distante de lo que realmente buscas.",
+          "Otro error frecuente es asumir que todas las misiones privadas se parecen. No es lo mismo una salida corporativa con agenda critica que un viaje de placer a un destino premium o una ruta que necesita operar en horarios poco comunes. Entender estas diferencias te ayuda a recibir una propuesta mas inteligente y mas util.",
         ],
       },
       {
@@ -522,7 +522,7 @@ export const seoPages = [
           "El objetivo final es pasar de la investigacion a una propuesta clara con seguimiento comercial y operativo bien enfocado.",
         paragraphs: [
           "Si ya tienes la ruta definida o una idea clara de la operacion, puedes enviar tus datos por WhatsApp o por la pagina de contacto para recibir seguimiento mas rapido. La clave es que el siguiente paso no se quede en una consulta abstracta, sino que se convierta en una solicitud util para que el equipo pueda ayudarte con opciones reales y tiempos de respuesta razonables.",
-          "El objetivo es convertir tu necesidad en una propuesta clara, no dejarte con informacion ambigua o sin ruta comercial. Por eso esta pagina funciona mejor cuando combina educacion breve, orientacion practica y una llamada a la accion directa. Asi el usuario entiende que cotizar un vuelo privado no es complicado, pero si conviene hacerlo con mejor informacion desde el inicio.",
+          "El objetivo es convertir tu necesidad en una propuesta clara, no dejarte con informacion ambigua o sin ruta comercial. Por eso esta pagina funciona mejor cuando combina educacion breve, orientacion practica y una llamada a la accion directa. Asi entiendes que cotizar un vuelo privado no es complicado, pero si conviene hacerlo con mejor informacion desde el inicio.",
         ],
       },
     ],
@@ -1509,6 +1509,69 @@ export const seoPages = [
     audience: ["International travelers", "Luxury clients", "English SEO"],
     english: true,
   }),
+  createPage({
+    slug: "costo-jet-privado-mexico",
+    title: "Costo de un Jet Privado en Mexico",
+    category: "Blog SEO",
+    description:
+      "Conoce cuanto cuesta un jet privado en Mexico y que variables cambian el precio segun ruta, tipo de aeronave, horarios y nivel de servicio.",
+    keywords:
+      "costo de un jet privado en mexico, cuanto cuesta un jet privado mexico, precio jet privado mexico",
+    intro:
+      "Esta pagina responde una de las preguntas con mayor intencion comercial: cuanto cuesta un jet privado en Mexico y por que el rango cambia segun la mision.",
+    benefitTitle: "Una pregunta de precio con alto potencial de lead",
+    benefitText:
+      "El contenido ayuda a captar usuarios que ya entienden el servicio y necesitan una referencia clara antes de solicitar una propuesta privada.",
+    operationTitle: "El precio depende de ruta, aeronave y disponibilidad",
+    operationText:
+      "El costo final cambia por distancia, categoria de aeronave, posicionamiento, horarios, aeropuerto y nivel de soporte operativo requerido.",
+    ctaTitle: "Solicita una cotizacion privada con precio mas claro",
+    ctaText:
+      "Comparte tu ruta, fecha y pasajeros para recibir una propuesta premium alineada con disponibilidad real.",
+    audience: ["SEO blog", "Usuarios comparando precios", "Alta intencion"],
+  }),
+  createPage({
+    slug: "cuanto-cuesta-cdmx-cancun-jet-privado",
+    title: "Cuanto Cuesta un Jet Privado de CDMX a Cancun",
+    category: "Blog SEO",
+    description:
+      "Descubre el rango estimado para volar en jet privado de CDMX a Cancun y que factores mueven la cotizacion en esta ruta premium.",
+    keywords:
+      "cuanto cuesta cdmx cancun jet privado, precio jet privado cdmx cancun, costo vuelo privado cdmx cancun",
+    intro:
+      "El objetivo es capturar usuarios que ya comparan una ruta concreta y estan mas cerca de pedir cotizacion que de solo explorar.",
+    benefitTitle: "Contenido orientado a una ruta con alta demanda",
+    benefitText:
+      "CDMX a Cancun es una de las rutas con mayor intencion de compra, ideal para conectar trafico SEO con una solicitud privada de disponibilidad.",
+    operationTitle: "La ruta combina tiempo, categoria de jet y ventana operativa",
+    operationText:
+      "El precio depende del aeropuerto de salida, tipo de cabina, horarios, pasajeros, equipaje y urgencia de la operacion.",
+    ctaTitle: "Cotiza tu ruta CDMX a Cancun con disponibilidad real",
+    ctaText:
+      "Solicita una propuesta privada para esta ruta premium y recibe una respuesta mas clara sobre aeronave, tiempo y rango estimado.",
+    audience: ["SEO blog", "Viajes premium", "Leads calientes"],
+  }),
+  createPage({
+    slug: "como-comprar-avion-ejecutivo",
+    title: "Como Comprar un Avion Ejecutivo",
+    category: "Blog SEO",
+    description:
+      "Aprende como comprar un avion ejecutivo con una evaluacion mas clara de presupuesto, uso, due diligence y soporte de adquisicion.",
+    keywords:
+      "como comprar un avion ejecutivo, comprar avion ejecutivo mexico, adquirir aeronave ejecutiva",
+    intro:
+      "Esta pagina fortalece la autoridad comercial de la marca frente a usuarios que buscan adquisicion de aeronaves y asesoria premium.",
+    benefitTitle: "Contenido estrategico para leads de alto valor",
+    benefitText:
+      "Conecta busquedas de compra con una conversacion mas seria sobre adquisicion, evaluacion tecnica, negociacion y estructura de operacion.",
+    operationTitle: "La compra correcta depende de perfil de uso y revision tecnica",
+    operationText:
+      "Antes de comprar conviene definir mision, presupuesto, categoria de aeronave, costos operativos y validacion documental.",
+    ctaTitle: "Habla con un asesor para comprar aeronave ejecutiva",
+    ctaText:
+      "Comparte tu objetivo de adquisicion y te ayudamos a evaluar opciones con una ruta mas clara y confidencial.",
+    audience: ["SEO blog", "Usuarios listos para comprar", "Clientes premium"],
+  }),
 ];
 
 export const seoPageGroups = [
@@ -1578,6 +1641,9 @@ export const seoPageGroups = [
       "mejores-rutas-jet-privado-mexico",
       "cuando-conviene-rentar-jet-privado",
       "private-jet-travel-experience",
+      "costo-jet-privado-mexico",
+      "cuanto-cuesta-cdmx-cancun-jet-privado",
+      "como-comprar-avion-ejecutivo",
     ],
   },
 ];
@@ -1764,7 +1830,7 @@ const pageTranslations = {
       description:
         "Request private flights in Mexico with personalized attention, nationwide coverage, and executive routes for corporate and private clients.",
       heroIntro:
-        "This page is built for travelers looking for a premium way to move within Mexico and beyond with stronger flexibility, faster coordination, and executive-level support. It brings together the main questions users usually have before requesting a proposal, including what shapes the quote, which airports are most relevant for private aviation, what aircraft categories are commonly used, and which routes tend to carry the strongest demand.",
+        "If you are looking for a premium way to move within Mexico and beyond, here you can understand what shapes the quote, which airports matter most, what aircraft categories are usually used, and which routes tend to have the strongest demand.",
       sections: [
         {
           title: "How much does a private flight in Mexico cost?",
@@ -1786,8 +1852,8 @@ const pageTranslations = {
             "Private aviation usually relies on executive airports, specialized terminals, and strategic hubs such as Toluca, Mexico City, Monterrey, Guadalajara, and Cancun.",
           highlights: ["Executive terminals", "Less friction", "Strategic hubs"],
           paragraphs: [
-            "When users search for private airports in Mexico, they are usually referring to airports and executive facilities used for private aviation, charter movements, and premium passenger handling. Activity is concentrated in markets with strong business, tourism, and high-value travel demand, such as Toluca, Mexico City, Monterrey, Guadalajara, Queretaro, Cancun, and Los Cabos. These locations do not all operate in exactly the same way, but they share the same value proposition: a smoother experience than commercial aviation, with more direct coordination and better support for demanding schedules.",
-            "Depending on the route and the profile of the traveler, the operation may rely on executive terminals, FBO support, slot availability, private passenger services, and a faster boarding process. This matters for companies, executives, families, and travelers who prioritize privacy and time savings. From an SEO perspective, this section helps because it connects the broad keyword private flights in Mexico with practical user questions such as where departures usually happen, which executive hubs are more convenient, and how the travel experience changes when the operation is built around private aviation infrastructure.",
+            "When you search for private airports in Mexico, you are usually referring to airports and executive facilities used for private aviation, charter movements, and premium passenger handling. Activity is concentrated in markets with strong business, tourism, and high-value travel demand, such as Toluca, Mexico City, Monterrey, Guadalajara, Queretaro, Cancun, and Los Cabos. These locations do not all operate in exactly the same way, but they share the same value proposition: a smoother experience than commercial aviation, with more direct coordination and better support for demanding schedules.",
+            "Depending on your route and travel profile, the operation may rely on executive terminals, FBO support, slot availability, private passenger services, and a faster boarding process. That matters if you prioritize privacy, time savings, and schedule continuity. It also helps you understand where departures usually happen, which executive hubs may be more convenient, and how the experience changes when the trip is built around private aviation infrastructure.",
           ],
         },
         {
@@ -1798,8 +1864,8 @@ const pageTranslations = {
             "Not every trip needs the same aircraft category. The best option changes according to range, passengers, luggage, and the experience expected.",
           highlights: ["Light jets", "Midsize and heavy", "Mission-based options"],
           paragraphs: [
-            "Not every private flight in Mexico is operated with the same aircraft category. There are light jets, midsize aircraft, super midsize jets, heavy jets, turboprops, and helicopters, and each one fits a different combination of range, travel time, passenger count, luggage needs, and mission profile. A business traveler moving quickly between major cities may need an agile aircraft for short or mid-range legs, while a family or premium group may require more cabin space, autonomy, and comfort for a longer route. Explaining these differences improves traffic quality because the visitor feels better guided before requesting a proposal.",
-            "From a commercial angle, talking about aircraft categories helps align expectations with the actual mission. Many users arrive searching for a broad phrase like private flights in Mexico, but what they really need is something more specific: a charter for a meeting, an urgent movement, a luxury trip, or a recurring route. This section helps translate that need into an operational category without overwhelming the visitor with unnecessary technical detail. It also strengthens semantic SEO by tying the page to related concepts such as executive charter, private aircraft, light jet, midsize jet, and domestic or international private aviation options.",
+            "Not every private flight in Mexico is operated with the same aircraft category. There are light jets, midsize aircraft, super midsize jets, heavy jets, turboprops, and helicopters, and each one fits a different combination of range, travel time, passenger count, luggage needs, and mission profile. If you move quickly between major cities, you may need an agile aircraft for short or mid-range legs. If you travel with family or a premium group, you may need more cabin space, autonomy, and comfort for a longer route.",
+            "Talking about aircraft categories also helps align expectations with the actual mission. You may arrive searching for a broad phrase like private flights in Mexico, but what you really need may be something more specific: a charter for a meeting, an urgent movement, a luxury trip, or a recurring route.",
           ],
         },
         {
@@ -1810,7 +1876,7 @@ const pageTranslations = {
             "The strongest demand usually appears in business corridors and premium destinations such as Monterrey, Guadalajara, Cancun, and Los Cabos.",
           highlights: ["Business corridors", "Premium destinations", "High buying intent"],
           paragraphs: [
-            "Among the most requested private aviation routes in Mexico are business and premium corridors such as Mexico City to Monterrey, Mexico City to Guadalajara, Toluca to Cancun, Monterrey to Cancun, Guadalajara to Los Cabos, and other links tied to strong executive or leisure demand. These routes attract consistent interest because they combine time savings, scheduling flexibility, and users with a clear reason to request private travel. A strong landing page should capture that intent and show that private flights in Mexico are not an abstract concept but a practical solution for recurring high-value routes.",
+            "Among the most requested private aviation routes in Mexico are business and premium corridors such as Mexico City to Monterrey, Mexico City to Guadalajara, Toluca to Cancun, Monterrey to Cancun, Guadalajara to Los Cabos, and other links tied to strong executive or leisure demand. These routes attract consistent interest because they combine time savings, scheduling flexibility, and clear reasons to request private travel.",
             "Some routes also gain momentum seasonally or because a traveler needs an urgent departure outside the logic of commercial aviation. Private travel becomes especially valuable when meetings happen in different cities on the same day, when a group needs to move together, or when the destination is tied to a premium experience where timing and privacy matter. Including most requested routes inside the main landing page helps SEO performance and creates stronger internal linking opportunities toward route pages, city pages, and supporting content. That allows the winning URL to attract demand while also distributing authority across the rest of the content ecosystem.",
           ],
         },
@@ -1822,7 +1888,7 @@ const pageTranslations = {
             "The best quote starts with a clear route, date, passenger count, and a defined operational context so the proposal is actually useful.",
           highlights: ["Share your route", "Define passengers", "Move to proposal"],
           paragraphs: [
-            "The right way to quote a private flight starts with sharing a clear route, date, passenger count, trip type, and any schedule restriction or operational detail that matters. The more defined the scenario is, the easier it becomes to receive a proposal that actually fits the mission. For users arriving through the keyword private flights in Mexico, this is often the next natural question, so turning it into a strong section improves both search relevance and conversion quality.",
+            "The right way to quote a private flight starts with sharing a clear route, date, passenger count, trip type, and any schedule restriction or operational detail that matters. The more defined the scenario is, the easier it becomes to receive a proposal that actually fits the mission.",
             "To work that buying intent more directly, the next step should point to https://redskyg.com/landing/ focused on the quoting process. From here, the user can move into a more transactional experience that explains what details to share, how a proposal is structured, and why a personalized quote is more useful than a generic public number. That link helps split intent intelligently between the main landing page and a dedicated conversion page without weakening the authority of the primary URL.",
           ],
           href: "https://redskyg.com/landing/",
@@ -1857,7 +1923,7 @@ const pageTranslations = {
       description:
         "Learn how to quote a private flight with the right details so you can receive a clearer and more useful proposal.",
       heroIntro:
-        "This page is built for users who are already evaluating a private departure and want to understand what information to share in order to receive a clearer and more practical proposal.",
+        "If you are already evaluating a private departure, here you can see what information to share so the proposal you receive is clearer and more useful.",
       sections: [
         {
           title: "What information should you share?",
@@ -1961,7 +2027,7 @@ const pageTranslations = {
             "Evita la friccion del aeropuerto comercial. Abordaje directo, tiempos mas cortos y una operacion privada mucho mas eficiente.",
           highlights: ["Direct boarding", "Full privacy", "Fast departure"],
           paragraphs: [
-            "Esta ruta esta pensada para clientes que necesitan velocidad, discrecion y una salida mejor controlada hacia Cancun.",
+            "Si necesitas velocidad, discrecion y una salida mejor controlada hacia Cancun, esta ruta te da un camino mucho mas directo.",
             "La ventaja no es solo llegar. Es proteger agenda, reducir ruido operativo y mantener la experiencia premium desde el primer contacto.",
           ],
         },
@@ -2074,33 +2140,183 @@ const pageTranslations = {
     },
   },
   "jet-privado-cdmx-guadalajara": {
-    en: {
-      title: "Private Jet CDMX to Guadalajara",
+    es: {
+      title: "Jet Privado de CDMX a Guadalajara",
+      seoTitle: "Jet Privado CDMX a Guadalajara | Charter Ejecutivo Premium | Red Sky Group",
+      seoDescription:
+        "Reserva vuelos privados de Ciudad de Mexico a Guadalajara con servicio premium, seguridad y disponibilidad ejecutiva.",
       description:
-        "Request a private jet from Mexico City to Guadalajara for executive travel, key meetings, and private transfers with full flexibility.",
+        "Reserva vuelos privados de Ciudad de Mexico a Guadalajara con servicio premium, seguridad y disponibilidad ejecutiva.",
+      heroKicker: "Ruta ejecutiva prioritaria",
+      heroTitle: "Jet Privado de CDMX a Guadalajara",
       heroIntro:
-        "A valuable route for capturing demand between two economic centers with strong business activity.",
+        "Charter ejecutivo con disponibilidad real para reuniones, visitas industriales y traslados premium entre Ciudad de Mexico y Guadalajara.",
+      primaryCtaLabel: "Solicita cotizacion privada",
+      secondaryCtaLabel: "Habla con ventas",
+      heroHighlights: [
+        "Disponibilidad ejecutiva real",
+        "Ruta corporativa de alta demanda",
+        "Atencion premium sin brokers tradicionales",
+      ],
+      heroStats: [
+        { value: "1h 10m - 1h 25m", label: "Tiempo estimado de vuelo segun aeropuerto y categoria" },
+        { value: "Light a Midsize", label: "Tipos de aeronave frecuentes para esta ruta" },
+        { value: "$145k - $295k MXN", label: "Rango estimado sujeto a disponibilidad real" },
+      ],
       sections: [
         {
-          title: "A strong balance of volume and conversion",
-          text:
-            "It can attract both corporate travelers and private clients looking for speed, flexibility, and a premium flight experience.",
+          title: "Tiempo estimado",
+          kicker: "Ruta",
+          summary:
+            "La mayoria de las operaciones entre CDMX y Guadalajara se mueven en una ventana aproximada de 1 hora 10 minutos a 1 hora 25 minutos.",
+          highlights: ["Salida ejecutiva", "Menos friccion", "Mas control de agenda"],
+          paragraphs: [
+            "Esta ruta permite proteger reuniones, visitas de planta y movimientos corporativos con una salida privada mucho mas agil que la aviacion comercial.",
+            "El tiempo final depende del aeropuerto de salida, condiciones operativas y categoria de aeronave, pero la ventaja principal es la continuidad de agenda.",
+          ],
         },
         {
-          title: "Built for productivity",
-          text:
-            "The messaging can reinforce time savings, easier logistics, and a more controlled experience compared with commercial aviation.",
+          title: "Tipos de aeronave",
+          kicker: "Aircraft fit",
+          summary:
+            "Normalmente recomendamos light jets y midsize jets para equilibrar tiempo, confort, numero de pasajeros y costo operativo.",
+          highlights: ["Light Jet", "Midsize Jet", "Executive cabin"],
+          paragraphs: [
+            "La seleccion correcta cambia segun pasajeros, equipaje, flexibilidad de horario y el tipo de experiencia que buscas.",
+            "No enviamos opciones vagas. Revisamos disponibilidad real para proponer una categoria que haga sentido comercial y operativo.",
+          ],
         },
         {
-          title: "Why this page matters",
-          text:
-            "It answers high-intent questions with clearer language, a stronger sales path, and more relevance for premium travelers looking for private aviation in Mexico.",
+          title: "Rango de precio",
+          kicker: "Pricing",
+          summary:
+            "Como referencia comercial, la ruta suele moverse en un rango aproximado de $145,000 a $295,000 MXN segun categoria, horario, aeropuerto y disponibilidad.",
+          highlights: ["Precio orientativo", "Disponibilidad real", "Propuesta privada"],
+          paragraphs: [
+            "El precio cambia si la salida requiere posicionamiento, horarios especiales, mayor cabina o una operacion con menor flexibilidad.",
+            "Por eso la mejor practica es solicitar una propuesta privada con ruta, fecha y pasajeros definidos para recibir una respuesta mas clara.",
+          ],
+        },
+        {
+          title: "Beneficios",
+          kicker: "Conversion",
+          summary:
+            "Esta ruta es ideal para clientes que valoran velocidad, privacidad, productividad y una experiencia premium de punta a punta.",
+          highlights: ["Ahorro de tiempo", "Privacidad", "Atencion premium"],
+          paragraphs: [
+            "Entre CDMX y Guadalajara, la aviacion privada suele ganar cuando la agenda importa mas que una tarifa comercial generica.",
+            "No solo compras un asiento; ganas control, disponibilidad executive y una coordinacion mas directa.",
+          ],
+        },
+      ],
+      ctaTitle: "Solicita cotizacion para CDMX a Guadalajara",
+      ctaText:
+        "Comparte tu ruta, fecha y pasajeros para recibir una propuesta privada con disponibilidad real y soporte premium.",
+      audience: ["Empresas", "Industria", "Clientes premium"],
+      faqs: [
+        {
+          question: "Cuanto cuesta rentar un jet privado de CDMX a Guadalajara?",
+          answer:
+            "Como referencia, la ruta suele moverse entre $145,000 y $295,000 MXN, pero el precio final cambia segun categoria de aeronave, horario, aeropuerto y disponibilidad.",
+        },
+        {
+          question: "Que incluye esta propuesta de charter ejecutivo?",
+          answer:
+            "Incluye revision comercial y operativa, seleccion de aeronave segun la mision, seguimiento de disponibilidad y atencion premium para coordinar la salida.",
+        },
+        {
+          question: "Con cuanto tiempo se recomienda reservar?",
+          answer:
+            "Mientras antes se comparta la ruta mejor, pero tambien atendemos solicitudes urgentes segun disponibilidad real, ventana operativa y categoria de aeronave.",
+        },
+      ],
+    },
+    en: {
+      title: "Private Jet CDMX to Guadalajara",
+      seoTitle: "Private Jet CDMX to Guadalajara | Premium Executive Charter | Red Sky Group",
+      seoDescription:
+        "Book private flights from Mexico City to Guadalajara with premium service, safety, and executive availability.",
+      description:
+        "Request a private jet from Mexico City to Guadalajara for executive travel, key meetings, and private transfers with full flexibility.",
+      heroKicker: "Priority executive route",
+      heroTitle: "Private Jet from CDMX to Guadalajara",
+      heroIntro:
+        "Executive charter with real availability for meetings, industrial visits, and premium transfers between Mexico City and Guadalajara.",
+      primaryCtaLabel: "Request private quote",
+      secondaryCtaLabel: "Speak with sales",
+      heroHighlights: [
+        "Real executive availability",
+        "High-demand corporate route",
+        "Premium support without traditional brokers",
+      ],
+      heroStats: [
+        { value: "1h 10m - 1h 25m", label: "Estimated flight time by airport and aircraft" },
+        { value: "Light to Midsize", label: "Frequent aircraft categories for this route" },
+        { value: "$145k - $295k MXN", label: "Estimated range subject to live availability" },
+      ],
+      sections: [
+        {
+          title: "Estimated flight time",
+          summary:
+            "Most operations between CDMX and Guadalajara move within an estimated window of 1 hour 10 minutes to 1 hour 25 minutes.",
+          highlights: ["Executive departure", "Less friction", "Better schedule control"],
+          paragraphs: [
+            "This route helps protect meetings, plant visits, and high-value business movement with a faster private departure than commercial aviation.",
+            "Final timing depends on departure airport, operating conditions, and aircraft category, but the real value is schedule continuity.",
+          ],
+        },
+        {
+          title: "Aircraft types",
+          summary:
+            "Light jets and midsize jets are usually the best fit to balance time, comfort, passenger count, and operating cost on this route.",
+          highlights: ["Light Jet", "Midsize Jet", "Executive cabin"],
+          paragraphs: [
+            "The right option changes according to passengers, baggage, flexibility, and the experience expected by the client.",
+            "We do not send vague options. We review live availability first so the proposal makes both commercial and operational sense.",
+          ],
+        },
+        {
+          title: "Price range",
+          summary:
+            "As a commercial reference, this route often moves in an estimated range of $145,000 to $295,000 MXN depending on aircraft, schedule, airport, and availability.",
+          highlights: ["Reference pricing", "Live availability", "Private proposal"],
+          paragraphs: [
+            "Pricing changes if the departure requires repositioning, tighter timing, larger cabin space, or lower operational flexibility.",
+            "That is why the best next step is to request a private proposal with route, date, and passenger details already defined.",
+          ],
+        },
+        {
+          title: "Benefits",
+          summary:
+            "This route is ideal for clients who value speed, privacy, productivity, and a premium experience from first contact to departure.",
+          highlights: ["Time savings", "Privacy", "Premium attention"],
+          paragraphs: [
+            "Between CDMX and Guadalajara, private aviation usually wins when the agenda matters more than a generic public fare.",
+            "The client is not only buying a seat. They are buying control, executive availability, and more direct coordination.",
+          ],
         },
       ],
       ctaTitle: "Request your private flight from CDMX to Guadalajara",
       ctaText:
-        "Share your itinerary and receive a proposal tailored to your schedule and travel needs.",
+        "Share your route, date, and passenger count to receive a private proposal with real availability and premium support.",
       audience: ["Companies", "Industry", "Premium clients"],
+      faqs: [
+        {
+          question: "How much does it cost to rent a private jet from CDMX to Guadalajara?",
+          answer:
+            "As a reference, the route often ranges from $145,000 to $295,000 MXN, but the final amount depends on aircraft category, schedule, airport, and live availability.",
+        },
+        {
+          question: "What does this executive charter proposal include?",
+          answer:
+            "It includes commercial and operational review, aircraft selection according to the mission, availability follow-up, and premium support to coordinate the departure.",
+        },
+        {
+          question: "How far in advance should I book this route?",
+          answer:
+            "The earlier the route is shared the better, but urgent requests can also be reviewed according to live availability, operating window, and aircraft category.",
+        },
+      ],
     },
   },
   "jet-privado-toluca-cancun": {
@@ -2831,6 +3047,27 @@ const pageTranslations = {
       ctaText:
         "Comparte tu itinerario y recibe una propuesta personalizada para viajar en jet privado por Mexico.",
       audience: ["Viajeros internacionales", "Clientes premium", "Usuarios en exploracion"],
+    },
+  },
+  "costo-jet-privado-mexico": {
+    en: {
+      title: "Cost of a Private Jet in Mexico",
+      description:
+        "Learn how much a private jet costs in Mexico and which variables change the final quote according to route, aircraft, and timing.",
+    },
+  },
+  "cuanto-cuesta-cdmx-cancun-jet-privado": {
+    en: {
+      title: "How Much a Private Jet from CDMX to Cancun Costs",
+      description:
+        "Explore the estimated range for a private jet from Mexico City to Cancun and what shapes the quote on this premium route.",
+    },
+  },
+  "como-comprar-avion-ejecutivo": {
+    en: {
+      title: "How to Buy an Executive Aircraft",
+      description:
+        "Learn how to buy an executive aircraft with clearer guidance on budget, mission fit, due diligence, and acquisition support.",
     },
   },
 };
