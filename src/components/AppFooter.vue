@@ -42,6 +42,8 @@
           <small class="footer-legal">
             {{ footerMeta.copyright }}
             <RouterLink :to="toLocalizedRoute('Privacy')" class="footer-link">{{ footerMeta.privacy }}</RouterLink>
+            <RouterLink :to="toLocalizedRoute('Cookies')" class="footer-link">{{ footerMeta.cookies }}</RouterLink>
+            <RouterLink :to="toLocalizedRoute('Terms')" class="footer-link">{{ footerMeta.terms }}</RouterLink>
           </small>
         </section>
 
@@ -205,10 +207,14 @@ const footerMeta = computed(() =>
     ? {
         copyright: "© 2026 RED SKY GROUP. All rights reserved.",
         privacy: "Privacy Policy",
+        cookies: "Cookie Policy",
+        terms: "Terms & Conditions",
       }
     : {
         copyright: "© 2026 RED SKY GROUP. Todos los derechos reservados.",
         privacy: "Aviso de privacidad",
+        cookies: "Politica de cookies",
+        terms: "Terminos y condiciones",
       }
 );
 

@@ -18,6 +18,8 @@ const ImportExport = () => import("../views/services/ImportExport.vue");
 const TallerMotores = () => import("../views/services/TallerMotores.vue");
 const Avionica = () => import("../views/services/Avionica.vue");
 const Privacy = () => import("../views/Privacy.vue");
+const Cookies = () => import("../views/Cookies.vue");
+const Terms = () => import("../views/Terms.vue");
 const TiempoCompartido = () => import("../views/services/TiempoCompartido.vue");
 const Copropiedad = () => import("../views/services/Copropiedad.vue");
 
@@ -331,6 +333,44 @@ const pageRoutes = [
         description:
           "Read the Sky Group privacy policy for information on data handling and communication practices.",
         keywords: "privacy policy sky group, website privacy aviation company",
+      }
+    ),
+  },
+  {
+    path: "cookies",
+    name: "Cookies",
+    component: Cookies,
+    meta: createRouteSeo(
+      {
+        title: "Politica de Cookies | Sky Group",
+        description:
+          "Consulta la politica de cookies de Sky Group para conocer las tecnologias de medicion, sesion y navegacion utilizadas en el sitio.",
+        keywords: "politica de cookies sky group, cookies sitio web aviacion, google analytics sky group",
+      },
+      {
+        title: "Cookie Policy | Sky Group",
+        description:
+          "Read the Sky Group cookie policy to understand the measurement, session, and browsing technologies used on the website.",
+        keywords: "cookie policy sky group, website cookies aviation company, google analytics sky group",
+      }
+    ),
+  },
+  {
+    path: "terms",
+    name: "Terms",
+    component: Terms,
+    meta: createRouteSeo(
+      {
+        title: "Terminos y Condiciones | Sky Group",
+        description:
+          "Consulta los terminos y condiciones de uso del sitio web de Sky Group para cotizaciones, servicios, contenidos y comunicaciones.",
+        keywords: "terminos y condiciones sky group, uso del sitio web aviacion, condiciones de cotizacion sky group",
+      },
+      {
+        title: "Terms and Conditions | Sky Group",
+        description:
+          "Read the Sky Group website terms and conditions for quotations, services, content, and communications.",
+        keywords: "terms and conditions sky group, aviation website terms, quote conditions sky group",
       }
     ),
   },
