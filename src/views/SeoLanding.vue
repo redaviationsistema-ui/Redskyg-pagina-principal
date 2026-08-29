@@ -331,7 +331,7 @@ const landingLabels = computed(() =>
     ? {
         heroPrimary: "Request a Quote",
         heroSecondary: "Speak with the Team",
-        cardMicrocopy: "Clear next step for this topic",
+        cardMicrocopy: "A relevant next step for this topic",
         cardCta: "Review options",
         quickFormBadge: "Fast review. No commitment required.",
         quickIcons: {
@@ -340,10 +340,10 @@ const landingLabels = computed(() =>
           passengers: "03",
         },
         faqToggle: "Open",
-        finalTitle: "Move from search to a clearer proposal.",
+        finalTitle: "Move from search to a clearer quote.",
         finalText:
-          "Share the route, travel timing, and passenger details so the team can review the request with better context.",
-        finalUrgency: "A clearer request leads to a more useful proposal.",
+          "Share the route, travel timing, and passenger details so the team can review the request with the right context.",
+        finalUrgency: "A clearer request leads to a more useful quote.",
         finalPrimary: "Request a Quote",
         finalSecondary: "Open WhatsApp",
       }
@@ -374,7 +374,7 @@ const localizedSeoPath = (pageEntry) =>
 const quickQuoteHref = computed(() => {
   const message =
     locale.value === "en"
-      ? `Hello, I would like to quote a private flight now.%0AName: ${quickForm.name || "-"}%0ARoute: ${quickForm.route || "-"}%0APassengers: ${quickForm.passengers || "-"}`
+      ? `Hello, I would like to request a private flight quote.%0AName: ${quickForm.name || "-"}%0ARoute: ${quickForm.route || "-"}%0APassengers: ${quickForm.passengers || "-"}`
       : `Hola, quiero cotizar un vuelo ahora.%0ANombre: ${quickForm.name || "-"}%0ARuta: ${quickForm.route || "-"}%0APasajeros: ${quickForm.passengers || "-"}`;
 
   return `https://wa.me/525586186576?text=${message}`;

@@ -107,9 +107,9 @@ const content = computed(() =>
 const services = computed(() =>
   locale.value === "en"
     ? [
-        { title: "Systems review", text: "Support for understanding current avionics condition, limitations, and priority areas." },
+        { title: "Systems review", text: "Support in understanding the current avionics condition, limitations, and priority areas." },
         { title: "Modernization planning", text: "Define scope, sequencing, and operational impact before committing to upgrades." },
-        { title: "Compliance alignment", text: "Review system needs that may affect aircraft usability and standards alignment." },
+        { title: "Compliance alignment", text: "Review system requirements that may affect aircraft usability and regulatory alignment." },
         { title: "Technical coordination", text: "Connect operational requirements with system decisions, vendors, and next actions." },
       ]
     : [
@@ -124,7 +124,7 @@ const outcomes = computed(() =>
   locale.value === "en"
     ? [
         { title: "Better upgrade clarity", text: "Owners gain a clearer view of what matters now versus later." },
-        { title: "Less technical ambiguity", text: "Projects move with better framing and fewer disconnected decisions." },
+        { title: "Less technical ambiguity", text: "Projects move with clearer framing and fewer disconnected decisions." },
         { title: "Stronger operational readiness", text: "System planning supports usability, confidence, and more consistent execution." },
       ]
     : [

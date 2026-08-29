@@ -36,7 +36,7 @@
           <div class="brand-meta">
             <span>{{ locale.value === "en" ? "Private Charter" : "Vuelos privados" }}</span>
             <span>{{ locale.value === "en" ? "Operational Support" : "Soporte operativo" }}</span>
-            <span>{{ locale.value === "en" ? "Technical Follow-Up" : "Seguimiento técnico" }}</span>
+            <span>{{ locale.value === "en" ? "Technical Support" : "Seguimiento técnico" }}</span>
           </div>
 
           <small class="footer-legal">
@@ -49,7 +49,7 @@
 
         <section class="footer-office footer-column">
           <div class="section-heading">
-            <span>{{ locale.value === "en" ? "Head Office" : "Oficina principal" }}</span>
+            <span>{{ locale.value === "en" ? "Main Office" : "Oficina principal" }}</span>
             <h4>{{ locale.value === "en" ? "Toluca, State of Mexico" : "Toluca, Estado de México" }}</h4>
           </div>
 
@@ -59,7 +59,7 @@
 
           <div class="office-grid">
             <div class="detail-group">
-              <h5>{{ locale.value === "en" ? "Client Service" : "Atención a clientes" }}</h5>
+              <h5>{{ locale.value === "en" ? "Client Services" : "Atención a clientes" }}</h5>
 
               <p>
                 <a href="#" @click.prevent="handlePhone('+527221126671')">
@@ -94,7 +94,7 @@
           </div>
 
           <p class="connect-text">
-            {{ locale.value === "en" ? "Follow charter availability, aircraft opportunities, and aviation updates from our commercial and operational team." : "Consulte disponibilidad de charter, oportunidades de aeronaves y actualizaciones de nuestro equipo comercial y operativo." }}
+            {{ locale.value === "en" ? "Follow charter updates, aircraft opportunities, and aviation news from our commercial and operational team." : "Consulte disponibilidad de charter, oportunidades de aeronaves y actualizaciones de nuestro equipo comercial y operativo." }}
           </p>
 
           <div class="footer-social">
@@ -185,10 +185,10 @@ const promoContent = computed(() =>
     ? {
         kicker: "Executive Aviation Support",
         title:
-          "One point of contact. Complete coordination.",
+          "One point of contact. End-to-end coordination.",
         text:
-          "Private flights, aircraft transactions, operational support and technical follow-up coordinated through one dedicated team.",
-        primaryCta: "Request Coordination",
+          "Private flights, aircraft transactions, operational support, and technical follow-up coordinated through one dedicated team.",
+        primaryCta: "Request Support",
         secondaryCta: "Speak on WhatsApp",
       }
     : {

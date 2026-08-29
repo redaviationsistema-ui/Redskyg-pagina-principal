@@ -267,7 +267,7 @@ const groupDescriptions = {
   },
   "Paginas por Rutas": {
     es: "Paginas enfocadas en corredores con intencion alta y decisiones mas cercanas a la cotizacion.",
-    en: "Pages focused on high-intent corridors and route decisions that sit closer to quoting.",
+    en: "Pages focused on active route demand and travel decisions that sit closer to a quote request.",
   },
   "Paginas por Ciudad": {
     es: "Cobertura local para plazas clave donde la aviacion privada ya tiene peso comercial real.",
@@ -279,7 +279,7 @@ const groupDescriptions = {
   },
   "Paginas de Intencion de Compra": {
     es: "Paginas orientadas a usuarios que ya quieren avanzar rapido hacia una propuesta.",
-    en: "Pages designed for visitors who already want to move quickly toward a proposal.",
+    en: "Pages designed for visitors who already want to move quickly toward a quote request.",
   },
   "Blog SEO": {
     es: "Temas de apoyo para enlazado interno, autoridad topical y busquedas de investigacion.",

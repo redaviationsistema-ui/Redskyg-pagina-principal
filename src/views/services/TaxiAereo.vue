@@ -187,16 +187,16 @@ const content = computed(() =>
   locale.value === "en"
     ? {
         heroEyebrow: "Private Jet Charter in Mexico",
-        heroTitle: "Private flights with operational precision.",
-        heroText: "Sky Group coordinates private flights in Mexico for corporate travel, urgent missions, executive itineraries and cross-border requirements.",
+        heroTitle: "Private aviation, coordinated with precision.",
+        heroText: "Sky Group coordinates private flights in Mexico for corporate travel, urgent missions, executive itineraries, and cross-border requirements.",
         heroPrimaryCta: "Request a Quote",
-        heroSecondaryCta: "Speak with Charter",
+        heroSecondaryCta: "Speak with the Charter Team",
         introEyebrow: "Why This Service",
-        introTitle: "Private aviation aligned with each mission.",
-        introText: "This service is designed for clients who need aircraft availability, route review and commercial response aligned with mission requirements.",
+        introTitle: "Private aviation aligned with the mission.",
+        introText: "This service is built for clients who need aircraft availability, route review, and a commercial response aligned with mission requirements.",
         coverageEyebrow: "Charter Coverage",
-        coverageTitle: "Private flight coverage across Mexico and beyond.",
-        coverageText: "We support departures tied to executive activity in Toluca, Mexico City, Monterrey, Guadalajara, Cancun, Queretaro and other strategic locations depending on mission profile and aircraft availability.",
+        coverageTitle: "Private flight coordination across Mexico and beyond.",
+        coverageText: "We support departures tied to executive activity in Toluca, Mexico City, Monterrey, Guadalajara, Cancun, Queretaro, and other strategic markets depending on mission profile and aircraft availability.",
         coverageLinks: {
           operations: "Operations Management",
           aircraft: "Aircraft Advisory",
@@ -207,8 +207,8 @@ const content = computed(() =>
         faqEyebrow: "Charter FAQ",
         faqTitle: "Common questions before requesting charter.",
         ctaEyebrow: "Immediate Support",
-        ctaTitle: "Need a fast private flight quote?",
-        ctaText: "Send your route, travel date, passenger count and timing window. We will review aircraft availability, mission profile and the right next step.",
+        ctaTitle: "Need a private flight quote?",
+        ctaText: "Send your route, travel date, passenger count, and preferred timing. We will review aircraft availability, mission profile, and the right next step.",
         ctaPrimary: "Quote by WhatsApp",
         ctaSecondary: "View Pricing Guidance",
       }
@@ -248,7 +248,7 @@ const whatsappHref = computed(() =>
 );
 
 const metrics = computed(() => [
-  { value: "24/7", label: locale.value === "en" ? "Quote and mission response" : "Respuesta para cotizacion y mision" },
+  { value: "Priority", label: locale.value === "en" ? "Quote review for time-sensitive missions" : "Respuesta para cotizacion y mision" },
   { value: "MX + INTL", label: locale.value === "en" ? "Domestic and international support" : "Cobertura nacional e internacional" },
   { value: locale.value === "en" ? "Direct" : "Directo", label: locale.value === "en" ? "Commercial and operational coordination" : "Coordinacion comercial y operativa" },
 ]);
@@ -266,7 +266,7 @@ const highlights = computed(() =>
         },
         {
           title: "Commercially focused response",
-          text: "The service flow is built to move quickly from inquiry to a real quote instead of leaving the visitor without direction.",
+          text: "The service flow is built to move efficiently from inquiry to a usable quote instead of leaving the traveler without direction.",
         },
       ]
     : [
@@ -328,7 +328,7 @@ const steps = computed(() =>
         {
           number: "02",
           title: "Receive aircraft and quote guidance",
-          text: "We align the proposal with mission profile, aircraft type, schedule expectations, and service level.",
+          text: "We align the proposal with the mission profile, aircraft type, schedule expectations, and level of service required.",
         },
         {
           number: "03",

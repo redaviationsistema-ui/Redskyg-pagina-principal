@@ -90,8 +90,8 @@ const content = computed(() =>
 const services = computed(() =>
   locale.value === "en"
     ? [
-        { title: "Regulatory compliance", text: "Maintain certifications, documentation and operating requirements in order." },
-        { title: "Crew and scheduling", text: "Coordinate pilots, readiness and recurring flight planning with fewer loose ends." },
+        { title: "Regulatory compliance", text: "Keep certifications, documentation, and operating requirements in order." },
+        { title: "Crew and scheduling", text: "Coordinate pilots, readiness, and recurring flight planning with fewer loose ends." },
         { title: "Maintenance planning", text: "Reduce risk and protect aircraft availability with structured technical follow-up." },
         { title: "Budget and reporting", text: "Review operating expenses and management priorities with greater visibility." },
       ]
@@ -106,8 +106,8 @@ const services = computed(() =>
 const outcomes = computed(() =>
   locale.value === "en"
     ? [
-        { title: "Less operational complexity", text: "You make decisions with more clarity instead of reacting to scattered issues." },
-        { title: "Better cost awareness", text: "Planning and reporting help you reduce surprises and keep spending under control." },
+        { title: "Less operational complexity", text: "You can make decisions with more clarity instead of reacting to scattered issues." },
+        { title: "Better cost awareness", text: "Planning and reporting help reduce surprises and keep spending under control." },
         { title: "Stronger execution quality", text: "Commercial, operational, and technical priorities move in a more coordinated way." },
       ]
     : [

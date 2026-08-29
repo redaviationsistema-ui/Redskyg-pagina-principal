@@ -123,8 +123,8 @@ const services = computed(() =>
     ? [
         { title: "Documentation control", text: "Support for filings, declarations, and movement-related paperwork." },
         { title: "Regulatory coordination", text: "Alignment with process requirements across jurisdictions and authorities." },
-        { title: "Logistics flow", text: "More structured oversight of transport timing and handling of high-value assets." },
-        { title: "Asset protection", text: "A process designed to reduce friction and improve traceability across the move." },
+        { title: "Logistics flow", text: "Structured oversight of transport timing and the handling of high-value assets." },
+        { title: "Asset protection", text: "A process designed to reduce friction and improve traceability throughout the move." },
       ]
     : [
         { title: "Control documental", text: "Apoyo para tramites, declaraciones y papeleria vinculada al movimiento." },
@@ -138,8 +138,8 @@ const outcomes = computed(() =>
   locale.value === "en"
     ? [
         { title: "Clearer shipment path", text: "The process becomes easier to follow for clients and stakeholders." },
-        { title: "Reduced administrative risk", text: "Better preparation helps lower the chance of documentation-related delays." },
-        { title: "Stronger control over timing", text: "Coordination improves predictability in complex cross-border situations." },
+        { title: "Reduced administrative risk", text: "Better preparation helps lower the risk of documentation-related delays." },
+        { title: "Stronger control over timing", text: "Coordination improves predictability in complex cross-border movements." },
       ]
     : [
         { title: "Ruta de embarque mas clara", text: "El proceso se vuelve mas facil de seguir para clientes y participantes." },

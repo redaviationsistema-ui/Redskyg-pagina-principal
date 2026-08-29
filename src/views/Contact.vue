@@ -204,20 +204,20 @@ const content = computed(() =>
         heroTitleAccent: "aviation requirement",
         heroTitleSuffix: "with the right team.",
         heroText:
-          "Use this channel for private flights, aircraft transactions, components sourcing, operational coordination and specialized aviation support.",
+          "Use this channel for private flights, aircraft transactions, component sourcing, operational coordination, and specialized aviation support.",
         heroStripText:
           "Direct support for owners, operators, flight departments and executive aviation clients.",
         asideLabel: "Operations Response Flow",
         introKicker: "Why clients reach us",
         introTitle: "Commercial and operational contact for executive aviation.",
         introText:
-          "Share your mission profile, aircraft requirement or technical request and we will route it to the right commercial, operational or technical team.",
+          "Share your mission profile, aircraft requirement, or technical request and we will route it to the right commercial, operational, or technical team.",
         benefitsKicker: "Operational advantages",
         benefitsTitle: "Built for clearer aviation coordination.",
         formKicker: "Request coordination",
-        formTitle: "Submit your aviation brief",
+        formTitle: "Share your aviation requirement",
         formText:
-          "Share the route, aircraft, technical scope or transaction requirement and our team will coordinate the follow-up through the right point of contact.",
+          "Share the route, aircraft, technical scope, or transaction requirement and our team will coordinate follow-up through the right point of contact.",
         nameLabel: "Full Name",
         emailLabel: "Email Address",
         serviceLabel: "Service Category",
@@ -225,12 +225,12 @@ const content = computed(() =>
         messageLabel: "Mission Details",
         messagePlaceholder:
           "Tell us about your aircraft, route, operational objective or coordination requirement.",
-        submitLabel: "Submit Request",
+        submitLabel: "Send Request",
         sendingLabel: "Sending...",
         successLabel: "Coordination request sent successfully.",
         modalTitle: "Message Received",
         modalText:
-          "We have received your request. The appropriate aviation team will contact you shortly.",
+          "We have received your request. The appropriate team will follow up shortly.",
         closeLabel: "Close",
         serverError: "Server error: ",
         genericError: "Error sending request. Please try again.",
@@ -295,9 +295,9 @@ const serviceOptions = computed(() =>
 const highlights = computed(() =>
   locale.value === "en"
     ? [
-        { value: "24/7", label: "Operational response window" },
+        { value: "Direct", label: "Aviation contact path" },
         { value: "5", label: "Core service divisions" },
-        { value: "1", label: "Dedicated aviation contact point" },
+        { value: "1", label: "Dedicated point of contact" },
       ]
     : [
         { value: "24/7", label: "Ventana de respuesta operativa" },
@@ -312,7 +312,7 @@ const responseFlow = computed(() =>
         {
           step: "01",
           title: "Initial Review",
-          description: "We identify the right team based on your mission profile, aircraft need or technical scope.",
+          description: "We identify the right team based on your mission profile, aircraft need, or technical scope.",
         },
         {
           step: "02",
@@ -356,8 +356,8 @@ const contactChannels = computed(() =>
         },
         {
           tag: "Availability",
-          title: "Response window",
-          text: "Continuous attention for owners, operators, flight departments, and urgent requirements.",
+          title: "Responsive follow-up",
+          text: "Support for owners, operators, flight departments, and time-sensitive requirements.",
           link: "24/7 Response Window",
           href: "#",
         },
@@ -442,11 +442,11 @@ const panelCommitments = computed(() =>
   locale.value === "en"
     ? [
         {
-          title: "Fast Routing",
+          title: "Fast routing",
           text: "Your request is directed to the right charter, transaction, or technical support team.",
         },
         {
-          title: "Confidential Handling",
+          title: "Confidential handling",
           text: "Sensitive commercial and operational details remain within our internal team.",
         },
       ]

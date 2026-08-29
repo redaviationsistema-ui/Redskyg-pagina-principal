@@ -114,9 +114,9 @@ const content = computed(() =>
 const checks = computed(() =>
   locale.value === "en"
     ? [
-        { title: "Aircraft condition review", text: "A clearer view of current technical status and operating concerns." },
+        { title: "Aircraft condition review", text: "A clearer view of the current technical condition and any operating concerns." },
         { title: "Maintenance record analysis", text: "Review of history, documentation quality, and maintenance continuity." },
-        { title: "Valuation context", text: "Support to understand whether condition and pricing are aligned." },
+        { title: "Valuation context", text: "Support in understanding whether condition and pricing are aligned." },
         { title: "Transaction risk identification", text: "Early visibility into issues that could affect cost, timing, or decision quality." },
       ]
     : [
@@ -131,8 +131,8 @@ const outcomes = computed(() =>
   locale.value === "en"
     ? [
         { title: "Better buying clarity", text: "The buyer moves forward with more confidence and fewer assumptions." },
-        { title: "Reduced technical surprises", text: "Problems are surfaced earlier, when they are still manageable." },
-        { title: "Stronger negotiation position", text: "A better technical and commercial picture supports more informed negotiation." },
+        { title: "Reduced technical surprises", text: "Issues surface earlier, while they are still manageable." },
+        { title: "Stronger negotiation position", text: "A clearer technical and commercial picture supports more informed negotiation." },
       ]
     : [
         { title: "Mayor claridad de compra", text: "El comprador avanza con mas confianza y menos supuestos." },

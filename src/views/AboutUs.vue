@@ -273,21 +273,21 @@ const content = computed(() =>
         heroTitle:
           "Integrated support for executive aviation.",
         heroText:
-          "Sky Group coordinates private flights, aircraft transactions, operational support and technical follow-up through a single aviation point of contact.",
+          "Sky Group coordinates private flights, aircraft transactions, operational support, and technical follow-up through a single aviation point of contact.",
         heroPrimaryCta: "Speak with an Advisor",
         heroSecondaryCta: "Explore Private Charter",
         introEyebrow: "Who We Are",
         introTitle:
           "Executive aviation support with commercial, technical and operational judgment.",
         introParagraphs: [
-          "We integrate private charter, aircraft sourcing, transaction support and technical coordination under one operating structure. This reduces fragmentation and gives clients a clearer path from inquiry to execution.",
-          "Owners, operators and flight departments work with one team that understands mission requirements, aircraft positioning, technical review, documentation flow and commercial timing.",
+          "We integrate private charter, aircraft sourcing, transaction support, and technical coordination under one operating structure. This reduces fragmentation and gives clients a clearer path from inquiry to execution.",
+          "Owners, operators, and flight departments work with one team that understands mission requirements, aircraft positioning, technical review, documentation flow, and commercial timing.",
         ],
         experienceAlt: "Executive aviation environment",
         experienceEyebrow: "How We Work",
         experienceTitle: "Aviation support with execution discipline.",
         experienceText:
-          "We align commercial coordination, operational control and regulatory follow-up so each requirement advances with clearer scope, faster response and stronger execution quality.",
+          "We align commercial coordination, operational control, and regulatory follow-up so each requirement moves forward with clearer scope, faster response, and stronger execution quality.",
         capabilitiesEyebrow: "Core Capabilities",
         capabilitiesTitle: "Capabilities across executive aviation.",
         capabilitiesAlt: "Sky Group core capabilities",
@@ -296,7 +296,7 @@ const content = computed(() =>
         strategyTitle:
           "Each aviation decision affects cost, timing, and asset exposure.",
         strategyText:
-          "Private charter, aircraft acquisition, technical review and recurrent flight operations should not be managed in isolation. We align those variables so clients can move with better information, traceability and operational control.",
+          "Private charter, aircraft acquisition, technical review, and recurring flight operations should not be managed in isolation. We align those variables so clients can move with better information, traceability, and operational control.",
         strategyMarkerEyebrow: "Working model",
         strategyMarkerText: "Commercial, technical, and operational alignment.",
         strategyImageAlt: "Sky Group strategic view",
@@ -308,7 +308,7 @@ const content = computed(() =>
           "We support executive aviation clients who need availability review, transaction guidance, technical follow-up, and a faster path from request to execution.",
         journeyPrimaryCta: "Request Support",
         journeySecondaryCta: "Speak with an Advisor",
-        journeyFootnote: "Response in under 15 minutes",
+        journeyFootnote: "Responsive follow-up for priority requirements",
         finalEyebrow: "Next Step",
         finalTitle:
           "Your operation, supported end to end.",
@@ -387,7 +387,7 @@ const pillars = computed(() =>
     ? [
         {
           title: "Operational control",
-          text: "Each requirement advances with clearer scope, timing control and traceable follow-up across the operating chain.",
+          text: "Each requirement moves forward with clearer scope, timing control, and traceable follow-up across the operating chain.",
         },
         {
           title: "Single point of contact",
@@ -497,8 +497,8 @@ const timeline = computed(() =>
         },
         {
           stage: "Response",
-          title: "Response time",
-          text: "Requests are routed quickly when the client needs a defined answer and execution path.",
+          title: "Responsive routing",
+          text: "Requests are routed quickly when the client needs a defined answer and a clear execution path.",
         },
         {
           stage: "Execution",

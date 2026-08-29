@@ -89,12 +89,12 @@ const content = computed(() =>
     ? {
         heroEyebrow: "Engine Shop Support",
         heroTitle: "Engine logistics and technical support.",
-        heroText: "Sky Group structures engine support around logistics, documentation, traceability, timing and protection of critical aviation assets.",
+        heroText: "Sky Group structures engine support around logistics, documentation, traceability, timing, and the protection of critical aviation assets.",
         heroPrimaryCta: "Request Engine Consultation",
         heroSecondaryCta: "Explore Import and Export",
         sectionEyebrow: "Engine Coordination",
         sectionTitle: "Engine coordination with tighter execution.",
-        sectionText: "This service supports clients managing engine logistics, documentation, technical handling and coordination across multiple stakeholders and jurisdictions.",
+        sectionText: "This service supports clients managing engine logistics, documentation, technical handling, and coordination across multiple stakeholders and jurisdictions.",
         visualEyebrow: "Engine Workflow",
         visualTitle: "Support across the engine workstream.",
         visualText: "These visuals reinforce the main workstreams behind engine support: technical intervention, movement control and aircraft asset protection.",
@@ -126,7 +126,7 @@ const services = computed(() =>
   locale.value === "en"
     ? [
         { title: "Engine logistics planning", text: "Support for movement timing, process structure, and handling requirements." },
-        { title: "Documentation support", text: "Coordination of the paperwork needed to move and trace engine assets correctly." },
+        { title: "Documentation support", text: "Coordination of the paperwork needed to move and track engine assets correctly." },
         { title: "Stakeholder coordination", text: "A clearer workflow between technical, commercial, and logistics participants." },
         { title: "Asset protection focus", text: "Greater attention to traceability and execution quality for high-value engine work." },
       ]
@@ -159,7 +159,7 @@ const visuals = computed(() =>
           src: "/images/Home/motor2.jpg",
           alt: "Engine logistics visual with global routing",
           title: "Logistics and traceability",
-          text: "Ideal for the import, routing, and documentation side of engine support where timing and visibility matter.",
+          text: "Well suited to the import, routing, and documentation side of engine support, where timing and visibility matter.",
         },
         {
           src: "/images/Tiempocompartido/motor.jpg",
