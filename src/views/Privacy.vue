@@ -38,7 +38,7 @@ const { locale } = useLocale();
 const content = computed(() =>
   locale.value === "en"
     ? {
-        heroTag: "Legal Documentation",
+        heroTag: "Legal Information",
         heroTitle: "Comprehensive Privacy Notice",
         companyName: "RED SKY GROUP, S.A. DE C.V.",
         updated: "Last updated: August 27, 2026",
@@ -173,7 +173,7 @@ const content = computed(() =>
         ],
       }
     : {
-        heroTag: "Documentacion legal",
+        heroTag: "Informacion legal",
         heroTitle: "Aviso de Privacidad Integral",
         companyName: "RED SKY GROUP, S.A. DE C.V.",
         updated: "Fecha de ultima actualizacion: 27 de agosto de 2026",

@@ -1,9 +1,9 @@
 export default {
   seo: {
     default: {
-      title: "Private Jet in Mexico | Premium Executive Charter | Red Sky Group",
+      title: "Private Jet in Mexico | Executive Charter | Red Sky Group",
       description:
-        "Private jet in Mexico with real availability, premium executive charter, and private aviation solutions built to convert.",
+        "Private jet in Mexico with real availability, executive charter, and private aviation support built around quoting.",
       keywords:
         "sky group aviation, private aviation mexico, aircraft services mexico, private charter mexico, aircraft management mexico",
     },
@@ -11,10 +11,10 @@ export default {
   home: {
     heroAlt: "Private jet prepared for executive travel in Mexico",
     heroLabel: "PRIVATE JET CHARTER PLATFORM",
-    heroTitle: "Fly private with a precise, discreet, premium operation.",
-    heroPitch: "Private Jet Charter in Mexico. Fast, Controlled, Exclusive.",
+    heroTitle: "Private aviation, precisely coordinated.",
+    heroPitch: "Private jet charter in Mexico. Direct, discreet, and well coordinated.",
     heroSubtitle:
-      "Executive charter in Mexico with real availability, fast response, and premium operational control.",
+      "Executive charter in Mexico with real availability, fast response, and strong operational control.",
     heroMicrocopy: "Not just a flight. A controlled operation.",
     whatsappCta: "Request Flight Now",
     advisorCta: "View Aircraft",
@@ -29,7 +29,7 @@ export default {
       { label: "Availability", value: "Verified aircraft network" },
       { label: "Aircraft", value: "Light Jet to Heavy Jet" },
       { label: "Pricing", value: "Clear quote before commitment" },
-      { label: "Support", value: "Operational handling end to end" },
+      { label: "Support", value: "Operational coordination from start to finish" },
     ],
     flightDeskNote:
       "Aircraft availability changes every hour. The fastest way to secure a mission is to request real-time support now.",
@@ -78,7 +78,7 @@ export default {
     finalTitle:
       "Plan your next flight with full operational control.",
     finalText:
-      "Ideal if you need real availability, operational control, and premium coordination instead of generic aviation sales language.",
+      "Ideal if you need real availability, operational control, and clear coordination instead of generic aviation language.",
     finalPrimaryCta: "Request Flight Now",
     finalSecondaryCta: "View Aircraft",
     finalFootnote: "Limited aircraft availability depending on route and time",
@@ -98,7 +98,7 @@ export default {
         route: "sell-your-aircraft",
         tag: "Aircraft sales",
         title: "Sell your aircraft",
-        text: "Qualified buyers with a clearer sales path.",
+        text: "Qualified buyers with a clearer transaction path.",
       },
       {
         route: "OperationsManagement",
@@ -122,7 +122,7 @@ export default {
         route: "Avionics",
         tag: "Avionics support",
         title: "Systems upgrades and technical support",
-        text: "Systems upgrades and technical performance support.",
+        text: "Systems upgrades and technical support aligned with aircraft performance.",
       },
     ],
     localCities: [
@@ -198,21 +198,21 @@ export default {
     ],
   },
   seoLanding: {
-    primaryCta: "Request a quote",
-    contactCta: "Talk to an advisor",
-    profileLabel: "Page profile",
+    primaryCta: "Request a Proposal",
+    contactCta: "Speak with the Team",
+    profileLabel: "Page Profile",
     faqKicker: "Frequently asked questions",
-    faqTitle: "Clear answers to help you move forward with confidence",
+    faqTitle: "Clear answers to move forward with better context",
     nextStep: "Next step",
     whatsappCta: "Go to WhatsApp",
     blogCta: "View more content",
     sectionLinkCta: "Open related page",
     expandLabel: "View details",
-    fleetQuoteCta: "Quote our fleet",
-    instantQuoteCta: "Quote flight now",
-    quickFormKicker: "Fast conversion",
-    quickFormTitle: "Quote in under a minute",
-    quickFormText: "Share 3 basic details and we will take you straight to WhatsApp with your request ready to send.",
+    fleetQuoteCta: "Request a Flight",
+    instantQuoteCta: "Request a Quote Now",
+    quickFormKicker: "Quick request",
+    quickFormTitle: "Quote with key details",
+    quickFormText: "Share your name, route and passengers to open WhatsApp with a better-structured request.",
     quickNameLabel: "Name",
     quickRouteLabel: "Route",
     quickPassengersLabel: "Passengers",

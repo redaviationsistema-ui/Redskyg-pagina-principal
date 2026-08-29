@@ -17,15 +17,15 @@
           <p class="hero-lead">{{ pageContent.heroLead }}</p>
 
           <div class="hero-actions">
-            <a class="btn-primary" href="#home-services-directory">{{ pageContent.primaryCta }}</a>
             <a
-              class="btn-secondary"
+              class="btn-primary"
               :href="whatsappHref"
               target="_blank"
               rel="noopener noreferrer"
             >
-              {{ pageContent.secondaryCta }}
+              {{ pageContent.primaryCta }}
             </a>
+            <a class="btn-secondary" href="#home-services-directory">{{ pageContent.secondaryCta }}</a>
           </div>
 
           <div class="hero-proof-grid" aria-label="SkyGroup trust metrics">
@@ -39,9 +39,6 @@
             </article>
           </div>
 
-          <div class="hero-pills" aria-label="SkyGroup focus areas">
-            <span v-for="pill in pageContent.heroPills" :key="pill">{{ pill }}</span>
-          </div>
         </div>
 
         <div class="hero-visual reveal is-visible" data-reveal="zoom">
@@ -51,10 +48,6 @@
               <strong>{{ pageContent.storyVisualTitle }}</strong>
               <p>{{ pageContent.storyVisualText }}</p>
             </aside>
-
-            <div class="hero-service-ribbon" aria-label="SkyGroup service areas">
-              <span v-for="pill in pageContent.heroPills" :key="`${pill}-visual`">{{ pill }}</span>
-            </div>
 
             <div class="hero-signal-card">
               <span class="hero-signal-label">{{ pageContent.heroSignalLabel }}</span>
@@ -66,22 +59,13 @@
       </div>
     </section>
 
-    <section class="trust-ribbon-section">
-      <div class="container">
-        <div class="trust-ribbon reveal" data-reveal="up">
-          <article v-for="metric in pageContent.trustMetrics" :key="metric.label" class="trust-item">
-            <strong>{{ metric.value }}</strong>
-            <span>{{ metric.label }}</span>
-          </article>
-        </div>
-      </div>
-    </section>
-
     <section class="section story-section">
       <div class="container story-shell">
         <div class="story-copy reveal" data-reveal="up">
           <span class="eyebrow">{{ pageContent.storyEyebrow }}</span>
           <h2>{{ pageContent.storyTitle }}</h2>
+          <br />
+          <br />
           <p>{{ pageContent.storyLead }}</p>
           <p>{{ pageContent.storyText }}</p>
         </div>
@@ -261,15 +245,15 @@
         <div class="testimonials-list">
           <article
             v-for="(testimonial, index) in pageContent.testimonials"
-            :key="testimonial.name"
+            :key="testimonial.title"
             class="testimonial-row reveal"
             :style="{ '--reveal-delay': `${index * 80}ms` }"
             data-reveal="up"
           >
-            <p>{{ testimonial.quote }}</p>
-            <div class="testimonial-meta">
-              <strong>{{ testimonial.name }}</strong>
-              <span>{{ testimonial.role }}</span>
+            <strong class="testimonial-value">{{ testimonial.value }}</strong>
+            <div class="testimonial-copy">
+              <strong>{{ testimonial.title }}</strong>
+              <p>{{ testimonial.text }}</p>
             </div>
           </article>
         </div>
@@ -291,9 +275,6 @@
               rel="noopener noreferrer"
             >
               {{ pageContent.finalPrimaryCta }}
-            </a>
-            <a class="btn-secondary" href="#home-services-directory">
-              {{ pageContent.finalSecondaryCta }}
             </a>
           </div>
         </div>
@@ -332,8 +313,8 @@ const { locale, toLocalizedRoute } = useLocale();
 
 const whatsappHref = computed(() =>
   locale.value === "en"
-    ? "https://wa.me/525586186576?text=Hello,%20I%20would%20like%20to%20speak%20with%20a%20SkyGroup%20advisor."
-    : "https://wa.me/525586186576?text=Hola,%20me%20gustaria%20hablar%20con%20un%20asesor%20de%20SkyGroup."
+    ? "https://wa.me/525586186576?text=Hello,%20I%20would%20like%20to%20speak%20with%20the%20SkyGroup%20team%20about%20an%20aviation%20requirement."
+    : "https://wa.me/525586186576?text=Hola,%20me%20gustar%C3%ADa%20hablar%20con%20el%20equipo%20de%20Sky%20Group%20sobre%20un%20requerimiento%20aeron%C3%A1utico."
 );
 
 const youtubeChannelUrl = "https://www.youtube.com/@redaviationcompany";
@@ -365,46 +346,47 @@ const youtubeVideoConfigs = {
 const content = {
   es: {
     heroAlt: "Aeronave ejecutiva en plataforma al atardecer",
-    heroEyebrow: "AVIACION PRIVADA · SOLUCIONES AERONAUTICAS",
-    heroTitle: "Soluciones para aviacion privada.",
+    heroEyebrow: "SKY GROUP",
+    heroTitle: "Soluciones Integrales para Aviación Ejecutiva.",
     heroLead:
-      "Coordinamos operaciones de vuelo, disponibilidad de aeronaves, suministro de componentes y soporte aeronautico especializado para clientes, operadores y empresas del sector.",
-    heroSignalLabel: "Estructura operativa",
-    heroSignalTitle: "Una estructura operativa para respaldar cada mision.",
+      "Coordinamos vuelos privados, transacciones de aeronaves, componentes aeronáuticos y soporte especializado a través de un único punto de contacto.",
+    heroSignalLabel: "Coordinación centralizada",
+    heroSignalTitle: "Un solo equipo para cada requerimiento aeronáutico.",
     heroSignalText:
-      "Desde la planificacion del vuelo hasta la gestion de aeronaves, componentes y servicios tecnicos, conectamos cada requerimiento con la solucion aeronautica adecuada.",
-    primaryCta: "Explorar servicios",
-    secondaryCta: "Hablar con un asesor",
-    heroPills: ["Vuelos privados", "Venta de aeronaves", "Partes aeronauticas", "Servicios especializados"],
+      "Respuesta ágil, seguimiento puntual y manejo confidencial para decisiones operativas, comerciales y técnicas.",
+    primaryCta: "Hablar con un asesor",
+    secondaryCta: "Explorar servicios",
     trustMetrics: [
-      { value: "+15 anos", label: "Experiencia" },
-      { value: "52", label: "Aeronaves verificadas" },
-      { value: "24/7", label: "Atencion especializada" },
-      { value: "Mexico · USA · Caribe", label: "Cobertura" },
+      { value: "25+ años", label: "Experiencia en coordinación y servicios aeronáuticos" },
+      { value: "50+", label: "Transacciones de aeronaves gestionadas" },
+      { value: "24/7", label: "Respuesta para requerimientos prioritarios" },
+      { value: "MX · GLOBAL", label: "Cobertura regional para aviación ejecutiva" },
     ],
-    storyEyebrow: "ECOSISTEMA AERONAUTICO",
-    storyTitle: "Ecosistema aeronautico integrado.",
+    storyEyebrow: "POR QUÉ SKY GROUP",
+    storyTitle: "Soporte Especializado para Cada Operación.",
     storyLead:
-      "SkyGroup integra diferentes areas de la aviacion dentro de una misma estructura operativa: vuelos privados, comercializacion de aeronaves, suministro de partes y soporte tecnico aeronautico.",
+      "Desde la coordinación de vuelos privados hasta transacciones de aeronaves, componentes y soporte aeronáutico especializado, cada requerimiento se gestiona con precisión mediante un punto de contacto dedicado.",
     storyText:
-      "Cada division trabaja bajo un mismo enfoque: disponibilidad, trazabilidad, coordinacion y continuidad operacional.",
-    storyVisualLabel: "Operacion coordinada",
-    storyVisualTitle: "Una estructura pensada para atender decisiones de alto valor.",
+      "Integramos coordinación comercial, técnica y documental para reducir complejidad, mantener visibilidad y facilitar decisiones aeronáuticas de alto valor.",
+    storyVisualLabel: "Soporte de aviación ejecutiva",
+    storyVisualTitle: "Precisa. Profesionalmente coordinada.",
     storyVisualText:
-      "Desde una solicitud comercial hasta una necesidad tecnica, el objetivo es resolver con una experiencia mas simple, directa y especializada.",
+      "Soporte para ejecutivos, propietarios, operadores y family offices que requieren claridad operativa, confidencialidad y capacidad real de coordinación.",
     storyPoints: [
-      { icon: "hangar", title: "Entorno aeronautico", text: "Aeronaves, operacion y soporte en la misma conversacion." },
-      { icon: "network", title: "Conexion sectorial", text: "Clientes, operadores y proveedores alineados por solucion." },
-      { icon: "support", title: "Atencion guiada", text: "Cada caso avanza con seguimiento y criterio especializado." },
+      { icon: "check", title: "Soluciones integradas", text: "Un solo punto de contacto para vuelos privados, aeronaves, componentes y soporte especializado." },
+      { icon: "network", title: "Coordinación aeronáutica", text: "Las áreas comerciales, técnicas y documentales avanzan alineadas de principio a fin." },
+      { icon: "concierge", title: "Atención con criterio ejecutivo", text: "Seguimiento directo con un asesor para decisiones sensibles o de alto valor." },
+      { icon: "hangar", title: "Capacidad especializada", text: "Servicios orientados a continuidad operacional, trazabilidad y cumplimiento." },
+      { icon: "support", title: "Respuesta cuando importa", text: "Gestión precisa para requerimientos urgentes, confidenciales o técnicamente complejos." },
     ],
     solutionsEyebrow: "SOLUCIONES",
-    solutionsTitle: "Capacidades integradas para la aviacion.",
-    solutionsLead: "Soluciones comerciales, operacionales y tecnicas para diferentes necesidades del sector aeronautico.",
+    solutionsTitle: "Servicios Aeronáuticos Especializados.",
+    solutionsLead: "Capacidades integradas para aviación privada, transacciones de aeronaves, componentes y soporte operacional.",
     solutions: [
       {
         title: "Vuelos privados",
-        text: "Coordinamos vuelos charter de acuerdo con los requerimientos de cada mision, considerando ruta, capacidad, autonomia, configuracion de cabina y disponibilidad operacional de la aeronave.",
-        cta: "Cotizar operacion ->",
+        text: "Vuelos privados coordinados según su itinerario, perfil de misión y requerimientos operacionales.",
+        cta: "Explorar vuelos privados ->",
         external: true,
         href: "https://redskyg.com/landing/es-mx/reserva",
         image: "/images/Home/IMG_0894.jpeg",
@@ -412,9 +394,9 @@ const content = {
         visualAlt: "Jet ejecutivo de SkyGroup",
       },
       {
-        title: "Venta y adquisicion de aeronaves",
-        text: "Apoyamos procesos de adquisicion y venta de aeronaves mediante identificacion de unidades, analisis de mercado y coordinacion documental y tecnica durante la operacion.",
-        cta: "Ver aeronaves ->",
+        title: "Venta de aeronaves",
+        text: "Asesoría especializada para adquisición, comercialización y gestión de transacciones de aeronaves.",
+        cta: "Explorar transacciones ->",
         external: true,
         href: "https://redskyg.com/sellyouraircraf/en-us",
         image: "/images/Home/image.png",
@@ -422,169 +404,171 @@ const content = {
         visualAlt: "Venta de aeronaves SkyGroup",
       },
       {
-        title: "Partes y componentes aeronauticos",
-        text: "Localizamos y suministramos componentes, rotables y material aeronautico para requerimientos programados y situaciones criticas de mantenimiento.",
+        title: "Partes aeronáuticas",
+        text: "Suministro de componentes aeronáuticos con trazabilidad documental, coordinación logística y soporte especializado.",
         cta: "Solicitar componente ->",
         external: true,
         href: "https://redaviationcorp.com/servicios/venta-partes",
         image: "/images/Home/IMG_0672.jpeg",
         visualImage: "/images/Home/IMG_0672.jpeg",
-        visualAlt: "Partes aeronauticas SkyGroup",
+        visualAlt: "Partes aeronáuticas SkyGroup",
       },
       {
-        title: "Servicios aeronauticos",
-        text: "Coordinamos soluciones especializadas para requerimientos de mantenimiento, inspeccion, soporte tecnico y continuidad operacional de aeronaves.",
+        title: "Servicios aeronáuticos",
+        text: "Soporte técnico y operativo para inspecciones, mantenimiento, documentación y requerimientos aeronáuticos especializados.",
         cta: "Solicitar soporte ->",
         route: "OperationsManagement",
         image: "/images/Home/IMG_1031.jpeg",
         visualImage: "/images/Home/IMG_1031.jpeg",
-        visualAlt: "Servicios aeronauticos SkyGroup",
+        visualAlt: "Servicios aeronáuticos SkyGroup",
       },
     ],
-    platformEyebrow: "UN SOLO ECOSISTEMA",
-    platformTitle: "Una estructura. Multiples capacidades.",
+    platformEyebrow: "BENEFICIOS CLAVE",
+    platformTitle: "Lo que aporta una coordinación centralizada.",
     platformLead:
-      "Conectamos operadores, proveedores, aeronaves y especialistas para responder a diferentes requerimientos dentro de una misma operacion.",
+      "Menos fragmentación, mejor trazabilidad y mayor control sobre cada requerimiento aeronáutico.",
     platformBenefits: [
-      { title: "Gestion centralizada", text: "Cada requerimiento se canaliza desde un mismo punto de contacto." },
-      { title: "Red aeronautica", text: "Conexion con operadores, proveedores y especialistas del sector." },
-      { title: "Seguimiento especializado", text: "Visibilidad y continuidad durante cada proceso." },
+      { title: "Un solo punto de contacto", text: "Centralizamos coordinación comercial, técnica y documental en una sola conversación." },
+      { title: "Seguimiento con visibilidad", text: "Cada etapa avanza con claridad para reducir vacíos de información y mejorar trazabilidad." },
+      { title: "Respuesta más eficiente", text: "Reducimos tiempos de ida y vuelta para acelerar evaluación, aprobación y ejecución." },
+      { title: "Confidencialidad y criterio", text: "Cada requerimiento se atiende con discreción, precisión y soporte especializado." },
     ],
-    needsEyebrow: "¿QUE NECESITAS?",
-    needsTitle: "Soluciones por requerimiento operativo.",
+    needsEyebrow: "REQUERIMIENTOS FRECUENTES",
+    needsTitle: "Cómo podemos apoyarle.",
     needsCards: [
       {
         title: "Coordinar un vuelo privado",
-        text: "Defina origen, destino, pasajeros y fechas de operacion. Nuestro equipo identificara aeronaves compatibles con el perfil de mision y disponibilidad requerida.",
-        cta: "Cotizar operacion",
+        text: "Comparta ruta, pasajeros y ventana de salida para revisar disponibilidad real y perfil de aeronave adecuado.",
+        cta: "Solicitar cotización",
         route: "AirTaxi",
         image: "/images/Home/IMG_1511.jpeg",
       },
       {
-        title: "Buscar una aeronave",
-        text: "Comparta los requerimientos de mision, categoria, alcance, capacidad o modelo requerido para iniciar la busqueda de unidades disponibles.",
-        cta: "Iniciar busqueda",
+        title: "Adquirir o colocar una aeronave",
+        text: "Definimos perfil de misión, alcance, configuración y objetivo de compra o venta antes de avanzar al mercado.",
+        cta: "Solicitar asesoría",
         route: "AircraftSales",
         image: "/images/Home/IMG_0025.jpg",
       },
       {
         title: "Localizar un componente",
-        text: "Envienos el Part Number (P/N), descripcion, condicion requerida, cantidad y certificacion necesaria. Nuestro equipo verificara disponibilidad y opciones de suministro.",
+        text: "Localizamos componentes aeronáuticos y validamos disponibilidad, condición y trazabilidad documental.",
         cta: "Solicitar componente",
         route: "ImportExport",
         image: "/images/Home/IMG_1511.png",
         mediaClass: "need-media-components",
       },
       {
-        title: "Solicitar soporte aeronautico",
-        text: "Coordinamos requerimientos relacionados con mantenimiento, inspeccion, soporte en tierra, asistencia tecnica y servicios especializados para aeronaves.",
+        title: "Solicitar soporte aeronáutico",
+        text: "Canalizamos soporte técnico, inspecciones, mantenimiento y requerimientos especiales con coordinación clara y seguimiento puntual.",
         cta: "Solicitar soporte",
         route: "OperationsManagement",
         image: "/images/Home/IMG_1138.jpg",
       },
     ],
-    mediaEyebrow: "SKYGROUP EN OPERACION",
-    mediaTitle: "Infraestructura comercial y operativa para la aviacion.",
-    mediaLead: "La tecnologia facilita la conexion. Nuestro valor esta en la capacidad de coordinar aeronaves, operadores, componentes y servicios especializados.",
+    mediaEyebrow: "SKYGROUP EN VIDEO",
+    mediaTitle: "Perspectiva del sector en contexto.",
+    mediaLead: "Contenido visual sobre aeronaves, operaciones y actividad comercial dentro de la aviación ejecutiva.",
     mediaCta: "Ver canal de YouTube",
-    testimonialsEyebrow: "EXPERIENCIA",
-    testimonialsTitle: "Experiencia aplicada a cada operacion.",
-    testimonialsLead: "Cada requerimiento aeronautico implica variables tecnicas, comerciales y operacionales. Nuestro equipo coordina estos elementos para proporcionar soluciones viables y eficientes.",
+    testimonialsEyebrow: "RESULTADOS",
+    testimonialsTitle: "Indicadores que respaldan la confianza.",
+    testimonialsLead: "La confianza se construye con referencias concretas y una ejecución consistente.",
     testimonials: [
       {
-        quote: "La respuesta fue inmediata y la propuesta llego con claridad operativa desde el primer contacto.",
-        name: "Direccion Ejecutiva",
-        role: "Industria financiera",
+        value: "25+",
+        title: "Años de trayectoria en aviación",
+        text: "Experiencia aplicada en vuelos privados, transacciones de aeronaves y soporte aeronáutico especializado.",
       },
       {
-        quote: "Necesitabamos una salida sensible de ultima hora y el seguimiento fue impecable.",
-        name: "Oficina Familiar",
-        role: "Cliente recurrente",
+        value: "50+",
+        title: "Aeronaves comercializadas",
+        text: "Procesos gestionados con enfoque comercial, revisión técnica y coordinación documental.",
       },
       {
-        quote: "Se sintio como un servicio premium real: menos vueltas, mas precision y mejor trato.",
-        name: "Asistente de Presidencia",
-        role: "Grupo corporativo",
+        value: "24/7",
+        title: "Soporte operativo disponible",
+        text: "Atención continua para requerimientos urgentes, sensibles o críticos para la operación.",
       },
     ],
-    finalEyebrow: "SKYGROUP",
-    finalTitle: "Cual es su requerimiento?",
+    finalEyebrow: "SIGUIENTE PASO",
+    finalTitle: "Su operación, coordinada de principio a fin.",
     finalText:
-      "Seleccione el area correspondiente y nuestro equipo analizara las variables tecnicas y comerciales necesarias para coordinar la solucion.",
+      "Comparta su requerimiento y coordinaremos la solución adecuada con seguimiento claro, respuesta puntual y respaldo especializado.",
     finalPrimaryCta: "Hablar con un asesor",
     finalSecondaryCta: "Explorar servicios",
-    contactTitle: "Capacidad operativa respaldada por conocimiento aeronautico.",
-    contactText: "Comparta su requerimiento y nuestro equipo lo canalizara con el area adecuada para dar continuidad tecnica, comercial u operacional.",
-    contactCta: "Contactar por WhatsApp",
+    contactTitle: "Un solo punto de contacto para cada requerimiento.",
+    contactText: "Comparta su ruta, aeronave, componente o necesidad técnica y coordinaremos la respuesta adecuada para su operación.",
+    contactCta: "Hablar con un asesor",
   },
   en: {
     heroAlt: "Executive aircraft parked on an apron at sunset",
-    heroEyebrow: "PRIVATE AVIATION · AERONAUTICAL SOLUTIONS",
-    heroTitle: "Solutions for private aviation.",
+    heroEyebrow: "SKY GROUP",
+    heroTitle: "Integrated Solutions for Executive Aviation.",
     heroLead:
-      "We coordinate flight operations, aircraft availability, component supply and specialized aviation support for clients, operators and aviation companies.",
-    heroSignalLabel: "Operational structure",
-    heroSignalTitle: "An operational structure built to support every mission.",
+      "We coordinate private flights, aircraft transactions, aviation components and specialized support through a single point of contact.",
+    heroSignalLabel: "Centralized Coordination",
+    heroSignalTitle: "One team for every aviation requirement.",
     heroSignalText:
-      "From flight planning to aircraft, component and technical service requirements, we connect each mission with the appropriate aviation solution.",
-    primaryCta: "Explore services",
-    secondaryCta: "Speak with an advisor",
-    heroPills: ["Private flights", "Aircraft sales", "Aeronautical parts", "Specialized services"],
+      "Fast response, clear follow-up and confidential handling for operational, commercial and technical decisions.",
+    primaryCta: "Speak with an Advisor",
+    secondaryCta: "Explore Services",
     trustMetrics: [
-      { value: "15+ years", label: "Experience" },
-      { value: "52", label: "Verified aircraft" },
-      { value: "24/7", label: "Specialized support" },
-      { value: "Mexico · USA · Caribbean", label: "Coverage" },
+      { value: "25+ Years", label: "Experience in aviation coordination and services" },
+      { value: "50+", label: "Aircraft transactions managed" },
+      { value: "24/7", label: "Response for priority requirements" },
+      { value: "MX · GLOBAL", label: "Regional coverage for executive aviation" },
     ],
-    storyEyebrow: "AVIATION ECOSYSTEM",
-    storyTitle: "Integrated aviation ecosystem.",
+    storyEyebrow: "WHY SKY GROUP",
+    storyTitle: "Specialized Support for Every Operation.",
     storyLead:
-      "SkyGroup integrates multiple areas of aviation within a single operational structure: private charter, aircraft sales, parts supply and specialized aviation support.",
+      "From private flight coordination to aircraft transactions, components and specialized aviation support, each requirement is managed with precision through a dedicated point of contact.",
     storyText:
-      "Every division operates around the same principles: availability, traceability, coordination and operational continuity.",
-    storyVisualLabel: "Coordinated operation",
-    storyVisualTitle: "A structure built to support high-value aviation decisions.",
+      "We integrate commercial, technical and documentation coordination to reduce complexity, maintain visibility and support high-value aviation decisions.",
+    storyVisualLabel: "Executive Aviation Support",
+    storyVisualTitle: "Precise. Discreet. Professionally Coordinated.",
     storyVisualText:
-      "From a commercial inquiry to a technical requirement, the goal is to solve with a simpler, more direct, and specialized experience.",
+      "Support for executives, operators, aircraft owners and family offices that require operational clarity, discretion and real coordination capability.",
     storyPoints: [
-      { icon: "hangar", title: "Aeronautical environment", text: "Aircraft, operations, and support in one conversation." },
-      { icon: "network", title: "Industry connection", text: "Clients, operators, and providers aligned by solution." },
-      { icon: "support", title: "Guided support", text: "Each case advances with specialized follow-up." },
+      { icon: "check", title: "Integrated solutions", text: "A single point of contact for flights, aircraft, components and specialized support." },
+      { icon: "network", title: "Aviation coordination", text: "Commercial, technical and documentation workflows move in alignment from start to finish." },
+      { icon: "concierge", title: "Executive-level guidance", text: "Direct follow-up through an advisor for sensitive or high-value decisions." },
+      { icon: "hangar", title: "Specialized capability", text: "Services built around operational continuity, traceability and compliance." },
+      { icon: "support", title: "Support when it matters", text: "Precise coordination for urgent, confidential or complex requirements." },
     ],
     solutionsEyebrow: "SOLUTIONS",
-    solutionsTitle: "Integrated capabilities across aviation.",
-    solutionsLead: "Commercial, operational and technical solutions for different aviation requirements.",
+    solutionsTitle: "Specialized Aviation Services.",
+    solutionsLead: "Integrated capabilities for private aviation, aircraft transactions, components and operational support.",
     solutions: [
       {
         title: "Private Charter",
-        text: "We coordinate charter flights according to each mission profile, considering routing, passenger capacity, range, cabin configuration and aircraft operational availability.",
-        cta: "Request a Quote ->",
+        text: "Private flights coordinated around your itinerary, mission profile and operational requirements.",
+        cta: "Explore Charter ->",
         route: "AirTaxi",
         image: "/images/Home/IMG_0894.jpeg",
         visualImage: "/images/Home/IMG_0894.jpeg",
         visualAlt: "SkyGroup executive jet",
       },
       {
-        title: "Aircraft Sales & Acquisitions",
-        text: "We support aircraft acquisition and sales processes through aircraft sourcing, market analysis and coordination of technical and transactional requirements.",
-        cta: "View Aircraft ->",
+        title: "Aircraft Sales",
+        text: "Specialized support for aircraft acquisition, sale-side positioning and transaction management.",
+        cta: "Explore Aircraft Sales ->",
         route: "AircraftSales",
         image: "/images/Home/image.png",
         visualImage: "/images/Home/image.png",
         visualAlt: "SkyGroup aircraft sales",
       },
       {
-        title: "Aircraft Parts & Components",
-        text: "We source aircraft components, rotables and aviation material for scheduled maintenance requirements and time-critical operational needs.",
+        title: "Aircraft Parts",
+        text: "Aircraft components sourced with documented traceability, logistics coordination and specialized support.",
         cta: "Request a Part ->",
         route: "ImportExport",
-        image: "/images/Home/IMG_0672.jpeg",
-        visualImage: "/images/Home/IMG_0672.jpeg",
+        image: "/images/Home/ALmacen 1.jpg",
+        visualImage: "/images/Home/ALmacen 1.jpg",
         visualAlt: "SkyGroup aeronautical parts",
       },
       {
         title: "Aviation Services",
-        text: "We coordinate specialized solutions for aircraft maintenance, inspection, technical requirements and operational continuity.",
+        text: "Technical and operational support for inspections, maintenance, documentation and specialized aviation requirements.",
         cta: "Request Support ->",
         route: "OperationsManagement",
         image: "/images/Home/IMG_1031.jpeg",
@@ -592,35 +576,36 @@ const content = {
         visualAlt: "SkyGroup aeronautical services",
       },
     ],
-    platformEyebrow: "ONE ECOSYSTEM",
-    platformTitle: "One structure. Multiple capabilities.",
+    platformEyebrow: "CORE BENEFITS",
+    platformTitle: "What centralized coordination provides.",
     platformLead:
-      "We connect operators, suppliers, aircraft and aviation specialists to support multiple requirements within a single operation.",
+      "Less fragmentation, stronger traceability and greater control over every aviation requirement.",
     platformBenefits: [
-      { title: "Centralized Management", text: "Each requirement is routed through a single point of contact." },
-      { title: "Aviation network", text: "Connections with operators, suppliers and industry specialists." },
-      { title: "Specialized Support", text: "Visibility and continuity throughout every process." },
+      { title: "Single Point of Contact", text: "Commercial, technical and documentation coordination stays within one conversation." },
+      { title: "Follow-up with visibility", text: "Each stage moves with clear status and fewer information gaps." },
+      { title: "Faster execution", text: "We reduce back-and-forth so evaluation, approval and action move faster." },
+      { title: "Confidentiality and judgment", text: "Every requirement is handled with discretion, precision and specialized support." },
     ],
-    needsEyebrow: "WHAT DO YOU NEED?",
-    needsTitle: "Solutions by operational need.",
+    needsEyebrow: "COMMON STARTING POINTS",
+    needsTitle: "How we can support you.",
     needsCards: [
       {
         title: "Coordinate a private flight",
-        text: "Define origin, destination, passengers and operating dates. Our team will identify aircraft compatible with the mission profile and required availability.",
+        text: "Share your route, passenger count and departure window so we can review real availability and aircraft fit.",
         cta: "Request Flight Options",
         route: "AirTaxi",
         image: "/images/Home/IMG_1511.jpeg",
       },
       {
-        title: "Source an aircraft",
-        text: "Provide your mission requirements, aircraft category, range, capacity or preferred model to begin identifying available aircraft.",
-        cta: "Start Aircraft Sourcing",
+        title: "Acquire or position an aircraft",
+        text: "We define mission profile, range, configuration and transaction objective before entering the market.",
+        cta: "Request Advisory",
         route: "AircraftSales",
         image: "/images/Home/IMG_0025.jpg",
       },
       {
         title: "Source an aircraft part",
-        text: "Provide the Part Number (P/N), description, required condition, quantity and certification requirements. Our team will verify availability and sourcing options.",
+        text: "We source aviation components and confirm availability, condition and documentation traceability.",
         cta: "Request Component",
         route: "ImportExport",
         image: "/images/Home/IMG_1511.png",
@@ -628,45 +613,45 @@ const content = {
       },
       {
         title: "Request aviation support",
-        text: "We coordinate requirements involving maintenance, inspections, ground support, technical assistance and specialized aircraft services.",
+        text: "We coordinate technical support, inspections, maintenance and specialized requirements with clear follow-up.",
         cta: "Request Support",
         route: "OperationsManagement",
         image: "/images/Home/IMG_1138.jpg",
       },
     ],
-    mediaEyebrow: "SKYGROUP IN OPERATION",
-    mediaTitle: "Commercial and operational infrastructure for aviation.",
-    mediaLead: "Technology enables the connection. Our value lies in coordinating aircraft, operators, components and specialized aviation services.",
+    mediaEyebrow: "SKYGROUP ON VIDEO",
+    mediaTitle: "Industry activity in context.",
+    mediaLead: "Visual content covering aircraft, operations and commercial activity across executive aviation.",
     mediaCta: "View YouTube channel",
-    testimonialsEyebrow: "EXPERIENCE",
-    testimonialsTitle: "Experience applied to every operation.",
-    testimonialsLead: "Every aviation requirement involves technical, commercial and operational variables. Our team coordinates these elements to deliver viable and efficient solutions.",
+    testimonialsEyebrow: "RESULTS",
+    testimonialsTitle: "Indicators that reinforce confidence.",
+    testimonialsLead: "Confidence is best reinforced through concrete references and consistent execution.",
     testimonials: [
       {
-        quote: "The response was immediate and the proposal arrived with operational clarity from the first touchpoint.",
-        name: "Executive Office",
-        role: "Financial industry",
+        value: "25+",
+        title: "Years in aviation coordination",
+        text: "Applied across private flights, aircraft transactions and specialized aviation support.",
       },
       {
-        quote: "We needed a sensitive last-minute departure and the follow-up was excellent.",
-        name: "Family Office",
-        role: "Repeat client",
+        value: "50+",
+        title: "Aircraft transactions managed",
+        text: "Commercial processes supported by technical review and documentation coordination.",
       },
       {
-        quote: "It felt like a real premium service: fewer loops, more precision, and better treatment.",
-        name: "Chief of Staff",
-        role: "Corporate group",
+        value: "24/7",
+        title: "Operational support available",
+        text: "Continuous support for urgent, sensitive or operationally critical requirements.",
       },
     ],
-    finalEyebrow: "SKYGROUP",
-    finalTitle: "What is your requirement?",
+    finalEyebrow: "NEXT STEP",
+    finalTitle: "Your operation, coordinated from start to finish.",
     finalText:
-      "Select the appropriate area and our team will evaluate the technical and commercial variables required to coordinate the solution.",
-    finalPrimaryCta: "Speak with an advisor",
-    finalSecondaryCta: "Explore services",
-    contactTitle: "Operational capability backed by aviation expertise.",
-    contactText: "Share your requirement and our team will route it to the right area for technical, commercial or operational continuity.",
-    contactCta: "Contact on WhatsApp",
+      "Tell us about your requirement and we will coordinate the right solution with clear follow-up, responsive execution and specialized support.",
+    finalPrimaryCta: "Speak with an Advisor",
+    finalSecondaryCta: "Explore Services",
+    contactTitle: "One point of contact for every requirement.",
+    contactText: "Share your route, aircraft, component or technical requirement and we will coordinate the right response for your operation.",
+    contactCta: "Speak with an Advisor",
   },
 };
 
@@ -1113,27 +1098,6 @@ const serviceLinkProps = (item) => {
   max-width: 32ch;
 }
 
-.hero-service-ribbon {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1rem;
-}
-
-.hero-service-ribbon span {
-  display: inline-flex;
-  align-items: center;
-  min-height: 40px;
-  padding: 0.65rem 0.9rem;
-  border-radius: 999px;
-  background: rgba(247, 241, 232, 0.08);
-  border: 1px solid rgba(247, 241, 232, 0.08);
-  color: rgba(247, 241, 232, 0.88);
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 .hero-signal-card {
   margin-top: 1.1rem;
   margin-left: auto;
@@ -1259,7 +1223,7 @@ const serviceLinkProps = (item) => {
 .story-point strong,
 .platform-copy h3,
 .media-copy h3,
-.testimonial-meta strong {
+.testimonial-copy strong {
   display: block;
   color: #f8f2e8;
 }
@@ -1409,20 +1373,35 @@ const serviceLinkProps = (item) => {
   margin-top: 1.8rem;
 }
 
+.testimonials-list {
+  gap: 1rem;
+}
+
 .testimonial-row {
-  grid-template-columns: minmax(0, 1fr) 220px;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 1.25rem;
+  padding: 1.4rem 1.5rem;
+  border-radius: 24px;
+  border: 1px solid rgba(215, 176, 116, 0.14);
+  background:
+    linear-gradient(180deg, rgba(11, 21, 34, 0.9), rgba(8, 16, 27, 0.92)),
+    radial-gradient(circle at top right, rgba(215, 176, 116, 0.08), transparent 28%);
 }
 
-.testimonial-meta {
-  text-align: right;
+.testimonial-value {
+  color: #e7c58a;
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 0.92;
 }
 
-.testimonial-meta strong {
-  display: block;
+.testimonial-copy {
+  display: grid;
+  gap: 0.45rem;
 }
 
-.testimonial-meta span {
-  color: rgba(241, 235, 226, 0.66);
+.testimonial-copy p {
+  margin: 0;
 }
 
 .final-copy p {
@@ -1525,10 +1504,6 @@ const serviceLinkProps = (item) => {
     order: initial;
   }
 
-  .testimonial-meta {
-    text-align: left;
-  }
-
   .hero-proof-grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -1602,12 +1577,6 @@ const serviceLinkProps = (item) => {
 
   .hero-aside-panel strong {
     max-width: none;
-  }
-
-  .hero-service-ribbon span {
-    width: 100%;
-    justify-content: center;
-    text-align: center;
   }
 
   .hero-signal-card {

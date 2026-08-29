@@ -8,7 +8,7 @@
             </RouterLink>
             <span>/</span>
             <RouterLink :to="toLocalizedRoute('Blog')">
-              {{ locale.value === "en" ? "Pages" : "Paginas" }}
+              {{ locale.value === "en" ? "Pages" : "Páginas" }}
             </RouterLink>
             <span>/</span>
             <span aria-current="page">{{ page.title }}</span>
@@ -190,7 +190,7 @@
     <section class="section related-links-section">
       <div class="container related-links-shell">
         <article class="related-links-card">
-          <span class="eyebrow">{{ locale.value === "en" ? "Priority pages" : "Paginas prioritarias" }}</span>
+          <span class="eyebrow">{{ locale.value === "en" ? "Priority pages" : "Páginas prioritarias" }}</span>
           <h2>{{ locale.value === "en" ? "Core internal path" : "Ruta interna principal" }}</h2>
           <div class="related-links-list">
             <RouterLink class="related-link" :to="toLocalizedRoute('Home')">
@@ -216,8 +216,8 @@
         </article>
 
         <article class="related-links-card">
-          <span class="eyebrow">{{ locale.value === "en" ? "Pages to quote" : "Paginas a cotizacion" }}</span>
-          <h2>{{ locale.value === "en" ? "Quote and external links" : "Cotizacion y enlaces externos" }}</h2>
+          <span class="eyebrow">{{ locale.value === "en" ? "Quote paths" : "Rutas hacia cotización" }}</span>
+          <h2>{{ locale.value === "en" ? "Quote and external links" : "Cotización y enlaces externos" }}</h2>
           <div class="related-links-list">
             <RouterLink class="related-link" :to="localizedSeoPath(quotePage)">
               {{ quotePage.title }}
@@ -310,12 +310,12 @@ const externalLinks = computed(() =>
         { label: "Instagram", href: "https://www.instagram.com/redaviationcompany" },
         { label: "TikTok", href: "https://www.tiktok.com/@redaviationcompany" },
         { label: "Main website", href: "https://redskyg.com/" },
-        { label: "Quoting website", href: "https://redskyg.com/landing" },
+        { label: "Quote page", href: "https://redskyg.com/landing" },
       ]
     : [
         { label: "Instagram", href: "https://www.instagram.com/redaviationcompany" },
         { label: "TikTok", href: "https://www.tiktok.com/@redaviationcompany" },
-        { label: "Nuestra web", href: "https://redskyg.com/" },
+        { label: "Sitio principal", href: "https://redskyg.com/" },
         { label: "Cotizaciones", href: "https://redskyg.com/landing" },
       ]
 );
@@ -329,42 +329,42 @@ const defaultFleetHref = "https://redskyg.com/landing/es-mx/reserva";
 const landingLabels = computed(() =>
   locale.value === "en"
     ? {
-        heroPrimary: "Get Instant Quote",
-        heroSecondary: "Speak to Advisor",
-        cardMicrocopy: "Response under 15 minutes",
-        cardCta: "View availability",
-        quickFormBadge: "Immediate availability. No commitment required.",
+        heroPrimary: "Request a Quote",
+        heroSecondary: "Speak with the Team",
+        cardMicrocopy: "Clear next step for this topic",
+        cardCta: "Review options",
+        quickFormBadge: "Fast review. No commitment required.",
         quickIcons: {
           name: "01",
           route: "02",
           passengers: "03",
         },
         faqToggle: "Open",
-        finalTitle: "Secure your aircraft before availability changes.",
+        finalTitle: "Move from search to a clearer proposal.",
         finalText:
-          "Move from browsing into a real quote with faster response, tighter coordination, and live aircraft review.",
-        finalUrgency: "Limited aircraft availability daily.",
-        finalPrimary: "Get Quote Now",
-        finalSecondary: "WhatsApp Instant",
+          "Share the route, travel timing, and passenger details so the team can review the request with better context.",
+        finalUrgency: "A clearer request leads to a more useful proposal.",
+        finalPrimary: "Request a Quote",
+        finalSecondary: "Open WhatsApp",
       }
     : {
         heroPrimary: "Cotizar vuelo ahora",
-        heroSecondary: "Hablar con asesor",
-        cardMicrocopy: "Response under 15 minutes",
-        cardCta: "Ver disponibilidad",
-        quickFormBadge: "Disponibilidad inmediata. Sin compromiso.",
+        heroSecondary: "Hablar con el equipo",
+        cardMicrocopy: "Siguiente paso claro para este tema",
+        cardCta: "Revisar opciones",
+        quickFormBadge: "Revisión ágil. Sin compromiso.",
         quickIcons: {
           name: "01",
           route: "02",
           passengers: "03",
         },
         faqToggle: "Abrir",
-        finalTitle: "Asegura tu aeronave antes de que cambie la disponibilidad.",
+        finalTitle: "Pase de la búsqueda a una propuesta más clara.",
         finalText:
-          "Pasa de explorar a cotizar con una respuesta mas rapida, mejor coordinacion y revision real de aeronave.",
-        finalUrgency: "Disponibilidad limitada de aeronaves cada dia.",
+          "Comparta ruta, horario y pasajeros para que el equipo revise la solicitud con mejor contexto.",
+        finalUrgency: "Una solicitud más clara permite una propuesta más útil.",
         finalPrimary: "Cotizar vuelo ahora",
-        finalSecondary: "WhatsApp instantaneo",
+        finalSecondary: "Abrir WhatsApp",
       }
 );
 

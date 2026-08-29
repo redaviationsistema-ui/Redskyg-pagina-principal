@@ -107,40 +107,40 @@ const content = computed(() =>
     ? {
         heroAlt: "Fractional aircraft ownership program",
         heroEyebrow: "Fractional Ownership",
-        heroTitle: "Fractional ownership with structured access.",
-        heroText: "Fractional ownership is designed for clients who need frequent access to executive aviation with stronger cost discipline and more predictability than occasional charter.",
+        heroTitle: "Fractional ownership with defined access.",
+        heroText: "Fractional ownership is designed for clients who need recurring access to executive aviation with more predictability, structure and cost control than occasional charter.",
         heroPrimaryCta: "Request Ownership Analysis",
         heroSecondaryCta: "Compare With Co-Ownership",
         structureEyebrow: "Program Structure",
         structureTitle: "What the program includes.",
-        structureText: "Clients acquire a defined share in a professionally managed aircraft program and receive allocated hours, operational support, and a more structured cost model.",
-        visualEyebrow: "Program Experience",
-        visualTitle: "The unused images fit the access story of fractional ownership.",
-        visualText: "One image reinforces the onboard experience and the other the recurring travel rhythm that gives this model its value.",
+        structureText: "Clients acquire a defined share in a professionally managed aircraft program with allocated hours, operating support and a clearer cost structure.",
+        visualEyebrow: "Program Access",
+        visualTitle: "Visual references for recurring aircraft access.",
+        visualText: "These images reinforce direct aircraft access and the recurring travel pattern associated with fractional ownership.",
         fitEyebrow: "Best Fit",
         fitTitle: "Who this model fits.",
         finalTitle: "Compare ownership models with technical guidance.",
-        finalText: "We can review your flight volume, budget priorities, and operational goals to recommend the most efficient model.",
+        finalText: "We can review flight volume, budget priorities and operating goals to recommend the most efficient ownership model.",
         finalPrimaryCta: "Schedule Ownership Review",
         finalSecondaryCta: "Explore Full Ownership Options",
       }
     : {
         heroAlt: "Programa de propiedad fraccional de aeronaves",
         heroEyebrow: "Propiedad fraccional",
-        heroTitle: "Propiedad fraccional con acceso estructurado.",
-        heroText: "El tiempo compartido esta pensado para clientes que necesitan acceso frecuente a aviacion ejecutiva con mayor disciplina de costos y mas previsibilidad que un charter ocasional.",
+        heroTitle: "Propiedad fraccional con acceso definido.",
+        heroText: "La propiedad fraccional esta pensada para clientes que requieren acceso recurrente a aviacion ejecutiva con mayor previsibilidad, estructura y control de costos que un charter ocasional.",
         heroPrimaryCta: "Solicitar analisis de propiedad",
         heroSecondaryCta: "Comparar con copropiedad",
         structureEyebrow: "Estructura del programa",
         structureTitle: "Lo que incluye el programa.",
-        structureText: "Los clientes adquieren una participacion definida dentro de un programa de aeronave administrado profesionalmente y reciben horas asignadas, soporte operativo y un modelo de costos mas estructurado.",
-        visualEyebrow: "Experiencia del programa",
-        visualTitle: "Las imagenes libres encajan con la historia de acceso del tiempo compartido.",
-        visualText: "Una refuerza la experiencia a bordo y la otra el ritmo de viaje recurrente que le da valor a este modelo.",
+        structureText: "Los clientes adquieren una participacion definida dentro de un programa de aeronave administrado profesionalmente, con horas asignadas, soporte operativo y una estructura de costos mas clara.",
+        visualEyebrow: "Acceso del programa",
+        visualTitle: "Referencias visuales para acceso recurrente a aeronave.",
+        visualText: "Estas imagenes refuerzan el acceso directo a la aeronave y el patron de viaje recurrente asociado con la propiedad fraccional.",
         fitEyebrow: "Mejor ajuste",
         fitTitle: "Para quien encaja este modelo.",
         finalTitle: "Compare esquemas de propiedad con criterio tecnico.",
-        finalText: "Podemos revisar tu volumen de vuelo, prioridades de presupuesto y objetivos operativos para recomendar el modelo mas eficiente.",
+        finalText: "Podemos revisar volumen de vuelo, prioridades de presupuesto y objetivos operativos para recomendar el modelo de propiedad mas eficiente.",
         finalPrimaryCta: "Agendar revision de propiedad",
         finalSecondaryCta: "Explorar opciones de propiedad total",
       }
@@ -149,18 +149,18 @@ const content = computed(() =>
 const structureItems = computed(() =>
   locale.value === "en"
     ? [
-        "Defined equity share in the aircraft or fleet structure",
+        "Defined equity share in the aircraft or program",
         "Allocated annual flight hours",
         "Management and operational support",
         "Predictable monthly and hourly cost components",
-        "Access to a structured private aviation framework",
+        "Access to a managed private aviation program",
       ]
     : [
-        "Participacion definida en la aeronave o estructura de flota",
+        "Participacion definida en la aeronave o en el programa",
         "Horas anuales de vuelo asignadas",
         "Gestion y soporte operativo",
         "Componentes mensuales y por hora mas predecibles",
-        "Acceso a una estructura organizada de aviacion privada",
+        "Acceso a un programa administrado de aviacion privada",
       ]
 );
 
@@ -173,11 +173,11 @@ const advantages = computed(() =>
         },
         {
           title: "Predictable access",
-          text: "A defined ownership structure helps align availability, scheduling expectations, and long-term planning.",
+          text: "A defined ownership model helps align availability, scheduling expectations, and long-term planning.",
         },
         {
           title: "Professional management",
-          text: "Operations, compliance, maintenance, and administrative coordination are typically handled through a structured program.",
+          text: "Operations, compliance, maintenance, and administrative coordination are handled through a managed program.",
         },
         {
           title: "Strategic flexibility",
@@ -191,11 +191,11 @@ const advantages = computed(() =>
         },
         {
           title: "Acceso predecible",
-          text: "Una estructura de propiedad definida ayuda a alinear disponibilidad, expectativas de programacion y planeacion de largo plazo.",
+          text: "Un modelo de propiedad definido ayuda a alinear disponibilidad, expectativas de programacion y planeacion de largo plazo.",
         },
         {
           title: "Gestion profesional",
-          text: "Operaciones, cumplimiento, mantenimiento y coordinacion administrativa suelen manejarse a traves de un programa estructurado.",
+          text: "Operaciones, cumplimiento, mantenimiento y coordinacion administrativa se manejan a traves de un programa administrado.",
         },
         {
           title: "Flexibilidad estrategica",
@@ -243,7 +243,7 @@ const visuals = computed(() =>
           src: "/images/Tiempocompartido/tiempoCompartido.jpeg",
           alt: "Private aircraft cabin interior prepared for passengers",
           title: "Onboard comfort",
-          text: "Supports the promise of a more refined and predictable travel experience for recurring private flyers.",
+          text: "Supports a more consistent and predictable access model for recurring private flyers.",
         },
         {
           src: "/images/Tiempocompartido/tiempocompartido1.jpeg",
@@ -257,7 +257,7 @@ const visuals = computed(() =>
           src: "/images/Tiempocompartido/tiempoCompartido.jpeg",
           alt: "Interior de aeronave privada preparado para pasajeros",
           title: "Confort a bordo",
-          text: "Refuerza la promesa de una experiencia de viaje mas refinada y predecible para usuarios recurrentes de aviacion privada.",
+          text: "Refuerza un esquema de acceso mas consistente y predecible para usuarios recurrentes de aviacion privada.",
         },
         {
           src: "/images/Tiempocompartido/tiempocompartido1.jpeg",

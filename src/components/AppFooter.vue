@@ -30,13 +30,13 @@
           </div>
 
           <p class="brand-text">
-            {{ locale.value === "en" ? "Sky Group is a private aviation company with more than two decades of experience in aircraft sales, executive charter, operational management, and technical support for high-value aviation clients." : "Sky Group es una empresa de aviacion privada con mas de dos decadas de experiencia en compra y venta de aeronaves, charter ejecutivo, administracion operativa y soporte tecnico para clientes de alto valor." }}
+            {{ locale.value === "en" ? "Sky Group coordinates private flights, aircraft transactions, operational support, and technical follow-up for owners, operators, and executive aviation clients." : "Sky Group coordina vuelos privados, transacciones de aeronaves, soporte operativo y seguimiento técnico para propietarios, operadores y clientes de aviación ejecutiva." }}
           </p>
 
           <div class="brand-meta">
-            <span>{{ locale.value === "en" ? "Private Aviation" : "Aviacion privada" }}</span>
-            <span>{{ locale.value === "en" ? "Operational Management" : "Administracion operativa" }}</span>
-            <span>{{ locale.value === "en" ? "Technical Services" : "Servicios tecnicos" }}</span>
+            <span>{{ locale.value === "en" ? "Private Charter" : "Vuelos privados" }}</span>
+            <span>{{ locale.value === "en" ? "Operational Support" : "Soporte operativo" }}</span>
+            <span>{{ locale.value === "en" ? "Technical Follow-Up" : "Seguimiento técnico" }}</span>
           </div>
 
           <small class="footer-legal">
@@ -50,16 +50,16 @@
         <section class="footer-office footer-column">
           <div class="section-heading">
             <span>{{ locale.value === "en" ? "Head Office" : "Oficina principal" }}</span>
-            <h4>{{ locale.value === "en" ? "Toluca, State of Mexico" : "Toluca, Estado de Mexico" }}</h4>
+            <h4>{{ locale.value === "en" ? "Toluca, State of Mexico" : "Toluca, Estado de México" }}</h4>
           </div>
 
           <p class="office-address">
-            {{ locale.value === "en" ? "San Nicolas Tolentino, Toluca de Lerdo, State of Mexico, Mexico" : "San Nicolas Tolentino, Toluca de Lerdo, Estado de Mexico, Mexico" }}
+            {{ locale.value === "en" ? "San Nicolas Tolentino, Toluca de Lerdo, State of Mexico, Mexico" : "San Nicolás Tolentino, Toluca de Lerdo, Estado de México, México" }}
           </p>
 
           <div class="office-grid">
             <div class="detail-group">
-              <h5>{{ locale.value === "en" ? "Customer Service" : "Atencion a clientes" }}</h5>
+              <h5>{{ locale.value === "en" ? "Client Service" : "Atención a clientes" }}</h5>
 
               <p>
                 <a href="#" @click.prevent="handlePhone('+527221126671')">
@@ -89,12 +89,12 @@
 
         <section class="footer-connect footer-column">
           <div class="section-heading">
-            <span>{{ locale.value === "en" ? "Connect With Us" : "Conecta con nosotros" }}</span>
-            <h4>{{ locale.value === "en" ? "Stay close to Sky Group" : "Mantente cerca de Sky Group" }}</h4>
+            <span>{{ locale.value === "en" ? "Connect With Us" : "Conecte con nosotros" }}</span>
+            <h4>{{ locale.value === "en" ? "Follow our aviation channels" : "Siga nuestros canales aeronáuticos" }}</h4>
           </div>
 
           <p class="connect-text">
-            {{ locale.value === "en" ? "Follow our channels for aviation updates, charter availability, aircraft opportunities, and corporate news." : "Sigue nuestros canales para novedades de aviacion, disponibilidad de charter, oportunidades de aeronaves y noticias corporativas." }}
+            {{ locale.value === "en" ? "Follow charter availability, aircraft opportunities, and aviation updates from our commercial and operational team." : "Consulte disponibilidad de charter, oportunidades de aeronaves y actualizaciones de nuestro equipo comercial y operativo." }}
           </p>
 
           <div class="footer-social">
@@ -142,7 +142,7 @@
               target="_blank"
               rel="noopener noreferrer"
             >
-              <span>{{ locale.value === "en" ? "Main Website" : "Nuestra Web" }}</span>
+              <span>{{ locale.value === "en" ? "Main Website" : "Sitio principal" }}</span>
               <strong aria-hidden="true">-></strong>
             </a>
             <a
@@ -183,21 +183,21 @@ const { locale, toLocalizedRoute } = useLocale();
 const promoContent = computed(() =>
   locale.value === "en"
     ? {
-        kicker: "Executive Aviation Group",
+        kicker: "Executive Aviation Support",
         title:
-          "Private aviation with technical and operational support.",
+          "One point of contact. Complete coordination.",
         text:
-          "Aircraft sales, charter, operations management, and technical services in one professional team.",
-        primaryCta: "Request Consultation",
-        secondaryCta: "Contact on WhatsApp",
+          "Private flights, aircraft transactions, operational support and technical follow-up coordinated through one dedicated team.",
+        primaryCta: "Request Coordination",
+        secondaryCta: "Speak on WhatsApp",
       }
     : {
-        kicker: "Grupo de aviacion privada",
+        kicker: "Soporte de aviación ejecutiva",
         title:
-          "Aviacion privada con soporte tecnico y operacional.",
+          "Un solo punto de contacto. Coordinación integral.",
         text:
-          "Compra y venta de aeronaves, charter, gestion operativa y servicios tecnicos en un solo equipo.",
-        primaryCta: "Solicitar asesoria",
+          "Vuelos privados, transacciones de aeronaves, soporte operativo y seguimiento técnico coordinados por un equipo dedicado.",
+        primaryCta: "Solicitar coordinación",
         secondaryCta: "Hablar por WhatsApp",
       }
 );
@@ -213,8 +213,8 @@ const footerMeta = computed(() =>
     : {
         copyright: "© 2026 RED SKY GROUP. Todos los derechos reservados.",
         privacy: "Aviso de privacidad",
-        cookies: "Politica de cookies",
-        terms: "Terminos y condiciones",
+        cookies: "Política de cookies",
+        terms: "Términos y condiciones",
       }
 );
 

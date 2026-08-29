@@ -73,7 +73,7 @@ import { useLocale } from "../../i18n";
 const { locale, toLocalizedRoute } = useLocale();
 
 const heroStyle = {
-  backgroundImage: 'url("/images/Service/IMG_2932.jpeg")',
+  backgroundImage: 'url("/images/Home/IMG_2932.jpg")',
   backgroundPosition: "center 40%",
 };
 
@@ -82,30 +82,30 @@ const content = computed(() =>
     ? {
         heroEyebrow: "Pre-Purchase Advisory",
         heroTitle: "Pre-purchase advisory with technical review.",
-        heroText: "Sky Group helps reduce acquisition risk through a structured review of the aircraft, its records, operating condition, and transaction context.",
+        heroText: "Sky Group helps reduce acquisition risk through a structured review of aircraft condition, records, maintenance status, and transaction context.",
         heroPrimaryCta: "Start Evaluation",
         heroSecondaryCta: "Explore Aircraft Advisory",
         sectionEyebrow: "Due Diligence",
         sectionTitle: "Technical due diligence before closing.",
-        sectionText: "This service is built for buyers who need more than a quick inspection. It combines technical review, maintenance record analysis, valuation context, and risk identification so the acquisition decision is made with more clarity.",
+        sectionText: "This service is built for buyers who need more than a quick inspection. It combines technical review, maintenance records analysis, valuation context, and transaction risk assessment.",
         outcomesEyebrow: "Decision Impact",
         finalTitle: "Need pre-purchase review for an aircraft?",
-        finalText: "We can help identify technical issues, documentation gaps, and broader transaction risks before they become expensive problems.",
+        finalText: "We can identify technical findings, documentation gaps, and transaction risks before they become costly issues.",
         finalPrimaryCta: "Request Review",
         finalSecondaryCta: "Explore Aircraft Advisory",
       }
     : {
         heroEyebrow: "Asesoria precompra",
         heroTitle: "Asesoria precompra con criterio tecnico.",
-        heroText: "Sky Group ayuda a reducir riesgos de adquisicion mediante una revision estructurada de la aeronave, sus registros, condicion operativa y contexto de la transaccion.",
+        heroText: "Sky Group ayuda a reducir riesgo de adquisicion mediante una revision estructurada de la condicion de la aeronave, sus registros, estado de mantenimiento y contexto transaccional.",
         heroPrimaryCta: "Iniciar evaluacion",
         heroSecondaryCta: "Explorar asesoria de aeronaves",
         sectionEyebrow: "Debida diligencia",
         sectionTitle: "Debida diligencia tecnica antes de cerrar.",
-        sectionText: "Este servicio esta pensado para compradores que necesitan mas que una inspeccion rapida. Combina revision tecnica, analisis de historiales de mantenimiento, contexto de valuacion e identificacion de riesgos para decidir con mayor claridad.",
+        sectionText: "Este servicio esta pensado para compradores que necesitan mas que una inspeccion rapida. Combina revision tecnica, analisis de historiales de mantenimiento, contexto de valuacion y evaluacion de riesgo transaccional.",
         outcomesEyebrow: "Impacto en decision",
         finalTitle: "Necesita revision precompra para una aeronave?",
-        finalText: "Podemos ayudarte a identificar problemas tecnicos, vacios documentales y riesgos transaccionales antes de que se conviertan en problemas costosos.",
+        finalText: "Podemos identificar hallazgos tecnicos, vacios documentales y riesgos transaccionales antes de que se conviertan en costos mayores.",
         finalPrimaryCta: "Solicitar revision",
         finalSecondaryCta: "Explorar asesoria de aeronaves",
       }

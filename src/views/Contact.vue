@@ -200,77 +200,77 @@ const content = computed(() =>
   locale.value === "en"
     ? {
         heroEyebrow: "Contact Sky Group",
-        heroTitlePrefix: "Quote your next",
-        heroTitleAccent: "private charter flight",
-        heroTitleSuffix: "with an expert team.",
+        heroTitlePrefix: "Coordinate your next",
+        heroTitleAccent: "aviation requirement",
+        heroTitleSuffix: "with the right team.",
         heroText:
-          "Private jet charter in Mexico, technical coordination and operational support under one premium team for fast, high-value decisions.",
+          "Use this channel for private flights, aircraft transactions, components sourcing, operational coordination and specialized aviation support.",
         heroStripText:
-          "Immediate support for owners, operators and executive aviation clients.",
-        asideLabel: "Flight Operations Window",
+          "Direct support for owners, operators, flight departments and executive aviation clients.",
+        asideLabel: "Operations Response Flow",
         introKicker: "Why clients reach us",
-        introTitle: "Executive contact for aviation needs.",
+        introTitle: "Commercial and operational contact for executive aviation.",
         introText:
-          "Use this contact channel to route charter requests, aircraft advisory, technical support, and operational requirements to the right team with faster response.",
+          "Share your mission profile, aircraft requirement or technical request and we will route it to the right commercial, operational or technical team.",
         benefitsKicker: "Operational advantages",
-        benefitsTitle: "Built for faster aviation coordination.",
-        formKicker: "Request consultation",
+        benefitsTitle: "Built for clearer aviation coordination.",
+        formKicker: "Request coordination",
         formTitle: "Submit your aviation brief",
         formText:
-          "Share your operation, aircraft, or mission needs and our team will follow up with the right specialist.",
+          "Share the route, aircraft, technical scope or transaction requirement and our team will coordinate the follow-up through the right point of contact.",
         nameLabel: "Full Name",
         emailLabel: "Email Address",
         serviceLabel: "Service Category",
         servicePlaceholder: "Select Service",
         messageLabel: "Mission Details",
         messagePlaceholder:
-          "Tell us about your aircraft, route, operational goal, or advisory request.",
+          "Tell us about your aircraft, route, operational objective or coordination requirement.",
         submitLabel: "Submit Request",
         sendingLabel: "Sending...",
-        successLabel: "Consultation request sent successfully.",
+        successLabel: "Coordination request sent successfully.",
         modalTitle: "Message Received",
         modalText:
-          "We have received your consultation request. Our executive team will contact you shortly.",
+          "We have received your request. The appropriate aviation team will contact you shortly.",
         closeLabel: "Close",
         serverError: "Server error: ",
         genericError: "Error sending request. Please try again.",
       }
     : {
         heroEyebrow: "Contactar a Sky Group",
-        heroTitlePrefix: "Cotiza tu siguiente",
-        heroTitleAccent: "charter ejecutivo",
-        heroTitleSuffix: "con un equipo experto.",
+        heroTitlePrefix: "Coordina tu siguiente",
+        heroTitleAccent: "requerimiento aeronáutico",
+        heroTitleSuffix: "con el equipo correcto.",
         heroText:
-          "Vuelos privados en Mexico, coordinacion tecnica y soporte operativo bajo un mismo equipo premium para decisiones rapidas y de alto valor.",
+          "Utilice este canal para vuelos privados, transacciones de aeronaves, suministro de componentes, coordinación operativa y soporte aeronáutico especializado.",
         heroStripText:
-          "Soporte inmediato para propietarios, operadores y clientes de aviacion ejecutiva.",
-        asideLabel: "Ventana de operaciones de vuelo",
+          "Atención directa para propietarios, operadores, departamentos de vuelo y clientes de aviación ejecutiva.",
+        asideLabel: "Ruta de atención operativa",
         introKicker: "Por que nos contactan",
-        introTitle: "Contacto ejecutivo para necesidades aeronauticas.",
+        introTitle: "Contacto comercial y operativo para aviacion ejecutiva.",
         introText:
-          "Utiliza este canal para dirigir solicitudes de charter, asesoria de aeronaves, soporte tecnico y requerimientos operativos al equipo correcto con una respuesta mas agil.",
+          "Comparta su requerimiento de vuelo, aeronave o soporte técnico y lo canalizaremos con el equipo comercial, operativo o técnico correspondiente.",
         benefitsKicker: "Ventajas operativas",
-        benefitsTitle: "Disenada para coordinacion aeronautica mas agil.",
-        formKicker: "Solicitar asesoria",
-        formTitle: "Comparta su brief aeronautico",
+        benefitsTitle: "Pensada para una coordinación aeronáutica más clara.",
+        formKicker: "Solicitar coordinacion",
+        formTitle: "Comparta su requerimiento aeronáutico",
         formText:
-          "Comparte tu operacion, aeronave o necesidad de mision y nuestro equipo te dara seguimiento con el especialista correcto.",
+          "Comparta la ruta, aeronave, alcance técnico o requerimiento transaccional y nuestro equipo coordinará el seguimiento a través del punto de contacto adecuado.",
         nameLabel: "Nombre completo",
-        emailLabel: "Correo electronico",
-        serviceLabel: "Categoria de servicio",
+        emailLabel: "Correo electrónico",
+        serviceLabel: "Categoría de servicio",
         servicePlaceholder: "Selecciona un servicio",
-        messageLabel: "Detalles de la mision",
+        messageLabel: "Detalles de la misión",
         messagePlaceholder:
-          "Cuentanos sobre tu aeronave, ruta, objetivo operativo o solicitud de asesoria.",
+          "Comparta información sobre su aeronave, ruta, objetivo operativo o requerimiento de coordinación.",
         submitLabel: "Enviar solicitud",
         sendingLabel: "Enviando...",
-        successLabel: "La solicitud de asesoria se envio correctamente.",
+        successLabel: "La solicitud de coordinación se envió correctamente.",
         modalTitle: "Mensaje recibido",
         modalText:
-          "Hemos recibido tu solicitud de asesoria. Nuestro equipo ejecutivo se pondra en contacto contigo en breve.",
+          "Hemos recibido su solicitud. El equipo aeronáutico correspondiente se pondrá en contacto en breve.",
         closeLabel: "Cerrar",
         serverError: "Error del servidor: ",
-        genericError: "Error al enviar la solicitud. Intentalo de nuevo.",
+        genericError: "Error al enviar la solicitud. Inténtelo de nuevo.",
       }
 );
 
@@ -278,31 +278,31 @@ const serviceOptions = computed(() =>
   locale.value === "en"
     ? [
         "Aircraft Acquisition",
-        "Executive Charter",
-        "Operational Management",
+        "Private Charter",
+        "Flight Operations",
         "Import & Export",
-        "Engine & Technical",
+        "Parts & Technical Support",
       ]
     : [
-        "Adquisicion de aeronaves",
-        "Charter ejecutivo",
-        "Gestion operativa",
-        "Importacion y exportacion",
-        "Motores y soporte tecnico",
+        "Adquisición de aeronaves",
+        "Vuelos privados",
+        "Operaciones de vuelo",
+        "Importación y exportación",
+        "Componentes y soporte técnico",
       ]
 );
 
 const highlights = computed(() =>
   locale.value === "en"
     ? [
-        { value: "24/7", label: "Executive support coverage" },
+        { value: "24/7", label: "Operational response window" },
         { value: "5", label: "Core service divisions" },
-        { value: "1", label: "Single premium contact point" },
+        { value: "1", label: "Dedicated aviation contact point" },
       ]
     : [
-        { value: "24/7", label: "Cobertura de soporte ejecutivo" },
+        { value: "24/7", label: "Ventana de respuesta operativa" },
         { value: "5", label: "Divisiones clave de servicio" },
-        { value: "1", label: "Punto premium de contacto" },
+        { value: "1", label: "Punto único de contacto aeronáutico" },
       ]
 );
 
@@ -312,34 +312,34 @@ const responseFlow = computed(() =>
         {
           step: "01",
           title: "Initial Review",
-          description: "We identify the right team based on your mission profile.",
+          description: "We identify the right team based on your mission profile, aircraft need or technical scope.",
         },
         {
           step: "02",
-          title: "Strategic Follow-Up",
-          description: "A specialist connects with you to scope aircraft or operations.",
+          title: "Specialist Routing",
+          description: "The request is assigned to the right charter, transaction, components or technical support team.",
         },
         {
           step: "03",
           title: "Execution Path",
-          description: "We define next actions with clarity, timing, and oversight.",
+          description: "We define the next action, timing, and operational follow-up.",
         },
       ]
     : [
         {
           step: "01",
-          title: "Revision inicial",
-          description: "Identificamos el equipo correcto segun el perfil de tu mision.",
+          title: "Revisión inicial",
+          description: "Identificamos el equipo correcto según el perfil de su misión, necesidad de aeronave o alcance técnico.",
         },
         {
           step: "02",
-          title: "Seguimiento estrategico",
-          description: "Un especialista se pone en contacto para definir el alcance de la aeronave u operacion.",
+          title: "Canalizacion especializada",
+          description: "La solicitud se asigna al equipo correcto de charter, transacciones, componentes o soporte técnico.",
         },
         {
           step: "03",
-          title: "Ruta de ejecucion",
-          description: "Definimos los siguientes pasos con claridad, tiempos y supervision.",
+          title: "Ruta de ejecución",
+          description: "Definimos el siguiente paso, los tiempos y el seguimiento operativo.",
         },
       ]
 );
@@ -349,46 +349,46 @@ const contactChannels = computed(() =>
     ? [
         {
           tag: "Direct Email",
-          title: "Executive coordination",
-          text: "For acquisition, charter, technical supervision, and operator support.",
+          title: "Commercial coordination",
+          text: "For private charter, aircraft transactions, technical review, and operator support.",
           link: "Direccion.general@redskyg.com",
           href: "mailto:Direccion.general@redskyg.com",
         },
         {
           tag: "Availability",
-          title: "Always within reach",
-          text: "Continuous attention for owners, aviation managers, and urgent requests.",
+          title: "Response window",
+          text: "Continuous attention for owners, operators, flight departments, and urgent requirements.",
           link: "24/7 Response Window",
           href: "#",
         },
         {
           tag: "Coverage",
-          title: "Multi-service approach",
-          text: "One page, one form, and one premium entry point for your full operation.",
-          link: "Integrated Aviation Support",
+          title: "Aviation scope",
+          text: "One contact channel for charter, sourcing, technical support, and operational coordination.",
+          link: "Executive Aviation Support",
           href: "#",
         },
       ]
     : [
         {
           tag: "Correo directo",
-          title: "Coordinacion ejecutiva",
-          text: "Para adquisicion, charter, supervision tecnica y soporte a operadores.",
+          title: "Coordinación comercial",
+          text: "Para vuelos privados, transacciones de aeronaves, revisión técnica y soporte a operadores.",
           link: "Direccion.general@redskyg.com",
           href: "mailto:Direccion.general@redskyg.com",
         },
         {
           tag: "Disponibilidad",
-          title: "Siempre a tu alcance",
-          text: "Atencion continua para propietarios, gerentes de aviacion y solicitudes urgentes.",
+          title: "Ventana de respuesta",
+          text: "Atención continua para propietarios, operadores, departamentos de vuelo y requerimientos urgentes.",
           link: "Ventana de respuesta 24/7",
           href: "#",
         },
         {
           tag: "Cobertura",
-          title: "Enfoque multiservicio",
-          text: "Una pagina, un formulario y un punto premium de entrada para toda tu operacion.",
-          link: "Soporte aeronautico integrado",
+          title: "Alcance aeronáutico",
+          text: "Un canal de contacto para charter, localización de aeronaves, soporte técnico y coordinación operativa.",
+          link: "Soporte de aviación ejecutiva",
           href: "#",
         },
       ]
@@ -399,41 +399,41 @@ const benefits = computed(() =>
     ? [
         {
           index: "01",
-          title: "Sharper first impression",
+          title: "Single aviation entry point",
           description:
-            "The page now feels closer to luxury aviation brands with stronger hierarchy and atmosphere.",
+            "One channel routes the request to charter, transactions, technical support, or flight operations.",
         },
         {
           index: "02",
-          title: "Better content distribution",
+          title: "Faster internal routing",
           description:
-            "Contact information, trust cues, and the form are separated clearly so scanning feels effortless.",
+            "The team can review mission scope and assign the right specialist with less delay.",
         },
         {
           index: "03",
-          title: "More conversion-focused",
+          title: "Operational clarity",
           description:
-            "The form is supported by context, response steps, and service framing that reduce friction.",
+            "The client shares the requirement once and receives a clearer next step.",
         },
       ]
     : [
         {
           index: "01",
-          title: "Primera impresion mas solida",
+          title: "Un solo canal aeronáutico",
           description:
-            "La pagina ahora se siente mas cercana a marcas de aviacion de lujo, con mejor jerarquia y atmosfera.",
+            "Un mismo canal dirige la solicitud a charter, transacciones, soporte técnico u operaciones de vuelo.",
         },
         {
           index: "02",
-          title: "Mejor distribucion del contenido",
+          title: "Canalización más ágil",
           description:
-            "La informacion de contacto, las senales de confianza y el formulario estan separadas con claridad para facilitar la lectura.",
+            "El equipo revisa el alcance de la misión y asigna al especialista correcto con menos demora.",
         },
         {
           index: "03",
-          title: "Mas orientada a conversion",
+          title: "Claridad operativa",
           description:
-            "El formulario esta respaldado por contexto, pasos de respuesta y encuadre de servicios que reducen friccion.",
+            "El cliente comparte el requerimiento una sola vez y recibe un siguiente paso más claro.",
         },
       ]
 );
@@ -443,21 +443,21 @@ const panelCommitments = computed(() =>
     ? [
         {
           title: "Fast Routing",
-          text: "Your request is directed to the correct aviation division.",
+          text: "Your request is directed to the right charter, transaction, or technical support team.",
         },
         {
-          title: "Private Handling",
-          text: "Sensitive operational details remain within our internal team.",
+          title: "Confidential Handling",
+          text: "Sensitive commercial and operational details remain within our internal team.",
         },
       ]
     : [
         {
-          title: "Canalizacion rapida",
-          text: "Tu solicitud se dirige a la division aeronautica correcta.",
+          title: "Canalización rápida",
+          text: "Su solicitud se dirige al equipo correcto de charter, transacciones o soporte técnico.",
         },
         {
-          title: "Atencion privada",
-          text: "Los detalles operativos sensibles permanecen dentro de nuestro equipo interno.",
+          title: "Atención confidencial",
+          text: "Los detalles comerciales y operativos sensibles permanecen dentro de nuestro equipo interno.",
         },
       ]
 );
@@ -466,36 +466,36 @@ const trustItems = computed(() =>
   locale.value === "en"
     ? [
         {
-          metric: "Mission Ready",
-          title: "Aviation-first design",
-          text: "Luxury dark surfaces, metallic accents, and clearer visual structure.",
+          metric: "24/7",
+          title: "Operational response",
+          text: "Requests can be reviewed quickly when timing, availability, or technical scope matter.",
         },
         {
-          metric: "Modern UX",
-          title: "Cleaner interaction flow",
-          text: "Form readability and information pacing are now much stronger on desktop and mobile.",
+          metric: "Multi-Service",
+          title: "Cross-functional support",
+          text: "Commercial, technical, and operational teams can work from the same requirement.",
         },
         {
-          metric: "Brand Presence",
-          title: "Higher-end visual tone",
-          text: "The page now communicates precision, control, and executive positioning.",
+          metric: "Direct",
+          title: "Single contact path",
+          text: "Clients avoid fragmented follow-up across multiple aviation providers or departments.",
         },
       ]
     : [
         {
-          metric: "Listo para mision",
-          title: "Diseno centrado en aviacion",
-          text: "Superficies oscuras, acentos metalicos y una estructura visual mas clara.",
+          metric: "24/7",
+          title: "Respuesta operativa",
+          text: "Las solicitudes pueden revisarse con rapidez cuando importan los tiempos, la disponibilidad o el alcance técnico.",
         },
         {
-          metric: "UX moderna",
-          title: "Flujo de interaccion mas limpio",
-          text: "La legibilidad del formulario y el ritmo de la informacion son ahora mas claros en escritorio y movil.",
+          metric: "Multiservicio",
+          title: "Soporte transversal",
+          text: "Los equipos comercial, técnico y operativo pueden trabajar desde un mismo requerimiento.",
         },
         {
-          metric: "Presencia de marca",
-          title: "Tono visual de mayor nivel",
-          text: "La pagina ahora comunica precision, control y posicionamiento ejecutivo.",
+          metric: "Directo",
+          title: "Ruta única de contacto",
+          text: "El cliente evita seguimientos fragmentados entre varios proveedores o departamentos aeronáuticos.",
         },
       ]
 );

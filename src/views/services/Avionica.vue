@@ -75,30 +75,30 @@ const content = computed(() =>
     ? {
         heroEyebrow: "Avionics Support",
         heroTitle: "Avionics and aircraft systems support.",
-        heroText: "Sky Group supports avionics decisions for operators and owners who need more reliability, planning, and operational readiness.",
+        heroText: "Sky Group supports avionics decisions for operators and owners who need greater reliability, planning and operational readiness.",
         heroPrimaryCta: "Request Avionics Assessment",
         heroSecondaryCta: "Explore Operations Support",
         sectionEyebrow: "Systems Focus",
         sectionTitle: "Technical support for avionics decisions.",
-        sectionText: "From modernization planning to system review and coordination, this service is designed to help owners and operators navigate avionics needs with more clarity and less technical uncertainty.",
+        sectionText: "From modernization planning to systems review and technical coordination, this service helps owners and operators move with clearer priorities, better traceability and less uncertainty.",
         outcomesEyebrow: "Operational Readiness",
         finalTitle: "Need support for avionics modernization?",
-        finalText: "We can help frame the scope, identify priorities, and route the project toward the right operational and technical next step.",
+        finalText: "We can define scope, identify priorities and route the project toward the right technical and operational next step.",
         finalPrimaryCta: "Contact Technical Team",
         finalSecondaryCta: "Explore Engine Services",
       }
     : {
         heroEyebrow: "Avionica y sistemas",
         heroTitle: "Avionica y sistemas con soporte tecnico.",
-        heroText: "Sky Group acompana decisiones de avionica para operadores y propietarios que necesitan mas confiabilidad, planeacion y preparacion operativa.",
+        heroText: "Sky Group acompana decisiones de avionica para operadores y propietarios que necesitan mayor confiabilidad, planeacion y preparacion operativa.",
         heroPrimaryCta: "Solicitar evaluacion de avionica",
         heroSecondaryCta: "Explorar soporte operativo",
         sectionEyebrow: "Enfoque en sistemas",
         sectionTitle: "Soporte tecnico para decisiones de avionica.",
-        sectionText: "Desde planeacion de modernizacion hasta revision de sistemas y coordinacion, este servicio ayuda a propietarios y operadores a navegar necesidades de avionica con mayor claridad y menos incertidumbre tecnica.",
+        sectionText: "Desde la planeacion de modernizacion hasta la revision de sistemas y la coordinacion tecnica, este servicio ayuda a propietarios y operadores a avanzar con prioridades mas claras, mejor trazabilidad y menor incertidumbre.",
         outcomesEyebrow: "Preparacion operativa",
         finalTitle: "Necesita soporte para modernizacion de avionica?",
-        finalText: "Podemos ayudarte a definir el alcance, identificar prioridades y canalizar el proyecto hacia el siguiente paso operativo y tecnico correcto.",
+        finalText: "Podemos definir el alcance, identificar prioridades y canalizar el proyecto hacia el siguiente paso tecnico y operativo correcto.",
         finalPrimaryCta: "Contactar equipo tecnico",
         finalSecondaryCta: "Explorar servicios de motores",
       }
@@ -107,16 +107,16 @@ const content = computed(() =>
 const services = computed(() =>
   locale.value === "en"
     ? [
-        { title: "Systems review", text: "Support for understanding current avionics condition and priority areas." },
-        { title: "Modernization planning", text: "A clearer way to frame modernization scope, sequencing, and operational impact." },
-        { title: "Compliance alignment", text: "Attention to system needs that can affect aircraft usability and standards alignment." },
-        { title: "Technical coordination", text: "A more structured bridge between operational goals and system-related decisions." },
+        { title: "Systems review", text: "Support for understanding current avionics condition, limitations, and priority areas." },
+        { title: "Modernization planning", text: "Define scope, sequencing, and operational impact before committing to upgrades." },
+        { title: "Compliance alignment", text: "Review system needs that may affect aircraft usability and standards alignment." },
+        { title: "Technical coordination", text: "Connect operational requirements with system decisions, vendors, and next actions." },
       ]
     : [
-        { title: "Revision de sistemas", text: "Apoyo para entender la condicion actual de la avionica y las areas prioritarias." },
-        { title: "Planeacion de modernizacion", text: "Una forma mas clara de estructurar mejoras, secuencia e impacto operativo." },
-        { title: "Alineacion de cumplimiento", text: "Atencion a necesidades de sistemas que pueden afectar usabilidad y alineacion con estandares." },
-        { title: "Coordinacion tecnica", text: "Un puente mas estructurado entre objetivos operativos y decisiones relacionadas con sistemas." },
+        { title: "Revision de sistemas", text: "Apoyo para entender la condicion actual de la avionica, sus limitaciones y las areas prioritarias." },
+        { title: "Planeacion de modernizacion", text: "Defina alcance, secuencia e impacto operativo antes de comprometer una actualizacion." },
+        { title: "Alineacion de cumplimiento", text: "Revise necesidades de sistemas que puedan afectar usabilidad y alineacion con estandares." },
+        { title: "Coordinacion tecnica", text: "Conecte requerimientos operativos con decisiones de sistemas, proveedores y siguientes acciones." },
       ]
 );
 

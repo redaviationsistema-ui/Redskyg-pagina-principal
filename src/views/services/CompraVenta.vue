@@ -54,24 +54,34 @@
 
     <section class="section sales-journey">
       <div class="container">
-        <div class="sales-journey__header reveal">
-          <span class="sales-eyebrow">{{ locale.value === "en" ? "Process Flow" : "Flujo del proceso" }}</span>
-          <h2>{{ locale.value === "en" ? "A cleaner transaction journey." : "Un recorrido transaccional mas claro." }}</h2>
-        </div>
+        <div class="sales-journey__layout">
+          <figure class="sales-journey__image reveal">
+            <img src="/images/Home/IMG_3121.jpg" :alt="locale.value === 'en' ? 'Aircraft transaction process support' : 'Soporte visual del proceso transaccional'" loading="lazy" />
+          </figure>
 
-        <div class="sales-timeline">
-          <article
-            v-for="(item, index) in steps"
-            :key="item.title"
-            class="sales-stage reveal"
-            :style="{ transitionDelay: `${index * 140}ms` }"
-          >
-            <span class="sales-stage__count">{{ String(index + 1).padStart(2, '0') }}</span>
-            <div>
-              <h3>{{ item.title }}</h3>
-              <p>{{ item.text }}</p>
+          <div>
+            <div class="sales-journey__header reveal">
+              <div class="sales-journey__copy">
+                <span class="sales-eyebrow">{{ locale.value === "en" ? "Process Flow" : "Flujo del proceso" }}</span>
+                <h2>{{ locale.value === "en" ? "A clearer transaction path." : "Una ruta transaccional más clara." }}</h2>
+              </div>
             </div>
-          </article>
+
+            <div class="sales-timeline">
+              <article
+                v-for="(item, index) in steps"
+                :key="item.title"
+                class="sales-stage reveal"
+                :style="{ transitionDelay: `${index * 140}ms` }"
+              >
+                <span class="sales-stage__count">{{ String(index + 1).padStart(2, '0') }}</span>
+                <div>
+                  <h3>{{ item.title }}</h3>
+                  <p>{{ item.text }}</p>
+                </div>
+              </article>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -115,47 +125,47 @@ const content = computed(() =>
   locale.value === "en"
     ? {
         heroEyebrow: "Aircraft Sales and Acquisition",
-        heroTitle: "Aircraft acquisition and sales with specialized support.",
-        heroText: "If you are evaluating an aircraft opportunity, we help you move with more order in sourcing, valuation, negotiation, and closing.",
+        heroTitle: "Aircraft transactions with specialized support.",
+        heroText: "If you are evaluating an aircraft opportunity, we support sourcing, valuation, negotiation, and closing with clearer technical, commercial, and documentary coordination.",
         heroPrimaryCta: "Discuss an Aircraft Opportunity",
         heroSecondaryCta: "Review Pre-Purchase Advisory",
         sectionEyebrow: "Transaction Support",
         sectionTitle: "Aircraft transactions backed by technical review.",
-        sectionText: "We support acquisition and sale processes where valuation, technical review, negotiation flow, and execution quality directly affect the result.",
+        sectionText: "We support aircraft acquisition and sale processes where valuation, technical review, negotiation flow and transaction timing directly affect the outcome.",
         finalTitle: "Aircraft acquisition, sales and evaluation.",
-        finalText: "We help you define the right commercial and technical next step before the transaction becomes more complex.",
-        finalPrimaryCta: "Contact an Aviation Advisor",
+        finalText: "We help define the right commercial and technical next step before the transaction becomes more complex.",
+        finalPrimaryCta: "Speak with a Transaction Advisor",
         finalSecondaryCta: "Review Pre-Purchase Advisory",
       }
     : {
-        heroEyebrow: "Venta y adquisicion de aeronaves",
-        heroTitle: "Adquisicion y venta de aeronaves con soporte especializado.",
-        heroText: "Si estas evaluando una oportunidad, te ayudamos a avanzar con mas orden en busqueda, valuacion, negociacion y cierre.",
+        heroEyebrow: "Venta y adquisición de aeronaves",
+        heroTitle: "Transacciones de aeronaves con soporte especializado.",
+        heroText: "Si está evaluando una oportunidad de aeronave, apoyamos la localización, valuación, negociación y cierre con mejor coordinación técnica, comercial y documental.",
         heroPrimaryCta: "Hablar sobre una oportunidad de aeronave",
-        heroSecondaryCta: "Revisar asesoria precompra",
+        heroSecondaryCta: "Revisar asesoría precompra",
         sectionEyebrow: "Soporte transaccional",
-        sectionTitle: "Transaccion con respaldo tecnico y comercial.",
-        sectionText: "Te apoyamos en procesos de compra y venta donde la valuacion, la revision tecnica, el flujo de negociacion y la calidad de ejecucion cambian el resultado.",
-        finalTitle: "Compra, venta y evaluacion de aeronaves.",
-        finalText: "Te ayudamos a definir el siguiente paso comercial y tecnico correcto antes de que la transaccion se vuelva mas compleja.",
-        finalPrimaryCta: "Contactar a un asesor aeronautico",
-        finalSecondaryCta: "Revisar asesoria precompra",
+        sectionTitle: "Transacciones con respaldo técnico y comercial.",
+        sectionText: "Apoyamos procesos de compra y venta de aeronaves donde la valuación, la revisión técnica, la negociación y los tiempos de cierre cambian el resultado.",
+        finalTitle: "Compra, venta y evaluación de aeronaves.",
+        finalText: "Ayudamos a definir el siguiente paso comercial y técnico correcto antes de que la transacción se vuelva más compleja.",
+        finalPrimaryCta: "Hablar con un asesor de transacciones",
+        finalSecondaryCta: "Revisar asesoría precompra",
       }
 );
 
 const services = computed(() =>
   locale.value === "en"
     ? [
-        { title: "Aircraft sourcing", text: "Find aircraft opportunities that actually fit your mission and objective." },
-        { title: "Valuation context", text: "Understand pricing, positioning, and transaction expectations with more clarity." },
-        { title: "Negotiation support", text: "Move through terms, timing, and decisions with better structure." },
-        { title: "Closing coordination", text: "Keep commercial steps, technical review, and execution aligned." },
+        { title: "Aircraft sourcing", text: "Identify aircraft options that match mission profile, budget, and availability." },
+        { title: "Valuation context", text: "Review pricing, market position, and transaction expectations with better reference points." },
+        { title: "Negotiation support", text: "Advance through terms, timing, and risk points with stronger structure." },
+        { title: "Closing coordination", text: "Keep commercial, legal, and technical workstreams aligned through closing." },
       ]
     : [
-        { title: "Busqueda de aeronaves", text: "Encuentra oportunidades que si encajan con tu mision y tu objetivo." },
-        { title: "Contexto de valuacion", text: "Entiendes mejor precio, posicionamiento y expectativas de la transaccion." },
-        { title: "Soporte de negociacion", text: "Avanzas con mas estructura en terminos, tiempos y decisiones." },
-        { title: "Coordinacion de cierre", text: "Mantienes alineados los pasos comerciales, la revision tecnica y la ejecucion." },
+        { title: "Localización de aeronaves", text: "Identifique opciones que correspondan al perfil de misión, presupuesto y disponibilidad." },
+        { title: "Contexto de valuación", text: "Revise precio, posicionamiento de mercado y expectativas de transacción con mejores referencias." },
+        { title: "Soporte de negociación", text: "Avance en términos, tiempos y puntos de riesgo con mayor estructura." },
+        { title: "Coordinación de cierre", text: "Mantenga alineados los frentes comerciales, legales y técnicos hasta el cierre." },
       ]
 );
 
@@ -167,9 +177,9 @@ const steps = computed(() =>
         { title: "Coordinate the next stage", text: "Move toward inspection, negotiation, or closing with a clearer plan." },
       ]
     : [
-        { title: "Definir el objetivo", text: "Aclara si necesitas adquisicion, venta, evaluacion o revision de portafolio." },
-        { title: "Revisar la oportunidad de aeronave", text: "Alinea la parte comercial y tecnica antes de profundizar." },
-        { title: "Coordinar la siguiente etapa", text: "Avanza hacia inspeccion, negociacion o cierre con un plan mas claro." },
+        { title: "Definir el objetivo", text: "Aclara si necesita adquisición, venta, evaluación o revisión de portafolio." },
+        { title: "Revisar la oportunidad de aeronave", text: "Alinea la parte comercial y técnica antes de profundizar." },
+        { title: "Coordinar la siguiente etapa", text: "Avanza hacia inspección, negociación o cierre con un plan más claro." },
       ]
 );
 
@@ -414,8 +424,40 @@ onBeforeUnmount(() => {
 .sales-journey__header {
   position: relative;
   z-index: 1;
-  max-width: 720px;
   margin-bottom: 2.5rem;
+}
+
+.sales-journey__layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.82fr) minmax(0, 1.18fr);
+  gap: 2rem;
+  align-items: center;
+}
+
+.sales-journey__layout > div {
+  min-width: 0;
+}
+
+.sales-journey__image {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 30px;
+  border: 1px solid rgba(215, 176, 116, 0.14);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2);
+  height: 100%;
+}
+
+.sales-journey__image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.sales-journey__copy {
+  max-width: 720px;
 }
 
 .sales-timeline {
@@ -471,7 +513,8 @@ onBeforeUnmount(() => {
 @media (max-width: 1100px) {
   .sales-hero__grid,
   .sales-cta__shell,
-  .sales-line__content {
+  .sales-line__content,
+  .sales-journey__layout {
     grid-template-columns: 1fr;
   }
 
@@ -482,6 +525,11 @@ onBeforeUnmount(() => {
 
   .sales-copy h1 {
     max-width: 10ch;
+  }
+
+  .sales-journey__image img {
+    aspect-ratio: 16 / 10;
+    height: auto;
   }
 }
 

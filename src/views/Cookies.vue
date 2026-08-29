@@ -54,7 +54,7 @@ const { locale } = useLocale();
 const content = computed(() =>
   locale.value === "en"
     ? {
-        heroTag: "Legal Documentation",
+        heroTag: "Legal Information",
         heroTitle: "Cookie Policy",
         companyName: "RED SKY GROUP, S.A. DE C.V.",
         siteLabel: "Website: redskyg.com",
@@ -281,7 +281,7 @@ const content = computed(() =>
         ],
       }
     : {
-        heroTag: "Documentacion legal",
+        heroTag: "Informacion legal",
         heroTitle: "Politica de Cookies",
         companyName: "RED SKY GROUP, S.A. DE C.V.",
         siteLabel: "Sitio web: redskyg.com",

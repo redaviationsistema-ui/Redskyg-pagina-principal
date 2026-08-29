@@ -88,33 +88,33 @@ const content = computed(() =>
   locale.value === "en"
     ? {
         heroEyebrow: "Co-Ownership",
-        heroTitle: "Aircraft co-ownership with structured access.",
-        heroText: "Aircraft co-ownership is designed for aligned participants who want to share investment, operating costs, and aircraft access through a more direct model.",
+        heroTitle: "Aircraft co-ownership with shared access.",
+        heroText: "Aircraft co-ownership is designed for aligned participants who want to share investment, operating costs and aircraft access through a more direct ownership model.",
         heroPrimaryCta: "Discuss Co-Ownership",
         heroSecondaryCta: "Compare With Fractional Ownership",
-        sectionEyebrow: "Structure",
+        sectionEyebrow: "Ownership Model",
         sectionTitle: "Shared access with aligned operating criteria.",
-        sectionText: "Co-ownership can be a strong fit when multiple parties want direct aircraft access while sharing acquisition cost, operating responsibility, and long-term asset participation.",
+        sectionText: "Co-ownership can be a strong fit when multiple parties want direct aircraft access while sharing acquisition cost, operating responsibility and long-term asset participation.",
         visualEyebrow: "Ownership Touchpoints",
         visualTitle: "Each image supports a different layer of co-ownership.",
-        visualText: "The unused assets in this folder map well to access, governance, planning, asset readiness, and onboard decision-making.",
+        visualText: "These assets reinforce access, governance, planning, aircraft readiness and onboard decision-making.",
         finalTitle: "Is co-ownership the right aircraft model?",
-        finalText: "We can review travel profile, ownership preferences, and governance expectations to determine whether co-ownership is the right model.",
+        finalText: "We can review travel profile, ownership preferences and governance expectations to determine whether co-ownership is the right model.",
         finalPrimaryCta: "Request Ownership Review",
         finalSecondaryCta: "Compare With Fractional Ownership",
       }
     : {
         heroEyebrow: "Copropiedad de aeronaves",
-        heroTitle: "Copropiedad de aeronaves con acceso estructurado.",
-        heroText: "La copropiedad de aeronaves esta pensada para participantes alineados que desean compartir inversion, costos operativos y acceso a la aeronave en un modelo mas directo.",
+        heroTitle: "Copropiedad de aeronaves con acceso compartido.",
+        heroText: "La copropiedad de aeronaves esta pensada para participantes alineados que desean compartir inversion, costos operativos y acceso a la aeronave dentro de un modelo de propiedad mas directo.",
         heroPrimaryCta: "Hablar sobre copropiedad",
         heroSecondaryCta: "Comparar con propiedad fraccional",
-        sectionEyebrow: "Estructura",
+        sectionEyebrow: "Modelo de propiedad",
         sectionTitle: "Acceso compartido con criterios operativos alineados.",
         sectionText: "La copropiedad puede ser una gran opcion cuando varias partes quieren acceso directo a la aeronave mientras comparten costo de adquisicion, responsabilidad operativa y participacion de largo plazo en el activo.",
         visualEyebrow: "Momentos del modelo",
         visualTitle: "Cada imagen respalda una capa distinta de la copropiedad.",
-        visualText: "Los assets que estaban libres en esta carpeta encajan con acceso, gobierno, planeacion, disponibilidad del activo y toma de decisiones a bordo.",
+        visualText: "Estas imagenes refuerzan acceso, gobierno, planeacion, disponibilidad del activo y toma de decisiones a bordo.",
         finalTitle: "La copropiedad es el modelo correcto?",
         finalText: "Podemos revisar perfil de viaje, preferencias de propiedad y expectativas de gobierno para determinar si la copropiedad es el modelo correcto.",
         finalPrimaryCta: "Solicitar revision de propiedad",
@@ -127,13 +127,13 @@ const features = computed(() =>
     ? [
         { title: "Shared acquisition cost", text: "Capital exposure is distributed among participants instead of carried by one owner." },
         { title: "Direct asset participation", text: "The model preserves a closer relationship to the aircraft asset than standard charter usage." },
-        { title: "Governance structure", text: "Clear rules are needed for scheduling, decision-making, use, and exits." },
+        { title: "Governance criteria", text: "Clear rules are needed for scheduling, decision-making, use, and exits." },
         { title: "Operational coordination", text: "Professional management helps turn a shared asset into a workable aviation solution." },
       ]
     : [
         { title: "Costo de adquisicion compartido", text: "La exposicion de capital se distribuye entre participantes en lugar de recaer en un solo propietario." },
         { title: "Participacion directa en el activo", text: "El modelo conserva una relacion mas cercana con la aeronave que el uso estandar de charter." },
-        { title: "Estructura de gobierno", text: "Se necesitan reglas claras para programacion, toma de decisiones, uso y salidas." },
+        { title: "Criterios de gobierno", text: "Se necesitan reglas claras para programacion, toma de decisiones, uso y salidas." },
         { title: "Coordinacion operativa", text: "La gestion profesional ayuda a convertir un activo compartido en una solucion aeronautica funcional." },
       ]
 );
@@ -141,12 +141,12 @@ const features = computed(() =>
 const comparison = computed(() =>
   locale.value === "en"
     ? [
-        { title: "Compared with charter", text: "Co-ownership offers deeper control and asset participation, but with more structural commitment." },
+        { title: "Compared with charter", text: "Co-ownership offers deeper control and asset participation, but with more ongoing commitment." },
         { title: "Compared with fractional ownership", text: "It can offer more direct ownership dynamics, though usually with tighter participant alignment needs." },
         { title: "Compared with full ownership", text: "It reduces capital concentration while still preserving meaningful access and asset involvement." },
       ]
     : [
-        { title: "Comparado con charter", text: "La copropiedad ofrece mayor control y participacion en el activo, pero con mas compromiso estructural." },
+        { title: "Comparado con charter", text: "La copropiedad ofrece mayor control y participacion en el activo, pero con mayor compromiso recurrente." },
         { title: "Comparado con propiedad fraccional", text: "Puede ofrecer dinamicas de propiedad mas directas, aunque normalmente requiere una alineacion mas estrecha entre participantes." },
         { title: "Comparado con propiedad total", text: "Reduce la concentracion de capital mientras conserva acceso significativo y participacion en el activo." },
       ]
@@ -158,7 +158,7 @@ const visuals = computed(() =>
         {
           src: "/images/Copropiedad/copropiedad2.webp",
           alt: "Private jet on ramp with passengers and crew",
-          title: "Shared arrival experience",
+          title: "Shared aircraft access",
           text: "Useful when the message is about coordinated access to the aircraft instead of one-off charter service.",
         },
         {
@@ -183,7 +183,7 @@ const visuals = computed(() =>
           src: "/images/Copropiedad/copropiedad6.png",
           alt: "Interior of a private aircraft prepared for passengers",
           title: "Cabin access",
-          text: "Reinforces the experience layer of having structured, recurring access to the aircraft cabin itself.",
+          text: "Reinforces the direct cabin access that comes with recurring use of the aircraft.",
         },
         {
           src: "/images/Copropiedad/coporpriedad2.png",
@@ -196,7 +196,7 @@ const visuals = computed(() =>
         {
           src: "/images/Copropiedad/copropiedad2.webp",
           alt: "Jet privado en plataforma con pasajeros y tripulacion",
-          title: "Experiencia de acceso compartido",
+          title: "Acceso compartido a la aeronave",
           text: "Sirve cuando el mensaje es acceso coordinado a la aeronave y no un servicio aislado de charter.",
         },
         {
@@ -221,7 +221,7 @@ const visuals = computed(() =>
           src: "/images/Copropiedad/copropiedad6.png",
           alt: "Interior de aeronave privada preparado para pasajeros",
           title: "Acceso a cabina",
-          text: "Refuerza la experiencia de contar con acceso estructurado y recurrente a la aeronave.",
+          text: "Refuerza el acceso recurrente a la aeronave como parte del esquema de uso compartido.",
         },
         {
           src: "/images/Copropiedad/coporpriedad2.png",

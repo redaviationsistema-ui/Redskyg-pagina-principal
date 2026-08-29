@@ -68,38 +68,38 @@ const content = computed(() =>
     ? {
         heroEyebrow: "Aircraft Management",
         heroTitle: "Aircraft management with operational control.",
-        heroText: "If you want a more organized way to run your aircraft, we help you keep operations, maintenance, and compliance under control.",
-        heroPrimaryCta: "Request Consultation",
+        heroText: "We help owners and operators keep flight operations, maintenance planning, compliance and reporting under control.",
+        heroPrimaryCta: "Request Dedicated Support",
         heroSecondaryCta: "Explore Charter",
         sectionEyebrow: "Management Scope",
         sectionTitle: "Operational oversight with clearer visibility.",
-        sectionText: "We connect operations, regulatory control, maintenance planning, and reporting in one structure so you can focus on your priorities instead of the daily complexity of the aircraft.",
+        sectionText: "We align flight operations, regulatory follow-up, maintenance planning and reporting so the aircraft can be managed with clearer control, stronger traceability and fewer loose ends.",
       }
     : {
         heroEyebrow: "Servicios aeronauticos",
         heroTitle: "Administracion de aeronaves con control operativo.",
-        heroText: "Si buscas una operacion mas ordenada, te ayudamos a mantener bajo control cumplimiento, mantenimiento y coordinacion diaria.",
-        heroPrimaryCta: "Solicitar asesoria",
+        heroText: "Apoyamos a propietarios y operadores para mantener bajo control operaciones de vuelo, planeacion de mantenimiento, cumplimiento y reporteo.",
+        heroPrimaryCta: "Solicitar soporte dedicado",
         heroSecondaryCta: "Explorar charter",
         sectionEyebrow: "Alcance de gestion",
         sectionTitle: "Supervision operativa con visibilidad real.",
-        sectionText: "Conectamos operaciones, control regulatorio, planeacion de mantenimiento y reporteo en una sola estructura para que puedas enfocarte en tu negocio y no en la complejidad diaria de la aeronave.",
+        sectionText: "Alineamos operaciones de vuelo, seguimiento regulatorio, planeacion de mantenimiento y reporteo para administrar la aeronave con mas control, mayor trazabilidad y menos frentes sueltos.",
       }
 );
 
 const services = computed(() =>
   locale.value === "en"
     ? [
-        { title: "Regulatory compliance", text: "Keep certifications, documentation, and operating requirements in order." },
-        { title: "Crew and scheduling", text: "Coordinate pilots, readiness, and recurring flight planning with fewer loose ends." },
-        { title: "Maintenance planning", text: "Reduce risk and improve aircraft availability with structured technical follow-up." },
-        { title: "Budget and reporting", text: "See operating expenses and management priorities more clearly." },
+        { title: "Regulatory compliance", text: "Maintain certifications, documentation and operating requirements in order." },
+        { title: "Crew and scheduling", text: "Coordinate pilots, readiness and recurring flight planning with fewer loose ends." },
+        { title: "Maintenance planning", text: "Reduce risk and protect aircraft availability with structured technical follow-up." },
+        { title: "Budget and reporting", text: "Review operating expenses and management priorities with greater visibility." },
       ]
     : [
-        { title: "Cumplimiento regulatorio", text: "Mantienes en orden certificaciones, documentacion y requerimientos operativos." },
-        { title: "Tripulacion y programacion", text: "Coordinas pilotos, disponibilidad y planeacion recurrente con menos frentes sueltos." },
-        { title: "Planeacion de mantenimiento", text: "Reducimos riesgo y mejoramos disponibilidad con seguimiento tecnico estructurado." },
-        { title: "Presupuesto y reporteo", text: "Ves con mas claridad los gastos operativos y las prioridades de gestion." },
+        { title: "Cumplimiento regulatorio", text: "Mantenga en orden certificaciones, documentacion y requerimientos operativos." },
+        { title: "Tripulacion y programacion", text: "Coordine pilotos, disponibilidad y planeacion recurrente con menos frentes sueltos." },
+        { title: "Planeacion de mantenimiento", text: "Reducimos riesgo y protegemos la disponibilidad de la aeronave con seguimiento tecnico estructurado." },
+        { title: "Presupuesto y reporteo", text: "Revise con mayor claridad los gastos operativos y las prioridades de gestion." },
       ]
 );
 

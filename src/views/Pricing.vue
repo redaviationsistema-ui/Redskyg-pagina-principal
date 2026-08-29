@@ -7,8 +7,8 @@
           <h1>{{ heroContent.title }}</h1>
           <p>{{ heroContent.text }}</p>
           <div class="hero-actions">
-            <a class="btn-primary" :href="whatsappHref" target="_blank" rel="noopener noreferrer">{{ locale.value === "en" ? "Request a Quote" : "Solicitar cotizacion" }}</a>
-            <RouterLink class="btn-ghost" :to="toLocalizedRoute('Contact')">{{ locale.value === "en" ? "Speak With Operations" : "Hablar con operaciones" }}</RouterLink>
+            <a class="btn-primary" :href="whatsappHref" target="_blank" rel="noopener noreferrer">{{ locale.value === "en" ? "Request a Quote" : "Solicitar cotización" }}</a>
+            <RouterLink class="btn-ghost" :to="toLocalizedRoute('Contact')">{{ locale.value === "en" ? "Speak with an Advisor" : "Hablar con un asesor" }}</RouterLink>
           </div>
         </div>
       </section>
@@ -16,8 +16,8 @@
       <section class="section">
         <div class="container intro-grid">
           <div>
-            <span class="eyebrow">{{ locale.value === "en" ? "How Pricing Works" : "Como funciona el precio" }}</span>
-            <h2>{{ locale.value === "en" ? "Pricing variables." : "Variables de cotizacion." }}</h2>
+            <span class="eyebrow">{{ locale.value === "en" ? "How Pricing Works" : "Cómo funciona la cotización" }}</span>
+            <h2>{{ locale.value === "en" ? "What shapes the quote." : "Qué define la cotización." }}</h2>
           </div>
 
           <div class="factors-grid">
@@ -42,9 +42,9 @@
       <section class="section">
         <div class="container quote-shell">
           <div>
-            <span class="eyebrow">{{ locale.value === "en" ? "Faster Quotes" : "Cotizaciones mas rapidas" }}</span>
-            <h2>{{ locale.value === "en" ? "Send the right mission details." : "Comparta los datos de la operacion." }}</h2>
-            <p>{{ locale.value === "en" ? "For charter requests, share route, dates, passenger count, and any schedule flexibility. For aircraft transactions or management support, include the aircraft model, current location, and your objective." : "Para solicitudes de charter, comparte ruta, fechas, numero de pasajeros y cualquier flexibilidad de horario. Para transacciones o administracion de aeronaves, incluye modelo, ubicacion actual y objetivo." }}</p>
+            <span class="eyebrow">{{ locale.value === "en" ? "Faster Review" : "Revisión más ágil" }}</span>
+            <h2>{{ locale.value === "en" ? "Share the right operating details." : "Comparta los datos clave de la operación." }}</h2>
+            <p>{{ locale.value === "en" ? "For charter requests, share route, dates, passenger count, and any schedule flexibility. For aircraft transactions or management support, include the aircraft model, current location, and your objective." : "Para solicitudes de charter, comparta ruta, fechas, número de pasajeros y cualquier flexibilidad de horario. Para transacciones o administración de aeronaves, incluya modelo, ubicación actual y objetivo." }}</p>
           </div>
 
           <div class="quote-list">
@@ -57,10 +57,10 @@
 
       <section class="section final-cta">
         <div class="container cta-shell">
-          <h2>{{ locale.value === "en" ? "Need pricing support for an aviation requirement?" : "Necesita apoyo de cotizacion para un requerimiento aeronautico?" }}</h2>
-          <p>{{ locale.value === "en" ? "We can review the mission and route it to the right team so the quote reflects the real operational requirements from the start." : "Podemos revisar la operacion y dirigirla al equipo correcto para que la propuesta refleje los requerimientos reales desde el inicio." }}</p>
+          <h2>{{ locale.value === "en" ? "Need guidance for an aviation quote?" : "¿Necesita orientación para una cotización aeronáutica?" }}</h2>
+          <p>{{ locale.value === "en" ? "We can review the requirement and route it to the right team so the quote reflects the real operating scope from the start." : "Podemos revisar el requerimiento y dirigirlo al equipo correcto para que la propuesta refleje el alcance operativo real desde el inicio." }}</p>
           <div class="hero-actions">
-            <a class="btn-primary" :href="whatsappHref" target="_blank" rel="noopener noreferrer">{{ locale.value === "en" ? "Get Pricing Support" : "Recibir apoyo de precios" }}</a>
+            <a class="btn-primary" :href="whatsappHref" target="_blank" rel="noopener noreferrer">{{ locale.value === "en" ? "Request Quote Guidance" : "Solicitar orientación" }}</a>
             <RouterLink class="btn-ghost dark" :to="toLocalizedRoute('AirTaxi')">{{ locale.value === "en" ? "Explore Charter Services" : "Explorar servicios de charter" }}</RouterLink>
           </div>
         </div>
@@ -78,40 +78,40 @@ const { locale, toLocalizedRoute } = useLocale();
 const whatsappHref =
   locale.value === "en"
     ? "https://wa.me/525586186576?text=Hello,%20I%20would%20like%20pricing%20information%20for%20a%20private%20flight%20or%20aviation%20service."
-    : "https://wa.me/525586186576?text=Hola,%20quiero%20informacion%20de%20precios%20para%20un%20vuelo%20privado%20o%20servicio%20aeronautico.";
+    : "https://wa.me/525586186576?text=Hola,%20quiero%20informaci%C3%B3n%20de%20precios%20para%20un%20vuelo%20privado%20o%20servicio%20aeron%C3%A1utico.";
 
 const heroContent = computed(() =>
   locale.value === "en"
     ? {
         eyebrow: "Charter Pricing",
-        title: "Private flight pricing by route, aircraft, and operational scope.",
+        title: "Pricing guided by route, aircraft and operational scope.",
         text:
-          "Sky Group does not work with flat rates because aircraft category, routing, airports, crew positioning, and technical requirements change the final cost of each operation.",
+          "Each quote is evaluated case by case because aircraft category, route profile, airport requirements, crew positioning and timing directly affect the final operating cost.",
       }
     : {
-        eyebrow: "Precios de charter",
-        title: "Precios de vuelo privado segun ruta, aeronave y operacion.",
+        eyebrow: "Cotización de vuelos privados",
+        title: "La cotización se define según ruta, aeronave y alcance operativo.",
         text:
-          "Sky Group no maneja tarifas planas porque la categoria de aeronave, la ruta, los aeropuertos, el posicionamiento de tripulacion y los requerimientos tecnicos cambian el costo final de cada operacion.",
+          "Cada cotización se revisa caso por caso porque la categoría de aeronave, el perfil de ruta, los requerimientos aeroportuarios, el posicionamiento de tripulación y los tiempos modifican el costo final de operación.",
       }
 );
 
 const factors = [
   {
-    title: locale.value === "en" ? "Aircraft category" : "Categoria de aeronave",
-    text: locale.value === "en" ? "Light jets, midsize aircraft, heavy jets, helicopters, and specialized aircraft each carry different fixed and variable cost structures." : "Jets ligeros, midsize, heavy jets, helicopteros y aeronaves especializadas tienen estructuras de costo distintas.",
+    title: locale.value === "en" ? "Aircraft category" : "Categoría de aeronave",
+    text: locale.value === "en" ? "Light jets, midsize aircraft, heavy jets, helicopters, and specialized aircraft each carry different fixed and variable cost structures." : "Jets ligeros, midsize, heavy jets, helicópteros y aeronaves especializadas tienen estructuras de costo fijas y variables distintas.",
   },
   {
     title: locale.value === "en" ? "Route and airport profile" : "Ruta y perfil de aeropuertos",
-    text: locale.value === "en" ? "Flight time, repositioning, permits, airport fees, and access to private terminals all affect the final quote." : "Tiempo de vuelo, posicionamiento, permisos, tarifas aeroportuarias y acceso a terminales privadas afectan la cotizacion final.",
+    text: locale.value === "en" ? "Flight time, repositioning, permits, airport fees and private terminal access all affect the final quote." : "Tiempo de vuelo, posicionamiento, permisos, tarifas aeroportuarias y acceso a terminales privadas afectan la cotizacion final.",
   },
   {
     title: locale.value === "en" ? "Availability and timing" : "Disponibilidad y tiempos",
-    text: locale.value === "en" ? "Short-notice requests, peak travel windows, and overnight crew requirements can shift pricing materially." : "Solicitudes urgentes, ventanas de alta demanda y requerimientos de pernocta de tripulacion pueden mover el precio.",
+    text: locale.value === "en" ? "Short-notice requests, peak travel windows and overnight crew requirements can shift pricing materially." : "Solicitudes urgentes, ventanas de alta demanda y requerimientos de pernocta de tripulacion pueden mover el precio de forma relevante.",
   },
   {
     title: locale.value === "en" ? "Operational scope" : "Alcance operativo",
-    text: locale.value === "en" ? "Advisory, management, technical support, import-export coordination, and acquisitions are scoped according to complexity and timeline." : "Asesoria, administracion, soporte tecnico, importacion-exportacion y adquisiciones se cotizan segun complejidad y calendario.",
+    text: locale.value === "en" ? "Advisory, management, technical support, import-export coordination, and acquisitions are scoped according to complexity and timeline." : "Asesoría, administración, soporte técnico, importación y exportación, y adquisiciones se cotizan según complejidad y calendario.",
   },
 ];
 
@@ -119,31 +119,31 @@ const servicePricing = [
   {
     tag: locale.value === "en" ? "Charter" : "Charter",
     title: locale.value === "en" ? "Private flight pricing" : "Precio de vuelo privado",
-    text: locale.value === "en" ? "Quoted based on route, aircraft category, positioning, crew logistics, passenger needs, and mission timing." : "Se cotiza segun ruta, categoria de aeronave, posicionamiento, logistica de tripulacion, necesidades de pasajeros y tiempo de operacion.",
+    text: locale.value === "en" ? "Quoted based on route, aircraft category, positioning, crew logistics, passenger requirements and mission timing." : "Se cotiza segun ruta, categoria de aeronave, posicionamiento, logistica de tripulacion, requerimientos de pasajeros y tiempo de operacion.",
   },
   {
-    tag: locale.value === "en" ? "Management" : "Gestion",
-    title: locale.value === "en" ? "Aircraft administration programs" : "Programas de administracion de aeronaves",
-    text: locale.value === "en" ? "Structured according to the aircraft profile, operational oversight required, compliance load, and reporting scope." : "Se estructuran de acuerdo con el perfil de la aeronave, el nivel de supervision requerido, cumplimiento y reporteo.",
+    tag: locale.value === "en" ? "Management" : "Gestión",
+    title: locale.value === "en" ? "Aircraft management programs" : "Programas de administración de aeronaves",
+    text: locale.value === "en" ? "Structured according to the aircraft profile, operational oversight required, compliance load and reporting scope." : "Se estructuran de acuerdo con el perfil de la aeronave, el nivel de supervision requerido, cumplimiento y reporteo.",
   },
   {
     tag: locale.value === "en" ? "Transactions" : "Transacciones",
-    title: locale.value === "en" ? "Aircraft acquisition and sales advisory" : "Asesoria para compra y venta de aeronaves",
-    text: locale.value === "en" ? "Advisory fees depend on sourcing requirements, due diligence complexity, valuation work, and transaction support." : "Los honorarios dependen del sourcing, la debida diligencia, la valuacion y el soporte transaccional.",
+    title: locale.value === "en" ? "Aircraft acquisition and sales advisory" : "Asesoría para compra y venta de aeronaves",
+    text: locale.value === "en" ? "Advisory fees depend on sourcing requirements, due diligence complexity, valuation scope, and transaction support." : "Los honorarios dependen del sourcing, la debida diligencia, el alcance de valuación y el soporte transaccional.",
   },
   {
-    tag: locale.value === "en" ? "Technical" : "Tecnico",
-    title: locale.value === "en" ? "Avionics, engines, and import-export support" : "Avionica, motores e importacion-exportacion",
-    text: locale.value === "en" ? "Technical and logistics pricing is built around certification review, parts scope, transport, and regulatory coordination." : "El precio tecnico y logistico se construye alrededor de certificaciones, alcance de partes, transporte y coordinacion regulatoria.",
+    tag: locale.value === "en" ? "Technical" : "Técnico",
+    title: locale.value === "en" ? "Avionics, engines, and import-export support" : "Aviónica, motores e importación y exportación",
+    text: locale.value === "en" ? "Technical and logistics pricing is built around certification review, parts scope, transport, and regulatory coordination." : "El precio técnico y logístico se construye alrededor de certificaciones, alcance de partes, transporte y coordinación regulatoria.",
   },
 ];
 
 const quoteChecklist = [
   locale.value === "en" ? "Departure and destination airports" : "Aeropuerto de salida y destino",
   locale.value === "en" ? "Preferred dates and time windows" : "Fechas preferidas y ventanas de horario",
-  locale.value === "en" ? "Passenger count and baggage profile" : "Numero de pasajeros y equipaje",
+  locale.value === "en" ? "Passenger count and baggage profile" : "Número de pasajeros y equipaje",
   locale.value === "en" ? "Aircraft model or service type when available" : "Modelo de aeronave o tipo de servicio si ya se conoce",
-  locale.value === "en" ? "Whether the request is urgent, recurring, or one-time" : "Si la solicitud es urgente, recurrente o unica",
+  locale.value === "en" ? "Whether the request is urgent, recurring, or one-time" : "Si la solicitud es urgente, recurrente o única",
 ];
 </script>
 

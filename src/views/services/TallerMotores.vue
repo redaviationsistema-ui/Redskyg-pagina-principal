@@ -80,8 +80,8 @@ import { useLocale } from "../../i18n";
 const { locale, toLocalizedRoute } = useLocale();
 
 const heroStyle = {
-  backgroundImage: 'url("/images/Service/TallerMotores.png")',
-  backgroundPosition: "center 42%",
+  backgroundImage: 'url("/images/Home/servicios1.jpg")',
+  backgroundPosition: "center 38%",
 };
 
 const content = computed(() =>
@@ -89,34 +89,34 @@ const content = computed(() =>
     ? {
         heroEyebrow: "Engine Shop Support",
         heroTitle: "Engine logistics and technical support.",
-        heroText: "Sky Group structures engine support around logistics, documentation, timing, and protection of critical aviation assets.",
+        heroText: "Sky Group structures engine support around logistics, documentation, traceability, timing and protection of critical aviation assets.",
         heroPrimaryCta: "Request Engine Consultation",
         heroSecondaryCta: "Explore Import and Export",
         sectionEyebrow: "Engine Coordination",
         sectionTitle: "Engine coordination with tighter execution.",
-        sectionText: "This service supports clients dealing with engine logistics, documentation, technical handling, and coordination across multiple stakeholders and jurisdictions.",
+        sectionText: "This service supports clients managing engine logistics, documentation, technical handling and coordination across multiple stakeholders and jurisdictions.",
         visualEyebrow: "Engine Workflow",
-        visualTitle: "Visual support across the engine program.",
-        visualText: "These visuals reinforce the main workstreams behind engine support: technical intervention, movement control, and aircraft asset protection.",
+        visualTitle: "Support across the engine workstream.",
+        visualText: "These visuals reinforce the main workstreams behind engine support: technical intervention, movement control and aircraft asset protection.",
         finalTitle: "Need support for an engine program?",
-        finalText: "We can help define the documentation, process flow, and next operational steps for high-value engine work.",
+        finalText: "We can help define the documentation, process flow and next operational steps for high-value engine work.",
         finalPrimaryCta: "Talk to Technical Team",
         finalSecondaryCta: "Explore Avionics Support",
       }
     : {
         heroEyebrow: "Soporte de motores",
         heroTitle: "Logistica y soporte tecnico para motores.",
-        heroText: "Sky Group estructura el soporte de motores alrededor de logistica, documentacion, tiempos y proteccion de activos aeronauticos criticos.",
+        heroText: "Sky Group estructura el soporte de motores alrededor de logistica, documentacion, trazabilidad, tiempos y proteccion de activos aeronauticos criticos.",
         heroPrimaryCta: "Solicitar asesoria de motores",
         heroSecondaryCta: "Explorar importacion y exportacion",
         sectionEyebrow: "Coordinacion de motores",
         sectionTitle: "Coordinacion de motores con mayor precision.",
         sectionText: "Este servicio apoya a clientes que trabajan con logistica de motores, documentacion, manejo tecnico y coordinacion entre multiples participantes y jurisdicciones.",
         visualEyebrow: "Flujo del programa",
-        visualTitle: "Apoyo visual para cada etapa del servicio.",
+        visualTitle: "Soporte para cada frente del programa de motores.",
         visualText: "Estas imagenes refuerzan los frentes principales del soporte de motores: intervencion tecnica, control logistico y proteccion del activo aeronautico.",
         finalTitle: "Necesita soporte para un programa de motores?",
-        finalText: "Podemos ayudarte a definir documentacion, flujo de proceso y siguientes pasos operativos para trabajos de motores de alto valor.",
+        finalText: "Podemos ayudarle a definir documentacion, flujo de proceso y siguientes pasos operativos para trabajos de motores de alto valor.",
         finalPrimaryCta: "Hablar con equipo tecnico",
         finalSecondaryCta: "Explorar soporte de avionica",
       }
@@ -156,7 +156,7 @@ const visuals = computed(() =>
   locale.value === "en"
     ? [
         {
-          src: "/images/Service/TallerMotores1.png",
+          src: "/images/Home/motor2.jpg",
           alt: "Engine logistics visual with global routing",
           title: "Logistics and traceability",
           text: "Ideal for the import, routing, and documentation side of engine support where timing and visibility matter.",
@@ -170,7 +170,7 @@ const visuals = computed(() =>
       ]
     : [
         {
-          src: "/images/Service/TallerMotores1.png",
+          src: "/images/Home/motor2.jpg",
           alt: "Visual de logistica de motores con trazabilidad global",
           title: "Logistica y trazabilidad",
           text: "Funciona para reforzar la parte de importacion, traslado y documentacion del soporte de motores, donde el control del proceso es clave.",

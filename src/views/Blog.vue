@@ -291,8 +291,8 @@ const heroStats = computed(() =>
   locale.value === "en"
     ? [
         { value: "Owners", label: "Aircraft sales and qualified buyer positioning" },
-        { value: "Operators", label: "Flight demand, coordination, and network access" },
-        { value: "Buyers", label: "Private aviation access across MX, LATAM, and beyond" },
+        { value: "Operators", label: "Flight demand, coordination and network access" },
+        { value: "Buyers", label: "Private aviation access across MX, LATAM and beyond" },
       ]
     : [
         { value: "Propietarios", label: "Venta de aeronaves y posicionamiento ante compradores calificados" },
@@ -304,14 +304,14 @@ const heroStats = computed(() =>
 const trustSignals = computed(() =>
   locale.value === "en"
     ? [
-        { title: "Mexico / LATAM", text: "Commercial reach built for regional and cross-border private aviation demand." },
-        { title: "Operator-facing", text: "A stronger path for owners, operators, buyers, and charter clients." },
-        { title: "Action-led", text: "Each section is designed to move the visitor into listing, quoting, or closing." },
+        { title: "Mexico / LATAM", text: "Commercial reach built for regional and cross-border executive aviation demand." },
+        { title: "Operator-facing", text: "A clearer path for owners, operators, buyers and charter clients." },
+        { title: "Action-led", text: "Each section is designed to move the visitor toward listing, quoting or closing." },
       ]
     : [
-        { title: "Mexico / LATAM", text: "Alcance comercial construido para demanda regional y transfronteriza de aviacion privada." },
+        { title: "Mexico / LATAM", text: "Alcance comercial construido para demanda regional y transfronteriza de aviacion ejecutiva." },
         { title: "Enfoque operador", text: "Una ruta mas clara para propietarios, operadores, compradores y clientes charter." },
-        { title: "Orientado a accion", text: "Cada seccion esta pensada para mover al visitante a listar, cotizar o cerrar." },
+        { title: "Orientado a accion", text: "Cada seccion esta pensada para mover al visitante hacia listar, cotizar o cerrar." },
       ]
 );
 
@@ -319,9 +319,9 @@ const content = computed(() =>
   locale.value === "en"
     ? {
         tag: "Aviation Business Platform",
-        title: "Sell, Operate and Access Private Aviation with Precision",
+        title: "A commercial gateway for executive aviation",
         text:
-          "Sky Group connects aircraft owners, operators and buyers across Mexico, LATAM and global markets.",
+          "Sky Group connects owners, operators and buyers through a commercial structure built for aircraft transactions, private flights and executive aviation demand.",
         heroAlt: "Private aviation business platform with executive aircraft visual",
         panelLabel: "Who we serve",
         primaryCta: "Sell Your Aircraft",
@@ -329,32 +329,32 @@ const content = computed(() =>
         quoteCta: "Get valuation",
         goToPage: "Open capability",
         whatWeDoEyebrow: "What We Do",
-        whatWeDoTitle: "Three clear commercial paths.",
-        whatWeDoText: "Focus the visitor on the transaction, flight, or platform capability they actually need.",
+        whatWeDoTitle: "Three direct aviation paths.",
+        whatWeDoText: "Guide visitors toward the aircraft transaction, private flight or platform capability they actually need.",
         processEyebrow: "How It Works",
-        processTitle: "A simple operating flow from demand to execution.",
-        processText: "The page is structured to move users through one business path instead of overwhelming them with a catalog.",
+        processTitle: "A simpler path from demand to execution.",
+        processText: "The page is structured to move users through one business path instead of overwhelming them with a generic catalog.",
         mainPagesEyebrow: "Platform Capabilities",
-        mainPagesTitle: "Core capabilities for owners, operators, and buyers.",
-        mainPagesText: "These pages work as the commercial infrastructure behind sales, flight demand, and quoting.",
+        mainPagesTitle: "Core capabilities for owners, operators and buyers.",
+        mainPagesText: "These pages work as the commercial infrastructure behind aircraft sales, flight demand and quoting.",
         mainPagesCta: "Commercial entry points",
         featuredCategory: "Marketplace vision",
         featuredAlt: "Aviation marketplace concept for Sky Group",
         marketplaceEyebrow: "Aviation Marketplace",
         marketplaceTitle: "The next layer is marketplace infrastructure.",
         marketplaceText:
-          "Sky Group is moving toward a stronger aviation marketplace model where owners, operators, and buyers can connect through one controlled environment.",
+          "Sky Group is moving toward a stronger aviation marketplace model where owners, operators and buyers can connect through one controlled environment.",
         marketplaceCta: "Join as operator",
         confidenceEyebrow: "Why It Converts Better",
-        confidenceTitle: "Built to feel like a business platform, not a blog index.",
+        confidenceTitle: "Built to feel like an aviation platform, not a blog index.",
         confidenceText:
-          "The goal is to create confidence, clarity, and premium positioning before the client reaches sales or operations.",
+          "The goal is to build confidence, clarity and stronger commercial positioning before the client reaches sales or operations.",
       }
     : {
         tag: "Plataforma de negocio aeronautico",
-        title: "Vende, opera y accede a la aviacion privada con precision",
+        title: "Una puerta comercial para la aviacion ejecutiva",
         text:
-          "Sky Group conecta propietarios de aeronaves, operadores y compradores a traves de Mexico, LATAM y mercados globales.",
+          "Sky Group conecta propietarios, operadores y compradores mediante una estructura comercial pensada para transacciones de aeronaves, vuelos privados y demanda de aviacion ejecutiva.",
         heroAlt: "Plataforma aeronautica con visual de aeronave ejecutiva",
         panelLabel: "A quien servimos",
         primaryCta: "Vende tu aeronave",
@@ -362,14 +362,14 @@ const content = computed(() =>
         quoteCta: "Solicitar valuacion",
         goToPage: "Abrir capacidad",
         whatWeDoEyebrow: "Que hacemos",
-        whatWeDoTitle: "Tres rutas comerciales claras.",
-        whatWeDoText: "Enfoca al visitante en la transaccion, vuelo o capacidad de plataforma que realmente necesita.",
+        whatWeDoTitle: "Tres rutas directas de aviacion.",
+        whatWeDoText: "Guiamos al visitante hacia la transaccion de aeronave, vuelo privado o capacidad de plataforma que realmente necesita.",
         processEyebrow: "Como funciona",
-        processTitle: "Un flujo simple desde la demanda hasta la ejecucion.",
-        processText: "La pagina esta estructurada para mover al usuario por una ruta de negocio en lugar de saturarlo con un catalogo.",
+        processTitle: "Una ruta mas clara entre demanda y ejecucion.",
+        processText: "La pagina esta estructurada para mover al usuario por una ruta de negocio en lugar de saturarlo con un catalogo generico.",
         mainPagesEyebrow: "Capacidades de la plataforma",
         mainPagesTitle: "Capacidades centrales para propietarios, operadores y compradores.",
-        mainPagesText: "Estas paginas funcionan como la infraestructura comercial detras de ventas, demanda de vuelo y cotizacion.",
+        mainPagesText: "Estas paginas funcionan como la infraestructura comercial detras de ventas de aeronaves, demanda de vuelo y cotizacion.",
         mainPagesCta: "Entradas comerciales",
         featuredCategory: "Vision de marketplace",
         featuredAlt: "Concepto de marketplace aeronautico para Sky Group",
@@ -379,9 +379,9 @@ const content = computed(() =>
           "Sky Group puede evolucionar hacia un modelo de marketplace aeronautico donde propietarios, operadores y compradores se conecten dentro de un entorno mas controlado.",
         marketplaceCta: "Unirme como operador",
         confidenceEyebrow: "Por que convierte mejor",
-        confidenceTitle: "Pensada para sentirse como plataforma de negocio, no como indice de blog.",
+        confidenceTitle: "Pensada para sentirse como plataforma aeronautica, no como indice de blog.",
         confidenceText:
-          "El objetivo es construir confianza, claridad y posicionamiento premium antes de que el cliente llegue a ventas u operaciones.",
+          "El objetivo es construir confianza, claridad y mejor posicionamiento comercial antes de que el cliente llegue a ventas u operaciones.",
       }
 );
 
@@ -414,12 +414,12 @@ const whatWeDo = computed(() =>
     ? [
         { kicker: "Aircraft Sales", title: "Sell aircraft with stronger market positioning", text: "Connect listings with qualified buyers and a clearer transaction path.", cta: "List your aircraft", to: sellAircraftPath.value },
         { kicker: "Private Flights", title: "Request flights with faster coordination", text: "Move into verified availability, route review, and direct operational support.", cta: "Request a flight", to: charterPath.value },
-        { kicker: "Aviation Marketplace", title: "Prepare for a marketplace-driven model", text: "Build the bridge between owners, operators, and buyers in one premium environment.", cta: "Join as operator", to: quotePagePath.value },
+        { kicker: "Aviation Marketplace", title: "Prepare for a marketplace-driven model", text: "Build the bridge between owners, operators, and buyers in one controlled aviation environment.", cta: "Join as operator", to: quotePagePath.value },
       ]
     : [
         { kicker: "Venta de aeronaves", title: "Vende aeronaves con mejor posicionamiento de mercado", text: "Conecta listados con compradores calificados y un proceso transaccional mas claro.", cta: "Publica tu aeronave", to: sellAircraftPath.value },
         { kicker: "Vuelos privados", title: "Solicita vuelos con coordinacion mas rapida", text: "Entra a disponibilidad verificada, revision de ruta y soporte operativo directo.", cta: "Solicitar vuelo", to: charterPath.value },
-        { kicker: "Marketplace aeronautico", title: "Prepara el camino hacia un modelo marketplace", text: "Construye el puente entre propietarios, operadores y compradores dentro de un entorno premium.", cta: "Unete como operador", to: quotePagePath.value },
+        { kicker: "Marketplace aeronautico", title: "Prepara el camino hacia un modelo marketplace", text: "Construye el puente entre propietarios, operadores y compradores dentro de un entorno aeronautico controlado.", cta: "Unete como operador", to: quotePagePath.value },
       ]
 );
 const businessSteps = computed(() =>
@@ -452,13 +452,13 @@ const confidenceItems = computed(() =>
   locale.value === "en"
     ? [
         { title: "Clearer commercial hierarchy", text: "The page now explains what Sky Group does before asking the visitor to browse links." },
-        { title: "Stronger conversion visibility", text: "Listing, valuation, flight request, and operator actions stay visible across the whole experience." },
-        { title: "More premium perception", text: "The layout feels closer to a controlled aviation platform than a content archive." },
+        { title: "Stronger conversion visibility", text: "Listing, valuation, flight request, and operator actions stay visible across the full conversion path." },
+        { title: "Stronger platform perception", text: "The layout feels closer to a controlled aviation platform than a content archive." },
       ]
     : [
         { title: "Jerarquia comercial mas clara", text: "La pagina ahora explica que hace Sky Group antes de pedirle al visitante que navegue enlaces." },
-        { title: "Conversion mas visible", text: "Listado, valuacion, solicitud de vuelo y accion para operadores se mantienen presentes en toda la experiencia." },
-        { title: "Percepcion mas premium", text: "El layout se siente mas cercano a una plataforma aeronautica controlada que a un archivo de contenido." },
+        { title: "Conversion mas visible", text: "Listado, valuacion, solicitud de vuelo y accion para operadores se mantienen presentes a lo largo de todo el recorrido." },
+        { title: "Percepcion de plataforma mas solida", text: "El layout se siente mas cercano a una plataforma aeronautica controlada que a un archivo de contenido." },
       ]
 );
 const marketplaceLink = "https://redskyg.com/";

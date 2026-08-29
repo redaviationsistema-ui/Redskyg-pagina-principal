@@ -262,8 +262,8 @@ const timelineIcons = [
 
 const journeyWhatsappHref = computed(() =>
   locale.value === "en"
-    ? "https://wa.me/525586186576?text=Hello,%20I%20need%20immediate%20private%20aviation%20availability.%20Could%20an%20advisor%20help%20me%3F"
-    : "https://wa.me/525586186576?text=Hola,%20necesito%20disponibilidad%20inmediata%20de%20aviacion%20privada.%20Me%20puede%20apoyar%20un%20asesor%3F"
+    ? "https://wa.me/525586186576?text=Hello,%20I%20need%20immediate%20private%20aviation%20availability.%20Could%20the%20Sky%20Group%20team%20assist%20me%3F"
+    : "https://wa.me/525586186576?text=Hola,%20necesito%20disponibilidad%20inmediata%20de%20aviaci%C3%B3n%20privada.%20%C2%BFMe%20puede%20apoyar%20el%20equipo%20de%20Sky%20Group%3F"
 );
 
 const content = computed(() =>
@@ -271,114 +271,114 @@ const content = computed(() =>
     ? {
         heroEyebrow: "Sky Group",
         heroTitle:
-          "Strategic support for private aviation.",
+          "Integrated support for executive aviation.",
         heroText:
-          "Sky Group is an aviation group focused on executive charter, operations, aircraft transactions, and technical coordination for clients who need clearer and more specialized support.",
-        heroPrimaryCta: "Talk to Sky Group",
+          "Sky Group coordinates private flights, aircraft transactions, operational support and technical follow-up through a single aviation point of contact.",
+        heroPrimaryCta: "Speak with an Advisor",
         heroSecondaryCta: "Explore Private Charter",
         introEyebrow: "Who We Are",
         introTitle:
-          "Commercial, operational, technical execution.",
+          "Executive aviation support with commercial, technical and operational judgment.",
         introParagraphs: [
-          "Sky Group operates with a structure designed to reduce friction for clients who need more than one isolated aviation service. Instead of treating charter, aircraft advisory, technical support, and operations as separate silos, we align them under one coordinated approach.",
-          "That makes the experience clearer for owners, executives, operators, and buyers who need responsive guidance, stronger oversight, and a team that understands both the strategic and operational side of aviation.",
+          "We integrate private charter, aircraft sourcing, transaction support and technical coordination under one operating structure. This reduces fragmentation and gives clients a clearer path from inquiry to execution.",
+          "Owners, operators and flight departments work with one team that understands mission requirements, aircraft positioning, technical review, documentation flow and commercial timing.",
         ],
         experienceAlt: "Executive aviation environment",
         experienceEyebrow: "How We Work",
-        experienceTitle: "Experience with operational structure.",
+        experienceTitle: "Aviation support with execution discipline.",
         experienceText:
-          "We approach aviation with a combination of commercial awareness, operational discipline, regulatory attention, and premium client handling. The goal is not only to move aircraft or coordinate flights, but to protect time, reduce complexity, and support better decisions.",
+          "We align commercial coordination, operational control and regulatory follow-up so each requirement advances with clearer scope, faster response and stronger execution quality.",
         capabilitiesEyebrow: "Core Capabilities",
-        capabilitiesTitle: "Capabilities across the aviation cycle.",
+        capabilitiesTitle: "Capabilities across executive aviation.",
         capabilitiesAlt: "Sky Group core capabilities",
         capabilitiesCta: "Explore service",
         strategyEyebrow: "Strategic View",
         strategyTitle:
-          "Aviation is a business asset and an operational system.",
+          "Each aviation decision affects cost, timing, and asset exposure.",
         strategyText:
-          "Every charter request, ownership structure, transaction, maintenance decision, or technical review affects cost, timing, risk, and long-term value. Sky Group is built around that broader reality, which is why our role goes beyond execution into informed guidance.",
-        strategyMarkerEyebrow: "Integrated approach",
-        strategyMarkerText: "Commercial, technical, and operational.",
+          "Private charter, aircraft acquisition, technical review and recurrent flight operations should not be managed in isolation. We align those variables so clients can move with better information, traceability and operational control.",
+        strategyMarkerEyebrow: "Working model",
+        strategyMarkerText: "Commercial, technical, and operational alignment.",
         strategyImageAlt: "Sky Group strategic view",
         strategyBadgeEyebrow: "Sky Group",
-        strategyBadgeText: "Informed decisions, coordinated execution.",
+        strategyBadgeText: "Clearer decisions, coordinated execution.",
         journeyEyebrow: "Why Trust Sky Group",
-        journeyTitle: "Strategic coverage for private aviation.",
+        journeyTitle: "Support built around real aviation priorities.",
         journeyText:
-          "Need immediate availability? We focus on operational coverage, faster response, concierge coordination, and clearer execution for high-value private aviation clients.",
-        journeyPrimaryCta: "Get Instant Quote",
-        journeySecondaryCta: "Speak to Advisor",
+          "We support executive aviation clients who need availability review, transaction guidance, technical follow-up, and a faster path from request to execution.",
+        journeyPrimaryCta: "Request Support",
+        journeySecondaryCta: "Speak with an Advisor",
         journeyFootnote: "Response in under 15 minutes",
         finalEyebrow: "Next Step",
         finalTitle:
-          "Charter, aircraft, operations connected.",
+          "Your operation, supported end to end.",
         finalText:
-          "If you are planning a flight, evaluating an aircraft, structuring ownership, or looking for technical and operational support, we can help define the right next move.",
-        finalPrimaryCta: "Contact Sky Group",
+          "Tell us about your requirement and we will coordinate the right commercial, operational or technical response.",
+        finalPrimaryCta: "Speak with an Advisor",
         finalSecondaryCta: "View Pricing Guidance",
       }
     : {
         heroEyebrow: "Sky Group",
         heroTitle:
-          "Soporte estrategico para aviacion privada.",
+          "Soporte integral para aviación ejecutiva.",
         heroText:
-          "Sky Group es un grupo aeronautico enfocado en charter ejecutivo, operaciones, transacciones de aeronaves y coordinacion tecnica para clientes que buscan una atencion mas clara y especializada.",
-        heroPrimaryCta: "Hablar con Sky Group",
+          "Sky Group coordina vuelos privados, transacciones de aeronaves, soporte operativo y seguimiento técnico a través de un solo punto de contacto aeronáutico.",
+        heroPrimaryCta: "Hablar con un asesor dedicado",
         heroSecondaryCta: "Explorar charter privado",
-        introEyebrow: "Quienes somos",
+        introEyebrow: "Quiénes somos",
         introTitle:
-          "Ejecucion comercial, operativa y tecnica conectada.",
+          "Soporte de aviación ejecutiva con criterio comercial, técnico y operativo.",
         introParagraphs: [
-          "Sky Group opera con una estructura pensada para reducir friccion a clientes que necesitan mas de un servicio aeronautico. En lugar de tratar charter, asesoria de aeronaves, soporte tecnico y operaciones como silos separados, los alineamos bajo un mismo enfoque coordinado.",
-          "Eso vuelve la experiencia mas clara para propietarios, ejecutivos, operadores y compradores que necesitan respuesta, supervision y un equipo que entienda tanto la parte estrategica como la operativa de la aviacion.",
+          "Integramos vuelos privados, localización de aeronaves, soporte transaccional y coordinación técnica dentro de una misma estructura operativa. Eso reduce fragmentación y ofrece una ruta más clara entre la solicitud y la ejecución.",
+          "Propietarios, operadores y departamentos de vuelo trabajan con un equipo que entiende requerimientos de misión, posicionamiento de aeronaves, revisión técnica, flujo documental y tiempos comerciales.",
         ],
-        experienceAlt: "Entorno de aviacion ejecutiva",
-        experienceEyebrow: "Como trabajamos",
-        experienceTitle: "Experiencia con estructura operativa.",
+        experienceAlt: "Entorno de aviación ejecutiva",
+        experienceEyebrow: "Cómo trabajamos",
+        experienceTitle: "Soporte aeronáutico con disciplina de ejecución.",
         experienceText:
-          "Abordamos la aviacion con una mezcla de criterio comercial, disciplina operativa, atencion regulatoria y trato premium al cliente. El objetivo no es solo mover aeronaves o coordinar vuelos, sino proteger tiempo, reducir complejidad y apoyar mejores decisiones.",
+          "Alineamos coordinación comercial, control operativo y seguimiento regulatorio para que cada requerimiento avance con mejor alcance, respuesta más ágil y mayor calidad de ejecución.",
         capabilitiesEyebrow: "Capacidades clave",
-        capabilitiesTitle: "Capacidades para todo el ciclo de aviacion.",
+        capabilitiesTitle: "Capacidades para aviación ejecutiva.",
         capabilitiesAlt: "Capacidades clave de Sky Group",
         capabilitiesCta: "Explorar servicio",
         strategyEyebrow: "Vision estrategica",
         strategyTitle:
-          "La aviacion es un activo y un sistema operativo.",
+          "Cada decisión aeronáutica impacta costo, tiempo y exposición del activo.",
         strategyText:
-          "Cada solicitud de charter, estructura de propiedad, transaccion, decision de mantenimiento o revision tecnica afecta costo, tiempo, riesgo y valor de largo plazo. Sky Group esta construido alrededor de esa realidad, por eso nuestro rol va mas alla de ejecutar y se convierte en una guia informada.",
-        strategyMarkerEyebrow: "Enfoque integral",
-        strategyMarkerText: "Comercial, tecnico y operativo.",
+          "Los vuelos privados, la adquisición de aeronaves, la revisión técnica y la operación recurrente no deben gestionarse por separado. Alineamos esas variables para que el cliente avance con mejor información, mayor trazabilidad y mejor control operativo.",
+        strategyMarkerEyebrow: "Modelo de trabajo",
+        strategyMarkerText: "Alineación comercial, técnica y operativa.",
         strategyImageAlt: "Vision estrategica de Sky Group",
         strategyBadgeEyebrow: "Sky Group",
-        strategyBadgeText: "Decision informada, ejecucion coordinada.",
-        journeyEyebrow: "Por que confiar en Sky Group",
-        journeyTitle: "Cobertura estrategica para aviacion privada.",
+        strategyBadgeText: "Mejor decisión, ejecución coordinada.",
+        journeyEyebrow: "Por qué confiar en Sky Group",
+        journeyTitle: "Soporte basado en prioridades reales de aviación.",
         journeyText:
-          "Necesitas disponibilidad inmediata? Nuestro enfoque esta en cobertura operativa, respuesta mas rapida, coordinacion premium y ejecucion mas clara para clientes de aviacion ejecutiva.",
-        journeyPrimaryCta: "Cotizar vuelo ahora",
-        journeySecondaryCta: "Hablar con asesor",
+          "Atendemos clientes de aviación ejecutiva que requieren revisión de disponibilidad, guía transaccional, seguimiento técnico y una ruta más ágil entre la solicitud y la ejecución.",
+        journeyPrimaryCta: "Solicitar soporte",
+        journeySecondaryCta: "Hablar con un asesor",
         journeyFootnote: "Respuesta en menos de 15 minutos",
         finalEyebrow: "Siguiente paso",
         finalTitle:
-          "Charter, aeronaves y operaciones conectadas.",
+          "Su operación, respaldada de principio a fin.",
         finalText:
-          "Si estas planeando un vuelo, evaluando una aeronave, estructurando propiedad o buscando soporte tecnico y operativo, podemos ayudarte a definir el siguiente movimiento correcto.",
-        finalPrimaryCta: "Contactar a Sky Group",
-        finalSecondaryCta: "Ver guia de precios",
+          "Comparta su requerimiento y coordinaremos la respuesta comercial, operativa o técnica adecuada.",
+        finalPrimaryCta: "Hablar con un asesor",
+        finalSecondaryCta: "Ver guía de precios",
       }
 );
 
 const metrics = computed(() =>
   locale.value === "en"
     ? [
-        { value: "20+", label: "Years linked to aviation experience" },
-        { value: "500+", label: "Flights and aviation operations supported" },
-        { value: "Multi-Service", label: "Commercial, technical, and operational scope" },
+        { value: "20+", label: "Years in executive aviation support" },
+        { value: "500+", label: "Flights and aviation assignments coordinated" },
+        { value: "Multi-Service", label: "Commercial, technical and operational coverage" },
       ]
     : [
-        { value: "20+", label: "Anos vinculados a experiencia aeronautica" },
-        { value: "500+", label: "Vuelos y operaciones aeronauticas atendidas" },
-        { value: "Multiservicio", label: "Alcance comercial, tecnico y operativo" },
+        { value: "20+", label: "Años en soporte de aviación ejecutiva" },
+        { value: "500+", label: "Vuelos y requerimientos aeronáuticos coordinados" },
+        { value: "Multiservicio", label: "Cobertura comercial, técnica y operativa" },
       ]
 );
 
@@ -386,30 +386,30 @@ const pillars = computed(() =>
   locale.value === "en"
     ? [
         {
-          title: "Operational precision",
-          text: "Aviation decisions are supported by structure, timing control, and attention to compliance and execution quality.",
+          title: "Operational control",
+          text: "Each requirement advances with clearer scope, timing control and traceable follow-up across the operating chain.",
         },
         {
-          title: "Client-centered coordination",
-          text: "We simplify complex aviation needs by guiding clients clearly across services, teams, and next steps.",
+          title: "Single point of contact",
+          text: "Clients work with one team across charter, aircraft transactions, technical review, and flight support.",
         },
         {
-          title: "Technical and commercial balance",
-          text: "Our work connects business goals with the realities of aircraft operations, maintenance, and asset value.",
+          title: "Commercial and technical alignment",
+          text: "Business objectives stay aligned with aircraft condition, availability, compliance and execution timing.",
         },
       ]
     : [
         {
-          title: "Precision operativa",
-          text: "Las decisiones aeronauticas se sostienen con estructura, control de tiempos y atencion al cumplimiento y la calidad de ejecucion.",
+          title: "Control operativo",
+          text: "Cada requerimiento avanza con mejor alcance, control de tiempos y seguimiento trazable a lo largo de la cadena operativa.",
         },
         {
-          title: "Coordinacion centrada en el cliente",
-          text: "Simplificamos necesidades aeronauticas complejas guiando al cliente con claridad entre servicios, equipos y siguientes pasos.",
+          title: "Punto único de contacto",
+          text: "El cliente trabaja con un solo equipo en charter, transacciones de aeronaves, revisión técnica y soporte de vuelo.",
         },
         {
-          title: "Balance tecnico y comercial",
-          text: "Nuestro trabajo conecta objetivos de negocio con la realidad de las operaciones, el mantenimiento y el valor de la aeronave.",
+          title: "Alineación comercial y técnica",
+          text: "Los objetivos de negocio se alinean con condición de aeronave, disponibilidad, cumplimiento y tiempos de ejecución.",
         },
       ]
 );
@@ -420,64 +420,64 @@ const services = computed(() =>
         {
           route: "AirTaxi",
           title: "Private Charter",
-          text: "Private flights designed for business mobility, urgent missions, and premium travel coordination.",
+          text: "Private charter for business travel, urgent missions, and executive itineraries.",
         },
         {
           route: "AircraftSales",
-          title: "Aircraft acquisition and sales",
-          text: "Advisory support for sourcing, valuation, negotiation, and transaction oversight.",
+          title: "Aircraft transactions",
+          text: "Aircraft acquisition, sourcing, valuation, and sale-side support.",
         },
         {
           route: "OperationsManagement",
           title: "Aircraft Management",
-          text: "Structured oversight for compliance, crew coordination, maintenance planning, and control.",
+          text: "Flight operations, compliance, maintenance planning, and reporting support.",
         },
         {
           route: "PrePurchaseInspection",
           title: "Pre-purchase advisory",
-          text: "Technical review and due diligence support before major aircraft decisions.",
+          text: "Technical review, records analysis, and due diligence before closing.",
         },
         {
           route: "ImportExport",
           title: "Import & Export",
-          text: "Cross-border coordination for aircraft, components, documentation, and regulatory flow.",
+          text: "Cross-border coordination for aircraft, components, traceability, and documentation.",
         },
         {
           route: "Avionics",
           title: "Avionics & Systems",
-          text: "Support for aircraft systems, modernization, and operational readiness.",
+          text: "Aircraft systems support, modernization planning, and technical follow-up.",
         },
       ]
     : [
         {
           route: "AirTaxi",
           title: "Vuelos privados",
-          text: "Vuelos privados pensados para movilidad de negocios, misiones urgentes y coordinacion premium de viaje.",
+          text: "Vuelos privados para viajes de negocios, misiones urgentes e itinerarios ejecutivos.",
         },
         {
           route: "AircraftSales",
-          title: "Venta y adquisicion de aeronaves",
-          text: "Soporte de asesoria para busqueda, valuacion, negociacion y supervision transaccional.",
+          title: "Transacciones de aeronaves",
+          text: "Adquisicion, localizacion, valuacion y soporte en compra y venta de aeronaves.",
         },
         {
           route: "OperationsManagement",
           title: "Administracion operativa",
-          text: "Supervision estructurada para cumplimiento, coordinacion de tripulacion, planeacion de mantenimiento y control.",
+          text: "Operaciones de vuelo, cumplimiento, planeacion de mantenimiento y reporteo.",
         },
         {
           route: "PrePurchaseInspection",
           title: "Asesoria precompra",
-          text: "Revision tecnica y soporte de debida diligencia antes de decisiones importantes sobre aeronaves.",
+          text: "Revision tecnica, analisis documental y debida diligencia antes del cierre.",
         },
         {
           route: "ImportExport",
           title: "Importacion y exportacion",
-          text: "Coordinacion transfronteriza para aeronaves, componentes, documentacion y flujo regulatorio.",
+          text: "Coordinacion transfronteriza para aeronaves, componentes, trazabilidad y documentacion.",
         },
         {
           route: "Avionics",
           title: "Avionica y sistemas",
-          text: "Soporte para sistemas de aeronaves, modernizacion y alistamiento operativo.",
+          text: "Soporte a sistemas de aeronaves, modernizacion y seguimiento tecnico.",
         },
       ]
 );
@@ -488,44 +488,44 @@ const timeline = computed(() =>
         {
           stage: "Availability",
           title: "Aircraft availability",
-          text: "Real charter review built around route, timing, aircraft category, and mission urgency.",
+          text: "Availability review based on route, timing, aircraft category, and mission profile.",
         },
         {
           stage: "Coverage",
-          title: "Operational coverage",
-          text: "Support across Mexico, LATAM, and international routes with stronger execution visibility.",
+          title: "Operational coordination",
+          text: "Commercial, technical, and operating teams align the next step with clearer accountability.",
         },
         {
           stage: "Response",
           title: "Response time",
-          text: "Commercial follow-up designed to move quickly when the client needs a serious answer fast.",
+          text: "Requests are routed quickly when the client needs a defined answer and execution path.",
         },
         {
-          stage: "Concierge",
-          title: "Premium coordination",
-          text: "A clearer premium path for charter, advisory, and high-touch operational coordination.",
+          stage: "Execution",
+          title: "Decision support",
+          text: "The client receives commercial guidance, operational visibility, and the right next recommendation.",
         },
       ]
     : [
         {
           stage: "Disponibilidad",
           title: "Disponibilidad de aeronave",
-          text: "Revision real de charter basada en ruta, horario, categoria de aeronave y urgencia de la mision.",
+          text: "Revision de disponibilidad basada en ruta, horario, categoria de aeronave y perfil de mision.",
         },
         {
           stage: "Cobertura",
-          title: "Cobertura operativa",
-          text: "Soporte a traves de Mexico, LATAM y rutas internacionales con mayor claridad de ejecucion.",
+          title: "Coordinacion operativa",
+          text: "Los equipos comercial, tecnico y operativo alinean el siguiente paso con mayor claridad.",
         },
         {
           stage: "Respuesta",
           title: "Tiempo de respuesta",
-          text: "Seguimiento comercial pensado para moverse rapido cuando el cliente necesita una respuesta seria.",
+          text: "Las solicitudes se canalizan con rapidez cuando el cliente necesita una respuesta definida y ejecutable.",
         },
         {
-          stage: "Concierge",
-          title: "Coordinacion premium",
-          text: "Un camino premium mas claro para charter, asesoria y coordinacion operativa de alto contacto.",
+          stage: "Ejecucion",
+          title: "Soporte a la decision",
+          text: "El cliente recibe guia comercial, visibilidad operativa y la recomendacion correcta para avanzar.",
         },
       ]
 );

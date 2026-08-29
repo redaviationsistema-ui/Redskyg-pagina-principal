@@ -30,16 +30,16 @@ const content = computed(() =>
     ? {
         eyebrow: "Aviation FAQ",
         title:
-          "Key answers on private charter and aviation services.",
+          "Key answers on executive aviation services.",
         text:
-          "This page helps resolve common questions before requesting a quote, hiring a charter, or moving forward with an aviation service.",
+          "Review common questions before requesting private flights, aircraft advisory or specialized operational support.",
       }
     : {
         eyebrow: "Preguntas frecuentes",
         title:
-          "Respuestas clave sobre charter privado y servicios aeronauticos.",
+          "Respuestas clave sobre servicios de aviación ejecutiva.",
         text:
-          "Esta pagina ayuda a resolver dudas frecuentes antes de solicitar una cotizacion, contratar un charter o avanzar con un servicio aeronautico.",
+          "Revise dudas frecuentes antes de solicitar vuelos privados, asesoría de aeronaves o soporte operativo especializado.",
       }
 );
 
@@ -49,22 +49,22 @@ const faqs = computed(() =>
         {
           question: "How do I request a private flight quote?",
           answer:
-            "Share your departure and destination airports, travel dates, passenger count, and any schedule flexibility. The more complete the request, the faster the operations team can respond.",
+            "Share your departure and destination airports, travel dates, passenger count, baggage profile and any schedule flexibility. The more precise the request, the faster the operations team can evaluate availability and respond.",
         },
         {
           question: "Do you only handle charter flights?",
           answer:
-            "No. Sky Group also supports aircraft acquisition and sales, operational management, pre-purchase advisory, avionics, engine coordination, and import-export services.",
+            "No. Sky Group also supports aircraft acquisitions and sales, operational management, pre-purchase advisory, avionics, engine coordination and import-export services.",
         },
         {
           question: "Can you support flights outside Mexico?",
           answer:
-            "Yes. The company supports both domestic and international aviation needs depending on aircraft availability, route profile, permits, and regulatory requirements.",
+            "Yes. We support domestic and international aviation requirements depending on aircraft availability, route profile, permits and regulatory conditions.",
         },
         {
           question: "Do you help owners who already have an aircraft?",
           answer:
-            "Yes. Aircraft owners can request management support, technical coordination, compliance oversight, and specialized advisory for operations and asset protection.",
+            "Yes. Aircraft owners can request management support, technical coordination, compliance oversight and specialized advisory for operations and asset protection.",
         },
         {
           question: "What is the difference between co-ownership and fractional ownership?",
@@ -74,39 +74,39 @@ const faqs = computed(() =>
         {
           question: "Can you assist with technical review before buying an aircraft?",
           answer:
-            "Yes. Pre-purchase advisory includes technical inspection coordination, maintenance record review, valuation support, and risk analysis before closing.",
+            "Yes. Pre-purchase advisory includes technical inspection coordination, maintenance record review, valuation support and risk analysis before closing.",
         },
       ]
     : [
         {
-          question: "Como solicito una cotizacion de vuelo privado?",
+          question: "¿Cómo solicito una cotización de vuelo privado?",
           answer:
-            "Comparte aeropuertos de salida y destino, fechas de viaje, numero de pasajeros y cualquier flexibilidad de horario. Mientras mas completa sea la solicitud, mas rapido puede responder el equipo de operaciones.",
+            "Comparta aeropuertos de salida y destino, fechas de viaje, número de pasajeros, perfil de equipaje y cualquier flexibilidad de horario. Mientras más precisa sea la solicitud, más rápido podremos evaluar disponibilidad y respuesta.",
         },
         {
-          question: "Solo manejan vuelos charter?",
+          question: "¿Solo manejan vuelos charter?",
           answer:
-            "No. Sky Group tambien apoya compra y venta de aeronaves, gestion operativa, asesoria precompra, avionica, coordinacion de motores e importacion y exportacion.",
+            "No. Sky Group también apoya compra y venta de aeronaves, gestión operativa, asesoría precompra, aviónica, coordinación de motores e importación y exportación.",
         },
         {
-          question: "Pueden apoyar vuelos fuera de Mexico?",
+          question: "¿Pueden apoyar vuelos fuera de México?",
           answer:
-            "Si. La empresa atiende necesidades aeronauticas nacionales e internacionales segun disponibilidad de aeronave, perfil de ruta, permisos y requerimientos regulatorios.",
+            "Sí. Atendemos requerimientos aeronáuticos nacionales e internacionales según disponibilidad de aeronave, perfil de ruta, permisos y condiciones regulatorias.",
         },
         {
-          question: "Ayudan a propietarios que ya tienen aeronave?",
+          question: "¿Ayudan a propietarios que ya tienen aeronave?",
           answer:
-            "Si. Los propietarios pueden solicitar soporte de administracion, coordinacion tecnica, supervision de cumplimiento y asesoria especializada para operacion y proteccion del activo.",
+            "Sí. Los propietarios pueden solicitar soporte de administración, coordinación técnica, supervisión de cumplimiento y asesoría especializada para la operación y protección del activo.",
         },
         {
-          question: "Cual es la diferencia entre copropiedad y propiedad fraccional?",
+          question: "¿Cuál es la diferencia entre copropiedad y propiedad fraccional?",
           answer:
-            "La copropiedad normalmente implica un grupo pequeno que comparte directamente una aeronave, mientras la propiedad fraccional es un modelo mas estructurado con participaciones, horas y esquemas de administracion definidos.",
+            "La copropiedad normalmente implica un grupo pequeño que comparte directamente una aeronave, mientras que la propiedad fraccional es un modelo más estructurado con participaciones, horas y esquemas de administración definidos.",
         },
         {
-          question: "Pueden ayudar con la revision tecnica antes de comprar una aeronave?",
+          question: "¿Pueden ayudar con la revisión técnica antes de comprar una aeronave?",
           answer:
-            "Si. La asesoria precompra incluye coordinacion de inspeccion tecnica, revision de historiales de mantenimiento, apoyo de valuacion y analisis de riesgo antes del cierre.",
+            "Sí. La asesoría precompra incluye coordinación de inspección técnica, revisión de historiales de mantenimiento, apoyo de valuación y análisis de riesgo antes del cierre.",
         },
       ]
 );
