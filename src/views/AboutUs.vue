@@ -49,7 +49,7 @@
 
     <section class="section experience-section">
       <img
-        src="/images/About/About10.png"
+        src="/images/About/IMG_0910.jpeg"
         :alt="content.experienceAlt"
         class="experience-bg"
         loading="lazy"
@@ -92,9 +92,21 @@
     </section>
 
     <section class="section capabilities-section">
-      <div class="container section-head reveal">
-        <span class="eyebrow">{{ content.capabilitiesEyebrow }}</span>
-        <h2>{{ content.capabilitiesTitle }}</h2>
+      <div class="container capabilities-hero reveal">
+        <div class="section-head capabilities-head">
+          <span class="eyebrow">{{ content.capabilitiesEyebrow }}</span>
+          <h2>{{ content.capabilitiesTitle }}</h2>
+        </div>
+
+        <div class="capabilities-visual reveal-delay">
+          <img
+            src="/images/About/about2.jpg"
+            :alt="content.capabilitiesAlt"
+            class="capabilities-image"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
       </div>
 
       <div class="container capabilities-stream">
@@ -126,9 +138,29 @@
 
     <section class="section strategy-section">
       <div class="container strategy-shell reveal">
-        <span class="eyebrow">{{ content.strategyEyebrow }}</span>
-        <h2>{{ content.strategyTitle }}</h2>
-        <p>{{ content.strategyText }}</p>
+        <div class="strategy-copy">
+          <span class="eyebrow">{{ content.strategyEyebrow }}</span>
+          <h2>{{ content.strategyTitle }}</h2>
+          <p>{{ content.strategyText }}</p>
+          <div class="strategy-marker">
+            <span>{{ content.strategyMarkerEyebrow }}</span>
+            <strong>{{ content.strategyMarkerText }}</strong>
+          </div>
+        </div>
+
+        <div class="strategy-visual">
+          <img
+            src="/images/About/about3.png"
+            :alt="content.strategyImageAlt"
+            class="strategy-image"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="strategy-badge">
+            <span>{{ content.strategyBadgeEyebrow }}</span>
+            <strong>{{ content.strategyBadgeText }}</strong>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -258,12 +290,18 @@ const content = computed(() =>
           "We approach aviation with a combination of commercial awareness, operational discipline, regulatory attention, and premium client handling. The goal is not only to move aircraft or coordinate flights, but to protect time, reduce complexity, and support better decisions.",
         capabilitiesEyebrow: "Core Capabilities",
         capabilitiesTitle: "Capabilities across the aviation cycle.",
+        capabilitiesAlt: "Sky Group core capabilities",
         capabilitiesCta: "Explore service",
         strategyEyebrow: "Strategic View",
         strategyTitle:
           "Aviation is a business asset and an operational system.",
         strategyText:
           "Every charter request, ownership structure, transaction, maintenance decision, or technical review affects cost, timing, risk, and long-term value. Sky Group is built around that broader reality, which is why our role goes beyond execution into informed guidance.",
+        strategyMarkerEyebrow: "Integrated approach",
+        strategyMarkerText: "Commercial, technical, and operational.",
+        strategyImageAlt: "Sky Group strategic view",
+        strategyBadgeEyebrow: "Sky Group",
+        strategyBadgeText: "Informed decisions, coordinated execution.",
         journeyEyebrow: "Why Trust Sky Group",
         journeyTitle: "Strategic coverage for private aviation.",
         journeyText:
@@ -301,12 +339,18 @@ const content = computed(() =>
           "Abordamos la aviacion con una mezcla de criterio comercial, disciplina operativa, atencion regulatoria y trato premium al cliente. El objetivo no es solo mover aeronaves o coordinar vuelos, sino proteger tiempo, reducir complejidad y apoyar mejores decisiones.",
         capabilitiesEyebrow: "Capacidades clave",
         capabilitiesTitle: "Capacidades para todo el ciclo de aviacion.",
+        capabilitiesAlt: "Capacidades clave de Sky Group",
         capabilitiesCta: "Explorar servicio",
         strategyEyebrow: "Vision estrategica",
         strategyTitle:
           "La aviacion es un activo y un sistema operativo.",
         strategyText:
           "Cada solicitud de charter, estructura de propiedad, transaccion, decision de mantenimiento o revision tecnica afecta costo, tiempo, riesgo y valor de largo plazo. Sky Group esta construido alrededor de esa realidad, por eso nuestro rol va mas alla de ejecutar y se convierte en una guia informada.",
+        strategyMarkerEyebrow: "Enfoque integral",
+        strategyMarkerText: "Comercial, tecnico y operativo.",
+        strategyImageAlt: "Vision estrategica de Sky Group",
+        strategyBadgeEyebrow: "Sky Group",
+        strategyBadgeText: "Decision informada, ejecucion coordinada.",
         journeyEyebrow: "Por que confiar en Sky Group",
         journeyTitle: "Cobertura estrategica para aviacion privada.",
         journeyText:
@@ -443,44 +487,44 @@ const timeline = computed(() =>
     ? [
         {
           stage: "Availability",
-          title: "Disponibilidad de aeronave",
+          title: "Aircraft availability",
           text: "Real charter review built around route, timing, aircraft category, and mission urgency.",
         },
         {
           stage: "Coverage",
-          title: "Cobertura operativa",
+          title: "Operational coverage",
           text: "Support across Mexico, LATAM, and international routes with stronger execution visibility.",
         },
         {
           stage: "Response",
-          title: "Tiempo de respuesta",
+          title: "Response time",
           text: "Commercial follow-up designed to move quickly when the client needs a serious answer fast.",
         },
         {
           stage: "Concierge",
-          title: "Coordinacion premium",
+          title: "Premium coordination",
           text: "A clearer premium path for charter, advisory, and high-touch operational coordination.",
         },
       ]
     : [
         {
           stage: "Disponibilidad",
-          title: "Aircraft availability",
+          title: "Disponibilidad de aeronave",
           text: "Revision real de charter basada en ruta, horario, categoria de aeronave y urgencia de la mision.",
         },
         {
           stage: "Cobertura",
-          title: "Operational coverage",
+          title: "Cobertura operativa",
           text: "Soporte a traves de Mexico, LATAM y rutas internacionales con mayor claridad de ejecucion.",
         },
         {
           stage: "Respuesta",
-          title: "Response time",
+          title: "Tiempo de respuesta",
           text: "Seguimiento comercial pensado para moverse rapido cuando el cliente necesita una respuesta seria.",
         },
         {
           stage: "Concierge",
-          title: "Concierge service",
+          title: "Coordinacion premium",
           text: "Un camino premium mas claro para charter, asesoria y coordinacion operativa de alto contacto.",
         },
       ]
@@ -523,7 +567,7 @@ onBeforeUnmount(() => {
   min-height: 92vh;
   display: flex;
   align-items: center;
-  background: url("/images/About/About.png") center/cover no-repeat;
+  background: url("/images/About/IMG_1510.jpeg") center/cover no-repeat;
   overflow: hidden;
 }
 
@@ -774,10 +818,75 @@ onBeforeUnmount(() => {
   margin-bottom: 2rem;
 }
 
+.capabilities-head {
+  max-width: 680px;
+}
+
+.capabilities-head h2 {
+  font-size: clamp(2rem, 3.7vw, 4rem);
+  white-space: normal;
+  text-wrap: balance;
+}
+
+.capabilities-section {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(7, 19, 32, 0.94), rgba(11, 18, 32, 0.98));
+}
+
+.capabilities-section::before,
+.capabilities-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.capabilities-section::before {
+  background: url("/images/About/about2.jpg") center/cover no-repeat;
+  filter: brightness(0.72) saturate(1);
+  transform: scale(1.02);
+}
+
+.capabilities-section::after {
+  background:
+    linear-gradient(180deg, rgba(4, 9, 18, 0.56), rgba(7, 13, 24, 0.68)),
+    linear-gradient(90deg, rgba(3, 7, 15, 0.34), rgba(3, 7, 15, 0.12) 45%, rgba(3, 7, 15, 0.38));
+}
+
+.capabilities-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+.capabilities-hero {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.72fr) minmax(420px, 1.28fr);
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
 .capabilities-stream {
   display: grid;
   gap: 0;
   border-top: 1px solid rgba(215, 176, 116, 0.18);
+}
+
+.capabilities-visual {
+  justify-self: end;
+  width: min(100%, 1120px);
+}
+
+.capabilities-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 6.2;
+  max-height: 400px;
+  object-fit: cover;
+  object-position: center 56%;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.24);
 }
 
 .capability-row {
@@ -831,13 +940,77 @@ onBeforeUnmount(() => {
   justify-content: center;
 }
 
-.strategy-section {
-  text-align: center;
+.strategy-shell {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.95fr) minmax(340px, 1.05fr);
+  gap: 2.5rem;
+  align-items: center;
 }
 
-.strategy-shell {
-  max-width: 980px;
-  margin: 0 auto;
+.strategy-copy {
+  max-width: 620px;
+}
+
+.strategy-copy p {
+  max-width: 52ch;
+}
+
+.strategy-marker {
+  display: inline-grid;
+  gap: 0.45rem;
+  margin-top: 2rem;
+  padding: 1rem 1.1rem;
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at top left, rgba(216, 178, 110, 0.12), transparent 46%),
+    linear-gradient(180deg, rgba(10, 23, 38, 0.92), rgba(7, 17, 30, 0.96));
+  border: 1px solid rgba(216, 178, 110, 0.18);
+}
+
+.strategy-marker span,
+.strategy-badge span {
+  color: #d8b26e;
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.strategy-marker strong,
+.strategy-badge strong {
+  color: #f8f4ec;
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.strategy-visual {
+  position: relative;
+}
+
+.strategy-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 4.6;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.28);
+}
+
+.strategy-badge {
+  position: absolute;
+  left: 1.25rem;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  display: grid;
+  gap: 0.45rem;
+  padding: 1rem 1.1rem;
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(7, 18, 31, 0.76), rgba(7, 18, 31, 0.92)),
+    radial-gradient(circle at top right, rgba(216, 178, 110, 0.12), transparent 36%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
 }
 
 .metrics-ribbon {
@@ -954,9 +1127,11 @@ onBeforeUnmount(() => {
   padding: 2rem;
   border-radius: 28px;
   background:
-    radial-gradient(circle at top left, rgba(212, 175, 55, 0.14), transparent 24%),
-    linear-gradient(135deg, rgba(9, 21, 37, 0.98), rgba(18, 43, 70, 0.94));
+    linear-gradient(135deg, rgba(9, 21, 37, 0.72), rgba(18, 43, 70, 0.66)),
+    radial-gradient(circle at top left, rgba(212, 175, 55, 0.18), transparent 26%),
+    url("/images/About/marco.jpg") center 42% / cover no-repeat;
   border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.2);
 }
 
 .reveal {
@@ -980,7 +1155,9 @@ onBeforeUnmount(() => {
   .pillar-content,
   .metrics-ribbon,
   .timeline-row,
-  .cta-shell {
+  .cta-shell,
+  .capabilities-hero,
+  .strategy-shell {
     grid-template-columns: 1fr;
   }
 
@@ -992,6 +1169,24 @@ onBeforeUnmount(() => {
   .capability-row.reverse .capability-copy,
   .capability-row.reverse .capability-icon {
     order: initial;
+  }
+
+  .strategy-copy {
+    max-width: none;
+  }
+
+  .capabilities-visual {
+    justify-self: stretch;
+    width: 100%;
+  }
+
+  .capabilities-image {
+    aspect-ratio: 16 / 9;
+    max-height: none;
+  }
+
+  .strategy-image {
+    aspect-ratio: 16 / 10;
   }
 }
 

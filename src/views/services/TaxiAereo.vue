@@ -3,7 +3,7 @@
     <section class="air-hero">
       <img
         class="air-hero__bg"
-        src="/images/Service/TaxiAereo.png"
+        src="/images/Service/IMG_0882.jpeg"
         :alt="locale.value === 'en' ? 'Private jet ready for executive charter service' : 'Jet privado listo para servicio de charter ejecutivo'"
         fetchpriority="high"
         decoding="async"
@@ -64,16 +64,25 @@
 
     <section class="section air-coverage">
       <div class="container air-coverage__grid">
-        <div class="air-coverage__copy reveal">
-          <span class="air-eyebrow">{{ content.coverageEyebrow }}</span>
-          <h2>{{ content.coverageTitle }}</h2>
-          <p>{{ content.coverageText }}</p>
+        <div class="air-coverage__feature reveal">
+          <div class="air-coverage__copy">
+            <span class="air-eyebrow">{{ content.coverageEyebrow }}</span>
+            <h2>{{ content.coverageTitle }}</h2>
+            <p>{{ content.coverageText }}</p>
 
-          <nav class="air-links">
-            <RouterLink :to="toLocalizedRoute('OperationsManagement')">{{ content.coverageLinks.operations }}</RouterLink>
-            <RouterLink :to="toLocalizedRoute('AircraftSales')">{{ content.coverageLinks.aircraft }}</RouterLink>
-            <RouterLink :to="toLocalizedRoute('Contact')">{{ content.coverageLinks.contact }}</RouterLink>
-          </nav>
+            <nav class="air-links">
+              <RouterLink :to="toLocalizedRoute('OperationsManagement')">{{ content.coverageLinks.operations }}</RouterLink>
+              <RouterLink :to="toLocalizedRoute('AircraftSales')">{{ content.coverageLinks.aircraft }}</RouterLink>
+              <RouterLink :to="toLocalizedRoute('Contact')">{{ content.coverageLinks.contact }}</RouterLink>
+            </nav>
+          </div>
+
+          <div class="air-coverage__visual">
+            <img
+              src="/images/Service/IMG_9259.jpg"
+              :alt="locale.value === 'en' ? 'Private charter coverage aircraft' : 'Aeronave de cobertura charter privada'"
+            />
+          </div>
         </div>
 
         <div class="air-coverage__routes">
@@ -97,19 +106,28 @@
           <h2>{{ content.processTitle }}</h2>
         </div>
 
-        <div class="air-timeline">
-          <article
-            v-for="(step, index) in steps"
-            :key="step.number"
-            class="air-step reveal"
-            :style="{ transitionDelay: `${index * 130}ms` }"
-          >
-            <span class="air-step__number">{{ step.number }}</span>
-            <div>
-              <h3>{{ step.title }}</h3>
-              <p>{{ step.text }}</p>
-            </div>
-          </article>
+        <div class="air-process__grid">
+          <div class="air-timeline">
+            <article
+              v-for="(step, index) in steps"
+              :key="step.number"
+              class="air-step reveal"
+              :style="{ transitionDelay: `${index * 130}ms` }"
+            >
+              <span class="air-step__number">{{ step.number }}</span>
+              <div>
+                <h3>{{ step.title }}</h3>
+                <p>{{ step.text }}</p>
+              </div>
+            </article>
+          </div>
+
+          <div class="air-process-visual__frame reveal reveal-delay">
+            <img
+              src="/images/Service/IMG_7634.jpg"
+              :alt="locale.value === 'en' ? 'Private charter service coordination' : 'Coordinacion de servicio charter privado'"
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -629,9 +647,25 @@ onBeforeUnmount(() => {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-  gap: 2rem;
+  grid-template-columns: minmax(320px, 0.96fr) minmax(320px, 1.04fr);
+  gap: 2.4rem;
   align-items: start;
+}
+
+.air-coverage__feature {
+  display: grid;
+  gap: 1.5rem;
+  padding: 1.6rem;
+  border-radius: 30px;
+  background:
+    linear-gradient(180deg, rgba(9, 20, 33, 0.86), rgba(7, 17, 29, 0.76)),
+    radial-gradient(circle at top right, rgba(215, 176, 116, 0.12), transparent 34%);
+  border: 1px solid rgba(215, 176, 116, 0.14);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.22);
+}
+
+.air-coverage__copy {
+  max-width: 38rem;
 }
 
 .air-links {
@@ -648,9 +682,24 @@ onBeforeUnmount(() => {
   font-size: 0.78rem;
 }
 
+.air-coverage__visual {
+  overflow: hidden;
+  border-radius: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.air-coverage__visual img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3.2;
+  object-fit: cover;
+  object-position: center 54%;
+}
+
 .air-coverage__routes {
   display: grid;
-  gap: 1rem;
+  gap: 1.15rem;
 }
 
 .air-route,
@@ -663,6 +712,16 @@ onBeforeUnmount(() => {
   border: 0;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: none;
+}
+
+.air-route {
+  padding: 1.7rem 1.55rem 1.7rem 1.9rem;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(180deg, rgba(8, 18, 30, 0.52), rgba(8, 18, 30, 0.18)),
+    radial-gradient(circle at top right, rgba(215, 176, 116, 0.08), transparent 38%);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.14);
 }
 
 .air-route::before,
@@ -682,6 +741,13 @@ onBeforeUnmount(() => {
   gap: 1rem;
 }
 
+.air-process__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 0.72fr);
+  gap: 2.5rem;
+  align-items: start;
+}
+
 .air-step {
   display: grid;
   grid-template-columns: 90px minmax(0, 1fr);
@@ -694,6 +760,21 @@ onBeforeUnmount(() => {
   gap: 1rem;
 }
 
+.air-process-visual__frame {
+  overflow: hidden;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 26px 80px rgba(0, 0, 0, 0.24);
+}
+
+.air-process-visual__frame img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  object-fit: cover;
+  object-position: center;
+}
+
 .air-cta__shell {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -702,9 +783,11 @@ onBeforeUnmount(() => {
   padding: 2.6rem 2.3rem;
   border-radius: 34px;
   background:
-    linear-gradient(115deg, rgba(7, 19, 32, 0.94), rgba(18, 41, 65, 0.84)),
-    radial-gradient(circle at top left, rgba(215, 176, 116, 0.12), transparent 28%);
+    linear-gradient(115deg, rgba(7, 19, 32, 0.86), rgba(18, 41, 65, 0.78)),
+    radial-gradient(circle at top left, rgba(215, 176, 116, 0.16), transparent 28%),
+    url("/images/About/marco.jpg") center/cover no-repeat;
   border: 1px solid rgba(215, 176, 116, 0.16);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.2);
 }
 
 .reveal {
@@ -725,9 +808,18 @@ onBeforeUnmount(() => {
 @media (max-width: 1100px) {
   .air-hero__grid,
   .air-coverage__grid,
+  .air-process__grid,
   .air-cta__shell,
   .air-ribbon__body {
     grid-template-columns: 1fr;
+  }
+
+  .air-coverage__copy {
+    max-width: none;
+  }
+
+  .air-coverage__visual img {
+    aspect-ratio: 16 / 10;
   }
 
   .air-hero__panel,

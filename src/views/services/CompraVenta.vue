@@ -107,7 +107,7 @@ import { useLocale } from "../../i18n";
 const { locale, toLocalizedRoute } = useLocale();
 
 const heroStyle = {
-  backgroundImage: 'url("/images/CompraVenta/Compraventa1.png")',
+  backgroundImage: 'url("/images/Service/IMG_8868.jpg")',
   backgroundPosition: "center center",
 };
 

@@ -121,28 +121,6 @@
                 <small>{{ headerContent.engineServicesDesc }}</small>
               </RouterLink>
 
-              <RouterLink :to="toLocalizedRoute('Avionics')" class="menu-item" @click="closeDropdownImmediate">
-                <div class="menu-icon-badge">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path :d="serviceIcons.avionics" />
-                  </svg>
-                </div>
-                <strong>{{ headerContent.avionics }}</strong>
-                <small>{{ headerContent.avionicsDesc }}</small>
-              </RouterLink>
-              <RouterLink
-                :to="toLocalizedRoute('FractionalOwnership')"
-                class="menu-item"
-                @click="closeDropdownImmediate"
-              >
-                <div class="menu-icon-badge">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path :d="serviceIcons.fractionalOwnership" />
-                  </svg>
-                </div>
-                <strong>{{ headerContent.fractionalOwnership }}</strong>
-                <small>{{ headerContent.fractionalOwnershipDesc }}</small>
-              </RouterLink>
               <RouterLink :to="toLocalizedRoute('CoOwnership')" class="menu-item" @click="closeDropdownImmediate">
                 <div class="menu-icon-badge">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -265,9 +243,6 @@
         <RouterLink :to="toLocalizedRoute('PrePurchaseInspection')" @click="closeMenu">
           {{ headerContent.prePurchase }}
         </RouterLink>
-        <RouterLink :to="toLocalizedRoute('FractionalOwnership')" @click="closeMenu">
-          {{ headerContent.fractionalOwnership }}
-        </RouterLink>
         <RouterLink :to="toLocalizedRoute('CoOwnership')" @click="closeMenu">
           {{ headerContent.coOwnership }}
         </RouterLink>
@@ -288,9 +263,6 @@
         </RouterLink>
         <RouterLink :to="toLocalizedRoute('EngineShop')" @click="closeMenu">
           {{ headerContent.engineServices }}
-        </RouterLink>
-        <RouterLink :to="toLocalizedRoute('Avionics')" @click="closeMenu">
-          {{ headerContent.avionicsMobile }}
         </RouterLink>
       </div>
     </nav>

@@ -41,6 +41,10 @@
               <p class="stat-band__value">{{ item.text }}</p>
             </article>
           </div>
+
+          <figure class="outcomes-visual">
+            <img src="/images/Service/admin2.jpg" :alt="content.heroTitle" loading="lazy" />
+          </figure>
         </div>
       </section>
 
@@ -55,7 +59,7 @@ import { useLocale } from "../../i18n";
 const { locale, toLocalizedRoute } = useLocale();
 
 const heroStyle = {
-  backgroundImage: 'url("/images/Service/AdministracionOperativa.png")',
+  backgroundImage: 'url("/images/Service/admin.jpg")',
   backgroundPosition: "center 34%",
 };
 
@@ -138,6 +142,7 @@ const outcomes = computed(() =>
 
 .stat-band {
   gap: 1.25rem;
+  margin-bottom: 2rem;
 }
 
 .stat-band__item {
@@ -148,5 +153,37 @@ const outcomes = computed(() =>
 .stat-band__value {
   font-size: 1.2rem;
   line-height: 1.7;
+}
+
+.outcomes-visual {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 30px;
+  border: 1px solid rgba(212, 175, 55, 0.12);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.24);
+}
+
+.outcomes-visual img {
+  display: block;
+  width: 100%;
+  min-height: 320px;
+  max-height: 460px;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (max-width: 760px) {
+  .stat-band {
+    margin-bottom: 1.5rem;
+  }
+
+  .outcomes-visual {
+    border-radius: 24px;
+  }
+
+  .outcomes-visual img {
+    min-height: 220px;
+    max-height: 300px;
+  }
 }
 </style>

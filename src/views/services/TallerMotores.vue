@@ -162,7 +162,7 @@ const visuals = computed(() =>
           text: "Ideal for the import, routing, and documentation side of engine support where timing and visibility matter.",
         },
         {
-          src: "/images/Service/TallerMotores2.png",
+          src: "/images/Tiempocompartido/motor.jpg",
           alt: "Aircraft protected inside hangar during technical supervision",
           title: "Operational protection",
           text: "Useful for communicating supervision, custody, and secure execution around high-value aviation assets.",
@@ -176,7 +176,7 @@ const visuals = computed(() =>
           text: "Funciona para reforzar la parte de importacion, traslado y documentacion del soporte de motores, donde el control del proceso es clave.",
         },
         {
-          src: "/images/Service/TallerMotores2.png",
+          src: "/images/Tiempocompartido/motor.jpg",
           alt: "Aeronave protegida en hangar durante supervision tecnica",
           title: "Proteccion operativa",
           text: "Aporta contexto visual para supervision, custodia y ejecucion segura alrededor de activos aeronauticos de alto valor.",

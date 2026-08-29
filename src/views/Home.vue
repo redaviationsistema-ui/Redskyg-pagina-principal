@@ -183,7 +183,7 @@
             <span class="need-link">{{ item.cta }}</span>
           </div>
 
-          <div class="need-media">
+          <div class="need-media" :class="item.mediaClass">
             <img :src="item.image" :alt="item.title" />
           </div>
         </component>
@@ -299,7 +299,7 @@
         </div>
 
         <div class="final-media reveal" data-reveal="zoom">
-          <img src="/images/Home/home10.png" :alt="pageContent.finalTitle" />
+          <img src="/images/Home/home11.jpg" :alt="pageContent.finalTitle" />
         </div>
       </div>
     </section>
@@ -458,28 +458,29 @@ const content = {
         text: "Defina origen, destino, pasajeros y fechas de operacion. Nuestro equipo identificara aeronaves compatibles con el perfil de mision y disponibilidad requerida.",
         cta: "Cotizar operacion",
         route: "AirTaxi",
-        image: "/images/Service/TaxiAereo.png",
+        image: "/images/Home/IMG_1511.jpeg",
       },
       {
         title: "Buscar una aeronave",
         text: "Comparta los requerimientos de mision, categoria, alcance, capacidad o modelo requerido para iniciar la busqueda de unidades disponibles.",
         cta: "Iniciar busqueda",
         route: "AircraftSales",
-        image: "/images/Service/CompraVenta.png",
+        image: "/images/Home/IMG_0025.jpg",
       },
       {
         title: "Localizar un componente",
         text: "Envienos el Part Number (P/N), descripcion, condicion requerida, cantidad y certificacion necesaria. Nuestro equipo verificara disponibilidad y opciones de suministro.",
         cta: "Solicitar componente",
         route: "ImportExport",
-        image: "/images/Service/ImportExport.png",
+        image: "/images/Home/IMG_1511.png",
+        mediaClass: "need-media-components",
       },
       {
         title: "Solicitar soporte aeronautico",
         text: "Coordinamos requerimientos relacionados con mantenimiento, inspeccion, soporte en tierra, asistencia tecnica y servicios especializados para aeronaves.",
         cta: "Solicitar soporte",
         route: "OperationsManagement",
-        image: "/images/Service/AdministracionOperativa.png",
+        image: "/images/Home/IMG_1138.jpg",
       },
     ],
     mediaEyebrow: "SKYGROUP EN OPERACION",
@@ -608,28 +609,29 @@ const content = {
         text: "Define origin, destination, passengers and operating dates. Our team will identify aircraft compatible with the mission profile and required availability.",
         cta: "Request Flight Options",
         route: "AirTaxi",
-        image: "/images/Service/TaxiAereo.png",
+        image: "/images/Home/IMG_1511.jpeg",
       },
       {
         title: "Source an aircraft",
         text: "Provide your mission requirements, aircraft category, range, capacity or preferred model to begin identifying available aircraft.",
         cta: "Start Aircraft Sourcing",
         route: "AircraftSales",
-        image: "/images/Service/CompraVenta.png",
+        image: "/images/Home/IMG_0025.jpg",
       },
       {
         title: "Source an aircraft part",
         text: "Provide the Part Number (P/N), description, required condition, quantity and certification requirements. Our team will verify availability and sourcing options.",
         cta: "Request Component",
         route: "ImportExport",
-        image: "/images/Service/ImportExport.png",
+        image: "/images/Home/IMG_1511.png",
+        mediaClass: "need-media-components",
       },
       {
         title: "Request aviation support",
         text: "We coordinate requirements involving maintenance, inspections, ground support, technical assistance and specialized aircraft services.",
         cta: "Request Support",
         route: "OperationsManagement",
-        image: "/images/Service/AdministracionOperativa.png",
+        image: "/images/Home/IMG_1138.jpg",
       },
     ],
     mediaEyebrow: "SKYGROUP IN OPERATION",
@@ -816,10 +818,19 @@ const serviceLinkProps = (item) => {
   gap: 3rem;
 }
 
+.final-shell {
+  grid-template-columns: minmax(320px, 0.68fr) minmax(620px, 1.32fr);
+  gap: 5.5rem;
+}
+
 .hero-copy,
 .media-lead,
 .final-copy {
   max-width: 620px;
+}
+
+.final-copy {
+  max-width: 540px;
 }
 
 .hero-copy {
@@ -1048,6 +1059,10 @@ const serviceLinkProps = (item) => {
   display: block;
 }
 
+.need-media.need-media-components img {
+  object-position: center 32%;
+}
+
 .hero-aside-panel {
   position: relative;
   z-index: 2;
@@ -1210,7 +1225,7 @@ const serviceLinkProps = (item) => {
 .story-image {
   aspect-ratio: 16 / 10;
   border-radius: 24px;
-  background: url("/images/About/About10.png") center/cover no-repeat;
+  background: url("/images/Home/IMG_0826.jpeg") center/cover no-repeat;
 }
 
 .story-point,
