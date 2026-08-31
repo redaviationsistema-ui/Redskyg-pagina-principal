@@ -228,9 +228,18 @@
     <nav class="mobile-nav">
       <div class="mobile-nav-section">
         <span class="mobile-kicker">{{ headerContent.overview }}</span>
-        <RouterLink :to="toLocalizedRoute('Home')" @click="closeMenu">{{ headerContent.homeTitle }}</RouterLink>
-        <RouterLink :to="toLocalizedRoute('AboutUs')" @click="closeMenu">{{ headerContent.aboutTitle }}</RouterLink>
-        <RouterLink :to="toLocalizedRoute('Blog')" @click="closeMenu">{{ headerContent.blogTitle }}</RouterLink>
+        <RouterLink :to="toLocalizedRoute('Home')" @click="closeMenu">
+          <span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path :d="navIcons.home" /></svg></span>
+          {{ headerContent.homeTitle }}
+        </RouterLink>
+        <RouterLink :to="toLocalizedRoute('AboutUs')" @click="closeMenu">
+          <span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path :d="navIcons.about" /></svg></span>
+          {{ headerContent.aboutTitle }}
+        </RouterLink>
+        <RouterLink :to="toLocalizedRoute('Blog')" @click="closeMenu">
+          <span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path :d="navIcons.blog" /></svg></span>
+          {{ headerContent.blogTitle }}
+        </RouterLink>
       </div>
 
       <div class="mobile-divider"></div>
@@ -238,12 +247,15 @@
       <div class="mobile-nav-section">
         <span class="mobile-kicker">{{ headerContent.aircraftAdvisory }}</span>
         <RouterLink :to="toLocalizedRoute('AircraftSales')" @click="closeMenu">
+          <span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path :d="serviceIcons.aircraftSales" /></svg></span>
           {{ headerContent.aircraftSales }}
         </RouterLink>
         <RouterLink :to="toLocalizedRoute('PrePurchaseInspection')" @click="closeMenu">
+          <span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path :d="serviceIcons.prePurchase" /></svg></span>
           {{ headerContent.prePurchase }}
         </RouterLink>
         <RouterLink :to="toLocalizedRoute('CoOwnership')" @click="closeMenu">
+          <span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path :d="serviceIcons.coOwnership" /></svg></span>
           {{ headerContent.coOwnership }}
         </RouterLink>
       </div>
@@ -253,15 +265,19 @@
       <div class="mobile-nav-section">
         <span class="mobile-kicker">{{ headerContent.operationsTechnical }}</span>
         <RouterLink :to="toLocalizedRoute('AirTaxi')" @click="closeMenu">
+          <span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path :d="serviceIcons.airTaxi" /></svg></span>
           {{ headerContent.airTaxi }}
         </RouterLink>
         <RouterLink :to="toLocalizedRoute('OperationsManagement')" @click="closeMenu">
+          <span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path :d="serviceIcons.operationsManagement" /></svg></span>
           {{ headerContent.operationsManagement }}
         </RouterLink>
         <RouterLink :to="toLocalizedRoute('ImportExport')" @click="closeMenu">
+          <span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path :d="serviceIcons.importExport" /></svg></span>
           {{ headerContent.importExport }}
         </RouterLink>
         <RouterLink :to="toLocalizedRoute('EngineShop')" @click="closeMenu">
+          <span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path :d="serviceIcons.engineServices" /></svg></span>
           {{ headerContent.engineServices }}
         </RouterLink>
       </div>
@@ -672,27 +688,24 @@ onUnmounted(() => {
 ================================= */
 
 .elegant-menu {
-  position: absolute;
-  top: 135%;
+  position: fixed;
+  top: 104px;
   left: 50%;
   transform: translateX(-50%);
-  width: min(1080px, calc(100vw - 48px));
-  max-height: calc(100vh - 120px);
-  padding: 2rem 2.2rem;
+  width: min(1180px, calc(100vw - 64px));
+  max-height: calc(100vh - 132px);
+  padding: 1.4rem;
   overflow-y: auto;
-  border-radius: 22px;
-
-  background: linear-gradient(
-    145deg,
-    rgba(10, 25, 50, 0.95),
-    rgba(5, 15, 30, 0.98)
-  );
-
-  backdrop-filter: blur(30px);
+  border: 1px solid rgba(216, 178, 110, 0.38);
+  border-radius: 0;
+  background:
+    radial-gradient(circle at 90% 0%, rgba(216, 178, 110, 0.13), transparent 26rem),
+    linear-gradient(135deg, #0b263d, #061525 62%, #04111c);
+  backdrop-filter: blur(22px);
 
   box-shadow:
     0 60px 120px rgba(0, 0, 0, 0.6),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
 
   animation: fadeElegant 0.3s ease;
 }
@@ -703,45 +716,84 @@ onUnmounted(() => {
   content: "";
   position: absolute;
   top: 0;
-  left: 40px;
-  right: 40px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #0078ff, transparent);
+  left: 1.4rem;
+  right: 1.4rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #d8b26e 18%, #d8b26e 82%, transparent);
 }
 
 /* Header */
 
 .menu-header {
-  margin-bottom: 1.25rem;
-  font-size: 0.65rem;
-  letter-spacing: 0.35em;
-  color: rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  min-height: 58px;
+  margin: 0 0 1rem;
+  padding: 0 0.55rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  color: #d8b26e;
   text-transform: uppercase;
+}
+
+.menu-header::after {
+  content: "Sky Group / Aviation Capabilities";
+  margin-left: auto;
+  color: rgba(255, 255, 255, 0.38);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
 }
 
 /* Grid */
 
 .menu-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem 1rem;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid rgba(216, 178, 110, 0.24);
+  background: rgba(216, 178, 110, 0.24);
 }
 
 /* Links */
 
 .menu-grid a {
+  position: relative;
   text-decoration: none;
   color: white;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-height: 128px;
-  padding: 0.85rem 0.9rem 0.95rem;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  transition: 0.35s ease;
+  grid-column: span 2;
+  min-height: 166px;
+  padding: 1.25rem;
+  border-radius: 0;
+  background: rgba(6, 23, 38, 0.96);
+  border: 0;
+  transition: background 0.3s ease, transform 0.3s ease;
+  animation: menuCardEnter 420ms both cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+.menu-grid a:last-child {
+  grid-column: 3 / span 2;
+}
+
+.menu-grid a::after {
+  content: "→";
+  position: absolute;
+  right: 1.2rem;
+  bottom: 1rem;
+  color: rgba(216, 178, 110, 0.7);
+  font-size: 1.15rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.menu-grid a:nth-child(1) { animation-delay: 40ms; }
+.menu-grid a:nth-child(2) { animation-delay: 80ms; }
+.menu-grid a:nth-child(3) { animation-delay: 120ms; }
+.menu-grid a:nth-child(4) { animation-delay: 160ms; }
+.menu-grid a:nth-child(5) { animation-delay: 200ms; }
+.menu-grid a:nth-child(6) { animation-delay: 240ms; }
+.menu-grid a:nth-child(7) { animation-delay: 280ms; }
 
 .menu-icon-badge {
   width: 42px;
@@ -749,14 +801,14 @@ onUnmounted(() => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0.75rem;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.045);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: auto;
+  border-radius: 50%;
+  background: rgba(216, 178, 110, 0.08);
+  border: 1px solid rgba(216, 178, 110, 0.32);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
   color: #d8b26e;
   transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
-  animation: menuIconFloat 4.2s ease-in-out infinite;
+  animation: none;
 }
 
 .menu-icon-badge svg {
@@ -770,32 +822,32 @@ onUnmounted(() => {
 }
 
 .menu-grid strong {
-  font-weight: 500;
-  margin-bottom: 4px;
-  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 1.1rem 1.8rem 0.38rem 0;
+  font-size: 1rem;
   letter-spacing: 0.03em;
   line-height: 1.3;
 }
 
 .menu-grid small {
-  font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.45);
-  letter-spacing: 0.05em;
+  max-width: 28ch;
+  font-size: 0.76rem;
+  color: rgba(255, 255, 255, 0.62);
+  letter-spacing: 0.03em;
   line-height: 1.45;
 }
 
 /* Hover Effect */
 
 .menu-grid a:hover {
-  transform: translateY(-4px);
-  border-color: rgba(216, 178, 110, 0.18);
-  background: rgba(255, 255, 255, 0.045);
+  transform: translateY(-3px);
+  background: #10324a;
 }
 
 .menu-grid a:hover .menu-icon-badge {
-  transform: translateY(-4px) scale(1.06);
-  border-color: rgba(216, 178, 110, 0.3);
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18), 0 0 22px rgba(216, 178, 110, 0.14);
+  transform: scale(1.06);
+  border-color: rgba(216, 178, 110, 0.65);
+  box-shadow: 0 0 24px rgba(216, 178, 110, 0.16);
 }
 
 .menu-grid a:hover strong {
@@ -804,6 +856,11 @@ onUnmounted(() => {
 
 .menu-grid a:hover small {
   color: rgba(255, 255, 255, 0.7);
+}
+
+.menu-grid a:hover::after {
+  color: #f1d08b;
+  transform: translateX(5px);
 }
 
 /* Animation */
@@ -829,29 +886,64 @@ onUnmounted(() => {
   }
 }
 
+@keyframes menuCardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 1200px) {
   .elegant-menu {
     width: min(920px, calc(100vw - 40px));
-    padding: 1.8rem 1.8rem;
+    padding: 1.2rem;
   }
 
   .menu-grid {
-    gap: 0.9rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px;
   }
 
   .menu-grid a {
-    min-height: 120px;
-    padding: 0.8rem;
+    grid-column: span 2;
+    min-height: 150px;
+    padding: 1rem;
+  }
+
+  .menu-grid a:last-child {
+    grid-column: 2 / span 2;
   }
 }
 
 @media (max-width: 900px) {
   .elegant-menu {
+    top: 96px;
     width: min(720px, calc(100vw - 32px));
   }
 
   .menu-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .menu-grid a,
+  .menu-grid a:last-child {
+    grid-column: span 1;
+  }
+
+  .menu-header::after {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-grid a,
+  .menu-icon-badge {
+    animation: none !important;
+    transition: none !important;
   }
 }
 /* ===== MOBILE PROFESSIONAL PANEL ===== */
@@ -1114,6 +1206,263 @@ onUnmounted(() => {
 
   .mobile-locale-switcher {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile navigation: a focused private-aviation flight desk. */
+.mobile-overlay {
+  background: rgba(2, 10, 17, 0.76);
+  backdrop-filter: blur(10px);
+}
+
+.mobile-panel {
+  width: min(100vw - 1.25rem, 430px);
+  right: min(-100vw, -450px);
+  padding: 1.35rem;
+  border-left: 1px solid rgba(216, 178, 110, 0.32);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(216, 178, 110, 0.14), transparent 18rem),
+    linear-gradient(155deg, #0a263c, #04121f 58%, #061827);
+  box-shadow: -24px 0 80px rgba(0, 0, 0, 0.54);
+}
+
+.mobile-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 2.2rem;
+  width: 1px;
+  height: 120px;
+  background: linear-gradient(180deg, transparent, rgba(216, 178, 110, 0.72), transparent);
+}
+
+.mobile-header {
+  min-height: 62px;
+  margin-bottom: 1.3rem;
+  padding: 0 0 1.2rem;
+  border-bottom-color: rgba(216, 178, 110, 0.24);
+}
+
+.mobile-header img {
+  height: 48px;
+  filter: brightness(0) invert(1);
+}
+
+.mobile-brand-copy {
+  display: none;
+}
+
+.mobile-close {
+  border-radius: 0;
+  border-color: rgba(216, 178, 110, 0.38);
+  background: rgba(216, 178, 110, 0.08);
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.mobile-close:hover {
+  transform: rotate(90deg);
+  background: rgba(216, 178, 110, 0.16);
+}
+
+.mobile-locale {
+  gap: 0.65rem;
+  margin-bottom: 1.35rem;
+}
+
+.mobile-kicker {
+  color: rgba(248, 243, 233, 0.55);
+  font-size: 0.68rem;
+  letter-spacing: 0.24em;
+}
+
+.mobile-locale-switcher {
+  gap: 0;
+  padding: 4px;
+  border: 1px solid rgba(216, 178, 110, 0.32);
+  background: rgba(2, 13, 23, 0.52);
+}
+
+.mobile-locale-switcher__button {
+  min-height: 44px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.58);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.mobile-locale-switcher__button.active {
+  color: #071827;
+  border: 0;
+  background: #dfba6a;
+}
+
+.mobile-nav {
+  gap: 0.35rem;
+  padding-right: 0;
+}
+
+.mobile-nav-section {
+  gap: 0;
+  padding: 1.15rem 0;
+  counter-reset: none;
+}
+
+.mobile-nav a {
+  position: relative;
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.8rem 2.7rem 0.8rem 0.35rem;
+  border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: transparent;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+}
+
+.mobile-nav a::before {
+  display: none;
+}
+
+.mobile-nav-icon {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #dfba6a;
+  border: 1px solid rgba(216, 178, 110, 0.34);
+  background: rgba(216, 178, 110, 0.08);
+  transition: transform 0.25s ease, color 0.25s ease, background 0.25s ease;
+}
+
+.mobile-nav-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mobile-nav a::after {
+  content: "→";
+  position: absolute;
+  right: 0.45rem;
+  color: rgba(216, 178, 110, 0.74);
+  font-size: 1.1rem;
+  transition: transform 0.25s ease;
+}
+
+.mobile-nav a:hover {
+  color: #ffffff;
+  transform: none;
+  border-color: rgba(216, 178, 110, 0.35);
+  background: rgba(216, 178, 110, 0.09);
+}
+
+.mobile-nav a:hover::after {
+  transform: translateX(4px);
+}
+
+.mobile-nav a:hover .mobile-nav-icon {
+  transform: scale(1.06);
+  background: rgba(216, 178, 110, 0.18);
+}
+
+.mobile-nav a.router-link-active,
+.mobile-nav a.router-link-exact-active {
+  color: #ffffff;
+  border-color: rgba(216, 178, 110, 0.48);
+  background: linear-gradient(90deg, rgba(216, 178, 110, 0.18), transparent);
+}
+
+.mobile-nav a.router-link-active .mobile-nav-icon,
+.mobile-nav a.router-link-exact-active .mobile-nav-icon {
+  color: #071827;
+  background: #dfba6a;
+}
+
+.mobile-divider {
+  height: 1px;
+  margin: 0;
+  background: linear-gradient(90deg, transparent, rgba(216, 178, 110, 0.44), transparent);
+}
+
+.mobile-cta {
+  gap: 0.55rem;
+  padding-top: 1.15rem;
+  border-top-color: rgba(216, 178, 110, 0.3);
+}
+
+.mobile-cta-primary,
+.mobile-cta-secondary {
+  min-height: 54px;
+  border-radius: 0;
+  letter-spacing: 0.16em;
+}
+
+.mobile-cta-primary {
+  background: linear-gradient(110deg, #d6af55, #f1d896);
+}
+
+.mobile-cta-secondary {
+  border-color: rgba(216, 178, 110, 0.38);
+  background: rgba(4, 17, 29, 0.5);
+}
+
+.mobile-panel.active .mobile-header,
+.mobile-panel.active .mobile-locale,
+.mobile-panel.active .mobile-nav-section,
+.mobile-panel.active .mobile-cta {
+  animation: mobileMenuItemIn 520ms both cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-panel.active .mobile-locale { animation-delay: 70ms; }
+.mobile-panel.active .mobile-nav-section:nth-child(1) { animation-delay: 130ms; }
+.mobile-panel.active .mobile-nav-section:nth-child(3) { animation-delay: 190ms; }
+.mobile-panel.active .mobile-nav-section:nth-child(5) { animation-delay: 250ms; }
+.mobile-panel.active .mobile-cta { animation-delay: 320ms; }
+
+@keyframes mobileMenuItemIn {
+  from {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .mobile-panel {
+    width: calc(100vw - 0.6rem);
+    padding: 1rem;
+  }
+
+  .mobile-locale-switcher {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-panel,
+  .mobile-close,
+  .mobile-nav a,
+  .mobile-panel.active .mobile-header,
+  .mobile-panel.active .mobile-locale,
+  .mobile-panel.active .mobile-nav-section,
+  .mobile-panel.active .mobile-cta {
+    animation: none !important;
+    transition: none !important;
   }
 }
 </style>

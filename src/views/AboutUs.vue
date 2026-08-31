@@ -1047,7 +1047,7 @@ onBeforeUnmount(() => {
 }
 
 .journey-section::before {
-  background: url("/images/About/About2.png") center/cover no-repeat;
+  background: url("/images/About/About.png") center/cover no-repeat;
   filter: brightness(0.66) saturate(0.92) contrast(1.06);
   transform: scale(1.03);
 }
@@ -1209,6 +1209,371 @@ onBeforeUnmount(() => {
   .timeline-row,
   .hero-metric {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Editorial overrides: this page is a brand narrative, not a service catalogue. */
+.about-page {
+  --about-ink: #061421;
+  --about-deep: #0a2235;
+  --about-gold: #deb865;
+  background:
+    radial-gradient(circle at 8% 24%, rgba(38, 101, 130, 0.18), transparent 31rem),
+    radial-gradient(circle at 92% 64%, rgba(222, 184, 101, 0.1), transparent 27rem),
+    #061421;
+}
+
+.about-hero {
+  min-height: min(940px, 100svh);
+  align-items: end;
+  background-position: center 42%;
+}
+
+.about-hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: clamp(2rem, 8vw, 9rem);
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent 13%, rgba(222, 184, 101, 0.7) 48%, transparent 88%);
+  opacity: 0.7;
+}
+
+.hero-overlay {
+  background:
+    linear-gradient(90deg, rgba(3, 12, 21, 0.96) 0%, rgba(3, 12, 21, 0.82) 40%, rgba(3, 12, 21, 0.32) 77%, rgba(3, 12, 21, 0.55) 100%),
+    linear-gradient(0deg, rgba(3, 12, 21, 0.9) 0%, transparent 43%);
+}
+
+.hero-shell {
+  grid-template-columns: minmax(0, 1.15fr) minmax(295px, 0.48fr);
+  gap: clamp(2rem, 8vw, 9rem);
+  padding-top: 11rem;
+  padding-bottom: clamp(3.5rem, 7vw, 6rem);
+}
+
+.hero-copy h1 {
+  max-width: 790px;
+  font-size: clamp(3.25rem, 6.2vw, 6.2rem);
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+}
+
+.hero-copy > p {
+  max-width: 630px;
+  font-size: clamp(1.05rem, 1.35vw, 1.22rem);
+}
+
+.hero-side-panel {
+  gap: 0;
+  padding: 1.5rem 1.65rem;
+  border-radius: 0;
+  border-color: rgba(222, 184, 101, 0.42);
+  background: linear-gradient(145deg, rgba(5, 20, 32, 0.91), rgba(10, 39, 57, 0.72));
+}
+
+.hero-metric {
+  grid-template-columns: 46px 1fr;
+  padding: 1.15rem 0;
+}
+
+.hero-metric + .hero-metric {
+  border-top: 1px solid rgba(222, 184, 101, 0.25);
+}
+
+.hero-metric strong {
+  color: #fffaf0;
+  font-family: var(--font-heading);
+  font-size: 1.7rem;
+  font-weight: 500;
+}
+
+.icon-badge {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+}
+
+.intro-section {
+  padding-top: clamp(6rem, 10vw, 10rem);
+  padding-bottom: clamp(6rem, 10vw, 10rem);
+}
+
+.intro-grid {
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(3rem, 10vw, 12rem);
+}
+
+.intro-grid h2,
+.section-head h2,
+.strategy-shell h2,
+.cta-shell h2,
+.experience-copy h2 {
+  font-size: clamp(2.45rem, 4.25vw, 4.6rem);
+  line-height: 1.03;
+}
+
+.intro-text {
+  gap: 0;
+  border-top: 1px solid rgba(222, 184, 101, 0.38);
+}
+
+.intro-text p {
+  padding: 1.6rem 0;
+  font-size: 1.08rem;
+}
+
+.intro-text p + p {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.experience-section {
+  min-height: 610px;
+  display: flex;
+  align-items: center;
+}
+
+.experience-overlay {
+  background:
+    linear-gradient(90deg, rgba(3, 12, 21, 0.95), rgba(3, 12, 21, 0.68) 46%, rgba(3, 12, 21, 0.12)),
+    linear-gradient(0deg, rgba(3, 12, 21, 0.58), transparent 50%);
+}
+
+.experience-shell {
+  min-height: auto;
+}
+
+.experience-copy {
+  max-width: 680px;
+  padding-left: clamp(1.25rem, 6vw, 6rem);
+  border-left: 1px solid var(--about-gold);
+}
+
+.pillars-section {
+  padding-top: clamp(5rem, 9vw, 9rem);
+  padding-bottom: clamp(5rem, 9vw, 9rem);
+}
+
+.pillar-lines {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid rgba(222, 184, 101, 0.28);
+  background: rgba(222, 184, 101, 0.28);
+}
+
+.pillar-line {
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  min-height: 300px;
+  padding: 1.7rem;
+  border: 0;
+  background: #0a2031;
+}
+
+.pillar-line:nth-child(even) {
+  background: #0d293c;
+}
+
+.pillar-content {
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+}
+
+.pillar-content h3 {
+  font-size: clamp(1.45rem, 2vw, 2rem);
+}
+
+.capabilities-section {
+  background: #071a2a;
+}
+
+.capabilities-section::before {
+  filter: brightness(0.32) saturate(0.7);
+}
+
+.capabilities-section::after {
+  background:
+    linear-gradient(90deg, rgba(4, 17, 28, 0.96), rgba(4, 17, 28, 0.84) 52%, rgba(4, 17, 28, 0.72)),
+    radial-gradient(circle at 88% 14%, rgba(222, 184, 101, 0.14), transparent 23rem);
+}
+
+.capabilities-hero {
+  grid-template-columns: minmax(0, 0.8fr) minmax(400px, 1.2fr);
+  gap: clamp(2rem, 6vw, 7rem);
+  margin-bottom: 4rem;
+}
+
+.capabilities-image {
+  border-radius: 0;
+  clip-path: polygon(7% 0, 100% 0, 93% 100%, 0 100%);
+}
+
+.capabilities-stream {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: 1px solid rgba(222, 184, 101, 0.48);
+  background: rgba(3, 14, 24, 0.42);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+}
+
+.capability-row,
+.capability-row.reverse {
+  grid-template-columns: minmax(0, 1fr) 64px;
+  gap: 1rem;
+  min-height: 220px;
+  padding: 1.7rem;
+  border: 0;
+  background: rgba(7, 28, 44, 0.82);
+}
+
+.capability-row:nth-child(odd) {
+  border-right: 1px solid rgba(222, 184, 101, 0.32);
+}
+
+.capability-row:nth-child(n + 3) {
+  border-top: 1px solid rgba(222, 184, 101, 0.32);
+}
+
+.capability-row.reverse .capability-copy,
+.capability-row.reverse .capability-icon {
+  order: initial;
+}
+
+.capability-row:hover {
+  background: rgba(16, 52, 74, 0.96);
+  box-shadow: inset 0 0 0 1px rgba(255, 232, 177, 0.42);
+}
+
+.capability-copy strong,
+.capability-number {
+  color: #f0c96f;
+}
+
+.capability-copy h3 {
+  font-size: clamp(1.3rem, 2vw, 1.85rem);
+}
+
+.strategy-section {
+  padding-top: clamp(6rem, 10vw, 10rem);
+  padding-bottom: clamp(4rem, 7vw, 7rem);
+}
+
+.strategy-shell {
+  grid-template-columns: minmax(0, 1.03fr) minmax(360px, 0.97fr);
+  gap: clamp(3rem, 9vw, 10rem);
+}
+
+.strategy-image {
+  border-radius: 0;
+  clip-path: polygon(0 0, 100% 8%, 100% 100%, 8% 92%);
+}
+
+.metrics-section {
+  padding-top: 0;
+  padding-bottom: clamp(5rem, 9vw, 9rem);
+}
+
+.metrics-ribbon {
+  gap: 0;
+  padding: 0;
+  border-color: rgba(222, 184, 101, 0.56);
+}
+
+.metric-block {
+  padding: 2.3rem 1.5rem;
+}
+
+.metric-block strong {
+  color: var(--about-gold);
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.7vw, 3.7rem);
+  font-weight: 500;
+}
+
+.journey-section::after {
+  background:
+    linear-gradient(180deg, rgba(3, 12, 21, 0.82), rgba(3, 12, 21, 0.94)),
+    radial-gradient(circle at 50% 32%, rgba(37, 92, 125, 0.22), transparent 38%);
+}
+
+.timeline {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin-top: 4rem;
+  border-top: 1px solid rgba(222, 184, 101, 0.38);
+  border-bottom: 1px solid rgba(222, 184, 101, 0.38);
+}
+
+.timeline-row {
+  grid-template-columns: 1fr;
+  gap: 1.6rem;
+  min-height: 270px;
+  padding: 1.7rem;
+  border-top: 0;
+}
+
+.timeline-row + .timeline-row {
+  border-left: 1px solid rgba(222, 184, 101, 0.3);
+}
+
+.cta-shell {
+  border-radius: 0;
+  padding: clamp(2rem, 5vw, 4rem);
+  background:
+    linear-gradient(90deg, rgba(4, 18, 30, 0.94), rgba(7, 38, 57, 0.79)),
+    url("/images/About/marco.jpg") center/cover no-repeat;
+}
+
+@media (max-width: 1100px) {
+  .about-hero::after {
+    display: none;
+  }
+
+  .hero-shell,
+  .intro-grid,
+  .capabilities-hero,
+  .strategy-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-side {
+    max-width: 540px;
+  }
+
+  .pillar-lines,
+  .timeline {
+    grid-template-columns: 1fr;
+  }
+
+  .capabilities-stream {
+    grid-template-columns: 1fr;
+  }
+
+  .capability-row:nth-child(odd),
+  .capability-row:nth-child(n + 3),
+  .timeline-row + .timeline-row {
+    border-right: 0;
+    border-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-copy h1 {
+    font-size: clamp(2.8rem, 13vw, 4.15rem);
+  }
+
+  .hero-shell {
+    padding-top: 8rem;
+  }
+
+  .experience-copy {
+    padding-left: 1.2rem;
+  }
+
+  .capability-row,
+  .capability-row.reverse {
+    grid-template-columns: minmax(0, 1fr) 54px;
   }
 }
 </style>

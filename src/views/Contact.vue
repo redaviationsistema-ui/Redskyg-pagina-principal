@@ -1,4 +1,5 @@
 <template>
+  <div class="contact-view">
     <section class="contact-page">
       <section class="contact-hero">
         <div class="hero-backdrop"></div>
@@ -187,6 +188,7 @@
         </div>
       </div>
     </transition>
+  </div>
 </template>
 
 <script setup>
@@ -1178,6 +1180,318 @@ select option {
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 18px;
     background: rgba(255, 255, 255, 0.03);
+  }
+}
+
+/* Contact is treated as a private aviation coordination desk. */
+.contact-page {
+  --contact-ink: #04121f;
+  --contact-panel: #082238;
+  --contact-gold: #dfba6a;
+  background:
+    radial-gradient(circle at 88% 34%, rgba(42, 112, 148, 0.2), transparent 31rem),
+    linear-gradient(180deg, #04111d, #081c2c 55%, #061421);
+}
+
+.contact-hero {
+  min-height: min(820px, 88svh);
+  display: flex;
+  align-items: end;
+  padding-top: 8rem;
+  padding-bottom: clamp(3.5rem, 7vw, 6rem);
+}
+
+.hero-backdrop {
+  background:
+    linear-gradient(90deg, rgba(2, 10, 18, 0.95), rgba(2, 10, 18, 0.78) 43%, rgba(2, 10, 18, 0.3) 82%),
+    linear-gradient(0deg, rgba(2, 10, 18, 0.85), transparent 48%),
+    url("/images/contacto/MM1.jpg") center/cover no-repeat;
+  animation: contactBackdropDrift 18s ease-in-out infinite alternate;
+}
+
+.contact-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: clamp(2rem, 10vw, 10rem);
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent 13%, rgba(223, 186, 106, 0.65) 48%, transparent 88%);
+}
+
+.hero-grid {
+  gap: clamp(2rem, 8vw, 9rem);
+}
+
+.hero-copy {
+  animation: contactRise 850ms 100ms both cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-copy h1 {
+  max-width: 820px;
+  font-size: clamp(3.2rem, 6vw, 6rem);
+  letter-spacing: -0.035em;
+}
+
+.hero-copy h1 span {
+  color: var(--contact-gold);
+}
+
+.hero-highlights {
+  max-width: 740px;
+  gap: 0;
+  margin-top: 2.6rem;
+  border-top: 1px solid rgba(223, 186, 106, 0.42);
+  border-bottom: 1px solid rgba(223, 186, 106, 0.24);
+}
+
+.highlight-stat {
+  min-height: 104px;
+  padding: 1.15rem 1.2rem 1.15rem 0;
+  border-right-color: rgba(223, 186, 106, 0.24);
+  animation: contactRise 700ms both cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.highlight-stat:nth-child(1) { animation-delay: 340ms; }
+.highlight-stat:nth-child(2) { animation-delay: 420ms; }
+.highlight-stat:nth-child(3) { animation-delay: 500ms; }
+
+.highlight-stat strong {
+  color: var(--contact-gold);
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.response-panel {
+  padding: 1.65rem;
+  border: 1px solid rgba(223, 186, 106, 0.4);
+  border-radius: 0;
+  background: linear-gradient(145deg, rgba(4, 20, 32, 0.93), rgba(12, 45, 64, 0.78));
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.24);
+  animation: contactRise 850ms 280ms both cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.aside-grid article {
+  padding-left: 1.55rem;
+  border-left-color: rgba(223, 186, 106, 0.35);
+}
+
+.aside-grid article::before {
+  background: var(--contact-gold);
+}
+
+.contact-content {
+  padding-top: clamp(4rem, 8vw, 7rem);
+  padding-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+.content-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(380px, 0.78fr);
+  gap: clamp(2.5rem, 6vw, 7rem);
+}
+
+.intro-panel {
+  padding: 0 0 2.2rem;
+  border-bottom-color: rgba(223, 186, 106, 0.38);
+}
+
+.contact-directory {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 2rem;
+  border: 1px solid rgba(223, 186, 106, 0.28);
+  background: rgba(223, 186, 106, 0.28);
+}
+
+.directory-item {
+  display: flex;
+  flex-direction: column;
+  min-height: 235px;
+  gap: 0;
+  padding: 1.4rem;
+  border: 0;
+  background: #082033;
+}
+
+.directory-item span {
+  color: var(--contact-gold);
+}
+
+.directory-item h3 {
+  margin-top: 1.4rem;
+}
+
+.directory-item a {
+  justify-self: auto;
+  margin-top: auto;
+  color: var(--contact-gold);
+  text-align: left;
+}
+
+.benefits-panel {
+  padding-top: 3.5rem;
+}
+
+.benefits-list {
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin-top: 1.75rem;
+  border-top: 1px solid rgba(223, 186, 106, 0.34);
+}
+
+.benefit-item {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 1rem;
+  padding: 1.3rem 0;
+  border-top: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.benefit-index {
+  color: var(--contact-gold);
+}
+
+.benefit-item h3 {
+  margin-top: 0;
+}
+
+.panel-shell {
+  padding: clamp(1.65rem, 3vw, 2.5rem);
+  border-radius: 0;
+  border-color: rgba(223, 186, 106, 0.44);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(223, 186, 106, 0.12), transparent 16rem),
+    linear-gradient(145deg, #0d2d44, #061827 68%);
+}
+
+.panel-heading {
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid rgba(223, 186, 106, 0.3);
+}
+
+input,
+select,
+textarea {
+  border-radius: 0;
+  background: rgba(1, 12, 21, 0.34);
+}
+
+.btn-submit,
+.close-modal {
+  border-radius: 2px;
+}
+
+.btn-submit {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-submit::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 25%, rgba(255, 255, 255, 0.42) 50%, transparent 75%);
+  transform: translateX(-130%);
+  transition: transform 650ms ease;
+}
+
+.btn-submit:hover::after {
+  transform: translateX(130%);
+}
+
+.trust-band {
+  padding: 0;
+  background: var(--contact-gold);
+  color: var(--contact-ink);
+}
+
+.trust-grid {
+  border: 0;
+}
+
+.trust-grid article,
+.trust-grid article + article {
+  min-height: 230px;
+  padding: 2.1rem 2rem;
+  border-right-color: rgba(4, 18, 31, 0.3);
+}
+
+.trust-grid :is(span, h3, p) {
+  color: var(--contact-ink);
+}
+
+.trust-grid span {
+  color: #765519;
+}
+
+.trust-grid p {
+  color: rgba(4, 18, 31, 0.78);
+}
+
+@keyframes contactRise {
+  from { opacity: 0; transform: translateY(26px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes contactBackdropDrift {
+  from { transform: scale(1.05) translate3d(-0.4%, 0, 0); }
+  to { transform: scale(1.09) translate3d(0.4%, -0.8%, 0); }
+}
+
+@media (max-width: 1100px) {
+  .contact-hero {
+    min-height: auto;
+  }
+
+  .content-grid,
+  .contact-directory {
+    grid-template-columns: 1fr;
+  }
+
+  .directory-item {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .contact-hero::before {
+    display: none;
+  }
+
+  .contact-hero {
+    padding-bottom: 3.5rem;
+  }
+
+  .hero-highlights {
+    grid-template-columns: 1fr;
+  }
+
+  .highlight-stat {
+    border-right: 0;
+    border-bottom: 1px solid rgba(223, 186, 106, 0.24);
+  }
+
+  .response-panel {
+    padding: 1.35rem;
+  }
+
+  .benefit-item {
+    grid-template-columns: 42px 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-backdrop,
+  .hero-copy,
+  .response-panel,
+  .highlight-stat {
+    animation: none !important;
+  }
+
+  .btn-submit::after {
+    transition: none;
   }
 }
 </style>
