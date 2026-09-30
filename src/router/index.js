@@ -10,6 +10,7 @@ const Pricing = () => import("../views/Pricing.vue");
 const Blog = () => import("../views/Blog.vue");
 const Contact = () => import("../views/Contact.vue");
 const SeoLanding = () => import("../views/SeoLanding.vue");
+const AircraftSales = () => import("../views/AircraftSales.vue");
 const CompraVenta = () => import("../views/services/CompraVenta.vue");
 const TaxiAereo = () => import("../views/services/TaxiAereo.vue");
 const AdministracionOperativa = () => import("../views/services/AdministracionOperativa.vue");
@@ -173,7 +174,7 @@ const pageRoutes = [
   {
     path: "aircraft-sales",
     name: "AircraftSales",
-    component: CompraVenta,
+    component: AircraftSales,
     meta: createRouteSeo(
       {
         title: "Compra y Venta de Aeronaves | Sky Group Aviation",
