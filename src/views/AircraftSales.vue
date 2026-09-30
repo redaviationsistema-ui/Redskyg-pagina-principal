@@ -17,37 +17,59 @@
 
     <section id="aircraft-catalog" class="aircraft-catalog">
       <div class="container">
-        <form class="aircraft-filters reveal" @submit.prevent>
-          <label>
-            <span>{{ copy.filters.status }}</span>
-            <select v-model="statusFilter">
-              <option value="all">{{ copy.filters.all }}</option>
-              <option value="ready">{{ copy.status.ready }}</option>
-              <option value="service">{{ copy.status.service }}</option>
-            </select>
-          </label>
+        <form class="aircraft-filters reveal" @submit.prevent="filtersOpen = false">
+          <div class="aircraft-filters__bar">
+            <button class="aircraft-filters__toggle" type="button" @click="filtersOpen = !filtersOpen">
+              {{ copy.filters.toggle }}
+              <span aria-hidden="true">{{ filtersOpen ? "−" : "+" }}</span>
+            </button>
+            <strong>{{ resultsLabel }}</strong>
+          </div>
 
-          <label>
-            <span>{{ copy.filters.type }}</span>
-            <select v-model="typeFilter">
-              <option value="all">{{ copy.filters.all }}</option>
-              <option v-for="type in aircraftTypes" :key="type" :value="type">{{ type }}</option>
-            </select>
-          </label>
+          <div class="aircraft-filters__panel" :class="{ 'aircraft-filters__panel--open': filtersOpen }">
+            <label>
+              <span>{{ copy.filters.brand }}</span>
+              <select v-model="brandFilter">
+                <option value="all">{{ copy.filters.all }}</option>
+                <option v-for="brand in aircraftBrands" :key="brand" :value="brand">{{ brand }}</option>
+              </select>
+            </label>
 
-          <label>
-            <span>{{ copy.filters.sort }}</span>
-            <select v-model="sortBy">
-              <option value="recent">{{ copy.filters.recent }}</option>
-              <option value="priceHigh">{{ copy.filters.priceHigh }}</option>
-              <option value="priceLow">{{ copy.filters.priceLow }}</option>
-            </select>
-          </label>
+            <label>
+              <span>{{ copy.filters.type }}</span>
+              <select v-model="typeFilter">
+                <option value="all">{{ copy.filters.all }}</option>
+                <option v-for="type in aircraftTypes" :key="type" :value="type">{{ type }}</option>
+              </select>
+            </label>
 
-          <label class="aircraft-search">
-            <span>{{ copy.filters.search }}</span>
-            <input v-model.trim="searchTerm" type="search" :placeholder="copy.filters.placeholder" />
-          </label>
+            <label>
+              <span>{{ copy.filters.status }}</span>
+              <select v-model="statusFilter">
+                <option value="all">{{ copy.filters.all }}</option>
+                <option value="ready">{{ copy.status.ready }}</option>
+                <option value="service">{{ copy.status.service }}</option>
+              </select>
+            </label>
+
+            <label>
+              <span>{{ copy.filters.location }}</span>
+              <select v-model="locationFilter">
+                <option value="all">{{ copy.filters.all }}</option>
+                <option v-for="location in aircraftLocations" :key="location" :value="location">{{ location }}</option>
+              </select>
+            </label>
+
+            <label class="aircraft-search">
+              <span>{{ copy.filters.search }}</span>
+              <input v-model.trim="searchTerm" type="search" :placeholder="copy.filters.placeholder" />
+            </label>
+
+            <div class="aircraft-filters__actions">
+              <button class="aircraft-btn aircraft-btn--gold" type="submit">{{ copy.filters.apply }}</button>
+              <button class="aircraft-btn aircraft-btn--ghost" type="button" @click="clearFilters">{{ copy.filters.clear }}</button>
+            </div>
+          </div>
         </form>
 
         <div v-if="loading" class="catalog-message reveal">
@@ -65,6 +87,7 @@
             :title="copy.readyTitle"
             :text="copy.readyText"
             :aircraft="readyAircraft"
+            :count-label="sectionCountLabel(readyAircraft.length)"
           :status-label="copy.status.ready"
           status="ready"
           :button-label="copy.cardCta"
@@ -79,6 +102,7 @@
             :title="copy.serviceTitle"
             :text="copy.serviceText"
             :aircraft="serviceAircraft"
+            :count-label="sectionCountLabel(serviceAircraft.length)"
           :status-label="copy.status.service"
           status="service"
           :button-label="copy.cardCta"
@@ -103,6 +127,22 @@
           {{ copy.finalCta }}
           <span aria-hidden="true">→</span>
         </RouterLink>
+      </div>
+    </section>
+
+    <section class="section aircraft-advisory">
+      <div class="container aircraft-advisory__inner reveal">
+        <span class="aircraft-eyebrow">{{ copy.advisoryEyebrow }}</span>
+        <h2>{{ copy.advisoryTitle }}</h2>
+        <p>{{ copy.advisoryText }}</p>
+        <div class="aircraft-advisory__actions">
+          <RouterLink class="aircraft-btn aircraft-btn--gold" :to="toLocalizedRoute('Contact')">
+            {{ copy.advisoryPrimary }}
+          </RouterLink>
+          <a class="aircraft-btn aircraft-btn--ghost" href="https://wa.me/5217225785991" target="_blank" rel="noopener">
+            {{ copy.advisorySecondary }}
+          </a>
+        </div>
       </div>
     </section>
 
@@ -211,9 +251,11 @@ import {
 const { locale, toLocalizedRoute } = useLocale();
 
 const statusFilter = ref("all");
+const brandFilter = ref("all");
 const typeFilter = ref("all");
-const sortBy = ref("recent");
+const locationFilter = ref("all");
 const searchTerm = ref("");
+const filtersOpen = ref(false);
 const selectedAircraft = ref(null);
 const galleryAircraft = ref(null);
 const galleryOpen = ref(false);
@@ -235,26 +277,29 @@ let inquiryCloseTimer;
 const copy = computed(() =>
   locale.value === "en"
     ? {
-        heroEyebrow: "Aircraft Sales and Acquisition",
-        heroTitle: "Aircraft catalog",
-        heroText: "Explore aircraft available for acquisition. Review availability, pricing, and request information about the aircraft that matches your operation.",
-        heroCta: "Explore Aircraft",
+        heroEyebrow: "Executive Aircraft Sales and Acquisition",
+        heroTitle: "Aircraft for Sale",
+        heroText: "Explore our portfolio of executive aircraft for sale, available in Mexico and the United States. Private jets, turboprops, and selected aircraft for acquisition.",
+        heroCta: "View Available Aircraft",
         filters: {
+          toggle: "Filter Aircraft",
+          brand: "Brand",
           status: "Status",
           type: "Aircraft Type",
-          sort: "Sort By",
+          location: "Location",
           search: "Search",
           all: "All",
-          recent: "Most Recent",
-          priceHigh: "Highest Price",
-          priceLow: "Lowest Price",
           placeholder: "Name, model or registration...",
+          apply: "Apply Filters",
+          clear: "Clear",
+          found: "aircraft found",
+          foundSingular: "aircraft found",
         },
         status: { ready: "Ready to Operate", service: "Out of Service" },
         readyTitle: "Ready to Operate",
         readyText: "Aircraft available and in operational condition, ready to integrate into your operation.",
         serviceTitle: "Out of Service",
-        serviceText: "Aircraft currently out of service or undergoing maintenance. This status does not remove them from the catalog.",
+        serviceText: "Aircraft currently out of service or in maintenance. They may represent acquisition opportunities depending on condition and project.",
         cardCta: "Request Information",
         galleryCta: "View Photos",
         galleryTitle: "Aircraft Gallery",
@@ -270,10 +315,15 @@ const copy = computed(() =>
         modalTitle: "Request Information",
         close: "Close",
         empty: "No aircraft match the selected filters.",
-        finalEyebrow: "Specific Search",
+        finalEyebrow: "Specialized Advisory",
         finalTitle: "Looking for a specific aircraft?",
-        finalText: "Our team can help you locate, evaluate, and acquire an aircraft with stronger technical and commercial context.",
+        finalText: "Our team can help you find the ideal aircraft according to your operational and budget requirements.",
         finalCta: "Speak with an Advisor",
+        advisoryEyebrow: "Aircraft Acquisition",
+        advisoryTitle: "Integrated aircraft purchase advisory.",
+        advisoryText: "We accompany you throughout the acquisition process with a personalized, confidential, and professional approach.",
+        advisoryPrimary: "Request Advisory",
+        advisorySecondary: "Chat on WhatsApp",
         form: {
           name: "Name *",
           namePlaceholder: "Full name",
@@ -294,26 +344,29 @@ const copy = computed(() =>
         },
       }
     : {
-        heroEyebrow: "Compra y venta de aeronaves",
-        heroTitle: "Catálogo de aeronaves",
-        heroText: "Descubre aeronaves disponibles para adquisición. Consulta disponibilidad, precio y solicita información sobre la aeronave que te interese.",
-        heroCta: "Explorar aeronaves",
+        heroEyebrow: "Compra y venta de aeronaves ejecutivas",
+        heroTitle: "Aeronaves en Venta",
+        heroText: "Explore nuestro portafolio de aeronaves ejecutivas en venta, disponibles en México y Estados Unidos. Jets privados, turbohélices y aeronaves seleccionadas para adquisición.",
+        heroCta: "Ver aeronaves disponibles",
         filters: {
+          toggle: "Filtrar aeronaves",
+          brand: "Marca",
           status: "Estado",
           type: "Tipo de aeronave",
-          sort: "Ordenar por",
+          location: "Ubicación",
           search: "Buscar",
           all: "Todos",
-          recent: "Más recientes",
-          priceHigh: "Mayor precio",
-          priceLow: "Menor precio",
           placeholder: "Nombre, modelo o matrícula...",
+          apply: "Aplicar filtros",
+          clear: "Limpiar",
+          found: "aeronaves encontradas",
+          foundSingular: "aeronave encontrada",
         },
-        status: { ready: "Listo para operar", service: "Fuera de servicio" },
-        readyTitle: "Listos para operar",
+        status: { ready: "Lista para operar", service: "Fuera de servicio" },
+        readyTitle: "Listas para operar",
         readyText: "Aeronaves disponibles y en condición operativa, listas para integrarse a su operación.",
         serviceTitle: "Fuera de servicio",
-        serviceText: "Aeronaves que actualmente se encuentran fuera de servicio o en proceso de mantenimiento. Este estado no las retira del catálogo.",
+        serviceText: "Aeronaves que actualmente se encuentran fuera de servicio o en proceso de mantenimiento. Pueden representar oportunidades de adquisición según condición y proyecto.",
         cardCta: "Solicitar información",
         galleryCta: "Ver fotos",
         galleryTitle: "Galería de aeronave",
@@ -329,10 +382,15 @@ const copy = computed(() =>
         modalTitle: "Solicitar información",
         close: "Cerrar",
         empty: "No hay aeronaves que coincidan con los filtros seleccionados.",
-        finalEyebrow: "Búsqueda específica",
+        finalEyebrow: "Asesoría especializada",
         finalTitle: "¿Busca una aeronave específica?",
-        finalText: "Nuestro equipo puede ayudarle a localizar, evaluar y adquirir una aeronave con mayor contexto técnico y comercial.",
+        finalText: "Nuestro equipo puede ayudarle a encontrar la aeronave ideal según sus necesidades operativas y presupuestales.",
         finalCta: "Hablar con un asesor",
+        advisoryEyebrow: "Adquisición de aeronaves",
+        advisoryTitle: "Asesoría integral en la compra de aeronaves.",
+        advisoryText: "Le acompañamos durante todo el proceso de adquisición con un enfoque personalizado, confidencial y profesional.",
+        advisoryPrimary: "Solicitar asesoría",
+        advisorySecondary: "Hablar por WhatsApp",
         form: {
           name: "Nombre *",
           namePlaceholder: "Tu nombre completo",
@@ -367,7 +425,9 @@ const normalizeAircraft = (items) =>
       id: item.id,
       name: item.name || item.model || "Aeronave",
       registration: item.registration || item.tail_number || "N/D",
+      brand: item.manufacturer || "Sky Group",
       type: item.type || item.aircraft_type || "Sin clasificar",
+      location: item.location || item.base_location || (locale.value === "en" ? "Mexico / United States" : "México / Estados Unidos"),
       status: normalizeStatus(item.status),
       main_image: item.main_image || null,
       images: Array.isArray(item.images) ? item.images.filter((image) => image.resolved_url) : [],
@@ -396,27 +456,41 @@ const loadAircraft = async () => {
   }
 };
 
-const aircraftTypes = computed(() => [...new Set(aircraft.value.map((item) => item.type))]);
+const aircraftTypes = computed(() => [...new Set(aircraft.value.map((item) => item.type).filter(Boolean))]);
+const aircraftBrands = computed(() => [...new Set(aircraft.value.map((item) => item.brand).filter(Boolean))]);
+const aircraftLocations = computed(() => [...new Set(aircraft.value.map((item) => item.location).filter(Boolean))]);
 
 const filteredAircraft = computed(() => {
   const term = searchTerm.value.toLowerCase();
   const result = aircraft.value.filter((item) => {
     const matchesStatus = statusFilter.value === "all" || item.status === statusFilter.value;
     const matchesType = typeFilter.value === "all" || item.type === typeFilter.value;
-    const searchable = `${item.name} ${item.registration} ${item.type}`.toLowerCase();
-    return matchesStatus && matchesType && searchable.includes(term);
+    const matchesBrand = brandFilter.value === "all" || item.brand === brandFilter.value;
+    const matchesLocation = locationFilter.value === "all" || item.location === locationFilter.value;
+    const searchable = `${item.name} ${item.registration} ${item.type} ${item.brand} ${item.location}`.toLowerCase();
+    return matchesStatus && matchesType && matchesBrand && matchesLocation && searchable.includes(term);
   });
 
-  return [...result].sort((a, b) => {
-    if (sortBy.value === "priceHigh") return b.priceValue - a.priceValue;
-    if (sortBy.value === "priceLow") return a.priceValue - b.priceValue;
-    return a.id - b.id;
-  });
+  return [...result].sort((a, b) => a.id - b.id);
 });
 
 const readyAircraft = computed(() => filteredAircraft.value.filter((item) => item.status === "ready"));
 const serviceAircraft = computed(() => filteredAircraft.value.filter((item) => item.status === "service"));
 const activeGalleryImage = computed(() => galleryAircraft.value?.images?.[activeImageIndex.value] || null);
+const resultsLabel = computed(() => {
+  const total = filteredAircraft.value.length;
+  return `${total} ${total === 1 ? copy.value.filters.foundSingular : copy.value.filters.found}`;
+});
+
+const clearFilters = () => {
+  brandFilter.value = "all";
+  typeFilter.value = "all";
+  statusFilter.value = "all";
+  locationFilter.value = "all";
+  searchTerm.value = "";
+};
+
+const sectionCountLabel = (count) => `${count} ${count === 1 ? copy.value.filters.foundSingular : copy.value.filters.found}`;
 
 const AircraftSection = defineComponent({
   props: {
@@ -424,6 +498,7 @@ const AircraftSection = defineComponent({
     text: { type: String, required: true },
     aircraft: { type: Array, required: true },
     statusLabel: { type: String, required: true },
+    countLabel: { type: String, required: true },
     status: { type: String, required: true },
     buttonLabel: { type: String, required: true },
     galleryLabel: { type: String, required: true },
@@ -434,8 +509,8 @@ const AircraftSection = defineComponent({
       h("section", { class: "aircraft-group" }, [
         h("div", { class: "aircraft-group__head" }, [
           h("div", { class: "aircraft-group__title" }, [
-            h("span", { class: "aircraft-plane", "aria-hidden": "true" }, "✈"),
             h("h2", props.title),
+            h("strong", props.countLabel),
           ]),
           h("div", { class: "aircraft-rule" }),
           h("p", props.text),
@@ -683,11 +758,11 @@ onBeforeUnmount(() => {
 
 .aircraft-hero {
   position: relative;
-  min-height: 92vh;
+  min-height: 620px;
   display: flex;
   align-items: center;
   overflow: hidden;
-  background-image: url("/images/Service/IMG_8868.jpg");
+  background-image: url("/images/CompraVenta/Compraventa2.png");
   background-position: center;
   background-size: cover;
 }
@@ -696,7 +771,7 @@ onBeforeUnmount(() => {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(5, 14, 24, 0.82), rgba(5, 14, 24, 0.54) 45%, rgba(5, 14, 24, 0.18)),
+    linear-gradient(90deg, rgba(3, 11, 20, 0.9), rgba(5, 14, 24, 0.62) 48%, rgba(5, 14, 24, 0.24)),
     linear-gradient(180deg, rgba(5, 14, 24, 0.08), #061522 100%);
 }
 
@@ -709,7 +784,7 @@ onBeforeUnmount(() => {
 }
 
 .aircraft-hero__copy {
-  max-width: 660px;
+  max-width: 690px;
 }
 
 .aircraft-eyebrow,
@@ -726,8 +801,8 @@ onBeforeUnmount(() => {
 .aircraft-hero h1,
 .aircraft-final h2 {
   margin: 1rem 0 1.3rem;
-  max-width: 8ch;
-  font-size: clamp(3.8rem, 8vw, 7.5rem);
+  max-width: 9ch;
+  font-size: clamp(4rem, 7vw, 6.8rem);
   line-height: 0.9;
 }
 
@@ -765,6 +840,13 @@ onBeforeUnmount(() => {
   color: #061522;
 }
 
+.aircraft-btn--ghost {
+  padding: 0.9rem 1.2rem;
+  border: 1px solid rgba(217, 174, 82, 0.55);
+  background: transparent;
+  color: #ffffff;
+}
+
 .aircraft-btn:hover,
 .aircraft-card__cta:hover {
   transform: translateY(-2px);
@@ -778,14 +860,23 @@ onBeforeUnmount(() => {
 }
 
 .aircraft-filters {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem;
   margin-bottom: 3.75rem;
   padding: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 6px;
-  background: rgba(12, 33, 52, 0.72);
+  border-radius: 8px;
+  background: rgba(8, 27, 42, 0.84);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.26);
+}
+
+.aircraft-filters__bar {
+  display: none;
+}
+
+.aircraft-filters__panel {
+  display: grid;
+  grid-template-columns: 0.9fr 1fr 1fr 1fr 1.35fr;
+  gap: 0.85rem;
+  align-items: end;
 }
 
 .aircraft-filters label {
@@ -811,6 +902,10 @@ onBeforeUnmount(() => {
 .aircraft-filters input {
   height: 48px;
   padding: 0 0.85rem;
+}
+
+.aircraft-filters__actions {
+  display: none;
 }
 
 .aircraft-filters input::placeholder,
@@ -859,16 +954,22 @@ onBeforeUnmount(() => {
 .aircraft-group__title {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
-}
-
-.aircraft-plane {
-  color: #d9ae52;
-  font-size: 1.35rem;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .aircraft-group h2 {
   font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.aircraft-group__title strong {
+  color: #d9ae52;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
 }
 
 .aircraft-rule {
@@ -889,8 +990,9 @@ onBeforeUnmount(() => {
 .aircraft-card {
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 10px;
-  background: #081b2a;
+  border-radius: 8px;
+  background: rgba(8, 27, 42, 0.86);
+  box-shadow: 0 22px 56px rgba(0, 0, 0, 0.22);
 }
 
 .aircraft-card__media {
@@ -994,7 +1096,8 @@ onBeforeUnmount(() => {
 
 .aircraft-card h3 {
   margin-bottom: 1rem;
-  font-size: 1.55rem;
+  font-size: 1.45rem;
+  line-height: 1.15;
 }
 
 .aircraft-card p {
@@ -1064,6 +1167,35 @@ onBeforeUnmount(() => {
 .aircraft-final h2 {
   max-width: 11ch;
   font-size: clamp(2.6rem, 5vw, 5rem);
+}
+
+.aircraft-advisory {
+  padding-top: 0;
+}
+
+.aircraft-advisory__inner {
+  max-width: 860px;
+}
+
+.aircraft-advisory h2 {
+  max-width: 720px;
+  margin: 1rem 0 1.1rem;
+  font-size: clamp(2.4rem, 5vw, 4.5rem);
+  line-height: 1;
+}
+
+.aircraft-advisory p {
+  max-width: 680px;
+  color: #aeb8c3;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.aircraft-advisory__actions {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  margin-top: 1.8rem;
 }
 
 .aircraft-gallery-modal {
@@ -1374,13 +1506,19 @@ onBeforeUnmount(() => {
 }
 
 @media (max-width: 980px) {
-  .aircraft-filters,
+  .aircraft-filters__panel,
   .aircraft-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .aircraft-search {
+  .aircraft-search,
+  .aircraft-filters__actions {
     grid-column: 1 / -1;
+  }
+
+  .aircraft-filters__actions {
+    display: flex;
+    gap: 0.75rem;
   }
 
   .aircraft-final__shell {
@@ -1391,22 +1529,116 @@ onBeforeUnmount(() => {
 
 @media (max-width: 640px) {
   .aircraft-hero {
-    min-height: 84vh;
+    min-height: 520px;
+    background-position: 58% center;
+  }
+
+  .aircraft-hero__shade {
+    background:
+      linear-gradient(90deg, rgba(3, 11, 20, 0.92), rgba(5, 14, 24, 0.78)),
+      linear-gradient(180deg, rgba(5, 14, 24, 0.1), #061522 100%);
+  }
+
+  .aircraft-hero__inner {
+    padding-top: 7rem;
+    padding-bottom: 4rem;
   }
 
   .aircraft-hero h1 {
-    font-size: 3.4rem;
+    font-size: clamp(2.65rem, 13vw, 3.25rem);
   }
 
-  .aircraft-filters,
+  .aircraft-hero p {
+    font-size: 0.96rem;
+    line-height: 1.65;
+  }
+
+  .aircraft-btn--gold {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .aircraft-filters__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .aircraft-filters__bar strong {
+    color: #d9ae52;
+    font-size: 0.74rem;
+    letter-spacing: 0.1em;
+    text-align: right;
+    text-transform: uppercase;
+  }
+
+  .aircraft-filters__toggle {
+    min-height: 46px;
+    border: 1px solid rgba(217, 174, 82, 0.56);
+    border-radius: 6px;
+    background: transparent;
+    color: #ffffff;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    padding: 0 0.85rem;
+    text-transform: uppercase;
+  }
+
+  .aircraft-filters__toggle span {
+    display: inline-block;
+    margin-left: 0.65rem;
+    color: #d9ae52;
+  }
+
+  .aircraft-filters__panel {
+    display: none;
+    margin-top: 1rem;
+  }
+
+  .aircraft-filters__panel--open {
+    display: grid;
+  }
+
+  .aircraft-filters__panel,
   .aircraft-grid,
   .request-summary {
     grid-template-columns: 1fr;
   }
 
+  .aircraft-filters__actions {
+    flex-direction: column;
+  }
+
+  .aircraft-filters__actions .aircraft-btn {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .aircraft-card__media,
+  .aircraft-card__no-image {
+    height: clamp(220px, 64vw, 260px);
+  }
+
+  .aircraft-card__gallery,
+  .aircraft-card__cta {
+    min-height: 48px;
+  }
+
   .aircraft-final__shell,
   .request-modal__panel {
     padding: 1.35rem;
+  }
+
+  .aircraft-final__shell .aircraft-btn,
+  .aircraft-advisory__actions .aircraft-btn {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .aircraft-advisory__actions {
+    flex-direction: column;
   }
 
   .request-summary img {
