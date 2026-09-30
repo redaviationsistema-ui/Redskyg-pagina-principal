@@ -83,7 +83,6 @@
         <template v-else>
           <AircraftSection
             v-if="readyAircraft.length"
-            class="reveal"
             :title="copy.readyTitle"
             :text="copy.readyText"
             :aircraft="readyAircraft"
@@ -98,7 +97,6 @@
 
           <AircraftSection
             v-if="serviceAircraft.length"
-            class="reveal"
             :title="copy.serviceTitle"
             :text="copy.serviceText"
             :aircraft="serviceAircraft"
@@ -148,7 +146,7 @@
 
     <div v-if="galleryOpen && galleryAircraft" class="aircraft-gallery-modal" role="dialog" aria-modal="true" :aria-label="copy.galleryTitle">
       <button class="aircraft-gallery-modal__backdrop" type="button" :aria-label="copy.close" @click="closeGallery"></button>
-      <div class="aircraft-gallery-modal__content">
+      <div ref="galleryContentRef" class="aircraft-gallery-modal__content">
         <button class="aircraft-gallery-modal__close" type="button" :aria-label="copy.close" @click="closeGallery">×</button>
 
         <div class="aircraft-gallery-modal__header">
@@ -188,7 +186,7 @@
 
     <div v-if="selectedAircraft" class="request-modal" role="dialog" aria-modal="true" :aria-label="copy.modalTitle">
       <button class="request-modal__backdrop" type="button" :aria-label="copy.close" @click="closeRequest"></button>
-      <div class="request-modal__panel">
+      <div ref="requestPanelRef" class="request-modal__panel">
         <button class="request-modal__close" type="button" :aria-label="copy.close" @click="closeRequest">×</button>
         <span class="aircraft-eyebrow">{{ copy.modalTitle }}</span>
 
@@ -212,11 +210,11 @@
           </label>
           <label>
             <span>{{ copy.form.email }}</span>
-            <input v-model="requestForm.email" required type="email" placeholder="correo@ejemplo.com" />
+            <input v-model="requestForm.email" required type="email" placeholder="" />
           </label>
           <label>
             <span>{{ copy.form.phone }}</span>
-            <input v-model="requestForm.phone" required type="tel" placeholder="+52" />
+            <input v-model="requestForm.phone" required type="tel" placeholder="" />
           </label>
           <label>
             <span>{{ copy.form.message }}</span>
@@ -258,6 +256,8 @@ const searchTerm = ref("");
 const filtersOpen = ref(false);
 const selectedAircraft = ref(null);
 const galleryAircraft = ref(null);
+const galleryContentRef = ref(null);
+const requestPanelRef = ref(null);
 const galleryOpen = ref(false);
 const activeImageIndex = ref(0);
 const aircraft = ref([]);
@@ -393,7 +393,7 @@ const copy = computed(() =>
         advisorySecondary: "Hablar por WhatsApp",
         form: {
           name: "Nombre *",
-          namePlaceholder: "Tu nombre completo",
+          namePlaceholder: "",
           email: "Correo electrónico *",
           phone: "Número telefónico *",
           message: "Mensaje",
@@ -571,13 +571,15 @@ const AircraftSection = defineComponent({
   },
 });
 
-const openGallery = (item) => {
+const openGallery = async (item) => {
   if (!item.images.length) return;
 
   galleryAircraft.value = item;
   activeImageIndex.value = 0;
   galleryOpen.value = true;
   document.body.style.overflow = "hidden";
+  await nextTick();
+  if (galleryContentRef.value) galleryContentRef.value.scrollTop = 0;
 };
 
 const closeGallery = () => {
@@ -606,12 +608,14 @@ const requestFromGallery = () => {
   if (item) openRequest(item);
 };
 
-const openRequest = (item) => {
+const openRequest = async (item) => {
   selectedAircraft.value = item;
   inquirySuccess.value = "";
   inquiryError.value = "";
   requestForm.message = "";
   document.body.style.overflow = "hidden";
+  await nextTick();
+  if (requestPanelRef.value) requestPanelRef.value.scrollTop = 0;
 };
 
 const closeRequest = () => {
@@ -1201,7 +1205,7 @@ onBeforeUnmount(() => {
 .aircraft-gallery-modal {
   position: fixed;
   inset: 0;
-  z-index: 90;
+  z-index: 10020;
   display: grid;
   place-items: center;
   padding: 1.8rem;
@@ -1357,7 +1361,7 @@ onBeforeUnmount(() => {
 .request-modal {
   position: fixed;
   inset: 0;
-  z-index: 80;
+  z-index: 10020;
   display: grid;
   place-items: center;
   padding: 1.25rem;
@@ -1607,6 +1611,29 @@ onBeforeUnmount(() => {
     grid-template-columns: 1fr;
   }
 
+  .aircraft-catalog,
+  .aircraft-group,
+  .aircraft-grid,
+  .aircraft-card {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .aircraft-grid {
+    display: grid;
+    width: 100%;
+    gap: 24px;
+  }
+
+  .aircraft-card {
+    position: relative;
+    width: 100%;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
   .aircraft-filters__actions {
     flex-direction: column;
   }
@@ -1629,6 +1656,10 @@ onBeforeUnmount(() => {
   .aircraft-final__shell,
   .request-modal__panel {
     padding: 1.35rem;
+  }
+
+  .request-modal__panel {
+    max-height: calc(100dvh - 2.5rem);
   }
 
   .aircraft-final__shell .aircraft-btn,
@@ -1654,6 +1685,7 @@ onBeforeUnmount(() => {
   }
 
   .aircraft-gallery-modal__content {
+    max-height: calc(100dvh - 2rem);
     padding: 1.25rem;
   }
 
