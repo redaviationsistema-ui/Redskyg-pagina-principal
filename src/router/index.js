@@ -193,6 +193,27 @@ const pageRoutes = [
     ),
   },
   {
+    path: "aircraft-sales/:registration",
+    name: "AircraftSalesDetail",
+    component: AircraftSales,
+    meta: createRouteSeo(
+      {
+        title: "Aeronave en Venta | Sky Group Aviation",
+        description:
+          "Consulta fotografias, especificaciones y disponibilidad de esta aeronave con Sky Group Aviation.",
+        keywords:
+          "aeronave en venta, compra venta aeronaves mexico, comprar jet privado, sky group aviation",
+      },
+      {
+        title: "Aircraft for Sale | Sky Group Aviation",
+        description:
+          "Review photos, specifications, and availability for this aircraft with Sky Group Aviation.",
+        keywords:
+          "aircraft for sale, aircraft sales mexico, buy private jet, sky group aviation",
+      }
+    ),
+  },
+  {
     path: "air-taxi",
     name: "AirTaxi",
     component: TaxiAereo,

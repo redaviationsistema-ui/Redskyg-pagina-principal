@@ -1,6 +1,77 @@
 <template>
   <section class="aircraft-page">
-    <section class="aircraft-hero">
+    <section v-if="detailRegistration" class="aircraft-detail">
+      <div class="container aircraft-detail__inner reveal">
+        <RouterLink class="aircraft-detail__back" :to="toLocalizedRoute('AircraftSales')">
+          {{ copy.detailBack }}
+        </RouterLink>
+
+        <div v-if="loading" class="catalog-message">
+          {{ copy.loading }}
+        </div>
+
+        <div v-else-if="loadError" class="catalog-message catalog-message--error">
+          {{ copy.loadError }}
+        </div>
+
+        <div v-else-if="detailAircraft" class="aircraft-detail__grid">
+          <div class="aircraft-detail__media">
+            <img v-if="detailImage" :src="detailImage" :alt="detailTitle" />
+            <div v-else class="aircraft-detail__no-image">{{ copy.noImage }}</div>
+          </div>
+
+          <div class="aircraft-detail__copy">
+            <span class="aircraft-eyebrow">{{ copy.detailEyebrow }}</span>
+            <h1>{{ detailHeading }}</h1>
+            <p>{{ detailDescription }}</p>
+
+            <dl class="aircraft-detail__specs">
+              <div v-if="detailAircraft.registration">
+                <dt>{{ copy.registration }}</dt>
+                <dd>{{ detailAircraft.registration }}</dd>
+              </div>
+              <div v-if="detailAircraft.brand">
+                <dt>{{ locale === 'en' ? 'Manufacturer' : 'Fabricante' }}</dt>
+                <dd>{{ detailAircraft.brand }}</dd>
+              </div>
+              <div v-if="detailAircraft.model">
+                <dt>{{ locale === 'en' ? 'Model' : 'Modelo' }}</dt>
+                <dd>{{ detailAircraft.model }}</dd>
+              </div>
+              <div>
+                <dt>{{ copy.statusLabel }}</dt>
+                <dd>{{ detailAircraft.status === "ready" ? copy.status.ready : copy.status.service }}</dd>
+              </div>
+              <div>
+                <dt>{{ locale === 'en' ? 'Price' : 'Precio' }}</dt>
+                <dd>{{ detailAircraft.displayPrice }}</dd>
+              </div>
+            </dl>
+
+            <div class="aircraft-detail__actions">
+              <button class="aircraft-btn aircraft-btn--gold" type="button" @click="openRequest(detailAircraft)">
+                {{ copy.cardCta }}
+                <span aria-hidden="true">→</span>
+              </button>
+              <button
+                v-if="detailAircraft.images.length"
+                class="aircraft-btn aircraft-btn--ghost"
+                type="button"
+                @click="openGallery(detailAircraft)"
+              >
+                {{ copy.galleryCta }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div v-else class="catalog-message catalog-message--error">
+          {{ copy.detailNotFound }}
+        </div>
+      </div>
+    </section>
+
+    <section v-else class="aircraft-hero">
       <div class="aircraft-hero__shade"></div>
       <div class="container aircraft-hero__inner">
         <div class="aircraft-hero__copy reveal">
@@ -15,7 +86,7 @@
       </div>
     </section>
 
-    <section id="aircraft-catalog" class="aircraft-catalog">
+    <section v-if="!detailRegistration" id="aircraft-catalog" class="aircraft-catalog">
       <div class="container">
         <form class="aircraft-filters reveal" @submit.prevent="filtersOpen = false">
           <div class="aircraft-filters__bar">
@@ -237,16 +308,22 @@
 </template>
 
 <script setup>
-import { computed, defineComponent, h, nextTick, onBeforeUnmount, onMounted, reactive, ref } from "vue";
-import { RouterLink } from "vue-router";
+import { computed, defineComponent, h, nextTick, onBeforeUnmount, onMounted, reactive, ref, watch } from "vue";
+import { RouterLink, useRoute } from "vue-router";
 import { useLocale } from "../i18n";
 import {
   createAircraftInquiry,
   listPublicAircraft,
   sendAircraftInquiryEmail,
 } from "../features/aircraft-sales/services/aircraftSales.service";
+import {
+  buildAircraftSeo,
+  cleanText,
+  normalizeRegistration,
+} from "../features/aircraft-sales/aircraftSeo";
 
 const { locale, toLocalizedRoute } = useLocale();
+const route = useRoute();
 
 const statusFilter = ref("all");
 const brandFilter = ref("all");
@@ -314,6 +391,9 @@ const copy = computed(() =>
         loadError: "The catalog could not be loaded.",
         modalTitle: "Request Information",
         close: "Close",
+        detailBack: "Back to aircraft",
+        detailEyebrow: "Aircraft for Sale",
+        detailNotFound: "This aircraft is not currently available.",
         empty: "No aircraft match the selected filters.",
         finalEyebrow: "Specialized Advisory",
         finalTitle: "Looking for a specific aircraft?",
@@ -381,6 +461,9 @@ const copy = computed(() =>
         loadError: "No fue posible cargar el catálogo.",
         modalTitle: "Solicitar información",
         close: "Cerrar",
+        detailBack: "Volver a aeronaves",
+        detailEyebrow: "Aeronave en venta",
+        detailNotFound: "Esta aeronave no esta disponible actualmente.",
         empty: "No hay aeronaves que coincidan con los filtros seleccionados.",
         finalEyebrow: "Asesoría especializada",
         finalTitle: "¿Busca una aeronave específica?",
@@ -418,15 +501,23 @@ const normalizeStatus = (status) => {
   return "ready";
 };
 
+const aircraftSlug = normalizeRegistration;
+
 const normalizeAircraft = (items) =>
   items.map((item) => {
+    const registration = cleanText(item.registration || item.tail_number);
+    const model = cleanText(item.model);
+    const manufacturer = cleanText(item.manufacturer);
+
     return {
       ...item,
       id: item.id,
-      name: item.name || item.model || "Aeronave",
-      registration: item.registration || item.tail_number || "N/D",
-      brand: item.manufacturer || "Sky Group",
-      type: item.type || item.aircraft_type || "Sin clasificar",
+      name: cleanText(item.name) || model || (locale.value === "en" ? "Aircraft" : "Aeronave"),
+      registration,
+      slug: aircraftSlug(registration || item.slug),
+      brand: manufacturer || "Sky Group",
+      model,
+      type: cleanText(item.type || item.aircraft_type) || model || manufacturer || "Sin clasificar",
       location: item.location || item.base_location || (locale.value === "en" ? "Mexico / United States" : "México / Estados Unidos"),
       status: normalizeStatus(item.status),
       main_image: item.main_image || null,
@@ -477,6 +568,30 @@ const filteredAircraft = computed(() => {
 const readyAircraft = computed(() => filteredAircraft.value.filter((item) => item.status === "ready"));
 const serviceAircraft = computed(() => filteredAircraft.value.filter((item) => item.status === "service"));
 const activeGalleryImage = computed(() => galleryAircraft.value?.images?.[activeImageIndex.value] || null);
+const detailRegistration = computed(() => aircraftSlug(route.params.registration));
+const detailAircraft = computed(() =>
+  aircraft.value.find((item) => item.slug === detailRegistration.value || aircraftSlug(item.registration) === detailRegistration.value)
+);
+const detailName = computed(() => {
+  const item = detailAircraft.value;
+  if (!item) return locale.value === "en" ? "Aircraft" : "Aeronave";
+
+  const registration = cleanText(item.registration);
+  const model = cleanText(item.model);
+  const genericAircraft = locale.value === "en" ? "Aircraft" : "Aeronave";
+
+  if (registration && model) return `${registration} - ${model}`;
+  if (registration) return `${registration} - ${genericAircraft}`;
+  return model || genericAircraft;
+});
+const detailTitle = computed(() => `${detailName.value} ${locale.value === "en" ? "for Sale" : "en Venta"}`);
+const detailHeading = computed(() => detailTitle.value);
+const detailDescription = computed(() => {
+  const item = detailAircraft.value;
+  if (!item) return "";
+  return cleanText(item.description) || buildAircraftSeo(item, locale.value).description;
+});
+const detailImage = computed(() => detailAircraft.value?.main_image || detailAircraft.value?.images?.[0]?.resolved_url || "");
 const resultsLabel = computed(() => {
   const total = filteredAircraft.value.length;
   return `${total} ${total === 1 ? copy.value.filters.foundSingular : copy.value.filters.found}`;
@@ -491,6 +606,35 @@ const clearFilters = () => {
 };
 
 const sectionCountLabel = (count) => `${count} ${count === 1 ? copy.value.filters.foundSingular : copy.value.filters.found}`;
+const aircraftDetailPath = (item) => {
+  const slug = aircraftSlug(item.registration || item.slug);
+  return slug ? `/${route.params.market || "mx"}/aircraft-sales/${slug}` : toLocalizedRoute("AircraftSales");
+};
+
+const applyAircraftSeo = () => {
+  if (!detailRegistration.value || !detailAircraft.value) return;
+
+  const baseUrl = (import.meta.env.VITE_SITE_URL || window.location.origin).replace(/\/+$/, "");
+  const seo = buildAircraftSeo(detailAircraft.value, locale.value, baseUrl);
+  const canonicalUrl = seo.canonical;
+  const title = seo.title;
+  const description = seo.description;
+  const imageUrl = detailImage.value || `${baseUrl}/images/Home/home10.png`;
+
+  document.title = title;
+  document.querySelector("meta[name='description']")?.setAttribute("content", description);
+  document.querySelector("meta[property='og:title']")?.setAttribute("content", title);
+  document.querySelector("meta[property='og:description']")?.setAttribute("content", detailDescription.value || description);
+  document.querySelector("meta[property='og:url']")?.setAttribute("content", canonicalUrl);
+  document.querySelector("meta[property='og:image']")?.setAttribute("content", imageUrl);
+  document.querySelector("meta[name='twitter:title']")?.setAttribute("content", title);
+  document.querySelector("meta[name='twitter:description']")?.setAttribute("content", description);
+  document.querySelector("meta[name='twitter:image']")?.setAttribute("content", imageUrl);
+  document.querySelector("link[rel='canonical']")?.setAttribute("href", canonicalUrl);
+  document.querySelector("link[rel='alternate'][hreflang='es-MX']")?.setAttribute("href", seo.spanishUrl);
+  document.querySelector("link[rel='alternate'][hreflang='en-US']")?.setAttribute("href", seo.englishUrl);
+  document.querySelector("link[rel='alternate'][hreflang='x-default']")?.setAttribute("href", seo.spanishUrl);
+};
 
 const AircraftSection = defineComponent({
   props: {
@@ -545,7 +689,9 @@ const AircraftSection = defineComponent({
                     ]),
                   ]),
               h("div", { class: "aircraft-card__body" }, [
-                h("h3", item.name),
+                h(RouterLink, { class: "aircraft-card__title-link", to: aircraftDetailPath(item) }, () =>
+                  h("h3", item.name)
+                ),
                 h("p", [h("span", `${locale.value === "en" ? "Registration" : "Matrícula"}: `), item.registration]),
                 h("div", { class: "aircraft-price" }, [
                   h("span", locale.value === "en" ? "Price" : "Precio"),
@@ -732,6 +878,10 @@ onMounted(() => {
   loadAircraft();
 });
 
+watch([detailAircraft, detailRegistration, locale], () => {
+  applyAircraftSeo();
+});
+
 onBeforeUnmount(() => {
   if (observer) observer.disconnect();
   if (inquiryCloseTimer) clearTimeout(inquiryCloseTimer);
@@ -751,6 +901,116 @@ onBeforeUnmount(() => {
     radial-gradient(circle at 82% 16%, rgba(217, 174, 82, 0.1), transparent 28%),
     linear-gradient(180deg, #061522 0%, #071827 46%, #06111d 100%);
   color: #ffffff;
+}
+
+.aircraft-detail {
+  min-height: 100vh;
+  padding: 150px 0 90px;
+  background:
+    linear-gradient(90deg, rgba(6, 17, 29, 0.94), rgba(6, 17, 29, 0.68)),
+    url("/images/CompraVenta/Compraventa1.png") center/cover;
+}
+
+.aircraft-detail__inner {
+  display: grid;
+  gap: 28px;
+}
+
+.aircraft-detail__back,
+.aircraft-card__title-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.aircraft-detail__back {
+  width: fit-content;
+  color: #d9ae52;
+  font-weight: 700;
+}
+
+.aircraft-detail__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+  gap: clamp(28px, 5vw, 70px);
+  align-items: center;
+}
+
+.aircraft-detail__media {
+  min-height: 360px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.aircraft-detail__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+  object-fit: cover;
+}
+
+.aircraft-detail__no-image {
+  display: grid;
+  min-height: 360px;
+  place-items: center;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.aircraft-detail__copy h1 {
+  margin: 10px 0 16px;
+  font-size: clamp(2.2rem, 5vw, 4.8rem);
+  line-height: 0.96;
+}
+
+.aircraft-detail__copy p {
+  max-width: 680px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.aircraft-detail__specs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 28px 0;
+}
+
+.aircraft-detail__specs div {
+  padding: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.aircraft-detail__specs dt {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.aircraft-detail__specs dd {
+  margin: 7px 0 0;
+  color: #fff;
+  font-weight: 800;
+}
+
+.aircraft-detail__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.aircraft-card__title-link h3 {
+  transition: color 0.2s ease;
+}
+
+.aircraft-card__title-link:hover h3 {
+  color: #d9ae52;
 }
 
 .layout-wrapper > .footer {
