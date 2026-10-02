@@ -907,8 +907,8 @@ onBeforeUnmount(() => {
   min-height: 100vh;
   padding: 150px 0 90px;
   background:
-    linear-gradient(90deg, rgba(6, 17, 29, 0.94), rgba(6, 17, 29, 0.68)),
-    url("/images/CompraVenta/Compraventa1.png") center/cover;
+    linear-gradient(90deg, rgba(6, 17, 29, 0.74), rgba(6, 17, 29, 0.34)),
+    url("/images/About/aircraftsales.png") center/cover;
 }
 
 .aircraft-detail__inner {
@@ -1026,7 +1026,7 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   overflow: hidden;
-  background-image: url("/images/CompraVenta/Compraventa2.png");
+  background-image: url("/images/About/aircraftsales.png");
   background-position: center;
   background-size: cover;
 }
@@ -1035,8 +1035,8 @@ onBeforeUnmount(() => {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(3, 11, 20, 0.9), rgba(5, 14, 24, 0.62) 48%, rgba(5, 14, 24, 0.24)),
-    linear-gradient(180deg, rgba(5, 14, 24, 0.08), #061522 100%);
+    linear-gradient(90deg, rgba(3, 11, 20, 0.68), rgba(5, 14, 24, 0.34) 48%, rgba(5, 14, 24, 0.1)),
+    linear-gradient(180deg, rgba(5, 14, 24, 0.02), rgba(6, 21, 34, 0.72) 100%);
 }
 
 .aircraft-hero__inner {
