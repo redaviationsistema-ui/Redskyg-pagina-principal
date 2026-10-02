@@ -345,17 +345,21 @@
             <template v-else>
               <div class="verification-card__icon" aria-hidden="true">{{ emailVerificationError ? "!" : "✉" }}</div>
               <div class="verification-card__body">
-                <div class="verification-card__head">
+                <div class="verification-card__head" :class="{ 'verification-card__head--expired': isEmailCodeExpired }">
                   <div>
                     <h4>{{ copy.form.emailVerificationTitle }}</h4>
-                    <p v-if="emailCodeSent">{{ copy.form.enterCodeSentTo }} <strong>{{ maskedEmail }}</strong></p>
+                    <p v-if="emailCodeSent && !isEmailCodeExpired">{{ copy.form.enterCodeSentTo }} <strong>{{ maskedEmail }}</strong></p>
                     <p v-else>{{ copy.form.emailVerificationText }}</p>
+                    <small v-if="isEmailCodeExpired" class="verification-card__expired-message">
+                      <span aria-hidden="true">⚠</span>
+                      {{ copy.form.codeExpired }}
+                    </small>
                   </div>
                   <button
-                    class="verification-link"
-                    :class="{ 'verification-link--button': isEmailCodeExpired }"
+                    class="verification-link verification-link--button"
                     type="button"
                     :disabled="emailVerificationLoading || emailCooldown > 0"
+                    :aria-label="isEmailCodeExpired ? copy.form.resendCode : copy.form.verifyEmail"
                     @click="sendEmailVerificationCode"
                   >
                     {{ emailVerificationLoading ? copy.form.sendingCode : emailCooldown > 0 ? `${copy.form.resendCodeIn} ${emailCooldown} s` : emailCodeRequested ? `↻ ${copy.form.resendCode}` : copy.form.verifyEmail }}
@@ -380,7 +384,7 @@
                   />
                 </div>
 
-                <small v-if="emailVerificationError" class="request-field__message request-field__message--error">
+                <small v-if="emailVerificationError && !isEmailCodeExpired" class="request-field__message request-field__message--error">
                   {{ emailVerificationError }}
                 </small>
 
@@ -463,6 +467,7 @@ import { useLocale } from "../i18n";
 import {
   createAircraftInquiry,
   listPublicAircraft,
+  sendAircraftInquiryEmail,
   sendAircraftPdf,
   sendAircraftEmailOtp,
   verifyAircraftEmailOtp,
@@ -1280,12 +1285,35 @@ const submitRequest = async () => {
       return;
     }
 
-    try {
-      const pdfResponse = await sendAircraftPdf(inquiry.id);
-      if (!pdfResponse?.success) {
-        throw new Error(pdfResponse?.message || pdfResponse?.error || "PDF delivery failed");
-      }
-    } catch (pdfError) {
+    const [internalEmailResult, pdfResult] = await Promise.allSettled([
+      sendAircraftInquiryEmail({
+        inquiry_id: inquiry.id,
+        aircraft_id: aircraftForRequest.id,
+        aircraft_name: aircraftForRequest.name,
+        registration: aircraftForRequest.registration,
+        price: aircraftForRequest.price,
+        currency: aircraftForRequest.currency,
+        aircraft_status: aircraftForRequest.status,
+        name: cleanForm.name,
+        email: verifiedEmail.value,
+        verified_email: verifiedEmail.value,
+        email_verified: true,
+        phone: cleanForm.phone,
+        message: cleanForm.message,
+        status: "new",
+      }),
+      sendAircraftPdf(inquiry.id),
+    ]);
+
+    if (internalEmailResult.status === "rejected") {
+      console.error("Solicitud guardada, pero falló correo interno:", internalEmailResult.reason);
+    }
+
+    if (pdfResult.status === "rejected" || !pdfResult.value?.success) {
+      const pdfError =
+        pdfResult.status === "rejected"
+          ? pdfResult.reason
+          : new Error(pdfResult.value?.message || pdfResult.value?.error || "PDF delivery failed");
       console.error("Solicitud guardada, pero falló envío PDF:", pdfError);
       const pdfMessage = String(pdfError?.message || "").toLowerCase();
       inquirySuccess.value = pdfMessage.includes("pdf") || pdfMessage.includes("documento")
@@ -2350,8 +2378,9 @@ onBeforeUnmount(() => {
 }
 
 .verification-card--expired {
-  gap: 1.2rem;
-  padding: clamp(1.35rem, 3vw, 1.75rem) clamp(1.25rem, 3.5vw, 2rem);
+  gap: 1.25rem;
+  padding: 28px 32px;
+  border-color: rgba(239, 98, 98, 0.65);
   border-radius: 16px;
   background: #071b2a;
 }
@@ -2377,6 +2406,14 @@ onBeforeUnmount(() => {
   color: #ef6262;
 }
 
+.verification-card--expired .verification-card__icon {
+  width: 46px;
+  height: 46px;
+  border-color: rgba(239, 98, 98, 0.78);
+  color: #ef6262;
+  font-size: 1.1rem;
+}
+
 .verification-card__icon--success {
   border-color: rgba(53, 201, 133, 0.65);
   color: #35c985;
@@ -2394,6 +2431,11 @@ onBeforeUnmount(() => {
   align-items: center;
 }
 
+.verification-card__head--expired {
+  min-height: 78px;
+  gap: 2rem;
+}
+
 .verification-card h4 {
   margin: 0;
   color: #f7f7f5;
@@ -2401,24 +2443,57 @@ onBeforeUnmount(() => {
 }
 
 .verification-card--expired h4 {
-  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  font-family: var(--font-heading);
+  font-size: clamp(1.45rem, 2vw, 1.5rem);
+  font-weight: 700;
 }
 
 .verification-card p {
   margin: 0.28rem 0 0;
   color: #9ba8b6;
+  font-size: 0.98rem;
   line-height: 1.55;
+}
+
+.verification-card--expired p {
+  max-width: 520px;
+  margin-top: 0.45rem;
+  font-size: 1rem;
 }
 
 .verification-card p strong {
   color: #f7f7f5;
 }
 
+.verification-card__expired-message {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1rem;
+  color: #ef6262;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.verification-card__expired-message span {
+  width: 18px;
+  height: 18px;
+  display: inline-grid;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(239, 98, 98, 0.7);
+  border-radius: 999px;
+  font-size: 0.72rem;
+}
+
 .verification-link {
-  min-height: 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
+  flex: 0 0 auto;
+  min-height: 56px;
+  padding: 0.85rem 1.55rem;
+  border: 1.5px solid #d8a742;
+  border-radius: 10px;
+  background: rgba(216, 167, 66, 0.1);
   color: #e1b75a;
   font-size: 0.72rem;
   font-weight: 800;
@@ -2426,28 +2501,28 @@ onBeforeUnmount(() => {
   text-transform: uppercase;
   cursor: pointer;
   white-space: nowrap;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, opacity 0.2s ease, border-color 0.2s ease;
 }
 
 .verification-link--button {
-  min-height: 56px;
-  padding: 0.85rem 1.35rem;
-  border: 1.5px solid #d8a742;
-  border-radius: 10px;
-  background: rgba(216, 167, 66, 0.1);
-  color: #e1b75a;
-  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+  box-shadow: inset 0 0 0 1px rgba(216, 167, 66, 0.08);
 }
 
-.verification-link--button:hover:not(:disabled),
-.verification-link--button:focus-visible:not(:disabled) {
+.verification-link:hover:not(:disabled),
+.verification-link:focus-visible:not(:disabled) {
   background: #d8a742;
   color: #071b2a;
   transform: translateY(-1px);
 }
 
-.verification-link--button:active:not(:disabled) {
+.verification-link:active:not(:disabled) {
   filter: brightness(0.92);
   transform: translateY(0);
+}
+
+.verification-link:focus-visible {
+  outline: 2px solid rgba(225, 183, 90, 0.9);
+  outline-offset: 3px;
 }
 
 .verification-link:disabled {
