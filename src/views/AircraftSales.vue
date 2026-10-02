@@ -259,48 +259,197 @@
       <button class="request-modal__backdrop" type="button" :aria-label="copy.close" @click="closeRequest"></button>
       <div ref="requestPanelRef" class="request-modal__panel">
         <button class="request-modal__close" type="button" :aria-label="copy.close" @click="closeRequest">×</button>
-        <span class="aircraft-eyebrow">{{ copy.modalTitle }}</span>
 
         <div class="request-summary">
-          <img v-if="selectedAircraft.main_image" :src="selectedAircraft.main_image" :alt="selectedAircraft.name" />
-          <div v-else class="request-summary__no-image">
-            <span>{{ copy.noImage }}</span>
-          </div>
-          <div>
+          <div class="request-summary__copy">
+            <span class="aircraft-eyebrow">{{ copy.modalTitle }}</span>
             <h3>{{ selectedAircraft.name }}</h3>
-            <p>{{ copy.registration }}: {{ selectedAircraft.registration }}</p>
-            <p>{{ copy.statusLabel }}: {{ selectedAircraft.status === "ready" ? copy.status.ready : copy.status.service }}</p>
-            <strong>{{ selectedAircraft.displayPrice }}</strong>
+            <dl>
+              <div>
+                <dt>{{ copy.registration }}</dt>
+                <dd>{{ selectedAircraft.registration }}</dd>
+              </div>
+              <div>
+                <dt>{{ copy.statusLabel }}</dt>
+                <dd><i aria-hidden="true"></i>{{ selectedAircraft.status === "ready" ? copy.status.ready : copy.status.service }}</dd>
+              </div>
+              <div>
+                <dt>{{ locale === 'en' ? 'Price' : 'Precio' }}</dt>
+                <dd class="request-summary__price">{{ selectedAircraft.displayPrice }}</dd>
+              </div>
+            </dl>
+          </div>
+          <div class="request-summary__media">
+            <img v-if="selectedAircraft.main_image" :src="selectedAircraft.main_image" :alt="selectedAircraft.name" />
+            <div v-else class="request-summary__no-image">
+              <span>{{ copy.noImage }}</span>
+            </div>
           </div>
         </div>
 
         <form class="request-form" @submit.prevent="submitRequest">
-          <label>
-            <span>{{ copy.form.name }}</span>
-            <input v-model="requestForm.name" required type="text" :placeholder="copy.form.namePlaceholder" />
-          </label>
-          <label>
-            <span>{{ copy.form.email }}</span>
-            <input v-model="requestForm.email" required type="email" placeholder="" />
-          </label>
-          <label>
-            <span>{{ copy.form.phone }}</span>
-            <input v-model="requestForm.phone" required type="tel" placeholder="" />
-          </label>
-          <label>
-            <span>{{ copy.form.message }}</span>
-            <textarea v-model="requestForm.message" rows="5" :placeholder="copy.form.messagePlaceholder"></textarea>
-          </label>
-          <button class="aircraft-btn aircraft-btn--gold request-form__submit" type="submit" :disabled="submitting">
-            {{ inquirySuccess ? copy.form.sentButton : submitting ? copy.form.sending : copy.form.submit }}
-            <span aria-hidden="true">→</span>
-          </button>
+          <div class="request-form__grid request-form__grid--primary">
+            <label class="request-field">
+              <span>{{ copy.form.name }}</span>
+              <input
+                v-model="requestForm.name"
+                type="text"
+                :placeholder="copy.form.namePlaceholder"
+                autocomplete="name"
+                :aria-invalid="Boolean(fieldErrors.name)"
+                @blur="touchField('name')"
+              />
+              <small v-if="fieldErrors.name" class="request-field__message request-field__message--error">
+                {{ fieldErrors.name }}
+              </small>
+            </label>
+            <label class="request-field">
+              <span>{{ copy.form.email }}</span>
+              <div class="request-input-wrap" :class="{ 'request-input-wrap--verified': isCurrentEmailVerified }">
+                <input
+                  v-model="requestForm.email"
+                  type="email"
+                  placeholder=""
+                  autocomplete="email"
+                  inputmode="email"
+                  :aria-invalid="Boolean(fieldErrors.email)"
+                  @blur="touchField('email')"
+                />
+                <strong v-if="isCurrentEmailVerified" aria-hidden="true">✓</strong>
+              </div>
+              <small v-if="fieldErrors.email" class="request-field__message request-field__message--error">
+                {{ fieldErrors.email }}
+              </small>
+              <small v-else-if="!isCurrentEmailVerified && showEmailValid" class="request-field__message request-field__message--success">
+                {{ copy.form.validEmail }}
+              </small>
+            </label>
+          </div>
+
+          <section
+            v-if="showEmailVerification || isCurrentEmailVerified"
+            class="verification-card"
+            :class="{
+              'verification-card--error': emailVerificationError,
+              'verification-card--expired': isEmailCodeExpired,
+              'verification-card--success': isCurrentEmailVerified,
+            }"
+          >
+            <template v-if="isCurrentEmailVerified">
+              <div class="verification-card__icon verification-card__icon--success" aria-hidden="true">✓</div>
+              <div class="verification-card__body">
+                <h4>{{ copy.form.emailVerified }}</h4>
+                <p>{{ copy.form.emailVerifiedText }}</p>
+              </div>
+            </template>
+            <template v-else>
+              <div class="verification-card__icon" aria-hidden="true">{{ emailVerificationError ? "!" : "✉" }}</div>
+              <div class="verification-card__body">
+                <div class="verification-card__head">
+                  <div>
+                    <h4>{{ copy.form.emailVerificationTitle }}</h4>
+                    <p v-if="emailCodeSent">{{ copy.form.enterCodeSentTo }} <strong>{{ maskedEmail }}</strong></p>
+                    <p v-else>{{ copy.form.emailVerificationText }}</p>
+                  </div>
+                  <button
+                    class="verification-link"
+                    :class="{ 'verification-link--button': isEmailCodeExpired }"
+                    type="button"
+                    :disabled="emailVerificationLoading || emailCooldown > 0"
+                    @click="sendEmailVerificationCode"
+                  >
+                    {{ emailVerificationLoading ? copy.form.sendingCode : emailCooldown > 0 ? `${copy.form.resendCodeIn} ${emailCooldown} s` : emailCodeRequested ? `↻ ${copy.form.resendCode}` : copy.form.verifyEmail }}
+                  </button>
+                </div>
+
+                <div v-if="emailCodeSent" class="otp-entry" @paste.prevent="handleOtpPaste">
+                  <input
+                    v-for="index in 8"
+                    :key="index"
+                    :ref="(element) => setOtpInputRef(element, index - 1)"
+                    class="otp-entry__box"
+                    :class="{ 'otp-entry__box--error': emailVerificationError }"
+                    type="text"
+                    inputmode="numeric"
+                    autocomplete="one-time-code"
+                    maxlength="1"
+                    :value="otpDigits[index - 1]"
+                    :aria-label="`${copy.form.verificationCode} ${index}`"
+                    @input="handleOtpInput($event, index - 1)"
+                    @keydown="handleOtpKeydown($event, index - 1)"
+                  />
+                </div>
+
+                <small v-if="emailVerificationError" class="request-field__message request-field__message--error">
+                  {{ emailVerificationError }}
+                </small>
+
+                <div v-if="emailCodeSent" class="verification-card__actions">
+                  <button
+                    class="verification-button"
+                    type="button"
+                    :disabled="emailVerificationLoading || emailVerificationCode.trim().length < 8"
+                    @click="confirmEmailVerificationCode"
+                  >
+                    {{ emailVerificationLoading ? copy.form.validatingCode : copy.form.confirmCode }}
+                    <span aria-hidden="true">→</span>
+                  </button>
+                </div>
+              </div>
+            </template>
+          </section>
+
+          <div class="request-form__grid request-form__grid--secondary">
+            <label class="request-field">
+              <span>{{ copy.form.phone }}</span>
+              <input
+                v-model="requestForm.phone"
+                type="tel"
+                placeholder=""
+                inputmode="tel"
+                autocomplete="tel"
+                :aria-invalid="Boolean(fieldErrors.phone)"
+                @blur="touchField('phone')"
+              />
+              <small v-if="fieldErrors.phone" class="request-field__message request-field__message--error">
+                {{ fieldErrors.phone }}
+              </small>
+              <small v-else-if="showPhoneValid" class="request-field__message request-field__message--success">
+                {{ copy.form.validPhone }}
+              </small>
+            </label>
+            <label class="request-field">
+              <span>{{ copy.form.message }}</span>
+              <textarea
+                v-model="requestForm.message"
+                rows="4"
+                maxlength="1200"
+                :placeholder="copy.form.messagePlaceholder"
+              ></textarea>
+            </label>
+          </div>
 
           <div v-if="inquirySuccess" class="request-form__success">
-            <strong>{{ copy.form.successTitle }}</strong>
-            <p>{{ copy.form.successText }}</p>
+            <strong>✓ {{ copy.form.successTitle }}</strong>
+            <p>{{ successMessage }}</p>
           </div>
           <p v-if="inquiryError" class="request-form__error">{{ inquiryError }}</p>
+
+          <div class="request-form__footer">
+            <p class="request-form__privacy">
+              <span aria-hidden="true">⌕</span>
+              <small>{{ copy.form.privacyText }}</small>
+            </p>
+            <div class="request-form__actions">
+              <button class="aircraft-btn aircraft-btn--ghost request-form__cancel" type="button" @click="closeRequest">
+                {{ copy.form.cancel }}
+              </button>
+              <button class="aircraft-btn aircraft-btn--gold request-form__submit" type="submit" :disabled="submitting">
+                {{ inquirySuccess ? copy.form.sentButton : submitting ? copy.form.sending : copy.form.submit }}
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
         </form>
       </div>
     </div>
@@ -314,7 +463,9 @@ import { useLocale } from "../i18n";
 import {
   createAircraftInquiry,
   listPublicAircraft,
-  sendAircraftInquiryEmail,
+  sendAircraftPdf,
+  sendAircraftEmailOtp,
+  verifyAircraftEmailOtp,
 } from "../features/aircraft-sales/services/aircraftSales.service";
 import {
   buildAircraftSeo,
@@ -335,6 +486,7 @@ const selectedAircraft = ref(null);
 const galleryAircraft = ref(null);
 const galleryContentRef = ref(null);
 const requestPanelRef = ref(null);
+const otpInputRefs = ref([]);
 const galleryOpen = ref(false);
 const activeImageIndex = ref(0);
 const aircraft = ref([]);
@@ -343,13 +495,27 @@ const loadError = ref(null);
 const submitting = ref(false);
 const inquirySuccess = ref("");
 const inquiryError = ref("");
+const emailVerified = ref(false);
+const emailCodeRequested = ref(false);
+const emailCodeSent = ref(false);
+const emailVerificationCode = ref("");
+const emailVerificationLoading = ref(false);
+const emailVerificationError = ref("");
+const verifiedEmail = ref("");
+const emailCooldown = ref(0);
 const requestForm = reactive({
   name: "",
   email: "",
   phone: "",
   message: "",
 });
+const touchedFields = reactive({
+  name: false,
+  email: false,
+  phone: false,
+});
 let inquiryCloseTimer;
+let emailCooldownTimer;
 
 const copy = computed(() =>
   locale.value === "en"
@@ -410,17 +576,50 @@ const copy = computed(() =>
           email: "Email *",
           phone: "Phone number *",
           message: "Message",
-          messagePlaceholder: "If you have an offer or specific requirement, share it here...",
+          messagePlaceholder: "Tell us about your interest in this aircraft...",
           submit: "Send Request",
           sentButton: "Request Sent",
           sending: "Sending...",
-          successTitle: "Request sent successfully.",
+          successTitle: "Request sent",
           successText:
-            "Your request was registered correctly. An advisor will contact you shortly. Thank you for choosing Sky Group Aviation.",
+            "Thank you for your interest.\n\nWe have sent the aircraft information to:\n\n{email}\n\nThe document link will be available for 24 hours.\n\nOne of our advisors will contact you.\n\nThank you for choosing Sky Group Aviation.",
           invalidEmail: "Enter a valid email address.",
-          required: "Name and email are required.",
+          invalidName: "Enter a valid name.",
+          invalidPhone: "Enter a valid phone number.",
+          nameRequired: "Name is required.",
+          emailRequired: "Email is required.",
+          phoneRequired: "Phone number is required.",
+          validEmail: "Valid email",
+          validPhone: "Valid number",
+          verifyEmail: "Verify Email",
+          emailVerified: "Email verified",
+          sendingCode: "Sending code...",
+          resendCode: "Resend Code",
+          resendCodeIn: "Resend code in",
+          codeSentTo: "Code sent to:",
+          enterCodeSentTo: "Enter the code sent to",
+          verificationCode: "Verification code",
+          codePlaceholder: "_ _ _ _ _ _",
+          confirmCode: "Confirm Code",
+          validatingCode: "Validating...",
+          emailVerificationTitle: "Email verification",
+          emailVerificationText: "Request a verification code to confirm access to this email.",
+          emailVerifiedText: "Your email has been verified successfully.",
+          privacyText: "Your information is protected. It will only be used to provide information about this aircraft.",
+          cancel: "Cancel",
+          verifyEmailBeforeSubmit: "Verify your email address before continuing.",
+          emailChanged: "The email was modified. Verify it again.",
+          emailCodeError: "The verification code is not correct.",
+          emailCodeRetry: "The code entered was not valid. Request a new code to try again.",
+          codeExpired: "The code has expired. Request a new one.",
+          emailOtpSendError: "We could not send the code to the email address.",
+          required: "Name, email, and phone number are required.",
           registerError: "The request could not be registered. Please try again.",
-          mailError: "Your request was registered, but we could not confirm the notification was sent.",
+          missingPdf:
+            "Your request was registered successfully.\n\nThe commercial document is currently not available for automatic delivery.\n\nOne of our advisors will contact you.",
+          pdfSendError:
+            "Your request was registered successfully, but the document could not be sent automatically.\n\nOne of our advisors will follow up on your request.",
+          mailError: "We could not send your request. Please try again.",
         },
       }
     : {
@@ -480,17 +679,50 @@ const copy = computed(() =>
           email: "Correo electrónico *",
           phone: "Número telefónico *",
           message: "Mensaje",
-          messagePlaceholder: "Si tienes una oferta, hazlo llegar...",
+          messagePlaceholder: "Cuéntanos sobre tu interés en esta aeronave...",
           submit: "Enviar solicitud",
           sentButton: "Solicitud enviada",
           sending: "Enviando...",
-          successTitle: "Solicitud enviada correctamente.",
+          successTitle: "Solicitud enviada",
           successText:
-            "Tu solicitud fue registrada correctamente. Un asesor se pondrá en contacto con usted a la brevedad. Gracias por elegir Sky Group Aviation.",
+            "Gracias por tu interés.\n\nHemos enviado la información de la aeronave al correo:\n\n{email}\n\nEl enlace para consultar el documento estará disponible durante 24 horas.\n\nUno de nuestros asesores se pondrá en contacto contigo.\n\nGracias por elegir Sky Group Aviation.",
           invalidEmail: "Ingresa un correo electrónico válido.",
-          required: "Nombre y correo son obligatorios.",
+          invalidName: "Ingresa un nombre válido.",
+          invalidPhone: "Ingresa un número telefónico válido.",
+          nameRequired: "El nombre es obligatorio.",
+          emailRequired: "El correo electrónico es obligatorio.",
+          phoneRequired: "El número telefónico es obligatorio.",
+          validEmail: "Correo válido",
+          validPhone: "Número válido",
+          verifyEmail: "Verificar correo",
+          emailVerified: "Correo verificado",
+          sendingCode: "Enviando código...",
+          resendCode: "Reenviar código",
+          resendCodeIn: "Reenviar código en",
+          codeSentTo: "Código enviado a:",
+          enterCodeSentTo: "Ingresa el código enviado a",
+          verificationCode: "Código de verificación",
+          codePlaceholder: "_ _ _ _ _ _ _ _",
+          confirmCode: "Confirmar código",
+          validatingCode: "Validando...",
+          emailVerificationTitle: "Verificación de correo",
+          emailVerificationText: "Solicita un código de verificación para confirmar el acceso a este correo.",
+          emailVerifiedText: "Tu correo ha sido verificado correctamente.",
+          privacyText: "Tu información está protegida. Solo será utilizada para brindarte información sobre esta aeronave.",
+          cancel: "Cancelar",
+          verifyEmailBeforeSubmit: "Verifica tu correo electrónico antes de continuar.",
+          emailChanged: "El correo fue modificado. Verifícalo nuevamente.",
+          emailCodeError: "El código de verificación no es correcto.",
+          emailCodeRetry: "El código ingresado no fue válido. Solicita un nuevo código para intentarlo nuevamente.",
+          codeExpired: "El código ha expirado. Solicita uno nuevo.",
+          emailOtpSendError: "No fue posible enviar el código al correo.",
+          required: "Nombre, correo y teléfono son obligatorios.",
           registerError: "No fue posible registrar la solicitud. Intenta nuevamente.",
-          mailError: "La solicitud fue registrada, pero no pudimos confirmar el envío de la notificación.",
+          missingPdf:
+            "Tu solicitud fue registrada correctamente.\n\nActualmente el documento comercial no está disponible para envío automático.\n\nUno de nuestros asesores se pondrá en contacto contigo.",
+          pdfSendError:
+            "Tu solicitud fue registrada correctamente, pero no fue posible enviar el documento automáticamente.\n\nUno de nuestros asesores dará seguimiento a tu solicitud.",
+          mailError: "No fue posible enviar tu solicitud. Inténtalo nuevamente.",
         },
       }
 );
@@ -592,10 +824,54 @@ const detailDescription = computed(() => {
   return cleanText(item.description) || buildAircraftSeo(item, locale.value).description;
 });
 const detailImage = computed(() => detailAircraft.value?.main_image || detailAircraft.value?.images?.[0]?.resolved_url || "");
+const normalizedForm = computed(() => ({
+  name: requestForm.name.trim(),
+  email: requestForm.email.trim().toLowerCase(),
+  phone: requestForm.phone.trim().replace(/\s+/g, " "),
+  message: requestForm.message.trim(),
+}));
+const isValidEmail = (email) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email);
+const isValidPhone = (phone) => {
+  const value = phone.trim();
+  const digits = value.replace(/\D/g, "");
+  return /^\+?[0-9][0-9\s().-]*$/.test(value) && digits.length >= 10 && digits.length <= 15;
+};
+const validationMessages = computed(() => {
+  const form = normalizedForm.value;
+  const errors = {};
+
+  if (!form.name) errors.name = copy.value.form.nameRequired;
+  else if (form.name.length < 2) errors.name = copy.value.form.invalidName;
+
+  if (!form.email) errors.email = copy.value.form.emailRequired;
+  else if (!isValidEmail(form.email)) errors.email = copy.value.form.invalidEmail;
+
+  if (!form.phone) errors.phone = copy.value.form.phoneRequired;
+  else if (!isValidPhone(form.phone)) errors.phone = copy.value.form.invalidPhone;
+
+  return errors;
+});
+const fieldErrors = computed(() =>
+  Object.fromEntries(
+    Object.entries(validationMessages.value).filter(([field]) => touchedFields[field])
+  )
+);
+const showEmailValid = computed(() => touchedFields.email && normalizedForm.value.email && !validationMessages.value.email);
+const showPhoneValid = computed(() => touchedFields.phone && normalizedForm.value.phone && !validationMessages.value.phone);
+const isCurrentEmailVerified = computed(() => emailVerified.value && normalizedForm.value.email === verifiedEmail.value);
+const showEmailVerification = computed(() => touchedFields.email && normalizedForm.value.email && !validationMessages.value.email && !isCurrentEmailVerified.value);
+const isEmailCodeExpired = computed(() => emailVerificationError.value === copy.value.form.codeExpired);
+const maskedEmail = computed(() => {
+  const [user, domain] = normalizedForm.value.email.split("@");
+  if (!user || !domain) return "";
+  return `${user.slice(0, 1)}***@${domain}`;
+});
+const otpDigits = computed(() => emailVerificationCode.value.padEnd(8, " ").slice(0, 8).split("").map((digit) => digit.trim()));
 const resultsLabel = computed(() => {
   const total = filteredAircraft.value.length;
   return `${total} ${total === 1 ? copy.value.filters.foundSingular : copy.value.filters.found}`;
 });
+const successMessage = computed(() => inquirySuccess.value.replace("{email}", verifiedEmail.value));
 
 const clearFilters = () => {
   brandFilter.value = "all";
@@ -754,11 +1030,184 @@ const requestFromGallery = () => {
   if (item) openRequest(item);
 };
 
+const resetRequestValidation = () => {
+  touchedFields.name = false;
+  touchedFields.email = false;
+  touchedFields.phone = false;
+};
+
+const stopCooldowns = () => {
+  if (emailCooldownTimer) {
+    clearInterval(emailCooldownTimer);
+    emailCooldownTimer = null;
+  }
+  emailCooldown.value = 0;
+};
+
+const stopEmailCooldown = () => {
+  if (emailCooldownTimer) {
+    clearInterval(emailCooldownTimer);
+    emailCooldownTimer = null;
+  }
+  emailCooldown.value = 0;
+};
+
+const startCooldown = (target) => {
+  const isEmail = target === "email";
+  const cooldownRef = emailCooldown;
+  const timer = emailCooldownTimer;
+
+  if (timer) clearInterval(timer);
+  cooldownRef.value = 45;
+
+  const interval = setInterval(() => {
+    cooldownRef.value = Math.max(0, cooldownRef.value - 1);
+    if (cooldownRef.value === 0) {
+      clearInterval(interval);
+      emailCooldownTimer = null;
+    }
+  }, 1000);
+
+  if (isEmail) emailCooldownTimer = interval;
+};
+
+const resetEmailVerification = () => {
+  emailVerified.value = false;
+  emailCodeRequested.value = false;
+  emailCodeSent.value = false;
+  emailVerificationCode.value = "";
+  emailVerificationError.value = "";
+  verifiedEmail.value = "";
+  stopEmailCooldown();
+};
+
+const resetOtpVerification = () => {
+  resetEmailVerification();
+  emailVerificationLoading.value = false;
+};
+
+const resetRequestForm = () => {
+  requestForm.name = "";
+  requestForm.email = "";
+  requestForm.phone = "";
+  requestForm.message = "";
+  resetRequestValidation();
+  resetOtpVerification();
+};
+
+const touchField = (field) => {
+  if (field in touchedFields) touchedFields[field] = true;
+};
+
+const touchRequiredFields = () => {
+  touchedFields.name = true;
+  touchedFields.email = true;
+  touchedFields.phone = true;
+};
+
+const otpErrorMessage = (error, fallback) => {
+  const message = String(error?.message || "").toLowerCase();
+  if (message.includes("expired")) return copy.value.form.codeExpired;
+  if (message.includes("token") || message.includes("otp") || message.includes("invalid")) return fallback;
+  return fallback;
+};
+
+const focusOtpBox = async (index) => {
+  await nextTick();
+  otpInputRefs.value[index]?.focus();
+};
+
+const setOtpInputRef = (element, index) => {
+  if (element) otpInputRefs.value[index] = element;
+};
+
+const setOtpCode = (value) => {
+  emailVerificationCode.value = String(value).replace(/\D/g, "").slice(0, 8);
+};
+
+const handleOtpInput = (event, index) => {
+  const digit = event.target.value.replace(/\D/g, "").slice(-1);
+  const digits = otpDigits.value;
+  digits[index] = digit;
+  setOtpCode(digits.join(""));
+  if (emailVerificationError.value && emailVerificationError.value !== copy.value.form.codeExpired) {
+    emailVerificationError.value = "";
+  }
+
+  if (digit && index < 7) focusOtpBox(index + 1);
+};
+
+const handleOtpKeydown = (event, index) => {
+  if (event.key !== "Backspace") return;
+
+  if (otpDigits.value[index]) return;
+  if (index > 0) focusOtpBox(index - 1);
+};
+
+const handleOtpPaste = (event) => {
+  const text = event.clipboardData?.getData("text") || "";
+  setOtpCode(text);
+  const nextIndex = Math.min(emailVerificationCode.value.length, 7);
+  focusOtpBox(nextIndex);
+};
+
+const sendEmailVerificationCode = async () => {
+  touchField("email");
+  emailVerificationError.value = "";
+
+  if (validationMessages.value.email || emailVerificationLoading.value || emailCooldown.value > 0) return;
+
+  emailVerificationLoading.value = true;
+
+  try {
+    await sendAircraftEmailOtp(normalizedForm.value.email);
+    emailCodeRequested.value = true;
+    emailCodeSent.value = true;
+    emailVerificationCode.value = "";
+    startCooldown("email");
+  } catch (error) {
+    console.error("Error enviando OTP de correo:", error);
+    emailVerificationError.value = copy.value.form.emailOtpSendError;
+  } finally {
+    emailVerificationLoading.value = false;
+  }
+};
+
+const confirmEmailVerificationCode = async () => {
+  touchField("email");
+  emailVerificationError.value = "";
+
+  if (validationMessages.value.email || emailVerificationLoading.value) return;
+
+  emailVerificationLoading.value = true;
+
+  try {
+    await verifyAircraftEmailOtp(normalizedForm.value.email, emailVerificationCode.value.trim());
+    verifiedEmail.value = normalizedForm.value.email;
+    emailVerified.value = true;
+    emailCodeRequested.value = false;
+    emailCodeSent.value = false;
+    emailVerificationCode.value = "";
+    stopEmailCooldown();
+  } catch (error) {
+    console.error("Error verificando OTP de correo:", error);
+    const message = otpErrorMessage(error, copy.value.form.emailCodeError);
+    emailVerificationError.value = message;
+    if (message === copy.value.form.codeExpired) {
+      emailCodeSent.value = false;
+      emailVerificationCode.value = "";
+      stopEmailCooldown();
+    }
+  } finally {
+    emailVerificationLoading.value = false;
+  }
+};
+
 const openRequest = async (item) => {
   selectedAircraft.value = item;
   inquirySuccess.value = "";
   inquiryError.value = "";
-  requestForm.message = "";
+  resetRequestForm();
   document.body.style.overflow = "hidden";
   await nextTick();
   if (requestPanelRef.value) requestPanelRef.value.scrollTop = 0;
@@ -772,79 +1221,85 @@ const closeRequest = () => {
   selectedAircraft.value = null;
   inquirySuccess.value = "";
   inquiryError.value = "";
+  submitting.value = false;
+  resetRequestForm();
   document.body.style.overflow = "";
 };
-
-const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
 const submitRequest = async () => {
   if (!selectedAircraft.value || submitting.value) return;
 
-  const cleanForm = {
-    name: requestForm.name.trim(),
-    email: requestForm.email.trim(),
-    phone: requestForm.phone.trim(),
-    message: requestForm.message.trim(),
-  };
+  touchRequiredFields();
 
   inquirySuccess.value = "";
   inquiryError.value = "";
 
-  if (!cleanForm.name || !cleanForm.email) {
-    inquiryError.value = copy.value.form.required;
+  if (Object.keys(validationMessages.value).length) {
     return;
   }
 
-  if (!isValidEmail(cleanForm.email)) {
-    inquiryError.value = copy.value.form.invalidEmail;
+  const cleanForm = normalizedForm.value;
+
+  if (!emailVerified.value) {
+    emailVerificationError.value = copy.value.form.verifyEmailBeforeSubmit;
+    return;
+  }
+
+  if (cleanForm.email !== verifiedEmail.value) {
+    resetEmailVerification();
+    emailVerificationError.value = copy.value.form.emailChanged;
+    return;
+  }
+
+  if (!selectedAircraft.value.id) {
+    inquiryError.value = copy.value.form.registerError;
     return;
   }
 
   submitting.value = true;
+  const aircraftForRequest = selectedAircraft.value;
 
   try {
     const inquiry = await createAircraftInquiry({
-      aircraft_sale_id: selectedAircraft.value.id,
+      aircraft_sale_id: aircraftForRequest.id,
       name: cleanForm.name,
-      email: cleanForm.email,
+      email: verifiedEmail.value,
       phone: cleanForm.phone,
       message: cleanForm.message,
+      status: "new",
+      email_verified: true,
+      verified_email: verifiedEmail.value,
+      pdf_sent: false,
+      pdf_sent_at: null,
+      email_status: "pending",
     });
 
-    let mailResponse = null;
-
-    try {
-      mailResponse = await sendAircraftInquiryEmail({
-        inquiry_id: inquiry.id,
-        aircraft_id: selectedAircraft.value.id,
-        aircraft_name: selectedAircraft.value.name,
-        registration: selectedAircraft.value.registration,
-        price: selectedAircraft.value.price,
-        currency: selectedAircraft.value.currency,
-        aircraft_status: selectedAircraft.value.status,
-        name: cleanForm.name,
-        email: cleanForm.email,
-        phone: cleanForm.phone,
-        message: cleanForm.message,
-      });
-    } catch (mailError) {
-      console.error("Solicitud guardada, pero correo falló:", mailError);
-      inquiryError.value = copy.value.form.mailError;
+    if (!inquiry?.id) {
+      console.error("La solicitud fue creada sin inquiry.id:", inquiry);
+      inquiryError.value = copy.value.form.registerError;
       return;
     }
 
-    if (mailResponse?.success === true) {
-      inquirySuccess.value = copy.value.form.successText;
-      requestForm.name = "";
-      requestForm.email = "";
-      requestForm.phone = "";
-      requestForm.message = "";
-
-      if (inquiryCloseTimer) clearTimeout(inquiryCloseTimer);
-      inquiryCloseTimer = setTimeout(() => {
-        closeRequest();
-      }, 3500);
+    try {
+      const pdfResponse = await sendAircraftPdf(inquiry.id);
+      if (!pdfResponse?.success) {
+        throw new Error(pdfResponse?.message || pdfResponse?.error || "PDF delivery failed");
+      }
+    } catch (pdfError) {
+      console.error("Solicitud guardada, pero falló envío PDF:", pdfError);
+      const pdfMessage = String(pdfError?.message || "").toLowerCase();
+      inquirySuccess.value = pdfMessage.includes("pdf") || pdfMessage.includes("documento")
+        ? copy.value.form.missingPdf
+        : copy.value.form.pdfSendError;
+      return;
     }
+
+    inquirySuccess.value = copy.value.form.successText;
+
+    if (inquiryCloseTimer) clearTimeout(inquiryCloseTimer);
+    inquiryCloseTimer = setTimeout(() => {
+      closeRequest();
+    }, 3500);
   } catch (error) {
     console.error(error);
     inquiryError.value = copy.value.form.registerError;
@@ -882,9 +1337,18 @@ watch([detailAircraft, detailRegistration, locale], () => {
   applyAircraftSeo();
 });
 
+watch(
+  () => normalizedForm.value.email,
+  (email) => {
+    if (!verifiedEmail.value) return;
+    if (email !== verifiedEmail.value) resetEmailVerification();
+  }
+);
+
 onBeforeUnmount(() => {
   if (observer) observer.disconnect();
   if (inquiryCloseTimer) clearTimeout(inquiryCloseTimer);
+  stopCooldowns();
   document.body.style.overflow = "";
 });
 </script>
@@ -1637,20 +2101,23 @@ onBeforeUnmount(() => {
 
 .request-modal__panel {
   position: relative;
-  width: min(100%, 720px);
+  width: min(100%, 1180px);
   max-height: calc(100vh - 2.5rem);
   overflow: auto;
-  padding: 2rem;
+  padding: 0;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 10px;
-  background: #071827;
-  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 74% 0%, rgba(216, 167, 66, 0.1), transparent 28%),
+    linear-gradient(180deg, #081f30 0%, #061826 100%);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.38);
 }
 
 .request-modal__close {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 1.1rem;
+  right: 1.1rem;
+  z-index: 3;
   width: 38px;
   height: 38px;
   border: 1px solid rgba(255, 255, 255, 0.16);
@@ -1663,24 +2130,94 @@ onBeforeUnmount(() => {
 
 .request-summary {
   display: grid;
-  grid-template-columns: 150px 1fr;
-  gap: 1.2rem;
-  align-items: center;
-  margin: 1.2rem 0 1.5rem;
-  padding-bottom: 1.5rem;
+  grid-template-columns: minmax(0, 0.58fr) minmax(320px, 0.42fr);
+  gap: 0;
+  align-items: stretch;
+  min-height: 285px;
+  margin: 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.request-summary img {
-  width: 150px;
-  aspect-ratio: 1.28;
+.request-summary__copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.6rem, 4vw, 3rem);
+}
+
+.request-summary__copy h3 {
+  max-width: 12ch;
+  margin: 0.85rem 0 1.4rem;
+  color: #f7f7f5;
+  font-family: var(--font-heading);
+  font-size: clamp(2.3rem, 5vw, 4.4rem);
+  line-height: 0.92;
+}
+
+.request-summary__copy dl {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+}
+
+.request-summary__copy dt {
+  color: #9ba8b6;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.request-summary__copy dd {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0.4rem 0 0;
+  color: #f7f7f5;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.request-summary__copy dd i {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #35c985;
+}
+
+.request-summary__price {
+  color: #e1b75a !important;
+}
+
+.request-summary__media {
+  position: relative;
+  min-height: 285px;
+  overflow: hidden;
+  background: #081f30;
+}
+
+.request-summary__media::before {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  content: "";
+  background: linear-gradient(90deg, #061826 0%, rgba(6, 24, 38, 0.72) 26%, rgba(6, 24, 38, 0.08) 100%);
+  pointer-events: none;
+}
+
+.request-summary__media img {
+  width: 100%;
+  height: 100%;
+  min-height: 285px;
   object-fit: cover;
-  border-radius: 6px;
+  display: block;
 }
 
 .request-summary__no-image {
-  width: 150px;
-  aspect-ratio: 1.28;
+  width: 100%;
+  height: 100%;
+  min-height: 285px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1694,22 +2231,17 @@ onBeforeUnmount(() => {
   text-transform: uppercase;
 }
 
-.request-summary h3 {
-  font-size: 1.7rem;
-}
-
-.request-summary p {
-  margin: 0.35rem 0;
-  color: #aeb8c3;
-}
-
-.request-summary strong {
-  color: #f0c86e;
-}
-
 .request-form {
   display: grid;
+  gap: 1.25rem;
+  padding: clamp(1.35rem, 3vw, 2.2rem) clamp(1.35rem, 4vw, 3rem) clamp(1.5rem, 4vw, 2.6rem);
+}
+
+.request-form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
+  align-items: start;
 }
 
 .request-form label span {
@@ -1719,16 +2251,244 @@ onBeforeUnmount(() => {
   margin-bottom: 0.35rem;
 }
 
+.request-field {
+  display: block;
+}
+
+.request-input-wrap {
+  position: relative;
+}
+
+.request-input-wrap input {
+  padding-right: 2.4rem;
+}
+
+.request-input-wrap strong {
+  position: absolute;
+  top: 50%;
+  right: 0.95rem;
+  transform: translateY(-50%);
+  color: #35c985;
+  font-size: 1rem;
+}
+
 .request-form input,
 .request-form textarea {
   margin-top: 0;
-  padding: 0.85rem;
+  padding: 0 0.95rem;
+  min-height: 54px;
+  border-radius: 10px;
+  background: rgba(7, 27, 42, 0.92);
+  border-color: rgba(255, 255, 255, 0.16);
+  color: #f7f7f5;
   resize: vertical;
 }
 
+.request-form textarea {
+  min-height: 104px;
+  padding-top: 0.9rem;
+}
+
+.request-form input[aria-invalid="true"] {
+  border-color: rgba(214, 106, 119, 0.78);
+}
+
+.request-field__message {
+  display: block;
+  margin-top: 0.45rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.request-field__message--error {
+  color: #ffb4bf;
+}
+
+.request-field__message--success {
+  color: #35c985;
+}
+
+.verification-block {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 0.65rem;
+}
+
+.verification-button {
+  width: fit-content;
+  min-height: 52px;
+  padding: 0.75rem 1rem;
+  border: 0;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #d8a742, #e1b75a);
+  color: #061826;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.verification-button:disabled {
+  cursor: wait;
+  opacity: 0.66;
+}
+
+.verification-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1.15rem;
+  border: 1px solid rgba(216, 167, 66, 0.55);
+  border-radius: 12px;
+  background: rgba(8, 31, 48, 0.72);
+}
+
+.verification-card--error {
+  border-color: rgba(239, 98, 98, 0.65);
+}
+
+.verification-card--expired {
+  gap: 1.2rem;
+  padding: clamp(1.35rem, 3vw, 1.75rem) clamp(1.25rem, 3.5vw, 2rem);
+  border-radius: 16px;
+  background: #071b2a;
+}
+
+.verification-card--success {
+  border-color: rgba(53, 201, 133, 0.65);
+  background: rgba(53, 201, 133, 0.08);
+}
+
+.verification-card__icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(216, 167, 66, 0.55);
+  color: #e1b75a;
+  font-weight: 900;
+}
+
+.verification-card--error .verification-card__icon {
+  border-color: rgba(239, 98, 98, 0.65);
+  color: #ef6262;
+}
+
+.verification-card__icon--success {
+  border-color: rgba(53, 201, 133, 0.65);
+  color: #35c985;
+}
+
+.verification-card__body {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.verification-card__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.verification-card h4 {
+  margin: 0;
+  color: #f7f7f5;
+  font-size: 1rem;
+}
+
+.verification-card--expired h4 {
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+}
+
+.verification-card p {
+  margin: 0.28rem 0 0;
+  color: #9ba8b6;
+  line-height: 1.55;
+}
+
+.verification-card p strong {
+  color: #f7f7f5;
+}
+
+.verification-link {
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #e1b75a;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.verification-link--button {
+  min-height: 56px;
+  padding: 0.85rem 1.35rem;
+  border: 1.5px solid #d8a742;
+  border-radius: 10px;
+  background: rgba(216, 167, 66, 0.1);
+  color: #e1b75a;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+
+.verification-link--button:hover:not(:disabled),
+.verification-link--button:focus-visible:not(:disabled) {
+  background: #d8a742;
+  color: #071b2a;
+  transform: translateY(-1px);
+}
+
+.verification-link--button:active:not(:disabled) {
+  filter: brightness(0.92);
+  transform: translateY(0);
+}
+
+.verification-link:disabled {
+  border-color: rgba(155, 168, 182, 0.42);
+  background: transparent;
+  color: #9ba8b6;
+  cursor: not-allowed;
+  opacity: 0.68;
+}
+
+.otp-entry {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 48px));
+  gap: 0.5rem;
+}
+
+.otp-entry__box {
+  width: 48px !important;
+  height: 56px;
+  min-height: 56px !important;
+  padding: 0 !important;
+  border: 1px solid rgba(216, 167, 66, 0.55) !important;
+  border-radius: 8px !important;
+  text-align: center;
+  color: #f7f7f5;
+  font-size: 1.35rem !important;
+  font-weight: 800;
+}
+
+.otp-entry__box--error {
+  border-color: rgba(239, 98, 98, 0.65) !important;
+}
+
+.verification-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .request-form__submit {
-  width: 100%;
-  margin-top: 0.3rem;
+  margin-top: 0;
 }
 
 .request-form__submit:disabled {
@@ -1752,10 +2512,51 @@ onBeforeUnmount(() => {
   color: #e9fff1;
 }
 
+.request-form__success p {
+  white-space: pre-line;
+}
+
 .request-form__error {
   border: 1px solid rgba(214, 106, 119, 0.36);
   background: rgba(92, 28, 39, 0.28);
   color: #fff0f2;
+}
+
+.request-form__footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.25rem;
+  align-items: center;
+  padding-top: 0.35rem;
+}
+
+.request-form__privacy {
+  display: flex;
+  gap: 0.65rem;
+  align-items: center;
+  margin: 0;
+  color: #9ba8b6;
+  line-height: 1.45;
+}
+
+.request-form__privacy span {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #e1b75a;
+}
+
+.request-form__actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.request-form__cancel {
+  margin-top: 0;
 }
 
 .reveal {
@@ -1772,6 +2573,28 @@ onBeforeUnmount(() => {
 @media (max-width: 980px) {
   .aircraft-filters__panel,
   .aircraft-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .request-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .request-summary__media {
+    order: -1;
+    min-height: 220px;
+  }
+
+  .request-summary__media::before {
+    background: linear-gradient(180deg, rgba(6, 24, 38, 0.08), #061826 100%);
+  }
+
+  .request-summary__media img,
+  .request-summary__no-image {
+    min-height: 220px;
+  }
+
+  .request-summary__copy dl {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1871,6 +2694,67 @@ onBeforeUnmount(() => {
     grid-template-columns: 1fr;
   }
 
+  .request-modal {
+    padding: 0.65rem;
+  }
+
+  .request-modal__panel {
+    max-height: calc(100vh - 1.3rem);
+    border-radius: 12px;
+  }
+
+  .request-summary__copy {
+    padding: 1.3rem;
+  }
+
+  .request-summary__copy h3 {
+    font-size: clamp(2rem, 12vw, 3rem);
+  }
+
+  .request-summary__copy dl,
+  .request-form__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .request-form {
+    padding: 1.15rem;
+  }
+
+  .verification-card {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+
+  .verification-card__head,
+  .request-form__footer,
+  .request-form__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .verification-link {
+    width: 100%;
+    text-align: left;
+    white-space: normal;
+  }
+
+  .verification-link--button {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .otp-entry {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    gap: 0.35rem;
+  }
+
+  .otp-entry__box {
+    width: 100% !important;
+    height: 46px;
+    min-height: 46px !important;
+    font-size: 1.05rem !important;
+  }
+
   .aircraft-catalog,
   .aircraft-group,
   .aircraft-grid,
@@ -1896,6 +2780,14 @@ onBeforeUnmount(() => {
 
   .aircraft-filters__actions {
     flex-direction: column;
+  }
+
+  .verification-button {
+    width: 100%;
+  }
+
+  .verification-code {
+    grid-template-columns: 1fr;
   }
 
   .aircraft-filters__actions .aircraft-btn {

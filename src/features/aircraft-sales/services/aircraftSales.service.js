@@ -36,21 +36,7 @@ export async function listPublicAircraft() {
   const { data, error } = await supabase
     .from(AIRCRAFT)
     .select(`
-      id,
-      name,
-      manufacturer,
-      model,
-      slug,
-      registration,
-      registration_spelled,
-      year,
-      price,
-      currency,
-      status,
-      description,
-      is_active,
-      display_order,
-      created_at,
+      *,
       images:${IMAGES} (
         id,
         public_url,
@@ -99,13 +85,33 @@ export async function createAircraftInquiry(payload) {
       email: payload.email.trim(),
       phone: payload.phone?.trim() || null,
       message: payload.message?.trim() || null,
-      status: "new",
+      status: payload.status || "new",
+      email_verified: payload.email_verified ?? false,
+      verified_email: payload.verified_email?.trim() || null,
+      pdf_sent: payload.pdf_sent ?? false,
+      pdf_sent_at: payload.pdf_sent_at ?? null,
+      email_status: payload.email_status || "pending",
     })
     .select()
     .single();
 
   if (error) {
     console.error("Error enviando solicitud:", error);
+    throw error;
+  }
+
+  return data;
+}
+
+export async function sendAircraftPdf(inquiryId) {
+  const { data, error } = await supabase.functions.invoke("send-aircraft-pdf", {
+    body: {
+      inquiry_id: inquiryId,
+    },
+  });
+
+  if (error) {
+    console.error("Error enviando PDF de aeronave:", error);
     throw error;
   }
 
@@ -137,6 +143,29 @@ export async function sendAircraftInquiryEmail(payload) {
         "Error enviando correo"
     );
   }
+
+  return data;
+}
+
+export async function sendAircraftEmailOtp(email) {
+  const { error } = await supabase.auth.signInWithOtp({
+    email,
+    options: {
+      shouldCreateUser: true,
+    },
+  });
+
+  if (error) throw error;
+}
+
+export async function verifyAircraftEmailOtp(email, token) {
+  const { data, error } = await supabase.auth.verifyOtp({
+    email,
+    token,
+    type: "email",
+  });
+
+  if (error) throw error;
 
   return data;
 }

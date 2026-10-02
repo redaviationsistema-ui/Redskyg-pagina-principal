@@ -574,7 +574,7 @@ const submitForm = async () => {
   background:
     linear-gradient(90deg, rgba(5, 13, 23, 0.68) 0%, rgba(5, 13, 23, 0.48) 34%, rgba(5, 13, 23, 0.2) 62%, rgba(5, 13, 23, 0.38) 100%),
     linear-gradient(180deg, rgba(5, 13, 23, 0.08), rgba(5, 13, 23, 0.28)),
-    url("/images/contacto/MM1.jpg") center/cover no-repeat;
+    url("/images/contacto/MM1.png") center/cover no-repeat;
   opacity: 1;
   transform: scale(1.05);
 }
@@ -1205,7 +1205,7 @@ select option {
   background:
     linear-gradient(90deg, rgba(2, 10, 18, 0.95), rgba(2, 10, 18, 0.78) 43%, rgba(2, 10, 18, 0.3) 82%),
     linear-gradient(0deg, rgba(2, 10, 18, 0.85), transparent 48%),
-    url("/images/contacto/MM1.jpg") center/cover no-repeat;
+    url("/images/contacto/MM1.png") center/cover no-repeat;
   animation: contactBackdropDrift 18s ease-in-out infinite alternate;
 }
 
