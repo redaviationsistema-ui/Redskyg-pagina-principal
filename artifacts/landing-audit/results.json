@@ -1,0 +1,371 @@
+{
+  "base": "http://127.0.0.1:5174",
+  "results": [
+    {
+      "locale": "es",
+      "path": "/compra-venta-aeronaves",
+      "viewport": {
+        "width": 1440,
+        "height": 1100
+      },
+      "title": "Tu próxima operación aeronáutica comienza aquí.",
+      "links": [
+        {
+          "title": "Comprar una aeronave",
+          "href": "/mx/solicitud/buy"
+        },
+        {
+          "title": "Vender una aeronave",
+          "href": "/mx/solicitud/sell"
+        },
+        {
+          "title": "Cotizar un vuelo privado",
+          "href": "https://redskyg.com/landing/es-mx/reserva"
+        },
+        {
+          "title": "Administrar mi aeronave",
+          "href": "/mx/solicitud/management"
+        },
+        {
+          "title": "Solicitar servicio técnico",
+          "href": "/mx/solicitud/maintenance"
+        }
+      ],
+      "destinations": [
+        {
+          "service": "buy",
+          "url": "http://127.0.0.1:5174/mx/solicitud/buy",
+          "fields": 11,
+          "focused": "INPUT"
+        },
+        {
+          "service": "sell",
+          "url": "http://127.0.0.1:5174/mx/solicitud/sell",
+          "fields": 10,
+          "focused": "SELECT"
+        },
+        {
+          "service": "management",
+          "url": "http://127.0.0.1:5174/mx/solicitud/management",
+          "fields": 7,
+          "focused": "SELECT"
+        },
+        {
+          "service": "maintenance",
+          "url": "http://127.0.0.1:5174/mx/solicitud/maintenance",
+          "fields": 8,
+          "focused": "SELECT"
+        }
+      ],
+      "languageSwitch": true,
+      "noHorizontalOverflow": true,
+      "noInitialForm": true
+    },
+    {
+      "locale": "en",
+      "path": "/en/aircraft-trade",
+      "viewport": {
+        "width": 1440,
+        "height": 1100
+      },
+      "title": "Your next aviation venture starts here.",
+      "links": [
+        {
+          "title": "Buy an aircraft",
+          "href": "/en/solicitud/buy"
+        },
+        {
+          "title": "Sell an aircraft",
+          "href": "/en/solicitud/sell"
+        },
+        {
+          "title": "Get a private flight quote",
+          "href": "https://redskyg.com/landing/es-mx/reserva"
+        },
+        {
+          "title": "Manage my aircraft",
+          "href": "/en/solicitud/management"
+        },
+        {
+          "title": "Request technical service",
+          "href": "/en/solicitud/maintenance"
+        }
+      ],
+      "destinations": [
+        {
+          "service": "buy",
+          "url": "http://127.0.0.1:5174/en/solicitud/buy",
+          "fields": 11,
+          "focused": "INPUT"
+        },
+        {
+          "service": "sell",
+          "url": "http://127.0.0.1:5174/en/solicitud/sell",
+          "fields": 10,
+          "focused": "SELECT"
+        },
+        {
+          "service": "management",
+          "url": "http://127.0.0.1:5174/en/solicitud/management",
+          "fields": 7,
+          "focused": "SELECT"
+        },
+        {
+          "service": "maintenance",
+          "url": "http://127.0.0.1:5174/en/solicitud/maintenance",
+          "fields": 8,
+          "focused": "SELECT"
+        }
+      ],
+      "languageSwitch": true,
+      "noHorizontalOverflow": true,
+      "noInitialForm": true
+    },
+    {
+      "locale": "es",
+      "path": "/compra-venta-aeronaves",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "title": "Tu próxima operación aeronáutica comienza aquí.",
+      "links": [
+        {
+          "title": "Comprar una aeronave",
+          "href": "/mx/solicitud/buy"
+        },
+        {
+          "title": "Vender una aeronave",
+          "href": "/mx/solicitud/sell"
+        },
+        {
+          "title": "Cotizar un vuelo privado",
+          "href": "https://redskyg.com/landing/es-mx/reserva"
+        },
+        {
+          "title": "Administrar mi aeronave",
+          "href": "/mx/solicitud/management"
+        },
+        {
+          "title": "Solicitar servicio técnico",
+          "href": "/mx/solicitud/maintenance"
+        }
+      ],
+      "destinations": [
+        {
+          "service": "buy",
+          "url": "http://127.0.0.1:5174/mx/solicitud/buy",
+          "fields": 11,
+          "focused": "INPUT"
+        },
+        {
+          "service": "sell",
+          "url": "http://127.0.0.1:5174/mx/solicitud/sell",
+          "fields": 10,
+          "focused": "SELECT"
+        },
+        {
+          "service": "management",
+          "url": "http://127.0.0.1:5174/mx/solicitud/management",
+          "fields": 7,
+          "focused": "SELECT"
+        },
+        {
+          "service": "maintenance",
+          "url": "http://127.0.0.1:5174/mx/solicitud/maintenance",
+          "fields": 8,
+          "focused": "SELECT"
+        }
+      ],
+      "languageSwitch": true,
+      "noHorizontalOverflow": true,
+      "noInitialForm": true
+    },
+    {
+      "locale": "en",
+      "path": "/en/aircraft-trade",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "title": "Your next aviation venture starts here.",
+      "links": [
+        {
+          "title": "Buy an aircraft",
+          "href": "/en/solicitud/buy"
+        },
+        {
+          "title": "Sell an aircraft",
+          "href": "/en/solicitud/sell"
+        },
+        {
+          "title": "Get a private flight quote",
+          "href": "https://redskyg.com/landing/es-mx/reserva"
+        },
+        {
+          "title": "Manage my aircraft",
+          "href": "/en/solicitud/management"
+        },
+        {
+          "title": "Request technical service",
+          "href": "/en/solicitud/maintenance"
+        }
+      ],
+      "destinations": [
+        {
+          "service": "buy",
+          "url": "http://127.0.0.1:5174/en/solicitud/buy",
+          "fields": 11,
+          "focused": "INPUT"
+        },
+        {
+          "service": "sell",
+          "url": "http://127.0.0.1:5174/en/solicitud/sell",
+          "fields": 10,
+          "focused": "SELECT"
+        },
+        {
+          "service": "management",
+          "url": "http://127.0.0.1:5174/en/solicitud/management",
+          "fields": 7,
+          "focused": "SELECT"
+        },
+        {
+          "service": "maintenance",
+          "url": "http://127.0.0.1:5174/en/solicitud/maintenance",
+          "fields": 8,
+          "focused": "SELECT"
+        }
+      ],
+      "languageSwitch": true,
+      "noHorizontalOverflow": true,
+      "noInitialForm": true
+    },
+    {
+      "locale": "es",
+      "path": "/compra-venta-aeronaves",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "title": "Tu próxima operación aeronáutica comienza aquí.",
+      "links": [
+        {
+          "title": "Comprar una aeronave",
+          "href": "/mx/solicitud/buy"
+        },
+        {
+          "title": "Vender una aeronave",
+          "href": "/mx/solicitud/sell"
+        },
+        {
+          "title": "Cotizar un vuelo privado",
+          "href": "https://redskyg.com/landing/es-mx/reserva"
+        },
+        {
+          "title": "Administrar mi aeronave",
+          "href": "/mx/solicitud/management"
+        },
+        {
+          "title": "Solicitar servicio técnico",
+          "href": "/mx/solicitud/maintenance"
+        }
+      ],
+      "destinations": [
+        {
+          "service": "buy",
+          "url": "http://127.0.0.1:5174/mx/solicitud/buy",
+          "fields": 11,
+          "focused": "INPUT"
+        },
+        {
+          "service": "sell",
+          "url": "http://127.0.0.1:5174/mx/solicitud/sell",
+          "fields": 10,
+          "focused": "SELECT"
+        },
+        {
+          "service": "management",
+          "url": "http://127.0.0.1:5174/mx/solicitud/management",
+          "fields": 7,
+          "focused": "SELECT"
+        },
+        {
+          "service": "maintenance",
+          "url": "http://127.0.0.1:5174/mx/solicitud/maintenance",
+          "fields": 8,
+          "focused": "SELECT"
+        }
+      ],
+      "languageSwitch": true,
+      "noHorizontalOverflow": true,
+      "noInitialForm": true
+    },
+    {
+      "locale": "en",
+      "path": "/en/aircraft-trade",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "title": "Your next aviation venture starts here.",
+      "links": [
+        {
+          "title": "Buy an aircraft",
+          "href": "/en/solicitud/buy"
+        },
+        {
+          "title": "Sell an aircraft",
+          "href": "/en/solicitud/sell"
+        },
+        {
+          "title": "Get a private flight quote",
+          "href": "https://redskyg.com/landing/es-mx/reserva"
+        },
+        {
+          "title": "Manage my aircraft",
+          "href": "/en/solicitud/management"
+        },
+        {
+          "title": "Request technical service",
+          "href": "/en/solicitud/maintenance"
+        }
+      ],
+      "destinations": [
+        {
+          "service": "buy",
+          "url": "http://127.0.0.1:5174/en/solicitud/buy",
+          "fields": 11,
+          "focused": "INPUT"
+        },
+        {
+          "service": "sell",
+          "url": "http://127.0.0.1:5174/en/solicitud/sell",
+          "fields": 10,
+          "focused": "SELECT"
+        },
+        {
+          "service": "management",
+          "url": "http://127.0.0.1:5174/en/solicitud/management",
+          "fields": 7,
+          "focused": "SELECT"
+        },
+        {
+          "service": "maintenance",
+          "url": "http://127.0.0.1:5174/en/solicitud/maintenance",
+          "fields": 8,
+          "focused": "SELECT"
+        }
+      ],
+      "languageSwitch": true,
+      "noHorizontalOverflow": true,
+      "noInitialForm": true
+    }
+  ],
+  "errors": [],
+  "homeRoutesVerified": [
+    "/mx",
+    "/en"
+  ],
+  "flightQuote": "Existing link verified; quote calculations and booking submission untouched."
+}

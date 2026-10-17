@@ -1,3 +1,5 @@
+> Actualización: el contrato público vigente y la integración PHP se describen en [commercial-inquiries.md](commercial-inquiries.md). Las referencias de este documento a validaciones y backend anteriores son históricas.
+
 # Landing de aeronaves — recepción exclusivamente por correo PHP
 
 Esta es la configuración vigente de los formularios públicos. Sustituye las propuestas anteriores de almacenamiento para la landing. No se necesita Supabase, Firebase, base de datos, clave administrativa ni el servidor Node para recibir estas solicitudes.
@@ -12,15 +14,23 @@ Se retiró del formulario de venta la dependencia del servicio Supabase, el cat�
 
 La validación antispam, frecuencia, aceptación de privacidad, correo, límites y escapado HTML deben seguir ejecutándose en PHP. Se conserva el honeypot `website` en el JSON; es necesario comprobar que PHP lo valide. No se afirma que la validación cliente sustituya la del servidor. No se modificaron reglas CORS del hosting.
 
+## Normalización del contrato PHP
+
+El mapeo final usa `toPhpString`: `null`/`undefined` se convierten a `""` y el resto a cadena recortada. `year`, `totalHours`, `totalCycles` y `askingPrice` llegan como cadenas; la validación y el estado reactivo conservan sus tipos anteriores. `privacyAccepted` y `priceToBeDefined` siguen siendo booleanos estrictos. Compra incluye `manufacturer: ""` cuando no existe captura separada. Venta incluye `priceToBeDefined`; con precio por definir, `askingPrice` es `""`.
+
+HTTP 422 permite solo mensajes de validación con gramática y claves conocidas (`Campo obligatorio: year`, `Valor inválido: year`, privacidad y campos de contacto). El resto recibe el mensaje seguro general; no se muestran valores recibidos, HTML ni diagnósticos SMTP. Se distinguen 403, 502, 503, HTML por Content-Type, JSON inválido y red. La presentación conserva mensajes específicos también en inglés mediante el adaptador de errores, sin cambiar el catálogo existente. Solo se simularon respuestas; no se comprobó entrega real ni se modificó PHP.
+
+Esta normalización sustituye las referencias antiguas a números/null en el contrato de envío descrito a continuación.
+
 ## Contrato de campos
 
 Compra: `operation: "buy"`, `aircraftType`, `model`, `year`, `registration`, `budget`, `usage`, `country`, `company`, `comments`, `name`, `email`, `phone`, `privacyAccepted`, `website`.
 
-El campo visible de compra es una sola entrada «Fabricante y modelo». Se envía íntegro en `model`: no se intenta dividir «Airbus Helicopters H145» o inventar un fabricante. No se manda `manufacturer` porque no existe una captura separada. El PHP deberá aceptar esta entrada combinada para compras. Si su contrato requiere fabricante separado incluso en compra, hay que revisar su código antes de modificar el formulario. El presupuesto es la descripción real de la opción seleccionada; año vacío es `null` y matrícula desconocida queda vacía. No se envían ejemplos ni campos técnicos de venta.
+El campo visible de compra es una sola entrada «Fabricante y modelo». Se envía íntegro en `model`: no se intenta dividir «Airbus Helicopters H145» o inventar un fabricante. Se manda `manufacturer: ""` cuando no existe una captura separada. El PHP deberá aceptar esta entrada combinada para compras. Si su contrato requiere fabricante separado incluso en compra, hay que revisar su código antes de modificar el formulario. El presupuesto es la descripción real de la opción seleccionada; año vacío es `""` y matrícula desconocida queda vacía. No se envían ejemplos ni campos técnicos de venta.
 
 Venta: `operation: "sell"`, `aircraftType`, `manufacturer`, `model`, `year`, `registration`, `serialNumber`, `totalHours`, `totalCycles`, `country`, `city`, `askingPrice`, `currency`, `aircraftStatus`, `company`, `relationship`, `preferredContact`, `comments`, `name`, `email`, `phone`, `privacyAccepted`, `website`.
 
-Se conservan validaciones y normalización. Cuando «Precio por definir» está marcado, `askingPrice` es `null`, aunque haya un precio escrito antes. No se envían archivos, tokens Supabase, documentos ni datos administrativos.
+Se conservan validaciones y normalización. Cuando «Precio por definir» está marcado, `askingPrice` es `""`, aunque haya un precio escrito antes. No se envían archivos, tokens Supabase, documentos ni datos administrativos.
 
 ## Éxito, errores y analítica
 

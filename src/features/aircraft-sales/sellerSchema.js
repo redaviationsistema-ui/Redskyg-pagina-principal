@@ -1,3 +1,4 @@
+import { validateFields, assertFields } from './fieldValidation.js';
 export const aircraftTypes = ['Jet privado', 'Turbohélice', 'Helicóptero', 'Avión de pistón', 'Otro'];
 export const manufacturers = ['Cessna', 'Beechcraft', 'Bombardier', 'Gulfstream', 'Dassault', 'Embraer', 'Hawker', 'Learjet', 'Bell', 'Airbus Helicopters', 'Leonardo', 'Otro'];
 export const aircraftStatuses = ['Operativa', 'En mantenimiento', 'Fuera de servicio', 'Otro'];
@@ -17,36 +18,10 @@ export function validateFiles(files) {
     if (!file.size || file.size > fileSizeLimit) throw new Error('Cada archivo debe pesar entre 1 byte y 5 MB.');
   }
 }
+export function sellerFieldValidation(input, now = new Date()) {
+  return validateFields(input, 'sell', { aircraft_type: aircraftTypes, aircraft_status: aircraftStatuses, relationship_to_aircraft: relationships, preferred_contact_method: contactMethods, currency: ['USD', 'MXN'] }, now);
+}
 export function validateSeller(input, now = new Date()) {
-  const out = {};
-  const required = ['aircraft_type', 'manufacturer', 'model', 'registration', 'country', 'city', 'contact_name', 'email', 'phone', 'aircraft_status', 'relationship_to_aircraft', 'preferred_contact_method'];
-  const optional = ['serial_number', 'aircraft_notes', 'company'];
-  for (const key of [...required, ...optional]) {
-    if (input[key] != null && typeof input[key] !== 'string') throw new Error('Formato de datos inválido.');
-    out[key] = (input[key] || '').trim();
-    if (required.includes(key) && !out[key]) throw new Error('Completa los campos obligatorios.');
-    if (out[key].length > (key === 'aircraft_notes' ? 4000 : 160)) throw new Error('Uno de los campos excede la longitud permitida.');
-  }
-  for (const [key, options] of Object.entries({ aircraft_type: aircraftTypes, manufacturer: manufacturers, aircraft_status: aircraftStatuses, relationship_to_aircraft: relationships, preferred_contact_method: contactMethods })) {
-    if (!options.includes(out[key])) throw new Error('Selecciona una opción válida.');
-  }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(out.email)) throw new Error('Ingresa un correo electrónico válido.');
-  if (!/^\+[1-9][\d ()-]{6,23}$/.test(out.phone) || out.phone.replace(/\D/g, '').length > 15) throw new Error('Incluye el código internacional del teléfono, por ejemplo +52.');
-  if (!/^[A-Za-z0-9 -]{2,20}$/.test(out.registration)) throw new Error('Revisa la matrícula de la aeronave.');
-  out.registration = out.registration.toUpperCase();
-  for (const key of ['manufacturing_year', 'total_time', 'total_cycles', 'asking_price']) {
-    const value = input[key];
-    if (value != null && !['number', 'string'].includes(typeof value)) throw new Error('Formato numérico inválido.');
-    out[key] = value === '' || value == null ? null : Number(value);
-    if (out[key] !== null && (!Number.isFinite(out[key]) || out[key] < 0 || out[key] > 1e12)) throw new Error('Revisa los valores numéricos.');
-  }
-  if (!Number.isInteger(out.manufacturing_year) || out.manufacturing_year < 1903 || out.manufacturing_year > now.getFullYear() + 1) throw new Error('Ingresa un año de fabricación válido.');
-  if (out.total_cycles !== null && !Number.isInteger(out.total_cycles)) throw new Error('Los ciclos deben ser un número entero.');
-  if (!['USD', 'MXN'].includes(input.currency)) throw new Error('Moneda inválida.');
-  out.currency = input.currency;
-  if (typeof input.price_to_be_defined !== 'boolean') throw new Error('Indica si el precio está por definir.');
-  out.price_to_be_defined = input.price_to_be_defined;
-  if (out.price_to_be_defined) out.asking_price = null;
-  if (input.privacy_accepted !== true) throw new Error('Debes aceptar el aviso de privacidad.');
-  return out;
+  const result = assertFields(sellerFieldValidation(input, now));
+  return { ...result, registration: (result.registration || '').toUpperCase() };
 }

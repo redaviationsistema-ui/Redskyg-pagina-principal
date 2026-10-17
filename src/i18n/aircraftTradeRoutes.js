@@ -3,8 +3,8 @@ export const aircraftTradePages = {
     paths: { es: '/compra-venta-aeronaves', en: '/en/aircraft-trade' },
     mode: 'buy', names: { es: 'AircraftTradeLanding', en: 'AircraftTradeLandingEn' },
     seo: {
-      es: { title: 'Compra y Venta de Aeronaves | Sky Group Aviation', description: 'Encuentra tu próxima aeronave o comercializa la tuya con asesoría profesional y atención personalizada de Sky Group Aviation.' },
-      en: { title: 'Aircraft Sales and Acquisition | Sky Group Aviation', description: 'Find your next aircraft or market the one you own with professional advice and personalized support from Sky Group Aviation.' },
+      es: { title: 'Servicios Aeronáuticos | Sky Group Aviation', description: 'Compra, vende, vuela o solicita administración y servicios técnicos para tu aeronave con atención especializada.' },
+      en: { title: 'Aviation Services | Sky Group Aviation', description: 'Buy, sell, fly or request aircraft management and technical services with expert support.' },
     },
   },
   sell: {

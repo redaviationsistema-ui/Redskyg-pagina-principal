@@ -1,0 +1,109 @@
+{
+  "version": "2026-10-17",
+  "common": {
+    "name": {
+      "required": true,
+      "min": 2,
+      "max": 100
+    },
+    "email": {
+      "required": true,
+      "max": 254
+    },
+    "phone": {
+      "required": true,
+      "max": 10
+    },
+    "country": {
+      "required": true,
+      "min": 2,
+      "max": 80
+    },
+    "aircraftType": {
+      "required": true
+    },
+    "comments": {
+      "max": 1000
+    }
+  },
+  "operations": {
+    "buy": {
+      "mode": "buy",
+      "types": [
+        "Jet privado",
+        "Turbohélice",
+        "Helicóptero",
+        "Otro"
+      ],
+      "fields": {
+        "model": {
+          "max": 120
+        }
+      }
+    },
+    "sell": {
+      "mode": "sell",
+      "types": [
+        "Jet privado",
+        "Turbohélice",
+        "Helicóptero",
+        "Avión de pistón",
+        "Otro"
+      ],
+      "fields": {
+        "manufacturer": {
+          "required": true,
+          "min": 2,
+          "max": 80
+        },
+        "model": {
+          "required": true,
+          "min": 2,
+          "max": 100
+        },
+        "year": {
+          "year": true
+        }
+      }
+    },
+    "aircraft_management": {
+      "mode": "management",
+      "types": [
+        "Jet privado",
+        "Turbohélice",
+        "Helicóptero",
+        "Otro"
+      ],
+      "fields": {
+        "model": {
+          "max": 120
+        },
+        "service": {
+          "required": true,
+          "min": 3,
+          "max": 120
+        }
+      }
+    },
+    "technical_service": {
+      "mode": "maintenance",
+      "types": [
+        "Jet privado",
+        "Turbohélice",
+        "Helicóptero",
+        "Otro"
+      ],
+      "fields": {
+        "model": {
+          "max": 120
+        },
+        "service": {
+          "required": true,
+          "min": 3,
+          "max": 120
+        }
+      }
+    }
+  },
+  "phoneMarket": "MX"
+}

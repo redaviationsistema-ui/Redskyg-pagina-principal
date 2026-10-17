@@ -1,0 +1,137 @@
+{
+  "responseMode": "injected fixtures only; no real POST sent",
+  "logs": [
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Inicio de solicitud {endpoint: http://127.0.0.1:5174/aircraft-inquiry.php, method: POST, startedAt: 2026-10-17T18:38:36.911Z, operation: buy}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Respuesta HTTP {status: 503, elapsedMs: 2, contentType: application/json, retryAfter: undefined}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Respuesta PHP (campos seguros) {success: false, code: configuration, message: [Mensaje PHP oculto: no pertenece al catálogo seguro]}"
+    },
+    {
+      "type": "error",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Solicitud rechazada {status: 503, origin: PHP: configuración privada incompleta o no válida}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Fin de solicitud {elapsedMs: 2, automaticRetries: 0}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Inicio de solicitud {endpoint: http://127.0.0.1:5174/aircraft-inquiry.php, method: POST, startedAt: 2026-10-17T18:38:36.914Z, operation: buy}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Respuesta HTTP {status: 429, elapsedMs: 0, contentType: application/json, retryAfter: 900}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Respuesta PHP (campos seguros) {success: false, code: rate_limit}"
+    },
+    {
+      "type": "warning",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Solicitud rechazada {status: 429, origin: PHP: límite de frecuencia confirmado}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Fin de solicitud {elapsedMs: 0, automaticRetries: 0}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Inicio de solicitud {endpoint: http://127.0.0.1:5174/aircraft-inquiry.php, method: POST, startedAt: 2026-10-17T18:38:36.914Z, operation: buy}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Respuesta HTTP {status: 422, elapsedMs: 0, contentType: application/json, retryAfter: undefined}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Respuesta PHP (campos seguros) {success: false, errors: Object}"
+    },
+    {
+      "type": "error",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Solicitud rechazada {status: 422, origin: Validación HTTP 422}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Fin de solicitud {elapsedMs: 1, automaticRetries: 0}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Inicio de solicitud {endpoint: http://127.0.0.1:5174/aircraft-inquiry.php, method: POST, startedAt: 2026-10-17T18:38:36.915Z, operation: buy}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Respuesta HTTP {status: 502, elapsedMs: 0, contentType: text/html, retryAfter: undefined}"
+    },
+    {
+      "type": "error",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] HTML recibido en lugar de JSON {status: 502, origin: Respuesta no JSON: servidor/proxy; origen exacto indeterminado}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Fin de solicitud {elapsedMs: 0, automaticRetries: 0}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Inicio de solicitud {endpoint: http://127.0.0.1:5174/aircraft-inquiry.php, method: POST, startedAt: 2026-10-17T18:38:36.915Z, operation: buy}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Respuesta HTTP {status: 200, elapsedMs: 0, contentType: application/json, retryAfter: undefined}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Respuesta PHP (campos seguros) {success: true, received: true}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Respuesta satisfactoria del endpoint {status: 200, note: El formulario aún comprueba el contrato de recepción; no implica entrega final de correo.}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Fin de solicitud {elapsedMs: 0, automaticRetries: 0}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Inicio de solicitud {endpoint: http://127.0.0.1:5174/aircraft-inquiry.php, method: POST, startedAt: 2026-10-17T18:38:36.915Z, operation: buy}"
+    },
+    {
+      "type": "error",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Fallo de transporte {origin: Red, timeout o proxy: no hay respuesta HTTP disponible; no permite atribuir el fallo a PHP, elapsedMs: 0}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Fin de solicitud {elapsedMs: 0, automaticRetries: 0}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Inicio de solicitud {endpoint: http://127.0.0.1:5174/aircraft-inquiry.php, method: POST, startedAt: 2026-10-17T18:38:36.916Z, operation: buy}"
+    },
+    {
+      "type": "warning",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Envío simultáneo bloqueado {method: POST, endpoint: http://127.0.0.1:5174/aircraft-inquiry.php}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Respuesta HTTP {status: 200, elapsedMs: 0, contentType: application/json, retryAfter: undefined}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Respuesta PHP (campos seguros) {success: true}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Respuesta satisfactoria del endpoint {status: 200, note: El formulario aún comprueba el contrato de recepción; no implica entrega final de correo.}"
+    },
+    {
+      "type": "log",
+      "text": "[SKY GROUP][AIRCRAFT INQUIRY] Fin de solicitud {elapsedMs: 0, automaticRetries: 0}"
+    }
+  ]
+}

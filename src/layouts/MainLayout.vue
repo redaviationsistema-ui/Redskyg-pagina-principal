@@ -18,7 +18,7 @@
       target="_blank"
       rel="noopener noreferrer"
       class="whatsapp-float"
-      :aria-label="locale.value === 'en' ? 'Contact Sky Group on WhatsApp' : 'Contactar a Sky Group por WhatsApp'"
+      :aria-label="locale === 'en' ? 'Contact Sky Group on WhatsApp' : 'Contactar a Sky Group por WhatsApp'"
     >
       <div class="whatsapp-icon">
         <svg
@@ -34,7 +34,7 @@
         </svg>
       </div>
 
-      <span class="whatsapp-text">{{ locale.value === "en" ? "Get a quote now!" : "Cotiza ahora" }}</span>
+      <span class="whatsapp-text">{{ locale === "en" ? "Get a quote now!" : "Cotiza ahora" }}</span>
     </a>
   </div>
 </template>
@@ -50,7 +50,7 @@ import AircraftTradeFooter from "../components/aircraft-sales/AircraftTradeFoote
 
 const route = useRoute();
 const isAircraftTradeLanding = computed(() =>
-  Boolean(route.meta.aircraftPage) || ['/compra-venta-aeronaves', '/vender-aeronave', '/comprar-aeronave'].includes(route.path.replace(/\/+$/, ''))
+  route.name === 'ServiceRequest' || Boolean(route.meta.aircraftPage) || ['/compra-venta-aeronaves', '/vender-aeronave', '/comprar-aeronave'].includes(route.path.replace(/\/+$/, ''))
 );
 const isNestedLayout = inject("has-main-layout", false);
 const { locale } = useLocale();

@@ -6,7 +6,7 @@
           <component
             :is="Component"
             v-if="Component"
-            :key="currentRoute.meta.aircraftPage ? `aircraft-${currentRoute.meta.aircraftPage}` : currentRoute.fullPath"
+            :key="currentRoute.name === 'ServiceRequest' ? 'service-' + currentRoute.params.service : currentRoute.name === 'Home' ? 'aviation-home' : currentRoute.meta.aircraftPage ? `aircraft-${currentRoute.meta.aircraftPage}` : currentRoute.fullPath"
           />
         </transition>
       </RouterView>

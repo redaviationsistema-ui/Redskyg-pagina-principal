@@ -65,6 +65,15 @@ const createRouteSeo = (esMeta, enMeta) => ({
 
 const pageRoutes = [
   {
+    path: 'solicitud/:service(buy|sell|management|maintenance)',
+    name: 'ServiceRequest',
+    component: () => import('../views/ServiceRequest.vue'),
+    meta: { seo: {
+      es: { title: 'Solicitud de servicios aeronáuticos | Sky Group Aviation', description: 'Compra, vende o solicita administración y mantenimiento de aeronaves con atención especializada.' },
+      en: { title: 'Request aviation services | Sky Group Aviation', description: 'Buy, sell or request aircraft management and maintenance with expert support.' },
+    } },
+  },
+  {
     path: "",
     name: "Home",
     component: Home,
@@ -463,7 +472,7 @@ const router = createRouter({
   routes: [
     ...Object.entries(aircraftTradePages).flatMap(([page, config]) => ['es', 'en'].map(locale => ({
       path: config.paths[locale], name: config.names[locale],
-      component: () => import('../views/SellAircraftLanding.vue'),
+      ...(page === 'trade' ? { redirect: to => ({ path: aircraftTradePages.sell.paths[locale], query: to.query, hash: to.hash }) } : { component: () => import('../views/AircraftTradeLanding.vue') }),
       meta: { standalone: true, aircraftPage: page, aircraftMode: config.mode, locale,
         localizedPaths: config.paths, canonicalPath: config.paths[locale],
         seoImage: '/images/Home/IMG_2992.jpg', seo: config.seo },
@@ -514,6 +523,7 @@ const router = createRouter({
     },
   ],
   scrollBehavior(to, from) {
+    if (to.hash === "#servicios") return { el: to.hash, top: 85 };
     if (to.meta.aircraftPage && to.meta.aircraftPage === from.meta.aircraftPage && to.meta.locale !== from.meta.locale) return false;
     return { top: 0 };
   },

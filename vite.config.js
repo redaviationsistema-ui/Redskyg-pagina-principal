@@ -1,9 +1,13 @@
 
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 
-export default defineConfig({
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '');
+  const phpTarget = env.SKY_PHP_DEV_TARGET || 'http://127.0.0.1:8085';
+  if (!['127.0.0.1', 'localhost', '[::1]'].includes(new URL(phpTarget).hostname)) throw new Error('SKY_PHP_DEV_TARGET must point to a local PHP test server.');
+  return {
   plugins: [vue()],
 
   server: {
@@ -14,21 +18,10 @@ export default defineConfig({
         changeOrigin: true,
       },
 
-      // PHP de compra y venta de aeronaves
+      // PHP local de pruebas; Vite no ejecuta PHP.
       '^/aircraft-inquiry\\.php$': {
-        target: 'https://redskyg.com',
-        changeOrigin: true,
-        secure: true,
-
-        // Solo para desarrollo local autorizado
-        configure(proxy) {
-          proxy.on('proxyReq', (proxyReq) => {
-            proxyReq.setHeader(
-              'Origin',
-              'https://redskyg.com'
-            )
-          })
-        },
+        target: phpTarget,
+        changeOrigin: false,
       },
     },
   },
@@ -40,4 +33,5 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
     },
   },
+}
 })

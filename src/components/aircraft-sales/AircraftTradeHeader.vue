@@ -1,12 +1,12 @@
 <script setup>
 import LocaleSwitcher from '../LocaleSwitcher.vue';
 import { useLocale } from '../../i18n';
-const { isEnglish } = useLocale();
+const { isEnglish, toLocalizedRoute } = useLocale();
 </script>
 <template>
   <header class="trade-header">
     <div class="trade-header__inner">
-      <RouterLink to="/" class="trade-header__home" :aria-label="isEnglish ? 'Sky Group Aviation — Home' : 'Sky Group Aviation — Inicio'">
+      <RouterLink :to="toLocalizedRoute('Home')" class="trade-header__home" :aria-label="isEnglish ? 'Sky Group LLC — Home' : 'Sky Group LLC — Inicio'">
         <img src="/images/logoo.png" alt="Sky Group Aviation" />
       </RouterLink>
       <LocaleSwitcher compact class="trade-header__language" />

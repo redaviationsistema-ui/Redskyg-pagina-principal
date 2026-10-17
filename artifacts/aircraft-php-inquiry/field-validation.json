@@ -1,0 +1,20 @@
+{
+  "checks": {
+    "emptyBuyerDoesNotSend": true,
+    "firstInvalidFocused": true,
+    "inlineRequiredErrors": true,
+    "requiredClearsWhileTyping": true,
+    "invalidEmailSpecific": true,
+    "errorsTranslate": true,
+    "privacyClearsImmediately": true,
+    "buyerValidSubmitsOnce": true,
+    "emptySellerBlocked": true,
+    "numericInputsAllowTyping": true,
+    "numericErrorsSpecific": true,
+    "firstNumericErrorFocused": true,
+    "numericErrorsClear": true,
+    "sellerValidPayload": true,
+    "noRuntimeErrors": true
+  },
+  "consoleErrors": []
+}

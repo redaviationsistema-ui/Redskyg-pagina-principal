@@ -1,3 +1,4 @@
+import { localizedInquiryError } from '../features/aircraft-sales/services/aircraftInquiry.service.js';
 import { computed, watch } from 'vue';
 import { useLocale, localizePath } from './index';
 import es from '../locales/es';
@@ -13,6 +14,8 @@ export function useAircraftTradeLocale() {
   const privacyPath = computed(() => localizePath('/privacy', locale.value));
   const displayError = message => {
     if (!message) return '';
+    const inquiryMessage = localizedInquiryError(message, locale.value);
+    if (inquiryMessage) return inquiryMessage;
     return locale.value === 'en'
       ? en.aircraftTrade[message] || 'We could not complete your request. Please try again or contact our team.'
       : message;

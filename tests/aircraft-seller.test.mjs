@@ -4,7 +4,7 @@ import { Readable } from 'node:stream';
 import { randomUUID } from 'node:crypto';
 import { validateSeller, validateFiles } from '../src/features/aircraft-sales/sellerSchema.js';
 import { createSellerApi, decodeSellerFiles } from '../server/aircraft-seller-api.mjs';
-const valid = () => ({ aircraft_type:'Jet privado',manufacturer:'Cessna',model:'Citation XLS+',manufacturing_year:2012,registration:'n123ab',country:'México',city:'Toluca',aircraft_status:'Operativa',contact_name:'Propietario de prueba',email:'owner@example.com',phone:'+52 722 123 4567',relationship_to_aircraft:'Propietario',preferred_contact_method:'Correo electrónico',currency:'USD',price_to_be_defined:true,privacy_accepted:true,request_id:randomUUID(),turnstile_token:'test-token',files:[] });
+const valid = () => ({ aircraft_type:'Jet privado',manufacturer:'Cessna',model:'Citation XLS+',manufacturing_year:2012,registration:'n123ab',country:'México',city:'Toluca',aircraft_status:'Operativa',contact_name:'Propietario de prueba',email:'owner@example.com',phone:'7221234567',relationship_to_aircraft:'Propietario',preferred_contact_method:'Correo electrónico',currency:'USD',price_to_be_defined:true,privacy_accepted:true,request_id:randomUUID(),turnstile_token:'test-token',files:[] });
 const env = { SELLER_ALLOWED_ORIGINS:'https://redskyg.com',TURNSTILE_SECRET_KEY:'test-secret',SELLER_IP_HASH_SECRET:'test-ip-hash-secret' };
 async function invoke(handler, data, { path='/api/aircraft-seller',method='POST',headers={} } = {}) {
   const req=Readable.from([Buffer.from(JSON.stringify(data))]);
@@ -48,7 +48,7 @@ test('normalizes valid data and ignores client administrative fields',()=>{
   assert.equal(data.registration,'N123AB');assert.equal(data.asking_price,null);assert.equal(data.submission_status,undefined);assert.equal(data.admin_notes,undefined);
 });
 test('rejects missing privacy, invalid enums, numeric fields and international phones',()=>{
-  for(const patch of [{privacy_accepted:false},{manufacturer:'unknown'},{manufacturing_year:3000},{total_cycles:2.5},{total_time:-1},{phone:'7221234567'},{email:'invalid'}])assert.throws(()=>validateSeller({...valid(),...patch}));
+  for(const patch of [{privacy_accepted:false},{aircraft_type:'unknown'},{manufacturing_year:3000},{total_cycles:2.5},{total_time:-1},{phone:'722123456'},{email:'invalid'}])assert.throws(()=>validateSeller({...valid(),...patch}));
 });
 test('rejects file content spoofing, paths, excessive size, count and combined size',()=>{
   assert.equal(decodeSellerFiles([pdf])[0].size,Buffer.from(pdf.data,'base64').length);
