@@ -1,0 +1,175 @@
+{
+  "checks": {
+    "buyerButtonEnabledWithoutSupabase": true,
+    "pendingWarningRetainedUntilVerified": true,
+    "buyerValidationBlocksRequest": true,
+    "privacyRequired": true,
+    "buyerDoubleClickBlockedOnFailure": true,
+    "smtpErrorSafeAndDraftRetained": true,
+    "noSuccessEventOnError": true,
+    "languagePreservesBuyerDraftAndMode": true,
+    "noPrematureSuccess": true,
+    "confirmedBuyerSuccessWithoutId": true,
+    "noFalseConfirmationClaim": true,
+    "buyerPhpPayload": true,
+    "buyerEventOnceAfterSuccess": true,
+    "successTranslatesWithoutResubmitting": true,
+    "sellerButtonEnabledWithoutCaptcha": true,
+    "sellerValidationIndependent": true,
+    "sellerNetworkFailureRetainsData": true,
+    "sellerWaitingForRealResponse": true,
+    "sellerConfirmedSuccess": true,
+    "sellerPhpPayload": true,
+    "sellerEventOnce": true,
+    "analyticsHasNoContactInfo": true,
+    "noSupabaseOrTurnstileCalls": true,
+    "noApplicationExceptions": true,
+    "mobileNoOverflow": true,
+    "desktopLayoutUnchanged": true
+  },
+  "consoleErrors": [],
+  "mockedRequests": 4,
+  "realCommercialSubmissions": 0,
+  "desktop": {
+    "viewport": 1440,
+    "scrollWidth": 1440,
+    "hero": {
+      "x": 40,
+      "y": 138,
+      "width": 707.1875,
+      "height": 1914.3125,
+      "color": "rgb(7, 27, 48)",
+      "font": "16px",
+      "background": "rgb(11, 37, 60)"
+    },
+    "photo": {
+      "x": 40,
+      "y": 138,
+      "width": 707.1875,
+      "height": 700,
+      "color": "rgb(7, 27, 48)",
+      "font": "16px",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "imagesLoaded": true,
+    "form": {
+      "x": 747.1875,
+      "y": 138,
+      "width": 652.8125,
+      "height": 1914.3125,
+      "color": "rgb(7, 27, 48)",
+      "font": "16px",
+      "background": "rgb(255, 255, 255)"
+    },
+    "title": {
+      "x": 80,
+      "y": 261.59375,
+      "width": 627.1875,
+      "height": 126.6875,
+      "color": "rgb(255, 255, 255)",
+      "font": "57.6px",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "categoriesTitle": {
+      "x": 40,
+      "y": 2692.1875,
+      "width": 526.90625,
+      "height": 48,
+      "color": "rgb(7, 27, 48)",
+      "font": "40px",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "formTitle": {
+      "x": 783.1875,
+      "y": 205.59375,
+      "width": 580.8125,
+      "height": 41.46875,
+      "color": "rgb(7, 27, 48)",
+      "font": "34.56px",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "button": {
+      "x": 783.1875,
+      "y": 1929.515625,
+      "width": 580.8125,
+      "height": 52,
+      "color": "rgb(255, 255, 255)",
+      "font": "12px",
+      "background": "rgb(169, 130, 76)"
+    },
+    "formColumns": "282.406px 282.406px",
+    "processColumns": "316px 316px 316px 316px",
+    "categoryColumns": "434.656px 434.672px 434.656px"
+  },
+  "mobile": {
+    "viewport": 390,
+    "scrollWidth": 390,
+    "hero": {
+      "x": 18,
+      "y": 104,
+      "width": 354,
+      "height": 585.171875,
+      "color": "rgb(7, 27, 48)",
+      "font": "16px",
+      "background": "rgb(11, 37, 60)"
+    },
+    "photo": {
+      "x": 18,
+      "y": 104,
+      "width": 354,
+      "height": 450,
+      "color": "rgb(7, 27, 48)",
+      "font": "16px",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "imagesLoaded": true,
+    "form": {
+      "x": 18,
+      "y": 689.171875,
+      "width": 354,
+      "height": 3134.546875,
+      "color": "rgb(7, 27, 48)",
+      "font": "16px",
+      "background": "rgb(255, 255, 255)"
+    },
+    "title": {
+      "x": 42,
+      "y": 202.890625,
+      "width": 306,
+      "height": 73.78125,
+      "color": "rgb(255, 255, 255)",
+      "font": "33.54px",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "categoriesTitle": {
+      "x": 18,
+      "y": 4695.015625,
+      "width": 354,
+      "height": 76.78125,
+      "color": "rgb(7, 27, 48)",
+      "font": "32px",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "formTitle": {
+      "x": 40,
+      "y": 748.765625,
+      "width": 310,
+      "height": 67.1875,
+      "color": "rgb(7, 27, 48)",
+      "font": "28px",
+      "background": "rgba(0, 0, 0, 0)"
+    },
+    "button": {
+      "x": 40,
+      "y": 3708.921875,
+      "width": 310,
+      "height": 52,
+      "color": "rgb(255, 255, 255)",
+      "font": "11px",
+      "background": "rgb(169, 130, 76)"
+    },
+    "formColumns": "310px",
+    "processColumns": "354px",
+    "categoryColumns": "354px"
+  }
+}

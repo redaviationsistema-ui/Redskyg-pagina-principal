@@ -63,6 +63,11 @@
                 <small>{{ headerContent.aircraftSalesDesc }}</small>
               </RouterLink>
 
+              <RouterLink to="/vender-aeronave" class="menu-item" @click="closeDropdownImmediate">
+                <div class="menu-icon-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path :d="serviceIcons.aircraftSales" /></svg></div>
+                <strong>Vende tu aeronave</strong><small>Solicita una evaluación comercial confidencial</small>
+              </RouterLink>
+
               <RouterLink :to="toLocalizedRoute('AirTaxi')" class="menu-item" @click="closeDropdownImmediate">
                 <div class="menu-icon-badge">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -161,19 +166,7 @@
       </div>
 
       <div class="header-actions">
-        <div class="locale-switcher" :aria-label="headerContent.changeLanguage">
-          <button
-            v-for="option in languageOptions"
-            :key="option.locale"
-            type="button"
-            class="locale-switcher__button"
-            :class="{ active: locale === option.locale }"
-            :aria-pressed="locale === option.locale"
-            @click="changeLanguage(option.locale)"
-          >
-            {{ option.label }}
-          </button>
-        </div>
+        <LocaleSwitcher :change-language="changeLanguage" />
 
         <!-- MOBILE -->
         <div class="hamburger" @click="toggleMenu">
@@ -250,6 +243,10 @@
           <span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path :d="serviceIcons.aircraftSales" /></svg></span>
           {{ headerContent.aircraftSales }}
         </RouterLink>
+        <RouterLink to="/vender-aeronave" @click="closeMenu">
+          <span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path :d="serviceIcons.aircraftSales" /></svg></span>
+          Vende tu aeronave
+        </RouterLink>
         <RouterLink :to="toLocalizedRoute('PrePurchaseInspection')" @click="closeMenu">
           <span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path :d="serviceIcons.prePurchase" /></svg></span>
           {{ headerContent.prePurchase }}
@@ -299,6 +296,7 @@
   </div>
 </template>
 <script setup>
+import LocaleSwitcher from "./LocaleSwitcher.vue";
 import { ref, computed, onMounted, onUnmounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useLocale } from "../i18n";

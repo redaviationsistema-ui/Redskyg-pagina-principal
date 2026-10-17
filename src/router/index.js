@@ -1,3 +1,4 @@
+import { aircraftTradePages } from '../i18n/aircraftTradeRoutes';
 import { h } from "vue";
 import { RouterView, createRouter, createWebHistory } from "vue-router";
 
@@ -460,6 +461,15 @@ const pageRoutes = [
 const router = createRouter({
   history: createWebHistory(),
   routes: [
+    ...Object.entries(aircraftTradePages).flatMap(([page, config]) => ['es', 'en'].map(locale => ({
+      path: config.paths[locale], name: config.names[locale],
+      component: () => import('../views/SellAircraftLanding.vue'),
+      meta: { standalone: true, aircraftPage: page, aircraftMode: config.mode, locale,
+        localizedPaths: config.paths, canonicalPath: config.paths[locale],
+        seoImage: '/images/Home/IMG_2992.jpg', seo: config.seo },
+    }))),
+    { path: '/controller/solicitudes-venta-aeronaves', name: 'AircraftSellerAdmin', component: () => import('../views/AircraftSellerAdmin.vue'), meta: { standalone: true, spanishOnly: true, noindex: true } },
+    { path: '/mx/vender-aeronave', redirect: '/vender-aeronave' },
     {
       path: "/",
       redirect: () => {
@@ -503,7 +513,8 @@ const router = createRouter({
       },
     },
   ],
-  scrollBehavior() {
+  scrollBehavior(to, from) {
+    if (to.meta.aircraftPage && to.meta.aircraftPage === from.meta.aircraftPage && to.meta.locale !== from.meta.locale) return false;
     return { top: 0 };
   },
 });
@@ -512,7 +523,7 @@ router.beforeEach((to, from) => {
   const fromLocale = getLocaleFromRoute(from);
   const fromMarket = normalizeMarket(from.params.market);
 
-  if (to.name && !to.params.market) {
+  if (to.name && !to.params.market && !to.meta.standalone) {
     return {
       name: to.name,
       params: {

@@ -1,4 +1,6 @@
+import { aircraftTradeEs } from "./aircraftTrade";
 export default {
+  aircraftTrade: aircraftTradeEs,
   seo: {
     default: {
       title: "Jet Privado en Mexico | Charter Ejecutivo | Red Sky Group",

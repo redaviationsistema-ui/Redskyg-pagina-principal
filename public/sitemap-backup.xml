@@ -858,4 +858,28 @@
     <loc>https://redskyg.com/landing</loc>
     <lastmod>2026-09-30</lastmod>
   </url>
+  <url>
+    <loc>https://redskyg.com/compra-venta-aeronaves</loc>
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://redskyg.com/compra-venta-aeronaves" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://redskyg.com/en/aircraft-trade" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://redskyg.com/compra-venta-aeronaves" />
+  </url>
+  <url>
+    <loc>https://redskyg.com/en/aircraft-trade</loc>
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://redskyg.com/compra-venta-aeronaves" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://redskyg.com/en/aircraft-trade" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://redskyg.com/compra-venta-aeronaves" />
+  </url>
+  <url>
+    <loc>https://redskyg.com/vender-aeronave</loc>
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://redskyg.com/vender-aeronave" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://redskyg.com/en/sell-aircraft" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://redskyg.com/vender-aeronave" />
+  </url>
+  <url>
+    <loc>https://redskyg.com/en/sell-aircraft</loc>
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://redskyg.com/vender-aeronave" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://redskyg.com/en/sell-aircraft" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://redskyg.com/vender-aeronave" />
+  </url>
 </urlset>

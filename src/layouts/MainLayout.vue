@@ -2,15 +2,18 @@
   <slot v-if="isNestedLayout" />
 
   <div v-else class="layout-wrapper">
-    <AppHeader />
+    <AircraftTradeHeader v-if="isAircraftTradeLanding" />
+    <AppHeader v-else />
 
     <main class="main-content">
       <slot />
     </main>
 
-    <AppFooter />
+    <AircraftTradeFooter v-if="isAircraftTradeLanding" />
+    <AppFooter v-else />
 
     <a
+      v-if="!route.meta.standalone"
       href="https://wa.me/525586186576?text=Hola,%20quiero%20cotizar%20un%20vuelo%20privado.%20Podrian%20darme%20informacion%3F"
       target="_blank"
       rel="noopener noreferrer"
@@ -37,11 +40,18 @@
 </template>
 
 <script setup>
-import { inject, provide } from "vue";
+import { useRoute } from "vue-router";
+import { computed, inject, provide } from "vue";
 import { useLocale } from "../i18n";
 import AppHeader from "../components/AppHeader.vue";
 import AppFooter from "../components/AppFooter.vue";
+import AircraftTradeHeader from "../components/aircraft-sales/AircraftTradeHeader.vue";
+import AircraftTradeFooter from "../components/aircraft-sales/AircraftTradeFooter.vue";
 
+const route = useRoute();
+const isAircraftTradeLanding = computed(() =>
+  Boolean(route.meta.aircraftPage) || ['/compra-venta-aeronaves', '/vender-aeronave', '/comprar-aeronave'].includes(route.path.replace(/\/+$/, ''))
+);
 const isNestedLayout = inject("has-main-layout", false);
 const { locale } = useLocale();
 

@@ -1,3 +1,5 @@
+import { aircraftTradePages } from '../src/i18n/aircraftTradeRoutes.js';
+import { createSellerApi } from "./aircraft-seller-api.mjs";
 import { createServer } from "node:http";
 import { createReadStream, existsSync, readFileSync } from "node:fs";
 import { extname, join, normalize } from "node:path";
@@ -37,6 +39,7 @@ const loadDotEnv = () => {
 };
 
 loadDotEnv();
+const handleSellerApi = createSellerApi();
 
 const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL;
 const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY;
@@ -262,6 +265,7 @@ const renderSitemapXml = async () => {
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
     ...[...staticRoutes, ...seoRoutes, ...aircraftRoutes].flatMap((route) => [buildUrl(route, "es"), buildUrl(route, "en")]),
+    ...Object.values(aircraftTradePages).flatMap(config => [buildUrl(config.paths, 'es'), buildUrl(config.paths, 'en')]),
     "</urlset>",
     "",
   ].join("\n");
@@ -286,6 +290,33 @@ const aircraftRoutePattern = /^\/(?<market>mx|en)\/aircraft-sales\/(?<registrati
 const server = createServer(async (req, res) => {
   try {
     const url = new URL(req.url || "/", `http://${req.headers.host || "localhost"}`);
+    if (await handleSellerApi(req, res, url)) return;
+    if (url.pathname === '/controller/solicitudes-venta-aeronaves') {
+      const html = replaceOrInsert(baseHtml, /<meta\s+name="robots"[^>]*>/i, '<meta name="robots" content="noindex, nofollow" />');
+      send(res, 200, html, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store', 'X-Robots-Tag': 'noindex, nofollow' }); return;
+    }
+    const tradeConfig = Object.values(aircraftTradePages).find(config => Object.values(config.paths).includes(url.pathname));
+    if (tradeConfig || url.pathname === '/mx/vender-aeronave') {
+      const config = tradeConfig || aircraftTradePages.sell;
+      const locale = url.pathname === config.paths.en ? 'en' : 'es';
+      const canonical = `${siteUrl}${config.paths[locale]}`;
+      const { title, description } = config.seo[locale];
+      let html = replaceOrInsert(baseHtml, /<title>[\s\S]*?<\/title>/, `<title>${title}</title>`);
+      html = html.replace(/<html[^>]*>/, `<html lang="${locale === 'en' ? 'en-US' : 'es-MX'}">`);
+      html = replaceOrInsert(html, /<meta\s+name="description"[^>]*>/i, `<meta name="description" content="${description}" />`);
+      html = replaceOrInsert(html, /<link\s+rel="canonical"[^>]*>/i, `<link rel="canonical" href="${canonical}" />`);
+      html = html.replace(/<link\s+rel="alternate"[^>]*>/gi, '');
+      for (const [hreflang, language] of [['es-MX','es'],['en-US','en'],['x-default','es']]) {
+        html = html.replace('</head>', `<link rel="alternate" hreflang="${hreflang}" href="${siteUrl}${config.paths[language]}" />\n</head>`);
+      }
+      for (const [key, value] of Object.entries({ title, description, url: canonical, image: `${siteUrl}/images/Home/IMG_2992.jpg`, locale: locale === 'en' ? 'en_US' : 'es_MX' })) {
+        html = replaceOrInsert(html, new RegExp(`<meta\\s+property="og:${key}"[^>]*>`, 'i'), `<meta property="og:${key}" content="${value}" />`);
+      }
+      for (const [key,value] of Object.entries({ title, description, image: `${siteUrl}/images/Home/IMG_2992.jpg` })) {
+        html = replaceOrInsert(html, new RegExp(`<meta\\s+name="twitter:${key}"[^>]*>`, 'i'), `<meta name="twitter:${key}" content="${value}" />`);
+      }
+      sendHtml(res, 200, html); return;
+    }
     const aircraftMatch = url.pathname.match(aircraftRoutePattern);
 
     if (aircraftMatch?.groups) {

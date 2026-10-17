@@ -1,0 +1,56 @@
+:is(.seller-form-shell, .buyer-form-shell) {
+  --form-navy: #071b30;
+  --form-gold: #a9824c;
+  position: relative; min-width: 0; padding: 36px;
+  color: var(--form-navy); background: #ffffff; border-radius: 16px;
+  box-shadow: -12px 0 40px #071b3012; scroll-margin-top: 112px;
+  font-size: 15px; line-height: 1.6;
+}
+:is(.seller-form-shell, .buyer-form-shell) form { margin: 0; }
+.eyebrow { margin: 0 0 14px; color: #866136; font-size: 11px; font-weight: 650; line-height: 1.5; letter-spacing: .14em; }
+:is(.seller-form-shell, .buyer-form-shell) h2 { margin: 0; color: var(--form-navy); font-family: var(--font-heading); font-size: clamp(30px, 2.5vw, 36px); font-weight: 400; line-height: 1.2; letter-spacing: -.025em; }
+header > p:not(.eyebrow) { margin: 16px 0 12px; color: #526171; font-size: 15px; font-weight: 400; line-height: 1.6; }
+header > small { color: #596777; font-size: 13px; }
+fieldset { display: flow-root; min-width: 0; padding: 24px 0 0; margin: 28px 0 0; border: 0; border-top: 1px solid #e4e8ed; }
+legend { float: left; display: flex; align-items: baseline; gap: 10px; width: 100%; margin: 0 0 20px; padding: 0; color: var(--form-navy); font-size: 16px; font-weight: 600; line-height: 1.5; }
+legend span { color: #906a3b; font-size: 13px; font-weight: 600; }
+.field-grid { display: grid; clear: both; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+label { display: flex; flex-direction: column; gap: 8px; min-width: 0; color: #25394c; font-size: 13px; font-weight: 500; line-height: 1.45; }
+input, select, textarea { display: block; width: 100%; min-width: 0; min-height: 46px; margin: 0; padding: 11px 12px; border: 1px solid #dce2e8; border-radius: 6px; background: #fcfcfd; color: #132a40; font: 400 15px/1.5 var(--font-body); letter-spacing: 0; }
+input::placeholder, textarea::placeholder { color: #697686; opacity: 1; }
+textarea { resize: vertical; min-height: 94px; }
+input:focus-visible, select:focus-visible, textarea:focus-visible { border-color: var(--form-gold); outline: 2px solid #a9824c42; outline-offset: 2px; }
+input:disabled { color: #687584; background: #edf0f3; }
+.full { grid-column: 1 / -1; }
+.check { flex-direction: row; align-items: flex-start; gap: 10px; font-size: 14px; font-weight: 400; line-height: 1.6; }
+.check input { width: 18px; height: 18px; min-height: 18px; flex: 0 0 18px; margin-top: 2px; padding: 0; accent-color: var(--form-gold); }
+.consent { margin: 24px 0 18px; }
+a { color: #79552c; text-underline-offset: 3px; }
+:is(.seller-submit, .buyer-submit) { display: flex; justify-content: center; align-items: center; gap: 10px; width: 100%; min-height: 52px; padding: 14px 12px; border: 0; border-radius: 6px; background: var(--form-gold); color: #ffffff; font-size: 12px; font-weight: 650; line-height: 1.5; letter-spacing: .035em; cursor: pointer; transition: background .2s; }
+:is(.seller-submit, .buyer-submit) svg { flex: 0 0 19px; }
+:is(.seller-submit, .buyer-submit):hover:not(:disabled) { background: #926c39; }
+:is(.seller-submit, .buyer-submit):focus-visible { outline: 2px solid #79552c; outline-offset: 4px; }
+:is(.seller-submit, .buyer-submit):disabled { background: #a9824c; opacity: .72; cursor: not-allowed; }
+.form-footnote { margin: 14px 0 0; color: #596777; font-size: 13px; line-height: 1.6; text-align: center; }
+.form-message { margin: 14px 0; padding: 14px; border: 1px solid #e5d7c3; border-radius: 6px; background: #faf6ef; color: #59452d; font-size: 14px; line-height: 1.6; }
+.error { border-color: #edc7c3; color: #9a3028; background: #fff3f2; }
+progress { width: 100%; margin: 12px 0; accent-color: var(--form-gold); }
+.honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.captcha { max-width: 100%; margin-bottom: 16px; overflow: hidden; }
+:is(.seller-success, .buyer-success) { padding-block: 32px; line-height: 1.65; }
+:is(.seller-success, .buyer-success) svg { margin-bottom: 24px; color: #8d6a3a; }
+:is(.seller-success, .buyer-success) p { margin: 20px 0; color: #526171; font-size: 16px; }
+:is(.seller-success, .buyer-success) .eyebrow { color: #866136; font-size: 12px; }
+:is(.seller-success, .buyer-success) small { font-size: 13px; overflow-wrap: anywhere; }
+@media (min-width: 768px) and (max-width: 1024px) { :is(.seller-form-shell, .buyer-form-shell) { padding: 40px; border-radius: 0 0 16px 16px; } }
+@media (max-width: 767px) {
+  :is(.seller-form-shell, .buyer-form-shell) { padding: 28px 22px; border-radius: 0 0 14px 14px; }
+  :is(.seller-form-shell, .buyer-form-shell) h2 { font-size: 30px; }
+  .field-grid { grid-template-columns: 1fr; }
+  legend { flex-wrap: wrap; gap: 8px; font-size: 15px; }
+  input, select, textarea { min-height: 48px; font-size: 16px; }
+  :is(.seller-submit, .buyer-submit) { font-size: 11px; letter-spacing: .015em; }
+}
+@media (prefers-reduced-motion: reduce) { :is(.seller-submit, .buyer-submit) { transition: none; } }
+
+.intake-embedded { padding: 0 !important; border-radius: 0 !important; box-shadow: none !important; }

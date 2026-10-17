@@ -6,7 +6,7 @@
           <component
             :is="Component"
             v-if="Component"
-            :key="currentRoute.fullPath"
+            :key="currentRoute.meta.aircraftPage ? `aircraft-${currentRoute.meta.aircraftPage}` : currentRoute.fullPath"
           />
         </transition>
       </RouterView>
@@ -233,6 +233,9 @@ const setStructuredData = () => {
 };
 
 const getLocalizedRoutePath = (targetLocale) => {
+  if (route.meta.localizedPaths?.[targetLocale]) return route.meta.localizedPaths[targetLocale];
+  if (route.meta.canonicalPath) return route.meta.canonicalPath;
+  if (route.meta.standalone) return route.path;
   const routeName = typeof route.name === "string" ? route.name : "";
   const seoPage = getSeoPageBySlug(routeName);
 
@@ -249,7 +252,7 @@ const applySeo = () => {
   const baseUrl = getBaseUrl();
   const canonicalPath = getLocalizedRoutePath(locale);
   const canonicalUrl = `${baseUrl}${canonicalPath}`;
-  const imageUrl = `${baseUrl}/images/Home/home10.png`;
+  const imageUrl = `${baseUrl}${route.meta.seoImage || "/images/Home/home10.png"}`;
   const englishUrl = `${baseUrl}${getLocalizedRoutePath("en")}`;
   const spanishUrl = `${baseUrl}${getLocalizedRoutePath("es")}`;
   const alternateLocale = locale === "en" ? "es" : "en";
@@ -261,7 +264,7 @@ const applySeo = () => {
 
   setMetaTag("meta[name='description']", "name", "description", description);
   setMetaTag("meta[name='keywords']", "name", "keywords", keywords);
-  setMetaTag("meta[name='robots']", "name", "robots", "index, follow, max-image-preview:large");
+  setMetaTag("meta[name='robots']", "name", "robots", route.meta.noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large");
   setMetaTag("meta[name='author']", "name", "author", "Sky Group Aviation");
   setMetaTag("meta[name='geo.region']", "name", "geo.region", "MX-MEX");
   setMetaTag("meta[name='geo.placename']", "name", "geo.placename", "Toluca, Mexico");
@@ -285,7 +288,7 @@ const applySeo = () => {
   setMetaTag("meta[name='twitter:image']", "name", "twitter:image", imageUrl);
 
   setCanonical(canonicalUrl);
-  syncAlternateLinks([
+  syncAlternateLinks(route.meta.spanishOnly ? [] : [
     { hreflang: "es-MX", href: spanishUrl },
     { hreflang: "en-US", href: englishUrl },
     { hreflang: "x-default", href: spanishUrl },

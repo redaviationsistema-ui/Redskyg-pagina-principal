@@ -28,7 +28,7 @@ export const normalizeMarket = (market) => {
 };
 
 export const getLocaleFromRoute = (route) =>
-  normalizeLocale(marketLocaleMap[normalizeMarket(route?.params?.market)]);
+  normalizeLocale(route?.meta?.locale || marketLocaleMap[normalizeMarket(route?.params?.market)]);
 
 export const getLocaleMeta = (locale) =>
   locale === "en"
@@ -69,6 +69,9 @@ export const useLocale = () => {
 
   const switchLocale = (nextLocale) => {
     const normalizedLocale = normalizeLocale(nextLocale);
+    if (route.meta.aircraftPage && route.meta.localizedPaths?.[normalizedLocale]) {
+      return router.push({ path: route.meta.localizedPaths[normalizedLocale], query: route.query, hash: route.hash });
+    }
     const params = { ...route.params };
     params.market = getMarketFromLocale(normalizedLocale);
 
