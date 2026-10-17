@@ -4,7 +4,7 @@ import { ArrowRight, CheckCircle2, LoaderCircle } from 'lucide-vue-next';
 import { RouterLink } from 'vue-router';
 import { useLocale, localizePath } from '../../i18n';
 import { commercialCopy } from '../../locales/commercialInquiry';
-import { contract, operationForMode, validateCommercial, normalizePhone } from '../../features/aircraft-sales/commercialSchema';
+import { contract, operationForMode, validateCommercial, normalizePhone, aircraftTypeOptions } from '../../features/aircraft-sales/commercialSchema';
 import { commercialDraft, commercialNavigation } from '../../features/aircraft-sales/commercialDrafts';
 import { useFieldValidation } from '../../features/aircraft-sales/useFieldValidation';
 import { submitCommercialInquiry } from '../../features/aircraft-sales/services/commercialInquiry.service';
@@ -20,7 +20,7 @@ const busy = computed(() => ['validating','sending'].includes(draft.status));
 const successPanel = ref(null);
 const { fieldErrors, fieldAttrs, onBlur, onEdit, checkFields } = useFieldValidation(form, value => validateCommercial(value, operation));
 const fields = computed(() => {
-  const aircraft = [{key:'aircraftType',type:'select',options:config.types,required:true,full:true}];
+  const aircraft = [{key:'aircraftType',type:'select',options:aircraftTypeOptions(config.types),required:true,full:true}];
   if (props.mode === 'sell') aircraft.push({key:'manufacturer',max:80,required:true},{key:'model',max:100,required:true},{key:'year',max:4,inputmode:'numeric'});
   else aircraft.push({key:'model',max:120,full:true});
   aircraft.push({key:'country',max:80,autocomplete:'country-name',required:true});
@@ -110,7 +110,7 @@ async function send(event) {
         <label v-for="field in fields" :key="field.key" :for="'commercial-'+field.key" :class="{full:field.full}">
           <span>{{ label(field.key) }} {{ field.required ? '*' : '('+copy.optional+')' }}</span>
           <select v-if="field.type==='select'" :id="'commercial-'+field.key" v-model="form[field.key]" v-bind="fieldAttrs(field.key)" :required="field.required" :aria-describedby="fieldErrors[field.key] ? 'field-error-'+field.key : field.key==='aircraftType' ? 'aircraft-type-help' : undefined">
-            <option disabled value="">{{ copy.select }}</option><option v-for="option in field.options" :key="option" :value="option">{{ copy.options[option] || option }}</option>
+            <option disabled value="">{{ copy.select }}</option><option v-for="option in field.options" :key="option.value" :value="option.value">{{ copy.options[option.label] || option.label }}</option>
           </select>
           <textarea v-else-if="field.type==='textarea'" :id="'commercial-'+field.key" v-model="form[field.key]" v-bind="fieldAttrs(field.key)" rows="3" :maxlength="field.max" />
           <input v-else-if="field.key==='phone'" :id="'commercial-'+field.key" :value="form.phone" @input="editPhone" @paste="pastePhone" v-bind="fieldAttrs(field.key)" type="tel" inputmode="numeric" maxlength="10" pattern="[0-9]{10}" autocomplete="tel-national" :placeholder="copy.phonePlaceholder" required />

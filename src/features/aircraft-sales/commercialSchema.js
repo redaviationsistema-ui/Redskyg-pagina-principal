@@ -3,6 +3,10 @@ export function normalizePhone(value) { return String(value ?? '').replace(/[^0-
 export function isValidPhone(value) { return typeof value === 'string' && /^[0-9]{10}$/.test(value); }
 export { contract };
 export const operationForMode = Object.fromEntries(Object.entries(contract.operations).map(([key, value]) => [value.mode, key]));
+const aircraftTypeValues = new Map([['Jet privado','jet'],['Turbohélice','turboprop'],['Helicóptero','helicopter'],['Otro','other']]);
+export function aircraftTypeOptions(types) {
+  return types.map(label => ({ label, value: aircraftTypeValues.get(label) || label }));
+}
 export function validateCommercial(input, operation, now = new Date()) {
   const config = contract.operations[operation];
   if (!config) throw new Error('Invalid operation');
@@ -17,7 +21,7 @@ export function validateCommercial(input, operation, now = new Date()) {
     if (key !== 'phone' && value && (Array.from(value).length < (rule.min || 0) || Array.from(value).length > (rule.max || 254))) fail(key, 'length');
     if ((key === 'comments' ? /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/ : /[\u0000-\u001F\u007F]/).test(typeof raw === 'string' ? raw : '')) fail(key, 'format');
   }
-  if (!config.types.includes(values.aircraftType)) fail('aircraftType', 'aircraftType');
+  if (!aircraftTypeOptions(config.types).some(option => option.value === values.aircraftType)) fail('aircraftType', 'aircraftType');
   if (values.country && !/^[\p{L}\p{M} .,'’()\-]+$/u.test(values.country)) fail('country', 'format');
   if (values.service && /[<>]/.test(values.service)) fail('service', 'format');
   if (values.name && !/^[\p{L}\p{M} '\u2019.\-]+$/u.test(values.name)) fail('name', 'name');

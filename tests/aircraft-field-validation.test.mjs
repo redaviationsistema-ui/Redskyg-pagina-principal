@@ -16,7 +16,7 @@ test('converts only numeric payloads and preserves text, privacy and source draf
   const input=seller(); input.total_time='3520,5'; input.price_to_be_defined=false; input.asking_price='1200000,50';
   const normalized=validateSeller(input), payload=buildAircraftInquiryPayload(normalized,'sell');
   assert.equal(payload.totalHours,'3520.5'); assert.equal(payload.totalCycles,'4200'); assert.equal(payload.askingPrice,'1200000.5');
-  assert.equal(payload.privacyAccepted,true); assert.equal(payload.model,'Citation XLS+'); assert.equal(input.total_time,'3520,5');
+  assert.equal(payload.privacyAccepted,true); assert.equal(payload.model,'Citation XLS+'); assert.equal(payload.aircraftType,'jet'); assert.equal(input.total_time,'3520,5');
   assert.equal(payload.comments,input.aircraft_notes);
 });
 test('optional purchase fields and budget to be determined are valid', () => {

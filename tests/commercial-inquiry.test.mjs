@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { contract, validateCommercial, normalizePhone, isValidPhone } from '../src/features/aircraft-sales/commercialSchema.js';
 import { submitCommercialInquiry } from '../src/features/aircraft-sales/services/commercialInquiry.service.js';
-const base = operation => ({ operation,aircraftType:'Jet privado',name:'María Pérez',email:'test@example.com',phone:'7221234567',country:'México',model:'',manufacturer:'Cessna',year:'',service:contract.operations[operation].fields.service?'Atención personalizada de aeronaves':'',comments:'',privacyAccepted:true,privacyVersion:contract.version });
+const base = operation => ({ operation,aircraftType:'jet',name:'María Pérez',email:'test@example.com',phone:'7221234567',country:'México',model:'',manufacturer:'Cessna',year:'',service:contract.operations[operation].fields.service?'Atención personalizada de aeronaves':'',comments:'',privacyAccepted:true,privacyVersion:contract.version });
 const cases=[];
 for(const operation of Object.keys(contract.operations)) {
  const valid={...base(operation),...(operation==='sell'?{model:'Citation XLS+'}:{})};

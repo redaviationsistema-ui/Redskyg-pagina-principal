@@ -44,7 +44,7 @@ Eventos nuevos tras éxito: `aircraft_purchase_submit_success` y `aircraft_sale_
 
 Copiar las variables públicas de `docs/aircraft-inquiry.env.example` según el entorno. El valor recomendado de URL es relativo, tanto en producción como para desarrollo con proxy. Una URL absoluta salta el proxy y necesita la política CORS real del hosting; no se añade `Access-Control-Allow-Origin: *`.
 
-`vite.config.js` incorpora un proxy HTTPS exclusivamente para el pathname `/aircraft-inquiry.php`. El resto de proxies existentes no se cambia. Vite aplica el proxy solo al servidor de desarrollo, no a `dist/`. Al subir `dist/` al hosting, el navegador llama al PHP de ese mismo dominio. Conservar `public_html/aircraft-inquiry.php` y `public_html/phpmailer/`; no copiar secretos a `public/` del proyecto.
+`vite.config.js` incorpora un proxy HTTPS exclusivamente para el pathname `/aircraft-inquiry.php`, dirigido por defecto a `https://redskyg.com` para usar el receptor existente de cPanel. Se puede establecer `SKY_PHP_DEV_TARGET` para un servidor PHP de pruebas expresamente configurado. El resto de proxies existentes no se cambia. Vite aplica el proxy solo al servidor de desarrollo, no a `dist/`. Al subir `dist/` al hosting, el navegador llama al PHP de ese mismo dominio. Conservar el PHP de `public_html`; no copiar secretos a `public/` del proyecto.
 
 `VITE_AIRCRAFT_INQUIRY_VERIFIED=false` mantiene un aviso de servicio de correo pendiente de verificación, sin bloquear el botón. Se puede completar y enviar; solo una respuesta PHP confirmada muestra éxito. El aviso debe retirarse configurando `true` y recompilando **después** de una prueba real de entrega autorizada. No se retiró como si SMTP ya estuviera funcionando.
 
@@ -59,9 +59,9 @@ Content-Length: 0
 Content-Type: text/html; charset=UTF-8
 ```
 
-La URL responde, pero no entrega JSON ni un rechazo controlado de método. Esto no prueba el funcionamiento del POST ni permite identificar la causa. No se envió un POST real y no se verificó entrega SMTP.
+La URL responde, pero no entrega JSON ni un rechazo controlado de método. Esto no prueba el funcionamiento del POST ni permite identificar la causa interna exacta del 500. No se envió un POST real y no se verificó entrega SMTP.
 
-El archivo PHP y la configuración privada de cPanel no están disponibles en este repositorio; por ello no se comprobó `SMTP_PASSWORD`, PHPMailer ni la seguridad del PHP. Revisar en el hosting:
+El archivo PHP realmente instalado en cPanel y su configuración privada no están disponibles en este repositorio; por ello no se comprobó `SMTP_PASSWORD`, PHPMailer ni la causa interna de ese 500. La copia `public/aircraft-inquiry.php` del repositorio carga por defecto `../server/php/bootstrap.php`, ruta que existe en el checkout local pero no como tal junto a `public_html` en cPanel. Si ese shim se copió sin desplegar el bootstrap privado ni definir `SKY_INQUIRY_BOOTSTRAP`, la causa concreta es `bootstrap_missing` (el código devuelve 503, no 500); la respuesta 500 vacía documentada indica que el PHP/Apache desplegado no corresponde sin más evidencia a esa ruta de código. No se atribuye el 500 a SMTP. Revisar en el hosting:
 
 - Logs de errores PHP/cPanel correspondientes a la consulta; comprobar sintaxis y versión de PHP.
 - Rutas reales `__DIR__ . '/phpmailer/PHPMailer.php'`, `SMTP.php`, `Exception.php` y sus namespaces, respetando la implementación existente.

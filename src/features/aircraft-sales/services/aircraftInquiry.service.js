@@ -6,6 +6,7 @@ export function reportBlockedInquiryAttempt() {
 }
 
 export const aircraftInquiryUrl = import.meta.env?.VITE_AIRCRAFT_INQUIRY_URL || '/aircraft-inquiry.php';
+const aircraftTypeValues = new Map([['Jet privado','jet'],['Turbohélice','turboprop'],['Helicóptero','helicopter'],['Otro','other']]);
 // Enable only after an authorized delivery check on the hosting succeeds.
 export const aircraftInquiryVerified = import.meta.env?.VITE_AIRCRAFT_INQUIRY_VERIFIED === 'true';
 const failure = 'No fue posible enviar tu solicitud. Inténtalo de nuevo o contacta a nuestro equipo.';
@@ -25,8 +26,10 @@ export function toPhpString(value) {
 }
 
 export function buildAircraftInquiryPayload(form, operation, website = '') {
+  const rawAircraftType = form.aircraft_type ?? form.aircraftType;
+  const aircraftType = aircraftTypeValues.get(rawAircraftType) || rawAircraftType;
   const common = {
-    operation, aircraftType: form.aircraft_type, country: form.country,
+    operation, aircraftType, country: form.country,
     company: form.company, name: form.contact_name, email: form.email,
     phone: form.phone, privacyAccepted: form.privacy_accepted === true, website,
   };

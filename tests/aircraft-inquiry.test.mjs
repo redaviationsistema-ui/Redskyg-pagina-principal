@@ -2,12 +2,21 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { aircraftInquiryUrl, buildAircraftInquiryPayload, submitAircraftInquiry } from '../src/features/aircraft-sales/services/aircraftInquiry.service.js';
 import { validateSeller } from '../src/features/aircraft-sales/sellerSchema.js';
+import { aircraftTypeOptions, validateCommercial } from '../src/features/aircraft-sales/commercialSchema.js';
 const seller = () => ({ aircraft_type:'Jet privado',manufacturer:'Cessna',model:'Citation XLS+',manufacturing_year:'2012',registration:'n123ab',serial_number:'123',total_time:'2250',total_cycles:'1800',country:'México',city:'Toluca',asking_price:'2300000',price_to_be_defined:false,currency:'USD',aircraft_status:'Operativa',aircraft_notes:'Prueba simulada',contact_name:'Propietario de prueba',company:'Empresa de prueba',email:'owner@example.com',phone:'7221234567',relationship_to_aircraft:'Propietario',preferred_contact_method:'Correo electrónico',privacy_accepted:true });
 const mock = (status,data) => async()=>({ok:status>=200&&status<300,status,json:async()=>data});
 test('uses relative same-origin PHP URL by default',()=>assert.equal(aircraftInquiryUrl,'/aircraft-inquiry.php'));
 test('maps real seller fields to PHP without DB, captcha, attachments or invented data',()=>{
   const input=seller(),validated=validateSeller(input);const payload=buildAircraftInquiryPayload({...validated,privacy_accepted:input.privacy_accepted},'sell');
-  assert.deepEqual(payload,{operation:'sell',aircraftType:'Jet privado',manufacturer:'Cessna',model:'Citation XLS+',year:'2012',registration:'N123AB',serialNumber:'123',totalHours:'2250',totalCycles:'1800',country:'México',city:'Toluca',askingPrice:'2300000',priceToBeDefined:false,currency:'USD',aircraftStatus:'Operativa',company:'Empresa de prueba',relationship:'Propietario',preferredContact:'Correo electrónico',comments:'Prueba simulada',name:'Propietario de prueba',email:'owner@example.com',phone:'7221234567',privacyAccepted:true,website:''});
+  assert.deepEqual(payload,{operation:'sell',aircraftType:'jet',manufacturer:'Cessna',model:'Citation XLS+',year:'2012',registration:'N123AB',serialNumber:'123',totalHours:'2250',totalCycles:'1800',country:'México',city:'Toluca',askingPrice:'2300000',priceToBeDefined:false,currency:'USD',aircraftStatus:'Operativa',company:'Empresa de prueba',relationship:'Propietario',preferredContact:'Correo electrónico',comments:'Prueba simulada',name:'Propietario de prueba',email:'owner@example.com',phone:'7221234567',privacyAccepted:true,website:''});
+});
+test('selector keeps Spanish labels while storing and validating PHP aircraft codes',()=>{
+  assert.deepEqual(aircraftTypeOptions(['Jet privado','Turbohélice','Helicóptero','Otro']),[
+    {label:'Jet privado',value:'jet'},{label:'Turbohélice',value:'turboprop'},{label:'Helicóptero',value:'helicopter'},{label:'Otro',value:'other'},
+  ]);
+  const input={aircraftType:'jet',country:'México',name:'María Pérez',email:'maria@example.com',phone:'7221234567',privacyAccepted:true};
+  assert.equal(validateCommercial(input,'buy').values.aircraftType,'jet');
+  for(const type of ['jet','turboprop','helicopter','other']) assert.equal(buildAircraftInquiryPayload({aircraftType:type},'buy').aircraftType,type);
 });
 test('price to be defined does not submit a stale asking price',()=>{
   const payload=buildAircraftInquiryPayload({...seller(),price_to_be_defined:true},'sell');assert.equal(payload.askingPrice,'');

@@ -8,7 +8,7 @@ $dir=sys_get_temp_dir().'/skygroup-test-'.bin2hex(random_bytes(8));mkdir($dir,07
 $count=0;
 function check(bool $condition,string $message):void{global $count;if(!$condition)throw new RuntimeException($message);$count++;}
 function uuid():string{$hex=bin2hex(random_bytes(16));return substr($hex,0,8).'-'.substr($hex,8,4).'-4'.substr($hex,13,3).'-a'.substr($hex,17,3).'-'.substr($hex,20);}
-$base=['operation'=>'buy','requestId'=>uuid(),'aircraftType'=>'Jet privado','country'=>'México','name'=>'María Pérez','email'=>'test@example.com','phone'=>'7221234567','comments'=>'<img src=x onerror=alert(1)>','privacyAccepted'=>true,'privacyVersion'=>CommercialInquiry::contract()['version']];
+$base=['operation'=>'buy','requestId'=>uuid(),'aircraftType'=>'jet','country'=>'México','name'=>'María Pérez','email'=>'test@example.com','phone'=>'7221234567','comments'=>'<img src=x onerror=alert(1)>','privacyAccepted'=>true,'privacyVersion'=>CommercialInquiry::contract()['version']];
 $config=['stateDir'=>$dir,'secret'=>str_repeat('x',48),'origins'=>['https://redskyg.com'],'rateLimit'=>100];
 $server=['CONTENT_TYPE'=>'application/json','HTTP_ORIGIN'=>'https://redskyg.com','REMOTE_ADDR'=>'127.0.0.1'];
 $sends=0;
