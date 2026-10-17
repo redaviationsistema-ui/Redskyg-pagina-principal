@@ -3,9 +3,9 @@ export function normalizePhone(value) { return String(value ?? '').replace(/[^0-
 export function isValidPhone(value) { return typeof value === 'string' && /^[0-9]{10}$/.test(value); }
 export { contract };
 export const operationForMode = Object.fromEntries(Object.entries(contract.operations).map(([key, value]) => [value.mode, key]));
-const aircraftTypeValues = new Map([['Jet privado','jet'],['Turbohélice','turboprop'],['Helicóptero','helicopter'],['Otro','other']]);
+const aircraftTypeLabels = new Map([['jet','Jet privado'],['turboprop','Turbohélice'],['helicopter','Helicóptero'],['other','Otro']]);
 export function aircraftTypeOptions(types) {
-  return types.map(label => ({ label, value: aircraftTypeValues.get(label) || label }));
+  return types.map(value => ({ label: aircraftTypeLabels.get(value) || value, value }));
 }
 export function validateCommercial(input, operation, now = new Date()) {
   const config = contract.operations[operation];

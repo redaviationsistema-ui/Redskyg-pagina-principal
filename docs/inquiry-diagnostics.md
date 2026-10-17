@@ -29,7 +29,7 @@ Con Vite en desarrollo, abrir DevTools → Console y filtrar por `[SKY GROUP][AI
 - **422**: revisar los campos y códigos de validación permitidos.
 - **Error sin respuesta HTTP**: red, timeout, CORS o proxy; el navegador no aporta evidencia suficiente para elegir una causa concreta.
 
-El endpoint actual de desarrollo sigue siendo `/aircraft-inquiry.php` por proxy a PHP local; Vite no ejecuta PHP. Para causas internas consultar el log privado PHP/cPanel sin compartir secretos. Los logs no declaran éxito de correo por recibir HTTP 200: el formulario mantiene su comprobación del contrato confirmado.
+Durante desarrollo, Vite proxya `/aircraft-inquiry.php` al receptor de cPanel por defecto; Vite no ejecuta PHP. Para revisar causas internas, consultar el log privado de PHP/cPanel sin compartir secretos. Los logs no declaran éxito de correo por recibir HTTP 200: el formulario mantiene su comprobación del contrato confirmado.
 
 ## Verificación
 

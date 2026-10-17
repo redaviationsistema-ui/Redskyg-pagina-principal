@@ -4,9 +4,9 @@
 
 ## Resultado y auditoría
 
-Se reutilizan los formularios y el endpoint **`/aircraft-inquiry.php`**, con guion; no se crea un endpoint con guion bajo. Vite sirve Vue y **no ejecuta PHP**. La configuración anterior enviaba POST al hosting real y se sustituyó por proxy a PHP local. No se probó ni modificó el hosting de producción.
+Se reutilizan los formularios y el endpoint **`/aircraft-inquiry.php`**, con guion; no se crea un endpoint con guion bajo. Vite sirve Vue y **no ejecuta PHP**. El frontend usa el receptor existente de cPanel; durante desarrollo Vite proxya esa ruta a `https://redskyg.com` por defecto. El PHP instalado en cPanel no está versionado en este repositorio.
 
-La copia de receptor disponible en este repositorio no tenía Dompdf, PDF interno, folio ni confirmación al cliente. Se implementaron sobre esa copia, sin sustituir un archivo remoto desconocido. Antes de publicar hay que comparar el receptor local con el PHP real del hosting y conservar sus convenciones o integraciones adicionales.
+El directorio `server/php` conserva una implementación local previa y su contrato. No se debe asumir que esa copia coincide con el PHP de cPanel. El lanzador local de PHP se retiró; la ruta de desarrollo actual usa el proxy de Vite.
 
 No se modificaron Home.vue, AircraftTradeLanding.vue, el diseño, el router, el inventario ni el cotizador en este ajuste.
 
@@ -39,12 +39,9 @@ Respuesta confirmada: `success:true, received:true, stored:false, delivery:"sent
 
 ## Desarrollo local
 
-1. `composer install --working-dir=server/php`.
-2. `npm run dev:php` inicia PHP en **127.0.0.1:8085**. No usa credenciales ni destinatarios de producción por defecto; crea estado privado temporal y falla con 503 cuando SMTP no está configurado.
-3. `npm run dev -- --host 127.0.0.1 --port 5174 --strictPort` inicia Vue. Vite dirige exclusivamente `/aircraft-inquiry.php` al PHP local.
-4. `SKY_PHP_DEV_TARGET` puede señalar otro puerto local; rechaza destinos remotos. No se falsifica Origin como dominio de producción.
+Ejecuta `npm run dev -- --host 127.0.0.1 --port 5174 --strictPort`. Vite dirige `/aircraft-inquiry.php` al receptor de cPanel por defecto. No hay un servidor PHP local gestionado por el proyecto ni un proceso asociado al puerto 8085. `SKY_PHP_DEV_TARGET` solo sirve para apuntar manualmente a un endpoint de pruebas que se haya iniciado por separado; no se configura en el ejemplo de entorno.
 
-La configuración SMTP debe cargarse en el entorno del proceso PHP, no con variables VITE_. El lanzador no lee secretos desde el frontend ni imprime sus valores. Conservar los archivos de estado privados y el secreto al reiniciar durante una sesión de pruebas si se necesita mantener la idempotencia entre reinicios. Las variables de `docs/commercial-inquiry.env.example` documentan la configuración del hosting.
+No incluyas credenciales SMTP en variables `VITE_`. Las variables PHP del ejemplo describen la configuración privada del receptor; el frontend no las lee.
 
 ## Rutas locales
 
@@ -58,9 +55,11 @@ La configuración SMTP debe cargarse en el entorno del proceso PHP, no con varia
 
 ## Validación y límites de lo comprobado
 
+Los resultados de integración local que siguen son históricos: pertenecen al backend local anterior y no verifican el PHP actual de cPanel. El servidor local y las pruebas dedicadas de transporte SMTP se retiraron.
+
 - Build y pruebas existentes, más contrato JS/PHP y SMTP TLS **local aislado**.
 - La prueba SMTP ejecuta el PHP real por HTTP, genera el PDF con Dompdf y envía el comercial y acuse a un servidor TLS de pruebas que solo captura mensajes localmente. Comprueba PDF válido, folio, rechazo comercial, reintento, fallo del acuse y ausencia de reenvío duplicado.
-- Navegador: `artifacts/php-integration/verify.mjs` prueba Vite → PHP local real (405 GET y 503 POST cuando no hay SMTP), además de respuestas simuladas 422/500/502/503 y éxitos con acuse fallido en cuatro formularios, dos idiomas y dos tamaños. No envía al hosting.
+- Navegador (histórico): `artifacts/php-integration/verify.mjs` probó Vite → PHP local (405 GET y 503 POST sin SMTP), además de respuestas simuladas en formularios e idiomas. No verifica el receptor actual de cPanel.
 - No se hicieron cambios en el cotizador ni se enviaron reservas.
 
 ## Pendientes antes de producción

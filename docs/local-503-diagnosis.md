@@ -1,4 +1,6 @@
-# Diagnóstico del PHP local y corrección de errores
+# Registro histórico: diagnóstico del PHP local
+
+Este informe describe el flujo anterior de PHP local en el puerto 8085. El lanzador `server/php/dev-server.mjs` y el comando `npm run dev:php` se retiraron; estos datos no describen el flujo vigente Vue → PHP de cPanel.
 
 ## Proceso inspeccionado
 

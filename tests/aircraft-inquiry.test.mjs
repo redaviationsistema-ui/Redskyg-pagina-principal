@@ -11,7 +11,7 @@ test('maps real seller fields to PHP without DB, captcha, attachments or invente
   assert.deepEqual(payload,{operation:'sell',aircraftType:'jet',manufacturer:'Cessna',model:'Citation XLS+',year:'2012',registration:'N123AB',serialNumber:'123',totalHours:'2250',totalCycles:'1800',country:'México',city:'Toluca',askingPrice:'2300000',priceToBeDefined:false,currency:'USD',aircraftStatus:'Operativa',company:'Empresa de prueba',relationship:'Propietario',preferredContact:'Correo electrónico',comments:'Prueba simulada',name:'Propietario de prueba',email:'owner@example.com',phone:'7221234567',privacyAccepted:true,website:''});
 });
 test('selector keeps Spanish labels while storing and validating PHP aircraft codes',()=>{
-  assert.deepEqual(aircraftTypeOptions(['Jet privado','Turbohélice','Helicóptero','Otro']),[
+  assert.deepEqual(aircraftTypeOptions(['jet','turboprop','helicopter','other']),[
     {label:'Jet privado',value:'jet'},{label:'Turbohélice',value:'turboprop'},{label:'Helicóptero',value:'helicopter'},{label:'Otro',value:'other'},
   ]);
   const input={aircraftType:'jet',country:'México',name:'María Pérez',email:'maria@example.com',phone:'7221234567',privacyAccepted:true};

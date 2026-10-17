@@ -30,10 +30,10 @@
     "buy": {
       "mode": "buy",
       "types": [
-        "Jet privado",
-        "Turbohélice",
-        "Helicóptero",
-        "Otro"
+        "jet",
+        "turboprop",
+        "helicopter",
+        "other"
       ],
       "fields": {
         "model": {
@@ -44,11 +44,11 @@
     "sell": {
       "mode": "sell",
       "types": [
-        "Jet privado",
-        "Turbohélice",
-        "Helicóptero",
+        "jet",
+        "turboprop",
+        "helicopter",
         "Avión de pistón",
-        "Otro"
+        "other"
       ],
       "fields": {
         "manufacturer": {
@@ -69,10 +69,10 @@
     "aircraft_management": {
       "mode": "management",
       "types": [
-        "Jet privado",
-        "Turbohélice",
-        "Helicóptero",
-        "Otro"
+        "jet",
+        "turboprop",
+        "helicopter",
+        "other"
       ],
       "fields": {
         "model": {
@@ -88,10 +88,10 @@
     "technical_service": {
       "mode": "maintenance",
       "types": [
-        "Jet privado",
-        "Turbohélice",
-        "Helicóptero",
-        "Otro"
+        "jet",
+        "turboprop",
+        "helicopter",
+        "other"
       ],
       "fields": {
         "model": {

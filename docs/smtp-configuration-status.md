@@ -1,4 +1,6 @@
-# Estado de configuración SMTP local
+# Registro histórico: configuración SMTP del servidor PHP local
+
+Este documento registra una configuración y pruebas anteriores del backend local. El lanzador `server/php/dev-server.mjs` y el comando `npm run dev:php` se retiraron; las referencias a `.env.php.local`, PID y puerto 8085 no describen el flujo vigente Vue → PHP de cPanel.
 
 Se verificaron los archivos reales: .env.php.local, dev-server.mjs, bootstrap.php, CommercialInquiry.php, public/aircraft-inquiry.php, package.json y vite.config.js. No se modificó Vue, formularios, validaciones, diseño ni rutas.
 

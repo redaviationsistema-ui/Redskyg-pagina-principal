@@ -9,8 +9,7 @@
     "preview": "vite preview",
     "start": "node server/aircraft-runtime-server.mjs",
     "test": "node --test tests/*.test.mjs",
-    "test:php": "php tests/commercial-backend.php",
-    "dev:php": "node server/php/dev-server.mjs"
+    "test:php": "php tests/commercial-backend.php"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.95.3",
