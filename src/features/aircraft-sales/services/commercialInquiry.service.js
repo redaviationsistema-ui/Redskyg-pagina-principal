@@ -1,9 +1,21 @@
 import { submitAircraftInquiry } from './aircraftInquiry.service.js';
+export function commercialInquiryErrorKey(error) {
+  if (['delivery_unknown', 'in_progress'].includes(error?.code)) return 'uncertain';
+  if (error?.code === 'rate_limit') return 'rateLimit';
+  if (error?.status === 422) return 'validationFailed';
+  if (error?.status === 502) return 'badGateway';
+  if (error?.status === 503) return 'serviceUnavailable';
+  return 'retry';
+}
+
 export async function submitCommercialInquiry(payload, options) {
   const result = await submitAircraftInquiry(payload, options);
-  if (result.received !== true || result.requestId !== payload.requestId || !['sent', 'pending'].includes(result.delivery) || (result.delivery === 'pending' && result.stored !== true)) throw new Error('Unconfirmed receipt');
-  const receipt = { ...result };
-  if (receipt.clientConfirmation !== undefined && !['sent','failed','unknown','not_configured'].includes(receipt.clientConfirmation)) throw new Error('Unconfirmed client email state');
-  if (receipt.folio !== undefined && (typeof receipt.folio !== 'string' || !/^SKY-[A-F0-9]{32}$/.test(receipt.folio))) throw new Error('Invalid receipt reference');
-  return receipt;
+  // Delivery is confirmed by the PHP response itself. Optional diagnostics,
+  // email acknowledgments, folio formatting, or echoed IDs must not override it.
+  if (result.success !== true || result.received !== true || result.delivery !== 'sent') {
+    const error = new Error('Unconfirmed receipt');
+    error.code = 'unconfirmed_receipt';
+    throw error;
+  }
+  return { ...result };
 }

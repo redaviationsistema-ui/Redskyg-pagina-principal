@@ -25,6 +25,21 @@ export function toPhpString(value) {
   return value === null || value === undefined ? '' : String(value).trim();
 }
 
+function extractInquiryResult(value) {
+  let current = value;
+  for (let depth = 0; depth < 3; depth += 1) {
+    if (typeof current === 'string') {
+      try { current = JSON.parse(current); } catch { return null; }
+    }
+    if (!current || typeof current !== 'object' || Array.isArray(current)) return current;
+    if (typeof current.success === 'boolean') return current;
+    const nested = current.data ?? current.result ?? current.body;
+    if (nested === undefined) return current;
+    current = nested;
+  }
+  return current;
+}
+
 export function buildAircraftInquiryPayload(form, operation, website = '') {
   const rawAircraftType = form.aircraft_type ?? form.aircraftType;
   const aircraftType = aircraftTypeValues.get(rawAircraftType) || rawAircraftType;
@@ -134,7 +149,7 @@ export async function submitAircraftInquiry(payload, { endpoint = aircraftInquir
     throw new Error('El servidor devolvió HTML en lugar de JSON.');
   }
   let result;
-  try { result = await response.json(); } catch {
+  try { result = extractInquiryResult(await response.json()); } catch {
     debug.error('JSON inválido o cuerpo vacío', { status: response.status, origin: classifyInquiryFailure(response.status, null, 'invalid') });
     throw new Error(statusMessages[response.status] && response.status !== 422 ? statusMessages[response.status] : 'El servidor devolvió una respuesta inválida.');
   }
@@ -145,6 +160,7 @@ export async function submitAircraftInquiry(payload, { endpoint = aircraftInquir
   if (!response.ok || !result || typeof result !== 'object' || Array.isArray(result) || result.success !== true) {
     const validation = response.status === 422 ? safePhpValidation(result?.message) : '';
     const error = new Error(validation || statusMessages[response.status] || failure);
+    error.status = response.status;
     const codes = new Set(['required','aircraftType','country','service','name','email','phone','phoneRequired','privacy','length','format','year']);
     const fields = new Set(['aircraftType','manufacturer','model','year','country','service','name','email','phone','comments','privacyAccepted']);
     if (response.status === 422 && result?.errors && typeof result.errors === 'object') {
@@ -162,5 +178,7 @@ export async function submitAircraftInquiry(payload, { endpoint = aircraftInquir
 }
 
 export function trackAircraftInquiry(event, params = {}) {
-  if (typeof window !== 'undefined' && typeof window.gtag === 'function') window.gtag('event', event, params);
+  if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+    try { window.gtag('event', event, params); } catch { /* Analytics must never affect delivery. */ }
+  }
 }

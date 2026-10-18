@@ -30,7 +30,10 @@ export function classifyInquiryFailure(status, result, format = 'json') {
 }
 export function createInquiryDiagnostics(enabled, logger = console) {
   const started = performance.now();
-  const emit = (level, event, details) => { if (enabled) logger[level](prefix + ' ' + event, details); };
+  const emit = (level, event, details) => {
+    if (!enabled) return;
+    try { logger[level](prefix + ' ' + event, details); } catch { /* Diagnostics must never affect inquiry delivery. */ }
+  };
   return {
     log: (event, details) => emit('log',event,details),
     warn: (event, details) => emit('warn',event,details),

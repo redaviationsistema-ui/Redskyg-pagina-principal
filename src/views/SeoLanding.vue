@@ -137,21 +137,18 @@
 
         <form class="quick-quote-form" @submit.prevent="openQuickQuote">
           <div class="quick-field">
-            <span class="quick-icon" aria-hidden="true">{{ landingLabels.quickIcons.name }}</span>
             <label for="quick-name">{{ content.quickNameLabel }}</label>
-            <input id="quick-name" v-model="quickForm.name" type="text" required />
+            <span class="quick-control"><UserRound class="quick-icon" :size="18" :stroke-width="1.8" aria-hidden="true" /><input id="quick-name" v-model="quickForm.name" type="text" required /></span>
           </div>
 
           <div class="quick-field">
-            <span class="quick-icon" aria-hidden="true">{{ landingLabels.quickIcons.route }}</span>
             <label for="quick-route">{{ content.quickRouteLabel }}</label>
-            <input id="quick-route" v-model="quickForm.route" type="text" required />
+            <span class="quick-control"><MapPin class="quick-icon" :size="18" :stroke-width="1.8" aria-hidden="true" /><input id="quick-route" v-model="quickForm.route" type="text" required /></span>
           </div>
 
           <div class="quick-field">
-            <span class="quick-icon" aria-hidden="true">{{ landingLabels.quickIcons.passengers }}</span>
             <label for="quick-passengers">{{ content.quickPassengersLabel }}</label>
-            <input id="quick-passengers" v-model="quickForm.passengers" type="text" required />
+            <span class="quick-control"><UsersRound class="quick-icon" :size="18" :stroke-width="1.8" aria-hidden="true" /><input id="quick-passengers" v-model="quickForm.passengers" type="text" required /></span>
           </div>
 
           <button class="btn-highlight quick-submit" type="submit">
@@ -274,6 +271,7 @@
 
 <script setup>
 import { computed, onMounted, onUnmounted, reactive, watch } from "vue";
+import { MapPin, UserRound, UsersRound } from "lucide-vue-next";
 import { useRoute } from "vue-router";
 import { getSeoPageBySlug, getSeoPagePathForLocale, resolveSeoPageForLocale } from "../data/seoPages";
 import en from "../locales/en";
@@ -334,11 +332,6 @@ const landingLabels = computed(() =>
         cardMicrocopy: "A relevant next step for this topic",
         cardCta: "Review options",
         quickFormBadge: "Fast review. No commitment required.",
-        quickIcons: {
-          name: "01",
-          route: "02",
-          passengers: "03",
-        },
         faqToggle: "Open",
         finalTitle: "Move from search to a clearer quote.",
         finalText:
@@ -353,11 +346,6 @@ const landingLabels = computed(() =>
         cardMicrocopy: "Siguiente paso claro para este tema",
         cardCta: "Revisar opciones",
         quickFormBadge: "Revisión ágil. Sin compromiso.",
-        quickIcons: {
-          name: "01",
-          route: "02",
-          passengers: "03",
-        },
         faqToggle: "Abrir",
         finalTitle: "Pase de la búsqueda a una propuesta más clara.",
         finalText:
@@ -943,27 +931,8 @@ h3 {
 }
 
 .quick-field {
-  position: relative;
   display: grid;
   gap: 0.45rem;
-}
-
-.quick-icon {
-  position: absolute;
-  top: -10px;
-  right: 12px;
-  min-width: 34px;
-  min-height: 34px;
-  padding: 0.35rem 0.5rem;
-  border-radius: 999px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #08121f;
-  background: linear-gradient(135deg, #d4af37, #f2d57a);
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
 }
 
 .quick-field label {
@@ -973,13 +942,45 @@ h3 {
   text-transform: uppercase;
 }
 
-.quick-field input {
+.quick-control {
+  display: flex;
+  align-items: center;
+  min-width: 0;
   min-height: 52px;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.62);
+  border-radius: 12px;
   background: rgba(255, 255, 255, 0.05);
+  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.quick-control:focus-within {
+  border-color: #f2d57a;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+}
+
+.quick-icon {
+  flex: 0 0 18px;
+  margin-left: 14px;
+  color: #f2d57a;
+}
+
+.quick-field input {
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+  border: 0;
+  outline: 0;
+  border-radius: 0 11px 11px 0;
+  background: transparent;
   color: white;
-  padding: 0.85rem 1rem;
+  padding: 0.75rem 0.9rem;
+  box-shadow: none;
+}
+
+.quick-field input:focus-visible {
+  outline: 0;
+  box-shadow: none;
 }
 
 .quick-submit {

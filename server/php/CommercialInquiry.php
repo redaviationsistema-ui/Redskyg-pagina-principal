@@ -34,7 +34,7 @@ final class CommercialInquiry {
             if (preg_match($key === 'comments' ? '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/u' : '/[\x00-\x1F\x7F]/u', is_string($raw) ? $raw : '')) $errors[$key] ??= 'format';
         }
         if (!in_array($values['aircraftType'], $rules['types'], true)) $errors['aircraftType'] ??= 'aircraftType';
-        if ($values['country'] !== '' && !preg_match("/^[\\p{L}\\p{M} .,'’()\\-]+$/u", $values['country'])) $errors['country'] ??= 'format';
+        if ($values['country'] !== '' && preg_match('/[\\p{Cc}<>]/u', $values['country'])) $errors['country'] ??= 'format';
         if (isset($values['service']) && preg_match('/[<>]/', $values['service'])) $errors['service'] ??= 'format';
         if ($values['name'] !== '' && !preg_match('/^[\p{L}\p{M} \'’\.\-]+$/u', $values['name'])) $errors['name'] ??= 'name';
         if ($values['email'] !== '' && !filter_var($values['email'], FILTER_VALIDATE_EMAIL)) $errors['email'] ??= 'email';

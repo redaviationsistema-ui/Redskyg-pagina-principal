@@ -9,9 +9,7 @@ const year = new Date().getFullYear();
     <div class="trade-footer__inner">
       <small>© {{ year }} Sky Group Aviation. {{ isEnglish ? 'All rights reserved.' : 'Todos los derechos reservados.' }}</small>
       <nav :aria-label="isEnglish ? 'Legal information' : 'Información legal'">
-        <RouterLink :to="toLocalizedRoute('Privacy')">{{ isEnglish ? 'Privacy' : 'Privacidad' }}</RouterLink>
-        <RouterLink :to="toLocalizedRoute('Terms')">{{ isEnglish ? 'Terms' : 'Términos' }}</RouterLink>
-      </nav>
+         </nav>
     </div>
   </footer>
 </template>

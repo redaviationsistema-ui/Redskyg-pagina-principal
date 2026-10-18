@@ -1,7 +1,7 @@
 <template>
   <slot v-if="isNestedLayout" />
 
-  <div v-else class="layout-wrapper">
+  <div v-else class="layout-wrapper" :class="{ 'layout-wrapper--request': route.name === 'ServiceRequest' }">
     <AircraftTradeHeader v-if="isAircraftTradeLanding" />
     <AppHeader v-else />
 
@@ -34,7 +34,20 @@
         </svg>
       </div>
 
-      <span class="whatsapp-text">{{ locale === "en" ? "Get a quote now!" : "Cotiza ahora" }}</span>
+      <span class="quote-action">
+        <span class="aircraft-flight" aria-hidden="true">
+          <span class="aircraft-flight__plane">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9L2 14v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5L21 16z" />
+            </svg>
+            <span class="aircraft-flight__trail"></span>
+          </span>
+        </span>
+        <span class="whatsapp-text">
+          <span>{{ locale === "en" ? "Get a quote now!" : "Cotiza ahora" }}</span>
+          <ArrowRight class="whatsapp-arrow" :size="18" :stroke-width="2" aria-hidden="true" />
+        </span>
+      </span>
     </a>
   </div>
 </template>
@@ -42,6 +55,7 @@
 <script setup>
 import { useRoute } from "vue-router";
 import { computed, inject, provide } from "vue";
+import { ArrowRight } from "lucide-vue-next";
 import { useLocale } from "../i18n";
 import AppHeader from "../components/AppHeader.vue";
 import AppFooter from "../components/AppFooter.vue";
@@ -130,6 +144,161 @@ provide("has-main-layout", true);
   transform: translateX(4px);
 }
 
+.layout-wrapper--request .whatsapp-float {
+  position: fixed;
+  right: clamp(14px, 2vw, 26px);
+  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  width: max-content;
+  margin: 0;
+  gap: 8px;
+  z-index: 9999;
+  animation: whatsapp-reveal 450ms cubic-bezier(.2,.75,.25,1) both;
+}
+
+@keyframes whatsapp-reveal {
+  from { opacity: 0; translate: 0 10px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+.layout-wrapper--request .whatsapp-icon {
+  width: 48px;
+  height: 48px;
+}
+
+.layout-wrapper--request .whatsapp-icon svg {
+  width: 23px;
+  height: 23px;
+}
+
+.layout-wrapper--request .whatsapp-text {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 48px;
+  padding: 0 18px;
+  border: 1px solid #c49a55;
+  background: linear-gradient(110deg, #174fbd 0%, #0b2a68 100%);
+  color: #fff;
+  font-size: 13px;
+  line-height: 1;
+  box-shadow: 0 8px 22px rgba(3, 14, 35, .25), inset 0 0 0 1px rgba(255,255,255,.06);
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
+}
+
+.layout-wrapper--request .quote-action {
+  position: relative;
+  display: block;
+  overflow: visible;
+}
+
+.layout-wrapper--request .aircraft-flight {
+  position: absolute;
+  z-index: 2;
+  left: 5px;
+  right: 5px;
+  bottom: calc(100% + 34px);
+  height: 28px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.layout-wrapper--request .aircraft-flight__plane {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 36px;
+  height: 36px;
+  color: #f0d08c;
+  filter: drop-shadow(0 2px 5px rgba(216,180,125,.34));
+  opacity: 0;
+  transform-origin: center;
+  animation: aircraft-quote-flight 6s ease-in-out infinite;
+}
+
+.layout-wrapper--request .aircraft-flight__plane svg {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: rotate(90deg);
+}
+
+.layout-wrapper--request .aircraft-flight__trail {
+  position: absolute;
+  top: 49%;
+  left: -22px;
+  width: 25px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(240,208,140,.6));
+  transform: rotate(-4deg);
+}
+
+@keyframes aircraft-quote-flight {
+  0%, 8% { opacity: 0; transform: translate3d(0, 6px, 0) rotate(-2deg); }
+  18% { opacity: 1; }
+  72% { opacity: 1; }
+  90%, 100% { opacity: 0; transform: translate3d(clamp(70px, 8.3vw, 120px), -5px, 0) rotate(1deg); }
+}
+
+.layout-wrapper--request .whatsapp-arrow {
+  flex: 0 0 auto;
+  color: #f0d08c;
+  transition: transform 220ms ease;
+}
+
+.layout-wrapper--request .whatsapp-float:hover .whatsapp-text {
+  transform: translateX(2px);
+  border-color: #e2bd73;
+  background: linear-gradient(110deg, #1c5bd2 0%, #10367f 100%);
+  box-shadow: 0 10px 26px rgba(3, 14, 35, .32), 0 0 16px rgba(196,154,85,.18);
+}
+
+.layout-wrapper--request .whatsapp-float:hover .whatsapp-arrow {
+  transform: translateX(3px);
+}
+
+.layout-wrapper--request .whatsapp-icon {
+  animation: none;
+}
+
+.layout-wrapper.layout-wrapper--request .trade-footer__inner {
+  justify-content: flex-start;
+  gap: 24px;
+}
+
+@media (max-width: 1100px) {
+  .layout-wrapper--request .whatsapp-text {
+    display: inline-flex;
+    min-height: 42px;
+    gap: 8px;
+    padding-inline: 12px;
+    font-size: 11px;
+  }
+
+  .layout-wrapper--request .whatsapp-float {
+    right: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .layout-wrapper--request .whatsapp-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .layout-wrapper--request .whatsapp-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .layout-wrapper--request .aircraft-flight__plane {
+    width: 28px;
+    height: 28px;
+  }
+}
+
 @media (max-width: 768px) {
   .whatsapp-float {
     right: 15px;
@@ -139,5 +308,70 @@ provide("has-main-layout", true);
   .whatsapp-text {
     display: none;
   }
+
+  .layout-wrapper--request .whatsapp-text {
+    display: none;
+  }
+
+  .layout-wrapper--request .aircraft-flight {
+    display: none;
+  }
+
+  .layout-wrapper--request .whatsapp-float {
+    position: fixed;
+    right: 15px;
+    bottom: calc(15px + env(safe-area-inset-bottom, 0px));
+    z-index: 9999;
+  }
+
+  .layout-wrapper--request .whatsapp-icon {
+    animation: whatsapp-mobile-float 2.8s ease-in-out infinite;
+  }
+}
+
+@keyframes whatsapp-mobile-float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -4px, 0); }
+}
+
+@media (max-width: 600px) {
+  .layout-wrapper--request .whatsapp-float {
+    right: 8px;
+    bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .layout-wrapper--request .whatsapp-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .layout-wrapper--request .whatsapp-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .layout-wrapper--request .whatsapp-text {
+    min-height: 38px;
+    gap: 5px;
+    padding-inline: 9px;
+    font-size: 10px;
+  }
+
+  .layout-wrapper--request .whatsapp-arrow {
+    width: 15px;
+    height: 15px;
+  }
+
+  .layout-wrapper--request .aircraft-flight__plane {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layout-wrapper--request .whatsapp-float { animation: none !important; }
+  .layout-wrapper--request .whatsapp-icon { animation: none !important; }
+  .layout-wrapper--request .aircraft-flight__plane { animation: none; opacity: 1; transform: translate3d(0, 2px, 0) rotate(-2deg); }
+  .layout-wrapper--request .aircraft-flight__trail { opacity: .35; }
 }
 </style>

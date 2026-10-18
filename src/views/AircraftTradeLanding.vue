@@ -26,7 +26,7 @@ function syncMotion() {
     cancelAnimationFrame(scrollFrame); scrollFrame = 0;
     root.value?.style.setProperty('--hero-shift', '0px');
     observer?.disconnect();
-    root.value?.querySelectorAll('.service-reveal').forEach(card => card.classList.add('is-visible'));
+    root.value?.querySelectorAll('.service-reveal, .section-reveal').forEach(item => item.classList.add('is-visible'));
   }
 }
 function onScroll() {
@@ -65,7 +65,7 @@ onMounted(() => {
   window.addEventListener('scroll', onScroll, { passive: true });
   if (heroImage.value?.complete) revealHero();
   else loadTimer = setTimeout(revealHero, 700);
-  const cards = root.value.querySelectorAll('.service-reveal');
+  const cards = root.value.querySelectorAll('.service-reveal, .section-reveal');
   if (motionEnabled.value && 'IntersectionObserver' in window) {
     observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -92,12 +92,11 @@ const flightUrl = computed(() => 'https://redskyg.com/landing/es-mx/reserva');
         <p class="eyebrow">SKY GROUP LLC <span> / </span> {{ text('AVIACIÓN EJECUTIVA', 'EXECUTIVE AVIATION') }}</p>
         <h1 id="home-title">{{ text('Tu próxima operación comienza aquí.', 'Your next venture starts here.') }}</h1>
         <p class="hero-description">{{ text('Compra, vende, vuela o solicita servicios aeronáuticos con atención especializada.', 'Buy, sell, fly or request aviation services with expert support.') }}</p>
-        <a href="#servicios" class="hero-link" @click="goToServices">{{ text('EXPLORA NUESTROS SERVICIOS', 'EXPLORE OUR SERVICES') }} <ArrowUpRight :size="18" /></a>
       </div>
       <span class="hero-caption" aria-hidden="true">{{ text('UNA VISIÓN. TODAS LAS POSIBILIDADES.', 'ONE VISION. EVERY POSSIBILITY.') }}</span>
     </section>
     <section id="servicios" class="service-selector landing-container" aria-labelledby="services-title">
-      <div class="selector-heading"><div><p class="eyebrow">{{ text('TU SIGUIENTE PASO', 'YOUR NEXT STEP') }}</p><h2 id="services-title">{{ text('¿Cómo podemos ayudarte hoy?', 'How can we help you today?') }}</h2></div><p>{{ text('Selecciona el servicio que necesitas para comenzar.', 'Select the service you need to get started.') }}</p></div>
+      <div class="selector-heading section-reveal" style="--reveal-delay: 40ms"><div><p class="eyebrow">{{ text('TU SIGUIENTE PASO', 'YOUR NEXT STEP') }}</p><h2 id="services-title">{{ text('¿Cómo podemos ayudarte hoy?', 'How can we help you today?') }}</h2></div><p>{{ text('Selecciona el servicio que necesitas para comenzar.', 'Select the service you need to get started.') }}</p></div>
       <div class="services-grid">
         <div v-for="(service,index) in services" :key="service.key" class="service-reveal" :style="{ '--reveal-delay': `${index * 70}ms` }">
         <component :is="service.key === 'flight' ? 'a' : RouterLink" v-bind="service.key === 'flight' ? { href: flightUrl } : { to: toLocalizedRoute('ServiceRequest', { service: service.key }) }" class="service-choice" :class="[`service-choice--${service.key}`, { 'is-selected': commercialNavigation.selected === service.key }]" @click="commercialNavigation.selected = service.key" @pointermove="followLight">
@@ -109,7 +108,7 @@ const flightUrl = computed(() => 'https://redskyg.com/landing/es-mx/reserva');
         </component>
         </div>
       </div>
-      <div class="selector-note"><ShieldCheck :size="19" aria-hidden="true" /><p>{{ text('Atención personalizada. Asesoría especializada. Información confidencial.', 'Personal attention. Expert guidance. Confidential information.') }}</p><span>SKY GROUP AVIATION</span></div>
+      <div class="selector-note section-reveal" style="--reveal-delay: 100ms"><ShieldCheck :size="19" aria-hidden="true" /><p>{{ text('Atención personalizada. Asesoría especializada. Información confidencial.', 'Personal attention. Expert guidance. Confidential information.') }}</p><span>SKY GROUP AVIATION</span></div>
     </section>
   </article>
 </template>
@@ -171,8 +170,8 @@ a:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
 .selector-note > svg { color: var(--gold); flex-shrink: 0; }
 .selector-note > span { margin-left: auto; font-size: 9px; letter-spacing: .16em; white-space: nowrap; }
 /* Reveal wrappers keep entry movement independent from interactive card transforms. */
-.motion-enabled .service-reveal:not(.is-visible) { opacity: 0; transform: translateY(20px); }
-.motion-enabled .service-reveal.is-visible { animation: card-reveal 550ms var(--reveal-delay) both; }
+.motion-enabled .service-reveal:not(.is-visible), .motion-enabled .section-reveal:not(.is-visible) { opacity: 0; transform: translateY(20px); }
+.motion-enabled .service-reveal.is-visible, .motion-enabled .section-reveal.is-visible { animation: card-reveal 600ms var(--reveal-delay, 0ms) both; }
 .service-reveal:focus-within { opacity: 1 !important; transform: none !important; animation: none !important; }
 .motion-enabled:not(.hero-ready) .hero-content > *, .motion-enabled:not(.hero-ready) .hero-image-layer img { opacity: 0; }
 .motion-enabled.hero-ready .hero-image-layer img { animation: hero-image 1000ms both; }
@@ -232,7 +231,7 @@ a:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
-  .hero-image-layer, .hero-image-layer img, .service-reveal, .service-choice, .service-photo, .hero-link, .hero-link svg, .arrow-circle svg { transform: none !important; translate: none !important; opacity: 1 !important; }
+  .hero-image-layer, .hero-image-layer img, .service-reveal, .section-reveal, .service-choice, .service-photo, .hero-link, .hero-link svg, .arrow-circle svg { transform: none !important; translate: none !important; opacity: 1 !important; }
   .hero-content > * { opacity: 1 !important; }
   .service-light { display: none; }
 }

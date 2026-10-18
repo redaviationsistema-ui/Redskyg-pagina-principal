@@ -2,7 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { contract, validateCommercial, normalizePhone, isValidPhone } from '../src/features/aircraft-sales/commercialSchema.js';
-import { submitCommercialInquiry } from '../src/features/aircraft-sales/services/commercialInquiry.service.js';
+import { submitCommercialInquiry, commercialInquiryErrorKey } from '../src/features/aircraft-sales/services/commercialInquiry.service.js';
+import { createInquiryDiagnostics } from '../src/features/aircraft-sales/services/inquiryDiagnostics.js';
 const base = operation => ({ operation,aircraftType:'jet',name:'María Pérez',email:'test@example.com',phone:'7221234567',country:'México',model:'',manufacturer:'Cessna',year:'',service:contract.operations[operation].fields.service?'Atención personalizada de aeronaves':'',comments:'',privacyAccepted:true,privacyVersion:contract.version });
 const cases=[];
 for(const operation of Object.keys(contract.operations)) {
@@ -31,13 +32,40 @@ test('PHP and frontend validate the same contract fixtures',()=>{
   if(!Object.keys(front.errors).length)assert.deepEqual(backend[index].phone,front.values.phone);
  });
 });
-test('commercial receipt requires server confirmation and matching request id',async()=>{
+test('commercial receipt requires the exact successful delivery contract, regardless of optional metadata',async()=>{
  const payload={requestId:'fixture'};
- for(const data of [{success:true},{success:true,received:true,requestId:'other',delivery:'sent'},{success:true,received:true,requestId:'fixture',delivery:'pending',stored:false}])await assert.rejects(submitCommercialInquiry(payload,{fetchImpl:async()=>({ok:true,status:200,json:async()=>data})}));
- const receipt={success:true,received:true,requestId:'fixture',delivery:'sent',stored:false};
+ for(const data of [{success:true},{success:true,received:true,delivery:'skipped'},{success:true,received:true,delivery:'pending'},{success:false,received:true,delivery:'sent'}])await assert.rejects(submitCommercialInquiry(payload,{fetchImpl:async()=>({ok:true,status:200,json:async()=>data})}));
+ const receipt={success:true,received:true,delivery:'sent'};
  assert.deepEqual(await submitCommercialInquiry(payload,{fetchImpl:async()=>({ok:true,status:200,json:async()=>receipt})}),receipt);
- const pending={...receipt,delivery:'pending',stored:true};
- assert.deepEqual(await submitCommercialInquiry(payload,{fetchImpl:async()=>({ok:true,status:200,json:async()=>pending})}),pending);
+ const metadata={...receipt,requestId:'different-optional-echo',folio:'folio supplied by PHP',clientConfirmation:'unknown'};
+ assert.deepEqual(await submitCommercialInquiry(payload,{fetchImpl:async()=>({ok:true,status:200,json:async()=>metadata})}),metadata);
+});
+
+test('unwraps nested PHP JSON and confirms the shared commercial flow for every operation',async()=>{
+ for(const operation of Object.keys(contract.operations)) {
+  const payload={operation,requestId:'fixture'};
+  const receipt={success:true,received:true,delivery:'sent',folio:'SKY-0123456789ABCDEF0123456789ABCDEF'};
+  assert.deepEqual(await submitCommercialInquiry(payload,{fetchImpl:async()=>({ok:true,status:200,json:async()=>({data:receipt})})}),receipt);
+ }
+});
+
+test('commercial flow reports simulated HTTP validation, gateway, unavailable and network errors',async()=>{
+ const payload={operation:'buy',requestId:'fixture'};
+ for(const [status,expected] of [[422,422],[502,502],[503,503]]) {
+  await assert.rejects(submitCommercialInquiry(payload,{fetchImpl:async()=>({ok:false,status,json:async()=>({success:false,message:'simulated'})})}),error=>error.status===expected);
+ }
+ await assert.rejects(submitCommercialInquiry(payload,{fetchImpl:async()=>{throw new TypeError('simulated network failure');}}),/No se pudo conectar/);
+ assert.equal(commercialInquiryErrorKey({status:422}),'validationFailed');
+ assert.equal(commercialInquiryErrorKey({status:502}),'badGateway');
+ assert.equal(commercialInquiryErrorKey({status:503}),'serviceUnavailable');
+ assert.equal(commercialInquiryErrorKey(new TypeError('simulated network failure')),'retry');
+});
+
+test('diagnostics logger failures do not escape into the delivery flow',()=>{
+ const diagnostics=createInquiryDiagnostics(true,{log(){throw Error('simulated logger failure')},warn(){throw Error('simulated logger failure')},error(){throw Error('simulated logger failure')}});
+ assert.doesNotThrow(()=>diagnostics.log('simulated event',{}));
+ assert.doesNotThrow(()=>diagnostics.warn('simulated event',{}));
+ assert.doesNotThrow(()=>diagnostics.error('simulated event',{}));
 });
 
 test('phone input normalization keeps only the first ten ASCII digits',()=>{
