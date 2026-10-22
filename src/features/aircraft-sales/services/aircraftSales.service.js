@@ -133,7 +133,6 @@ export async function sendAircraftInquiryEmail(payload) {
 
   const data = await response.json();
 
-  console.log("AIRCRAFT EMAIL RESPONSE:", data);
 
   if (!response.ok || !data.success) {
     throw new Error(

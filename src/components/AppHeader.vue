@@ -1,379 +1,81 @@
 <template>
-  <header
-    class="header"
-    :class="{
-      scrolled,
-      solid: !isHome,
-    }"
-  >
+  <header class="header sky-header" :class="{ 'desktop-hidden': headerHidden, 'header-solid': route.name !== 'Home' }" @focusin="headerHidden = false">
     <div class="header-inner">
-      <!-- LEFT NAV -->
-      <nav class="nav nav-left">
-        <RouterLink :to="toLocalizedRoute('Home')" class="nav-link">
-          <span class="nav-link-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path :d="navIcons.home" />
-            </svg>
-          </span>
-          {{ headerContent.home }}
-        </RouterLink>
-
-        <RouterLink :to="toLocalizedRoute('AboutUs')" class="nav-link">
-          <span class="nav-link-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path :d="navIcons.about" />
-            </svg>
-          </span>
-          {{ headerContent.about }}
-        </RouterLink>
-
-        <div
-          ref="dropdownRef"
-          class="dropdown"
-          @mouseenter="openDropdown"
-          @mouseleave="closeDropdown"
-        >
-          <button
-            type="button"
-            class="nav-link nav-link-button"
-            :aria-expanded="dropdownOpen ? 'true' : 'false'"
-            @click="toggleDropdown"
-          >
-            <span class="nav-link-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path :d="navIcons.services" />
-              </svg>
-            </span>
-            {{ headerContent.services }}
-          </button>
-
-          <div class="elegant-menu" v-show="dropdownOpen">
-            <div class="menu-header">
-              <span>{{ headerContent.menuTitle }}</span>
-            </div>
-
-            <div class="menu-grid">
-              <RouterLink :to="toLocalizedRoute('AircraftSales')" class="menu-item" @click="closeDropdownImmediate">
-                <div class="menu-icon-badge">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path :d="serviceIcons.aircraftSales" />
-                  </svg>
-                </div>
-                <strong>{{ headerContent.aircraftSales }}</strong>
-                <small>{{ headerContent.aircraftSalesDesc }}</small>
-              </RouterLink>
-
-              <RouterLink to="/vender-aeronave" class="menu-item" @click="closeDropdownImmediate">
-                <div class="menu-icon-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path :d="serviceIcons.aircraftSales" /></svg></div>
-                <strong>Vende tu aeronave</strong><small>Solicita una evaluación comercial confidencial</small>
-              </RouterLink>
-
-              <RouterLink :to="toLocalizedRoute('AirTaxi')" class="menu-item" @click="closeDropdownImmediate">
-                <div class="menu-icon-badge">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path :d="serviceIcons.airTaxi" />
-                  </svg>
-                </div>
-                <strong>{{ headerContent.airTaxi }}</strong>
-                <small>{{ headerContent.airTaxiDesc }}</small>
-              </RouterLink>
-
-              <RouterLink
-                :to="toLocalizedRoute('OperationsManagement')"
-                class="menu-item"
-                @click="closeDropdownImmediate"
-              >
-                <div class="menu-icon-badge">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path :d="serviceIcons.operationsManagement" />
-                  </svg>
-                </div>
-                <strong>{{ headerContent.operationsManagement }}</strong>
-                <small>{{ headerContent.operationsManagementDesc }}</small>
-              </RouterLink>
-
-              <RouterLink
-                :to="toLocalizedRoute('PrePurchaseInspection')"
-                class="menu-item"
-                @click="closeDropdownImmediate"
-              >
-                <div class="menu-icon-badge">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path :d="serviceIcons.prePurchase" />
-                  </svg>
-                </div>
-                <strong>{{ headerContent.prePurchase }}</strong>
-                <small>{{ headerContent.prePurchaseDesc }}</small>
-              </RouterLink>
-
-              <RouterLink :to="toLocalizedRoute('ImportExport')" class="menu-item" @click="closeDropdownImmediate">
-                <div class="menu-icon-badge">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path :d="serviceIcons.importExport" />
-                  </svg>
-                </div>
-                <strong>{{ headerContent.importExport }}</strong>
-                <small>{{ headerContent.importExportDesc }}</small>
-              </RouterLink>
-
-              <RouterLink :to="toLocalizedRoute('EngineShop')" class="menu-item" @click="closeDropdownImmediate">
-                <div class="menu-icon-badge">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path :d="serviceIcons.engineServices" />
-                  </svg>
-                </div>
-                <strong>{{ headerContent.engineServices }}</strong>
-                <small>{{ headerContent.engineServicesDesc }}</small>
-              </RouterLink>
-
-              <RouterLink :to="toLocalizedRoute('CoOwnership')" class="menu-item" @click="closeDropdownImmediate">
-                <div class="menu-icon-badge">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path :d="serviceIcons.coOwnership" />
-                  </svg>
-                </div>
-                <strong>{{ headerContent.coOwnership }}</strong>
-                <small>{{ headerContent.coOwnershipDesc }}</small>
-              </RouterLink>
-            </div>
-          </div>
+      <RouterLink :to="toLocalizedRoute('Home')" class="brand" aria-label="Sky Group"><img src="/images/logoo.png" alt="Sky Group Aviation" width="238" height="159" /></RouterLink>
+      <nav class="desktop-nav" :aria-label="english ? 'Main navigation' : 'Navegación principal'">
+        <RouterLink v-for="item in primaryLinks.slice(0, 2)" :key="item.name" :to="item.to" class="desktop-link">{{ item.label }}</RouterLink>
+        <div ref="desktopServices" class="desktop-services" @mouseenter="openDesktopServices" @mouseleave="scheduleDesktopClose" @focusout="onDesktopFocusOut">
+          <button ref="desktopServicesButton" type="button" class="desktop-link" :class="{ active: serviceActive }" :aria-expanded="desktopServicesOpen" aria-controls="desktop-services-panel" @click="desktopServicesOpen = !desktopServicesOpen" @keydown.down.prevent="focusDesktopService">{{ headerContent.services }}<ChevronDown :size="14" aria-hidden="true" /></button>
+          <Transition name="desktop-menu"><div v-if="desktopServicesOpen" id="desktop-services-panel" class="desktop-services-panel">
+            <section v-for="group in serviceGroups" :key="group.title"><h2>{{ group.title }}</h2><RouterLink v-for="item in group.items" :key="item.name" :to="item.to" class="desktop-service-link" @click="desktopServicesOpen = false"><component :is="item.icon" :size="20" :stroke-width="1.5" aria-hidden="true" /><span>{{ item.label }}</span></RouterLink></section>
+          </div></Transition>
         </div>
-
-        <RouterLink :to="toLocalizedRoute('Blog')" class="nav-link">
-          <span class="nav-link-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path :d="navIcons.blog" />
-            </svg>
-          </span>
-          {{ headerContent.blog }}
-        </RouterLink>
-
-        <RouterLink :to="toLocalizedRoute('Contact')" class="nav-link">
-          <span class="nav-link-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path :d="navIcons.contact" />
-            </svg>
-          </span>
-          {{ headerContent.contact }}
-        </RouterLink>
+        <RouterLink v-for="item in primaryLinks.slice(2)" :key="item.name" :to="item.to" class="desktop-link">{{ item.name === 'Blog' ? headerContent.blog : item.label }}</RouterLink>
       </nav>
-
-      <!-- LOGO -->
-      <div class="logo">
-        <RouterLink :to="toLocalizedRoute('Home')">
-          <img src="/images/logoo.png" alt="Sky Group Aviation logo" />
-        </RouterLink>
-      </div>
-
       <div class="header-actions">
-        <LocaleSwitcher :change-language="changeLanguage" />
-
-        <!-- MOBILE -->
-        <div class="hamburger" @click="toggleMenu">
-          <span :class="{ open: mobileOpen }"></span>
-          <span :class="{ open: mobileOpen }"></span>
-          <span :class="{ open: mobileOpen }"></span>
-        </div>
+        <RouterLink :to="toLocalizedRoute('Contact')" class="header-contact">{{ headerContent.contact }}</RouterLink>
+        <LocaleSwitcher compact :change-language="changeLanguage" />
+        <button type="button" class="menu-trigger" :aria-label="english ? 'Open navigation' : 'Abrir navegación'" :aria-expanded="isMenuOpen" aria-controls="sky-navigation" aria-haspopup="dialog" @click="isMenuOpen = true"><Menu :size="24" :stroke-width="1.5" aria-hidden="true" /><span>{{ english ? 'Menu' : 'Menú' }}</span></button>
       </div>
     </div>
   </header>
-
-  <!-- MOBILE MENU -->
-  <div
-    class="mobile-overlay"
-    :class="{ active: mobileOpen }"
-    @click="closeMenu"
-  ></div>
-
-  <div class="mobile-panel" :class="{ active: mobileOpen }">
-    <div class="mobile-header">
-      <div class="mobile-brand">
-        <img src="/images/logoo.png" alt="Sky Group Aviation logo" />
-        <div class="mobile-brand-copy">
-          <span>Sky Group</span>
-          <small>{{ headerContent.mobileBrand }}</small>
-        </div>
-      </div>
-
-      <button class="mobile-close" @click="closeMenu" :aria-label="headerContent.closeNavigation">
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-
-    <div class="mobile-locale">
-      <span class="mobile-kicker">{{ headerContent.changeLanguage }}</span>
-      <div class="mobile-locale-switcher" :aria-label="headerContent.changeLanguage">
-        <button
-          v-for="option in languageOptions"
-          :key="option.locale"
-          type="button"
-          class="mobile-locale-switcher__button"
-          :class="{ active: locale === option.locale }"
-          :aria-pressed="locale === option.locale"
-          @click="changeLanguage(option.locale)"
-        >
-          {{ option.longLabel }}
-        </button>
-      </div>
-    </div>
-
-    <nav class="mobile-nav">
-      <div class="mobile-nav-section">
-        <span class="mobile-kicker">{{ headerContent.overview }}</span>
-        <RouterLink :to="toLocalizedRoute('Home')" @click="closeMenu">
-          <span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path :d="navIcons.home" /></svg></span>
-          {{ headerContent.homeTitle }}
-        </RouterLink>
-        <RouterLink :to="toLocalizedRoute('AboutUs')" @click="closeMenu">
-          <span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path :d="navIcons.about" /></svg></span>
-          {{ headerContent.aboutTitle }}
-        </RouterLink>
-        <RouterLink :to="toLocalizedRoute('Blog')" @click="closeMenu">
-          <span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path :d="navIcons.blog" /></svg></span>
-          {{ headerContent.blogTitle }}
-        </RouterLink>
-      </div>
-
-      <div class="mobile-divider"></div>
-
-      <div class="mobile-nav-section">
-        <span class="mobile-kicker">{{ headerContent.aircraftAdvisory }}</span>
-        <RouterLink :to="toLocalizedRoute('AircraftSales')" @click="closeMenu">
-          <span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path :d="serviceIcons.aircraftSales" /></svg></span>
-          {{ headerContent.aircraftSales }}
-        </RouterLink>
-        <RouterLink to="/vender-aeronave" @click="closeMenu">
-          <span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path :d="serviceIcons.aircraftSales" /></svg></span>
-          Vende tu aeronave
-        </RouterLink>
-        <RouterLink :to="toLocalizedRoute('PrePurchaseInspection')" @click="closeMenu">
-          <span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path :d="serviceIcons.prePurchase" /></svg></span>
-          {{ headerContent.prePurchase }}
-        </RouterLink>
-        <RouterLink :to="toLocalizedRoute('CoOwnership')" @click="closeMenu">
-          <span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path :d="serviceIcons.coOwnership" /></svg></span>
-          {{ headerContent.coOwnership }}
-        </RouterLink>
-      </div>
-
-      <div class="mobile-divider"></div>
-
-      <div class="mobile-nav-section">
-        <span class="mobile-kicker">{{ headerContent.operationsTechnical }}</span>
-        <RouterLink :to="toLocalizedRoute('AirTaxi')" @click="closeMenu">
-          <span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path :d="serviceIcons.airTaxi" /></svg></span>
-          {{ headerContent.airTaxi }}
-        </RouterLink>
-        <RouterLink :to="toLocalizedRoute('OperationsManagement')" @click="closeMenu">
-          <span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path :d="serviceIcons.operationsManagement" /></svg></span>
-          {{ headerContent.operationsManagement }}
-        </RouterLink>
-        <RouterLink :to="toLocalizedRoute('ImportExport')" @click="closeMenu">
-          <span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path :d="serviceIcons.importExport" /></svg></span>
-          {{ headerContent.importExport }}
-        </RouterLink>
-        <RouterLink :to="toLocalizedRoute('EngineShop')" @click="closeMenu">
-          <span class="mobile-nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path :d="serviceIcons.engineServices" /></svg></span>
-          {{ headerContent.engineServices }}
-        </RouterLink>
-      </div>
+  <nav class="mobile-bottom-nav" :aria-label="english ? 'Quick navigation' : 'Navegación rápida'">
+    <RouterLink :to="toLocalizedRoute('Home')" class="bottom-nav-item"><House :size="20" :stroke-width="1.5" aria-hidden="true" /><span>{{ english ? 'Home' : 'Inicio' }}</span></RouterLink>
+    <RouterLink :to="toLocalizedRoute('AircraftSales')" class="bottom-nav-item" :class="{ 'is-active': route.name === 'AircraftSalesDetail' }"><Plane :size="20" :stroke-width="1.5" aria-hidden="true" /><span>{{ english ? 'Aircraft' : 'Aeronaves' }}</span></RouterLink>
+    <button type="button" class="bottom-nav-item" :class="{ 'is-active': isMenuOpen }" :aria-expanded="isMenuOpen" aria-controls="sky-navigation" aria-haspopup="dialog" @click="isMenuOpen = true"><Menu :size="20" :stroke-width="1.5" aria-hidden="true" /><span>{{ english ? 'Menu' : 'Menú' }}</span></button>
+    <RouterLink :to="toLocalizedRoute('Contact')" class="bottom-nav-item"><Mail :size="20" :stroke-width="1.5" aria-hidden="true" /><span>{{ headerContent.contact }}</span></RouterLink>
+  </nav>
+  <NavigationDrawer v-model="isMenuOpen" :title="english ? 'Main navigation' : 'Navegación principal'" :close-label="headerContent.closeNavigation">
+    <template #brand><RouterLink :to="toLocalizedRoute('Home')" class="brand" aria-label="Sky Group" @click="isMenuOpen = false"><img src="/images/logoo.png" alt="Sky Group Aviation" width="238" height="159" /></RouterLink><p class="brand-caption">PRIVATE AVIATION &amp; AIRCRAFT SERVICES</p></template>
+    <nav :aria-label="english ? 'Main navigation' : 'Navegación principal'">
+      <RouterLink v-for="item in primaryLinks.slice(0, 2)" :key="item.name" :to="item.to" class="drawer-link" @click="isMenuOpen = false"><component :is="item.icon" :size="20" :stroke-width="1.5" aria-hidden="true" /><span>{{ item.label }}</span></RouterLink>
+      <button type="button" class="drawer-link services-toggle" :class="{ 'section-active': serviceActive }" :aria-expanded="isServicesExpanded" aria-controls="drawer-services" @click="isServicesExpanded = !isServicesExpanded"><BriefcaseBusiness :size="20" :stroke-width="1.5" aria-hidden="true" /><span>{{ headerContent.services }}</span><ChevronDown class="chevron" :class="{ rotated: isServicesExpanded }" :size="16" aria-hidden="true" /></button>
+      <div v-show="isServicesExpanded" id="drawer-services" class="drawer-services"><RouterLink v-for="item in services" :key="item.name" :to="item.to" class="drawer-link service-link" @click="isMenuOpen = false"><component :is="item.icon" :size="18" :stroke-width="1.5" aria-hidden="true" /><span>{{ item.label }}</span></RouterLink></div>
+      <RouterLink v-for="item in primaryLinks.slice(2)" :key="item.name" :to="item.to" class="drawer-link" @click="isMenuOpen = false"><component :is="item.icon" :size="20" :stroke-width="1.5" aria-hidden="true" /><span>{{ item.label }}</span></RouterLink>
     </nav>
-
-    <div class="mobile-cta">
-      <RouterLink :to="toLocalizedRoute('Contact')" @click="closeMenu" class="mobile-cta-primary">
-        {{ headerContent.contactSkyGroup }}
-      </RouterLink>
-      <a
-        href="https://wa.me/525586186576"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="mobile-cta-secondary"
-      >
-        {{ headerContent.whatsappQuote }}
-      </a>
-    </div>
-  </div>
+    <template #footer><strong class="institution-name">SKY GROUP</strong><p class="institution-copy">Aviation Solutions &amp; Private Charter</p><RouterLink :to="toLocalizedRoute('AirTaxi')" class="quote-button" @click="isMenuOpen = false">{{ english ? 'REQUEST A FLIGHT QUOTE' : 'COTIZAR VUELO' }}<ArrowUpRight :size="18" aria-hidden="true" /></RouterLink></template>
+  </NavigationDrawer>
 </template>
 <script setup>
-import LocaleSwitcher from "./LocaleSwitcher.vue";
-import { ref, computed, onMounted, onUnmounted, watch } from "vue";
-import { useRoute } from "vue-router";
-import { useLocale } from "../i18n";
-
+import LocaleSwitcher from './LocaleSwitcher.vue';
+import NavigationDrawer from './NavigationDrawer.vue';
+import { ArrowUpRight, BadgeDollarSign, BookOpen, BriefcaseBusiness, Building2, ChevronDown, FileCheck2, Globe2, House, Mail, Menu, Plane, PlaneTakeoff, UsersRound, Wrench } from 'lucide-vue-next';
+import { ref, computed, watch, nextTick, onMounted, onUnmounted } from 'vue';
+import { useRoute } from 'vue-router';
+import { useLocale } from '../i18n';
 const route = useRoute();
 const { locale, toLocalizedRoute, switchLocale } = useLocale();
-const serviceIcons = {
-  aircraftSales: "M4 18h16M6 18l2-8h8l2 8M9 10V7h6v3",
-  airTaxi: "M2 12h11m0 0-3-3m3 3-3 3m3 0h7M18 9l3 3-3 3",
-  operationsManagement: "M5 18V8l7-4 7 4v10M9 12h6M9 15h4",
-  prePurchase: "M4 12c2-4.5 5-6.75 8-6.75S18 7.5 20 12c-2 4.5-5 6.75-8 6.75S6 16.5 4 12Zm8 2.75a2.75 2.75 0 1 0 0-5.5 2.75 2.75 0 0 0 0 5.5Z",
-  importExport: "M12 3v18m0 0 4-4m-4 4-4-4m4-10 4 4m-4-4-4 4",
-  engineServices: "M4 18h16M7 18v-4l2-2h6l2 2v4M9 12V8h6v4",
-  avionics: "M4 7h16M6 12h12M8 17h8",
-  fractionalOwnership: "M3 17l9-11 9 11M6 17h12M9 17v-3h6v3",
-  coOwnership: "M7 11a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm10 0a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5ZM3.5 19a3.5 3.5 0 0 1 7 0m3 0a3.5 3.5 0 0 1 7 0",
-};
-const navIcons = {
-  home: "M4 11.5 12 5l8 6.5M6.5 10.5V19h11v-8.5M10 19v-4.5h4V19",
-  about: "M12 12a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5ZM5 19a7 7 0 0 1 14 0",
-  services: "M4 7h16M4 12h10M4 17h13",
-  blog: "M6 5.5h9.5A2.5 2.5 0 0 1 18 8v10.5H8.5A2.5 2.5 0 0 0 6 21V5.5Zm0 0A2.5 2.5 0 0 1 8.5 3H18v15.5M9 8h6M9 11h6M9 14h4",
-  contact: "M4 7.5 12 13l8-5.5M5.5 6h13A1.5 1.5 0 0 1 20 7.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 16.5v-9A1.5 1.5 0 0 1 5.5 6Z",
-};
-
-const scrolled = ref(false);
-const mobileOpen = ref(false);
-const dropdownOpen = ref(false);
-const dropdownRef = ref(null);
-let closeTimeout = null;
-const languageOptions = [
-  { locale: "es", label: "ES", longLabel: "Español" },
-  { locale: "en", label: "EN", longLabel: "English" },
-];
-
-const openDropdown = () => {
-  clearTimeout(closeTimeout);
-  dropdownOpen.value = true;
-};
-
-const closeDropdown = () => {
-  closeTimeout = setTimeout(() => {
-    dropdownOpen.value = false;
-  }, 300); // 🔥 aquí controlas la velocidad
-};
-
-const closeDropdownImmediate = () => {
-  clearTimeout(closeTimeout);
-  dropdownOpen.value = false;
-};
-
-const toggleDropdown = () => {
-  clearTimeout(closeTimeout);
-  dropdownOpen.value = !dropdownOpen.value;
-};
-
-const handlePointerDown = (event) => {
-  if (!dropdownRef.value) return;
-  if (!dropdownRef.value.contains(event.target)) {
-    closeDropdownImmediate();
-  }
-};
-
-const handleKeydown = (event) => {
-  if (event.key === "Escape") {
-    closeDropdownImmediate();
-    closeMenu();
-  }
-};
-
-const isHome = computed(() => route.name === "Home");
+const english = computed(() => locale.value === 'en');
+const isMenuOpen = ref(false);
+const desktopServicesOpen = ref(false);
+const desktopServices = ref(null);
+const desktopServicesButton = ref(null);
+const headerHidden = ref(false);
+let lastY = 0;
+let desktopCloseTimer;
+function openDesktopServices() { clearTimeout(desktopCloseTimer); desktopServicesOpen.value = true; }
+function scheduleDesktopClose() { clearTimeout(desktopCloseTimer); desktopCloseTimer = setTimeout(() => { if (!desktopServices.value?.contains(document.activeElement)) desktopServicesOpen.value = false; }, 180); }
+function onDesktopFocusOut(event) { if (!desktopServices.value?.contains(event.relatedTarget)) desktopServicesOpen.value = false; }
+async function focusDesktopService() { openDesktopServices(); await nextTick(); desktopServices.value?.querySelector('a')?.focus(); }
+function onPointerDown(event) { if (!desktopServices.value?.contains(event.target)) desktopServicesOpen.value = false; }
+function onKeydown(event) { if (event.key === 'Escape' && desktopServicesOpen.value) { desktopServicesOpen.value = false; desktopServicesButton.value?.focus(); } }
+function onScroll() {
+  const y = Math.max(0, window.scrollY);
+  const delta = y - lastY;
+  if (y <= 40) headerHidden.value = false;
+  else if (Math.abs(delta) >= 4 && !desktopServices.value?.contains(document.activeElement)) { headerHidden.value = delta > 0; if (headerHidden.value) desktopServicesOpen.value = false; }
+  if (Math.abs(delta) >= 4 || y <= 40) lastY = y;
+}
+function onResize() { if (window.innerWidth > 1240) isMenuOpen.value = false; else desktopServicesOpen.value = false; }
+onMounted(() => { lastY = window.scrollY; document.addEventListener('pointerdown', onPointerDown); document.addEventListener('keydown', onKeydown); window.addEventListener('scroll', onScroll, { passive: true }); window.addEventListener('resize', onResize); });
+onUnmounted(() => { clearTimeout(desktopCloseTimer); document.removeEventListener('pointerdown', onPointerDown); document.removeEventListener('keydown', onKeydown); window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onResize); });
+const isServicesExpanded = ref(false);
 const headerContent = computed(() =>
   locale.value === "en"
     ? {
-        home: "HOME",
-        about: "ABOUT US",
-        services: "SERVICES",
+        home: "Home",
+        about: "About us",
+        services: "Services",
         menuTitle: "Our Aviation Services",
         aircraftSales: "Aircraft Sales & Acquisitions",
         aircraftSalesDesc: "Sourcing, Valuation, and Transactions",
@@ -393,8 +95,8 @@ const headerContent = computed(() =>
         fractionalOwnershipDesc: "Structured Shared Access Programs",
         coOwnership: "Aircraft Co-Ownership",
         coOwnershipDesc: "Shared Equity and Governance Structure",
-        blog: "PRIVATE FLIGHT GUIDE",
-        contact: "CONTACT",
+        blog: "Aviation guide",
+        contact: "Contact",
         mobileBrand: "Private Aviation Services",
         changeLanguage: "Change language",
         closeNavigation: "Close navigation",
@@ -409,9 +111,9 @@ const headerContent = computed(() =>
         whatsappQuote: "WhatsApp Quote",
       }
     : {
-        home: "INICIO",
-        about: "NOSOTROS",
-        services: "SERVICIOS",
+        home: "Inicio",
+        about: "Nosotros",
+        services: "Servicios",
         menuTitle: "Nuestros servicios aeronáuticos",
         aircraftSales: "Venta y adquisición de aeronaves",
         aircraftSalesDesc: "Búsqueda, valuación y transacción",
@@ -419,9 +121,9 @@ const headerContent = computed(() =>
         airTaxiDesc: "Vuelos privados y coordinación de misión",
         operationsManagement: "Servicios aeronáuticos",
         operationsManagementDesc: "Cumplimiento, tripulacion y supervision",
-        prePurchase: "Asesoria precompra",
+        prePurchase: "Asesoría precompra",
         prePurchaseDesc: "Debida diligencia y revisión de riesgos",
-        importExport: "Importacion y exportacion",
+        importExport: "Importación y exportación",
         importExportDesc: "Coordinacion aeronautica transfronteriza",
         engineServices: "Servicios de motores",
         engineServicesDesc: "Programas, logística y soporte técnico",
@@ -431,8 +133,8 @@ const headerContent = computed(() =>
         fractionalOwnershipDesc: "Programas estructurados de acceso compartido",
         coOwnership: "Copropiedad de aeronaves",
         coOwnershipDesc: "Capital compartido y estructura de gobernanza",
-        blog: "GUÍA DE AVIACIÓN PRIVADA",
-        contact: "CONTACTO",
+        blog: "Guía de aviación",
+        contact: "Contacto",
         mobileBrand: "Servicios de aviación privada",
         changeLanguage: "Cambiar idioma",
         closeNavigation: "Cerrar navegación",
@@ -448,1019 +150,92 @@ const headerContent = computed(() =>
       }
 );
 
-// const logoSrc = computed(() => {
-//   return "/images/logo.png";
-// });
 
-const handleScroll = () => {
-  scrolled.value = window.scrollY > 40;
-};
+const primaryLinks = computed(() => [
+  { name: 'Home', icon: House, label: headerContent.value.home },
+  { name: 'AboutUs', icon: Building2, label: headerContent.value.about },
+  { name: 'Blog', icon: BookOpen, label: english.value ? 'Private aviation guide' : 'Guía de aviación privada' },
+  { name: 'Contact', icon: Mail, label: headerContent.value.contact },
+].map(item => ({ ...item, to: toLocalizedRoute(item.name) })));
+const serviceGroups = computed(() => [
+  { title: english.value ? 'Aircraft & operations' : 'Aeronaves y operaciones', items: [
+    { name: 'AircraftSales', icon: Plane, label: headerContent.value.aircraftSales },
+    { name: 'sell', icon: BadgeDollarSign, label: english.value ? 'Sell your aircraft' : 'Vende tu aeronave', to: '/vender-aeronave' },
+    { name: 'AirTaxi', icon: PlaneTakeoff, label: headerContent.value.airTaxi },
+    { name: 'OperationsManagement', icon: BriefcaseBusiness, label: headerContent.value.operationsManagement },
+  ] },
+  { title: english.value ? 'Specialist services' : 'Servicios especializados', items: [
+    { name: 'PrePurchaseInspection', icon: FileCheck2, label: headerContent.value.prePurchase },
+    { name: 'ImportExport', icon: Globe2, label: headerContent.value.importExport },
+    { name: 'EngineShop', icon: Wrench, label: headerContent.value.engineServices },
+    { name: 'CoOwnership', icon: UsersRound, label: headerContent.value.coOwnership },
+  ] },
+].map(group => ({ ...group, items: group.items.map(item => ({ ...item, to: item.to || toLocalizedRoute(item.name) })) })));
 
-const toggleMenu = () => {
-  mobileOpen.value = !mobileOpen.value;
-};
-
-const closeMenu = () => {
-  mobileOpen.value = false;
-};
-
-const changeLanguage = (nextLocale) => {
-  if (locale.value === nextLocale) return;
-  closeMenu();
-  switchLocale(nextLocale);
-};
-
-watch(mobileOpen, (val) => {
-  document.body.style.overflow = val ? "hidden" : "auto";
-});
-
-watch(
-  () => route.fullPath,
-  () => {
-    closeDropdownImmediate();
-    closeMenu();
-  }
-);
-
-onMounted(() => {
-  handleScroll();
-  window.addEventListener("scroll", handleScroll);
-  document.addEventListener("pointerdown", handlePointerDown);
-  document.addEventListener("keydown", handleKeydown);
-});
-
-onUnmounted(() => {
-  window.removeEventListener("scroll", handleScroll);
-  document.removeEventListener("pointerdown", handlePointerDown);
-  document.removeEventListener("keydown", handleKeydown);
-});
+const services = computed(() => serviceGroups.value.flatMap(group => group.items));
+const serviceActive = computed(() => services.value.some(item => item.name === route.name) || ['AircraftSalesDetail', 'Avionics', 'FractionalOwnership'].includes(route.name));
+function changeLanguage(value) { isMenuOpen.value = false; if (locale.value !== value) switchLocale(value); }
+watch(() => route.fullPath, () => { isMenuOpen.value = false; desktopServicesOpen.value = false; headerHidden.value = false; });
+watch(isMenuOpen, value => { if (value) isServicesExpanded.value = serviceActive.value; });
 </script>
-<style>
-/* HEADER */
-
-.header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 90px;
-  display: flex;
-  align-items: center;
-  z-index: 10000;
-  transition: all 0.4s ease;
-  background: transparent;
-}
-
-.header.scrolled,
-.header.solid {
-  height: 90px;
-  background: rgba(5, 15, 30, 0.96);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-}
-
-.header-inner {
-  max-width: 1400px;
-  width: 100%;
-  margin: auto;
-  padding: 0 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.locale-switcher {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.35rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  backdrop-filter: blur(12px);
-}
-
-.locale-switcher__button,
-.mobile-locale-switcher__button {
-  border: none;
-  cursor: pointer;
-  transition: 0.28s ease;
-  font-family: inherit;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.locale-switcher__button {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: transparent;
-  color: rgba(255, 255, 255, 0.72);
-  font-size: 0.82rem;
-  font-weight: 600;
-}
-
-.locale-switcher__button:hover,
-.mobile-locale-switcher__button:hover {
-  color: white;
-}
-
-.locale-switcher__button.active {
-  color: #d8b26e;
-  border: 1px solid rgba(216, 178, 110, 0.65);
-  background: rgba(216, 178, 110, 0.12);
-  box-shadow: 0 0 0 1px rgba(216, 178, 110, 0.08);
-}
-
-.nav {
-  flex: 1;
-  display: flex;
-  gap: 2.5rem;
-  font-family: var(--font-body);
-  font-size: 14px;
-  letter-spacing: 2px;
-}
-
-.nav-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  color: white;
-  text-decoration: none;
-  position: relative;
-  transition: 0.3s;
-  font-weight: 500;
-  text-transform: uppercase;
-}
-
-.nav-link-icon {
-  width: 16px;
-  height: 16px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #d8b26e;
-  opacity: 0.92;
-}
-
-.nav-link-icon svg {
-  width: 16px;
-  height: 16px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.nav-link-button {
-  padding: 0;
-  border: none;
-  background: transparent;
-  font: inherit;
-  letter-spacing: inherit;
-  text-transform: inherit;
-  cursor: pointer;
-}
-
-.nav-link:hover {
-  color: #d8b26e;
-}
-
-.nav-link:hover .nav-link-icon,
-.nav-link.router-link-active .nav-link-icon,
-.nav-link.router-link-exact-active .nav-link-icon {
-  opacity: 1;
-}
-
-.nav-link.router-link-active,
-.nav-link.router-link-exact-active {
-  color: #d8b26e;
-}
-
-.nav-link.router-link-active::after,
-.nav-link.router-link-exact-active::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -10px;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, #d8b26e, rgba(216, 178, 110, 0.3));
-}
-
-.cta {
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  padding: 6px 16px;
-  border-radius: 30px;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  background: transparent;
-}
-
-.logo img {
-  height: 74px;
-  width: auto;
-  object-fit: contain;
-  transition: all 0.3s ease;
-  filter: brightness(0) invert(1); /* convierte logo oscuro en blanco */
-}
-.header.scrolled .logo img {
-  height: 60px;
-}
-
-/* DROPDOWN */
-
-/* ===============================
-   ULTRA ELEGANT DROPDOWN
-================================= */
-
-.elegant-menu {
-  position: fixed;
-  top: 104px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(1180px, calc(100vw - 64px));
-  max-height: calc(100vh - 132px);
-  padding: 1.4rem;
-  overflow-y: auto;
-  border: 1px solid rgba(216, 178, 110, 0.38);
-  border-radius: 0;
-  background:
-    radial-gradient(circle at 90% 0%, rgba(216, 178, 110, 0.13), transparent 26rem),
-    linear-gradient(135deg, #0b263d, #061525 62%, #04111c);
-  backdrop-filter: blur(22px);
-
-  box-shadow:
-    0 60px 120px rgba(0, 0, 0, 0.6),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
-
-  animation: fadeElegant 0.3s ease;
-}
-
-/* Top Accent Line */
-
-.elegant-menu::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 1.4rem;
-  right: 1.4rem;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #d8b26e 18%, #d8b26e 82%, transparent);
-}
-
-/* Header */
-
-.menu-header {
-  display: flex;
-  align-items: center;
-  min-height: 58px;
-  margin: 0 0 1rem;
-  padding: 0 0.55rem;
-  font-size: 0.68rem;
-  letter-spacing: 0.28em;
-  color: #d8b26e;
-  text-transform: uppercase;
-}
-
-.menu-header::after {
-  content: "Sky Group / Aviation Capabilities";
-  margin-left: auto;
-  color: rgba(255, 255, 255, 0.38);
-  font-size: 0.6rem;
-  letter-spacing: 0.18em;
-}
-
-/* Grid */
-
-.menu-grid {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 1px;
-  border: 1px solid rgba(216, 178, 110, 0.24);
-  background: rgba(216, 178, 110, 0.24);
-}
-
-/* Links */
-
-.menu-grid a {
-  position: relative;
-  text-decoration: none;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  grid-column: span 2;
-  min-height: 166px;
-  padding: 1.25rem;
-  border-radius: 0;
-  background: rgba(6, 23, 38, 0.96);
-  border: 0;
-  transition: background 0.3s ease, transform 0.3s ease;
-  animation: menuCardEnter 420ms both cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.menu-grid a:last-child {
-  grid-column: 3 / span 2;
-}
-
-.menu-grid a::after {
-  content: "→";
-  position: absolute;
-  right: 1.2rem;
-  bottom: 1rem;
-  color: rgba(216, 178, 110, 0.7);
-  font-size: 1.15rem;
-  transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.menu-grid a:nth-child(1) { animation-delay: 40ms; }
-.menu-grid a:nth-child(2) { animation-delay: 80ms; }
-.menu-grid a:nth-child(3) { animation-delay: 120ms; }
-.menu-grid a:nth-child(4) { animation-delay: 160ms; }
-.menu-grid a:nth-child(5) { animation-delay: 200ms; }
-.menu-grid a:nth-child(6) { animation-delay: 240ms; }
-.menu-grid a:nth-child(7) { animation-delay: 280ms; }
-
-.menu-icon-badge {
-  width: 42px;
-  height: 42px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: auto;
-  border-radius: 50%;
-  background: rgba(216, 178, 110, 0.08);
-  border: 1px solid rgba(216, 178, 110, 0.32);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  color: #d8b26e;
-  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
-  animation: none;
-}
-
-.menu-icon-badge svg {
-  width: 22px;
-  height: 22px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.7;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.menu-grid strong {
-  font-weight: 600;
-  margin: 1.1rem 1.8rem 0.38rem 0;
-  font-size: 1rem;
-  letter-spacing: 0.03em;
-  line-height: 1.3;
-}
-
-.menu-grid small {
-  max-width: 28ch;
-  font-size: 0.76rem;
-  color: rgba(255, 255, 255, 0.62);
-  letter-spacing: 0.03em;
-  line-height: 1.45;
-}
-
-/* Hover Effect */
-
-.menu-grid a:hover {
-  transform: translateY(-3px);
-  background: #10324a;
-}
-
-.menu-grid a:hover .menu-icon-badge {
-  transform: scale(1.06);
-  border-color: rgba(216, 178, 110, 0.65);
-  box-shadow: 0 0 24px rgba(216, 178, 110, 0.16);
-}
-
-.menu-grid a:hover strong {
-  color: #d8b26e;
-}
-
-.menu-grid a:hover small {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.menu-grid a:hover::after {
-  color: #f1d08b;
-  transform: translateX(5px);
-}
-
-/* Animation */
-
-@keyframes fadeElegant {
-  from {
-    opacity: 0;
-    transform: translate(-50%, 15px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-}
-
-@keyframes menuIconFloat {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-}
-
-@keyframes menuCardEnter {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (max-width: 1200px) {
-  .elegant-menu {
-    width: min(920px, calc(100vw - 40px));
-    padding: 1.2rem;
-  }
-
-  .menu-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1px;
-  }
-
-  .menu-grid a {
-    grid-column: span 2;
-    min-height: 150px;
-    padding: 1rem;
-  }
-
-  .menu-grid a:last-child {
-    grid-column: 2 / span 2;
-  }
-}
-
-@media (max-width: 900px) {
-  .elegant-menu {
-    top: 96px;
-    width: min(720px, calc(100vw - 32px));
-  }
-
-  .menu-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .menu-grid a,
-  .menu-grid a:last-child {
-    grid-column: span 1;
-  }
-
-  .menu-header::after {
-    display: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .menu-grid a,
-  .menu-icon-badge {
-    animation: none !important;
-    transition: none !important;
-  }
-}
-/* ===== MOBILE PROFESSIONAL PANEL ===== */
-
-.mobile-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(6px);
-  opacity: 0;
-  visibility: hidden;
-  transition: 0.4s ease;
-  z-index: 9998;
-}
-
-.mobile-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.mobile-panel {
-  position: fixed;
-  top: 0;
-  right: -420px;
-  width: 380px;
-  height: 100vh;
-  background:
-    radial-gradient(circle at top right, rgba(77, 163, 255, 0.08), transparent 22%),
-    linear-gradient(180deg, #05101d 0%, #081728 100%);
-  padding: 1.4rem 1.25rem 1.25rem;
-  display: flex;
-  flex-direction: column;
-  transition: 0.45s cubic-bezier(0.77, 0, 0.18, 1);
-  z-index: 9999;
-  box-shadow: -20px 0 60px rgba(0, 0, 0, 0.5);
-}
-
-.mobile-panel.active {
-  right: 0;
-}
-
-.mobile-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  padding: 0.35rem 0 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.mobile-locale {
-  display: grid;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-}
-
-.mobile-locale-switcher {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.75rem;
-}
-
-.mobile-locale-switcher__button {
-  min-height: 48px;
-  padding: 0.9rem 1rem;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 0.76rem;
-  font-weight: 600;
-}
-
-.mobile-locale-switcher__button.active {
-  color: #d4af37;
-  border-color: rgba(212, 175, 55, 0.38);
-  background: rgba(212, 175, 55, 0.1);
-}
-
-.mobile-brand {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-}
-
-.mobile-header img {
-  height: 44px;
-}
-
-.mobile-brand-copy {
-  display: flex;
-  flex-direction: column;
-}
-
-.mobile-brand-copy span {
-  color: white;
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-}
-
-.mobile-brand-copy small,
-.mobile-kicker {
-  color: rgba(255, 255, 255, 0.46);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-size: 0.66rem;
-}
-
-.mobile-close {
-  position: relative;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.04);
-  cursor: pointer;
-}
-
-.mobile-close span {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 16px;
-  height: 1.5px;
-  background: white;
-}
-
-.mobile-close span:first-child {
-  transform: translate(-50%, -50%) rotate(45deg);
-}
-
-.mobile-close span:last-child {
-  transform: translate(-50%, -50%) rotate(-45deg);
-}
-
-.mobile-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  flex: 1;
-  overflow-y: auto;
-  padding-right: 0.2rem;
-}
-
-.mobile-nav-section {
-  display: grid;
-  gap: 0.45rem;
-  padding: 1rem 0;
-}
-
-.mobile-nav a {
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 0.96rem;
-  letter-spacing: 0.03em;
-  font-weight: 500;
-  transition: 0.25s ease;
-  padding: 0.85rem 0.95rem;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid transparent;
-}
-
-.mobile-nav a:hover {
-  color: white;
-  transform: translateX(4px);
-  border-color: rgba(123, 183, 255, 0.18);
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.mobile-nav a.router-link-active,
-.mobile-nav a.router-link-exact-active {
-  color: #d4af37;
-  border-color: rgba(212, 175, 55, 0.3);
-  background: rgba(212, 175, 55, 0.08);
-}
-
-.mobile-divider {
-  height: 1px;
-  background: rgba(255, 255, 255, 0.08);
-  margin: 0.1rem 0;
-}
-
-.mobile-cta {
-  display: grid;
-  gap: 0.7rem;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.mobile-cta-primary,
-.mobile-cta-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 52px;
-  text-decoration: none;
-  border-radius: 16px;
-  font-size: 0.82rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-}
-
-.mobile-cta-primary {
-  background: linear-gradient(135deg, #d4af37, #f1d88a);
-  color: #08111d;
-  font-weight: 700;
-}
-
-.mobile-cta-secondary {
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.04);
-}
-
-/* RESPONSIVE */
-
-@media (max-width: 1024px) {
-  .nav {
-    display: none;
-  }
-
-  .locale-switcher {
-    display: none;
-  }
-
-  .hamburger {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    width: 44px;
-    height: 44px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  .hamburger span {
-    width: 26px;
-    height: 2px;
-    background: white;
-    transition: 0.3s;
-  }
-}
-
-@media (max-width: 480px) {
-  .mobile-panel {
-    width: min(100vw, 360px);
-    padding: 1rem;
-  }
-
-  .header-inner {
-    padding: 0 1rem;
-  }
-
-  .mobile-locale-switcher {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Mobile navigation: a focused private-aviation flight desk. */
-.mobile-overlay {
-  background: rgba(2, 10, 17, 0.76);
-  backdrop-filter: blur(10px);
-}
-
-.mobile-panel {
-  width: min(100vw - 1.25rem, 430px);
-  right: min(-100vw, -450px);
-  padding: 1.35rem;
-  border-left: 1px solid rgba(216, 178, 110, 0.32);
-  background:
-    radial-gradient(circle at 100% 0%, rgba(216, 178, 110, 0.14), transparent 18rem),
-    linear-gradient(155deg, #0a263c, #04121f 58%, #061827);
-  box-shadow: -24px 0 80px rgba(0, 0, 0, 0.54);
-}
-
-.mobile-panel::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 2.2rem;
-  width: 1px;
-  height: 120px;
-  background: linear-gradient(180deg, transparent, rgba(216, 178, 110, 0.72), transparent);
-}
-
-.mobile-header {
-  min-height: 62px;
-  margin-bottom: 1.3rem;
-  padding: 0 0 1.2rem;
-  border-bottom-color: rgba(216, 178, 110, 0.24);
-}
-
-.mobile-header img {
-  height: 48px;
-  filter: brightness(0) invert(1);
-}
-
-.mobile-brand-copy {
-  display: none;
-}
-
-.mobile-close {
-  border-radius: 0;
-  border-color: rgba(216, 178, 110, 0.38);
-  background: rgba(216, 178, 110, 0.08);
-  transition: transform 0.25s ease, background 0.25s ease;
-}
-
-.mobile-close:hover {
-  transform: rotate(90deg);
-  background: rgba(216, 178, 110, 0.16);
-}
-
-.mobile-locale {
-  gap: 0.65rem;
-  margin-bottom: 1.35rem;
-}
-
-.mobile-kicker {
-  color: rgba(248, 243, 233, 0.55);
-  font-size: 0.68rem;
-  letter-spacing: 0.24em;
-}
-
-.mobile-locale-switcher {
-  gap: 0;
-  padding: 4px;
-  border: 1px solid rgba(216, 178, 110, 0.32);
-  background: rgba(2, 13, 23, 0.52);
-}
-
-.mobile-locale-switcher__button {
-  min-height: 44px;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  color: rgba(255, 255, 255, 0.58);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  transition: background 0.25s ease, color 0.25s ease;
-}
-
-.mobile-locale-switcher__button.active {
-  color: #071827;
-  border: 0;
-  background: #dfba6a;
-}
-
-.mobile-nav {
-  gap: 0.35rem;
-  padding-right: 0;
-}
-
-.mobile-nav-section {
-  gap: 0;
-  padding: 1.15rem 0;
-  counter-reset: none;
-}
-
-.mobile-nav a {
-  position: relative;
-  min-height: 54px;
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  padding: 0.8rem 2.7rem 0.8rem 0.35rem;
-  border-radius: 0;
-  border: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background: transparent;
-  font-size: 1rem;
-  letter-spacing: 0.01em;
-}
-
-.mobile-nav a::before {
-  display: none;
-}
-
-.mobile-nav-icon {
-  width: 34px;
-  height: 34px;
-  flex: 0 0 34px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #dfba6a;
-  border: 1px solid rgba(216, 178, 110, 0.34);
-  background: rgba(216, 178, 110, 0.08);
-  transition: transform 0.25s ease, color 0.25s ease, background 0.25s ease;
-}
-
-.mobile-nav-icon svg {
-  width: 18px;
-  height: 18px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.7;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.mobile-nav a::after {
-  content: "→";
-  position: absolute;
-  right: 0.45rem;
-  color: rgba(216, 178, 110, 0.74);
-  font-size: 1.1rem;
-  transition: transform 0.25s ease;
-}
-
-.mobile-nav a:hover {
-  color: #ffffff;
-  transform: none;
-  border-color: rgba(216, 178, 110, 0.35);
-  background: rgba(216, 178, 110, 0.09);
-}
-
-.mobile-nav a:hover::after {
-  transform: translateX(4px);
-}
-
-.mobile-nav a:hover .mobile-nav-icon {
-  transform: scale(1.06);
-  background: rgba(216, 178, 110, 0.18);
-}
-
-.mobile-nav a.router-link-active,
-.mobile-nav a.router-link-exact-active {
-  color: #ffffff;
-  border-color: rgba(216, 178, 110, 0.48);
-  background: linear-gradient(90deg, rgba(216, 178, 110, 0.18), transparent);
-}
-
-.mobile-nav a.router-link-active .mobile-nav-icon,
-.mobile-nav a.router-link-exact-active .mobile-nav-icon {
-  color: #071827;
-  background: #dfba6a;
-}
-
-.mobile-divider {
-  height: 1px;
-  margin: 0;
-  background: linear-gradient(90deg, transparent, rgba(216, 178, 110, 0.44), transparent);
-}
-
-.mobile-cta {
-  gap: 0.55rem;
-  padding-top: 1.15rem;
-  border-top-color: rgba(216, 178, 110, 0.3);
-}
-
-.mobile-cta-primary,
-.mobile-cta-secondary {
-  min-height: 54px;
-  border-radius: 0;
-  letter-spacing: 0.16em;
-}
-
-.mobile-cta-primary {
-  background: linear-gradient(110deg, #d6af55, #f1d896);
-}
-
-.mobile-cta-secondary {
-  border-color: rgba(216, 178, 110, 0.38);
-  background: rgba(4, 17, 29, 0.5);
-}
-
-.mobile-panel.active .mobile-header,
-.mobile-panel.active .mobile-locale,
-.mobile-panel.active .mobile-nav-section,
-.mobile-panel.active .mobile-cta {
-  animation: mobileMenuItemIn 520ms both cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.mobile-panel.active .mobile-locale { animation-delay: 70ms; }
-.mobile-panel.active .mobile-nav-section:nth-child(1) { animation-delay: 130ms; }
-.mobile-panel.active .mobile-nav-section:nth-child(3) { animation-delay: 190ms; }
-.mobile-panel.active .mobile-nav-section:nth-child(5) { animation-delay: 250ms; }
-.mobile-panel.active .mobile-cta { animation-delay: 320ms; }
-
-@keyframes mobileMenuItemIn {
-  from {
-    opacity: 0;
-    transform: translateX(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@media (max-width: 480px) {
-  .mobile-panel {
-    width: calc(100vw - 0.6rem);
-    padding: 1rem;
-  }
-
-  .mobile-locale-switcher {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .mobile-panel,
-  .mobile-close,
-  .mobile-nav a,
-  .mobile-panel.active .mobile-header,
-  .mobile-panel.active .mobile-locale,
-  .mobile-panel.active .mobile-nav-section,
-  .mobile-panel.active .mobile-cta {
-    animation: none !important;
-    transition: none !important;
-  }
-}
+<style scoped>
+.mobile-bottom-nav, .desktop-nav { display: none; }
+.desktop-menu-enter-active, .desktop-menu-leave-active { transition: opacity 180ms ease, translate 180ms ease; }
+.desktop-menu-enter-from, .desktop-menu-leave-to { opacity: 0; translate: 0 -6px; }
+.header.sky-header { position: fixed; inset: 0 0 auto; z-index: 10000; height: 84px; color: #fff; background: rgba(7,19,35,.88); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(212,175,106,.12); }
+.header-inner { max-width: 1800px; height: 100%; margin: auto; padding-inline: clamp(20px,4vw,72px); display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.brand { position: relative; display: block; width: 175px; height: 64px; flex-shrink: 0; overflow: hidden; }
+.brand img { position: absolute; left: 50%; top: 50%; width: 238px; max-width: none; height: 159px; object-fit: contain; transform: translate(-50%,-50%); filter: brightness(0) invert(1); }
+.header-actions { display: flex; align-items: center; gap: 28px; }
+.header-contact { color: #fff; text-decoration: none; font-size: 14px; padding-block: 14px; }
+.menu-trigger { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-width: 44px; min-height: 44px; padding: 0; border: 0; background: transparent; color: #fff; cursor: pointer; font: 400 14px var(--font-body,sans-serif); }
+.header-actions :deep(.locale-switcher) { display: inline-flex; padding: 0; gap: 4px; border: 0; background: transparent; backdrop-filter: none; }
+.header-actions :deep(.locale-switcher::before) { display: none; }
+.header-actions :deep(.locale-switcher__button) { width: 44px; height: 44px; border: 0; border-radius: 0; font-size: 12px; font-weight: 400; letter-spacing: .06em; color: #c7d3df; }
+.header-actions :deep(.locale-switcher__button.active) { color: #d4af6a; }
+.header-actions :deep(.locale-switcher__button + .locale-switcher__button)::before { content: '/'; position: absolute; margin-left: -13px; color: #c7d3df; }
+.brand-caption { max-width: 250px; margin-top: 8px; color: #c7d3df; font-size: 9px; letter-spacing: .15em; line-height: 1.6; }
+.drawer-link { position: relative; display: flex; align-items: center; gap: 14px; width: 100%; min-height: 50px; padding: 12px 14px; border: 0; border-radius: 4px; background: transparent; color: #fff; font: 400 15px/1.5 var(--font-body,sans-serif); text-align: left; text-decoration: none; cursor: pointer; transition: background-color 180ms ease,color 180ms ease; }
+.drawer-link svg { flex-shrink: 0; color: #c7d3df; }
+.drawer-link span { flex: 1; }
+.drawer-link:hover { background: rgba(255,255,255,.06); color: #d4af6a; }
+.drawer-link.router-link-exact-active, .drawer-link.section-active { color: #d4af6a; }
+.drawer-link.router-link-exact-active::before, .drawer-link.section-active::before { content: ''; position: absolute; left: 0; top: 12px; bottom: 12px; width: 2px; background: #d4af6a; }
+.drawer-link.router-link-exact-active svg, .drawer-link.section-active svg { color: #d4af6a; }
+.chevron { transition: transform 200ms ease; }
+.rotated { transform: rotate(180deg); }
+.drawer-services { padding: 4px 0 12px 16px; }
+.service-link { font-size: 14px; min-height: 46px; gap: 12px; }
+.institution-name { color: #fff; font-size: 12px; font-weight: 500; letter-spacing: .18em; }
+.institution-copy { color: #c7d3df; font-size: 12px; line-height: 1.6; margin: 8px 0 20px; }
+.quote-button { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 48px; padding: 12px 16px; border: 1px solid #d4af6a; border-radius: 3px; background: #d4af6a; color: #071323; text-decoration: none; font-size: 11px; font-weight: 600; letter-spacing: .08em; }
+.quote-button:hover { background: #e2c38b; }
+:where(a,button):focus-visible { outline: 2px solid #d4af6a; outline-offset: 3px; }
+@media (min-width: 1241px) {
+  .header.sky-header { height: 96px; background: rgba(7,19,35,.28); border: 0; backdrop-filter: blur(8px); transition: transform 200ms ease; }
+  .header.sky-header.header-solid { background: #071323; }
+  .header.sky-header.desktop-hidden { transform: translateY(-100%); }
+  .header-actions .header-contact, .header-actions .menu-trigger { display: none; }
+  .desktop-nav { display: flex; flex: 1; justify-content: space-evenly; align-items: center; height: 100%; gap: 24px; }
+  .desktop-link { position: relative; display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0; border: 0; background: transparent; color: #fff; text-decoration: none; white-space: nowrap; font: 400 clamp(14px,1.2vw,19px) var(--font-body); cursor: pointer; }
+  .desktop-link.router-link-exact-active::after, .desktop-link.active::after { content: ''; position: absolute; bottom: -3px; left: -4px; right: -4px; height: 2px; background: #d4af6a; }
+  .desktop-services { display: flex; align-items: center; height: 100%; }
+  .desktop-services-panel { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); width: min(760px,calc(100vw - 48px)); padding: 30px 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; background: rgba(7,19,35,.97); border: 1px solid rgba(255,255,255,.08); border-radius: 0 0 8px 8px; }
+  .desktop-services-panel h2 { font: 400 12px var(--font-body); color: #c7d3df; margin-bottom: 16px; }
+  .desktop-service-link { display: flex; align-items: center; gap: 12px; min-height: 48px; color: #fff; text-decoration: none; font-size: 14px; line-height: 1.5; }
+  .desktop-service-link svg { flex-shrink: 0; color: #d4af6a; }
+  .desktop-link:hover, .desktop-service-link:hover { color: #d4af6a; }
+  .header-actions :deep(.locale-switcher) { border-left: 1px solid rgba(255,255,255,.3); border-radius: 0; padding-left: 24px; }
+}
+
+@media(max-width:767px) { .header.sky-header { height: calc(88px + env(safe-area-inset-top, 0px)); padding-top: calc(20px + env(safe-area-inset-top, 0px)); } .header-inner { padding-inline: 16px; gap: 12px; } .header-actions { gap: 8px; } .header-contact, .menu-trigger span { display: none; } .brand { width: 135px; height: 54px; } .brand img { width: 184px; height: 123px; } }
+@media(max-width:767px) {
+  .mobile-bottom-nav { position: fixed; z-index: 10001; left: 50%; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); align-items: center; width: calc(100% - 32px); max-width: 420px; height: 60px; padding: 4px 8px; border-radius: 22px; background: #091b2f; box-shadow: 0 5px 20px rgba(0,0,0,.2); }
+  .bottom-nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-width: 44px; min-height: 44px; height: 52px; padding: 0; border: 0; background: transparent; color: #fff; text-decoration: none; font: 400 10px/1.2 var(--font-body,sans-serif); cursor: pointer; }
+  .bottom-nav-item svg { flex-shrink: 0; }
+  .bottom-nav-item.router-link-exact-active, .bottom-nav-item.is-active { color: #d4af6a; }
+  .bottom-nav-item:focus-visible { outline-offset: 0; border-radius: 12px; }
+}
+@media(max-width:359px) { .header-inner { padding-inline: 12px; } .header-actions { gap: 0; } .header-inner > .brand { width: 112px; } .header-inner > .brand img { width: 152px; height: 101px; } }
+@media(prefers-reduced-motion:reduce) { *, *::before { transition: none !important; } }
 </style>

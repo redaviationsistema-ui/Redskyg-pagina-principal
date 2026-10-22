@@ -322,3 +322,16 @@ p1{
     animation: none;
   }
 }
+
+/* Shared action-button shape across pages and form components. */
+:is(a, button, input)[class*="btn"],
+:is(a, button)[class*="button"],
+a[class*="cta"],
+button[type="submit"],
+button[type="reset"],
+input[type="submit"],
+input[type="reset"],
+.aircraft-card__gallery,
+.aircraft-filters__toggle {
+  border-radius: 999px !important;
+}

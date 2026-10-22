@@ -772,7 +772,6 @@ const loadAircraft = async () => {
 
   try {
     aircraft.value = normalizeAircraft(await listPublicAircraft());
-    console.log("AIRCRAFT PUBLIC:", aircraft.value);
   } catch (error) {
     console.error(error);
     loadError.value = error;
@@ -1543,6 +1542,12 @@ onBeforeUnmount(() => {
   max-width: 690px;
 }
 
+ .aircraft-hero__copy h1 { margin-block: 18px 24px; }
+.aircraft-hero__copy p { margin-bottom: 32px; }
+.aircraft-group__head p { max-width: 720px; line-height: 1.75; }
+.aircraft-final__shell p, .aircraft-advisory__inner > p { margin-top: 20px; line-height: 1.75; }
+.aircraft-advisory__actions { margin-top: 28px; }
+
 .aircraft-eyebrow,
 .aircraft-filters label span,
 .aircraft-price span {
@@ -1612,12 +1617,12 @@ onBeforeUnmount(() => {
   width: 100%;
   height: auto;
   min-height: auto;
-  padding: 70px 0 100px;
+  padding: clamp(48px, 6vw, 88px) 0 clamp(64px, 8vw, 112px);
 }
 
 .aircraft-filters {
-  margin-bottom: 3.75rem;
-  padding: 1rem;
+  margin-bottom: clamp(40px, 5vw, 72px);
+  padding: clamp(20px, 2.5vw, 32px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
   background: rgba(8, 27, 42, 0.84);
@@ -1631,7 +1636,7 @@ onBeforeUnmount(() => {
 .aircraft-filters__panel {
   display: grid;
   grid-template-columns: 0.9fr 1fr 1fr 1fr 1.35fr;
-  gap: 0.85rem;
+  gap: 24px 20px;
   align-items: end;
 }
 
@@ -1704,7 +1709,7 @@ onBeforeUnmount(() => {
 }
 
 .aircraft-group__head {
-  margin-bottom: 2rem;
+  margin-bottom: 40px;
 }
 
 .aircraft-group__title {
@@ -1738,9 +1743,10 @@ onBeforeUnmount(() => {
 .aircraft-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
+  gap: 40px 32px;
+  align-items: stretch;
   width: 100%;
-  margin-top: 32px;
+  margin-top: 40px;
 }
 
 .aircraft-card {
@@ -1847,18 +1853,19 @@ onBeforeUnmount(() => {
 }
 
 .aircraft-card__body {
-  padding: 1.35rem;
+  padding: clamp(22px, 2.2vw, 32px);
 }
 
 .aircraft-card h3 {
-  margin-bottom: 1rem;
+  margin-bottom: 20px;
   font-size: 1.45rem;
-  line-height: 1.15;
+  line-height: 1.3;
 }
 
 .aircraft-card p {
+  margin: 10px 0;
   color: #aeb8c3;
-  line-height: 1.6;
+  line-height: 1.75;
 }
 
 .aircraft-card p span {
@@ -1866,7 +1873,9 @@ onBeforeUnmount(() => {
 }
 
 .aircraft-price {
-  margin: 1.35rem 0;
+  margin: 24px 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .aircraft-price strong {
@@ -2842,7 +2851,7 @@ onBeforeUnmount(() => {
   .aircraft-grid {
     display: grid;
     width: 100%;
-    gap: 24px;
+    gap: 32px;
   }
 
   .aircraft-card {
@@ -2924,6 +2933,48 @@ onBeforeUnmount(() => {
   .aircraft-gallery-modal__main {
     min-height: 240px;
     height: 48vh;
+  }
+}
+/* Mobile introduction: leave room below the fixed header and separate each block. */
+@media (max-width: 767px) {
+  .aircraft-hero { min-height: auto; }
+  .aircraft-hero__inner {
+    padding-top: calc(128px + env(safe-area-inset-top, 0px));
+    padding-bottom: 48px;
+  }
+  .aircraft-hero__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+  }
+  .aircraft-hero__copy .aircraft-eyebrow {
+    max-width: 36ch;
+    font-size: 11px;
+    line-height: 1.7;
+    letter-spacing: .12em;
+  }
+  .aircraft-hero__copy h1 {
+    margin: 0;
+    max-width: 12ch;
+    font-size: clamp(2.75rem, 10vw, 4rem);
+    line-height: 1.08;
+  }
+  .aircraft-hero__copy p {
+    margin: 0;
+    max-width: 52ch;
+    font-size: 15px;
+    line-height: 1.85;
+  }
+  .aircraft-hero__copy > .aircraft-btn {
+    width: 100%;
+    min-height: 52px;
+    margin-top: 8px;
+    padding: 14px 18px;
+    gap: 12px;
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: center;
   }
 }
 </style>

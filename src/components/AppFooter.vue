@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer">
+  <footer class="footer footer--desktop">
     <div class="footer-overlay">
       <section class="footer-promo">
         <div class="footer-promo-copy">
@@ -172,9 +172,11 @@
       </div>
     </div>
   </footer>
+  <MobileFooter />
 </template>
 
 <script setup>
+import MobileFooter from "./MobileFooter.vue";
 import { computed } from "vue";
 import { useLocale } from "../i18n";
 
@@ -233,6 +235,10 @@ const handlePhone = (number) => {
 </script>
 
 <style>
+@media (max-width: 767px) {
+  .footer.footer--desktop { display: none; }
+}
+
 .footer {
   background:
     radial-gradient(circle at top left, rgba(63, 169, 245, 0.08), transparent 28%),
